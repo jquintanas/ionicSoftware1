@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar color="omipali">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-img src="assets/logos/logoTexto.jpeg"></ion-img>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-slides #slide pager="false" [options]="slideOpts">
+    <ion-slide *ngFor="let data of listaImagenes">
+      <img [src]="data" onerror="this.src='/assets/img/404.jpg';" class="imagenCarrusel" />
+    </ion-slide>
+  </ion-slides>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="10">
+        <strong>
+          <p class="ion-text-center ion-text-wrap colorPrimario">
+            {{nombreProducto}}
+          </p>
+        </strong>
+        <ion-text class="ion-no-margin">
+          <h5 class="ion-no-margin ion-text-wrap ">Precio: <strong class="colorPrimario">${{precioProducto}}</strong></h5>
+        </ion-text>
+        <p class="ion-no-margin ion-no-padding ion-text-justify ion-text-wrap textoDescripcion">
+          {{descripcionProducto}}
+        </p>
+      </ion-col>
+      <ion-col size="2">
+        <ion-button *ngIf="!banderaCorazon" (click)="marcarFavorito()" class="ion-no-padding botonesIcionos">
+          <ion-icon slot="icon-only" name="heart-outline"></ion-icon>
+        </ion-button>
+        <ion-button *ngIf="banderaCorazon" (click)="marcarFavorito()" class="ion-no-padding botonesIcionos">
+          <ion-icon class="colorFavorito" slot="icon-only" name="heart-sharp"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row class="containerSpinner">
+      <ion-col size="2"></ion-col>
+      <ion-col size="3" class="spinnerIzq" (click)="decrementarProducto()">
+        <ion-icon class="iconosSpinner" *ngIf="cantidad>1" name="remove-circle-outline"></ion-icon>
+        <ion-icon class="iconosSpinner" *ngIf="cantidad==1" name="trash-outline"></ion-icon>
+      </ion-col>
+      <ion-col size="2" class="spinnerCentrar">{{cantidad}}</ion-col>
+      <ion-col size="3" class="spinnerDer" (click)="incrementarProducto()">
+        <ion-icon class="iconosSpinner" name="add-circle-outline"></ion-icon>
+      </ion-col>
+      <ion-col size="2"></ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <p class="ion-text-center ion-text-wrap colorPrimario">
+          Ingredientes
+        </p>
+        <ion-item *ngFor="let ingrediente of listaIngredientes">
+          <ion-label>
+            {{ingrediente}}
+          </ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

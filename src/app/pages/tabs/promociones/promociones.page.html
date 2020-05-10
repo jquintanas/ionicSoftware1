@@ -1,0 +1,12 @@
+<ion-content>
+  <ion-content>
+    <ion-grid>
+      <ion-row> 
+        <ion-col size="12" *ngFor="let promocion of dataPromociones">
+          <app-card-productos [Imagen]="promocion.Imagen" [Titulo]="promocion.Titulo" [Descripcion]="promocion.Descripcion" [Precio]="promocion.Precio" [Favorito]="promocion.Favorito" [esPar]="promocion.esPar"></app-card-productos>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
+  
+</ion-content>

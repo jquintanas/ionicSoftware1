@@ -1,0 +1,64 @@
+.imagenCarrusel {
+    width: 100%;
+    height: 100%;
+}
+
+.textoDescripcion {
+    font-size: small;
+}
+
+.botonesIcionos {
+    width: 100% !important;
+    --background: transparent;
+    --border-style: none;
+    --border-width: 0px;
+    --box-shadow: transparent;
+}
+
+ion-icon {
+    color: black;
+}
+
+.colorFavorito {
+    color: red !important;
+}
+
+.containerSpinner {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.spinnerIzq {
+    text-align: center;
+    font-weight: bold;
+    font-size: 0.8rem;
+    border-top: solid 1px var(--ion-color-omipali);
+    border-left: solid 1px var(--ion-color-omipali);
+    border-bottom: solid 1px var(--ion-color-omipali);
+}
+
+.spinnerCentrar {
+    text-align: center;
+    font-weight: bold;
+    font-size: large;
+    border-top: solid 1px var(--ion-color-omipali);
+    border-bottom: solid 1px var(--ion-color-omipali);
+}
+
+.spinnerDer {
+    text-align: center;
+    font-weight: bold;
+    font-size: 0.8rem;
+    border-top: solid 1px var(--ion-color-omipali);
+    border-right: solid 1px var(--ion-color-omipali);
+    border-bottom: solid 1px var(--ion-color-omipali);
+}
+
+.iconosSpinner {
+    font-size: x-large !important;
+}
+
+.colorPrimario {
+    color: var(--ion-color-omipali);
+}
+

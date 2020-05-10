@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar color="omipali">
+    <ion-buttons slot="start">
+      <ion-button>
+        <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-img src="assets/logos/logoTexto.jpeg"></ion-img>
+    </ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="habilitarBusqueda()" *ngIf="!banderaDeBusqueda">
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+      <ion-button (click)="habilitarBusqueda()" *ngIf="banderaDeBusqueda">
+        <ion-icon slot="icon-only" name="close-circle-outline"></ion-icon>
+      </ion-button>
+      <ion-button (click)="abrirCarrito()">
+        <ion-icon slot="icon-only" name="cart-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-toolbar *ngIf="banderaDeBusqueda" color="omipali">
+    <ion-input placeholder="Buscar Producto" [(ngModel)]="productoBusqueda"></ion-input>
+    <ion-buttons slot="end">
+      <ion-button (click)="buscarProducto()">
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="bebidas">
+        <ion-icon src="assets/icon/botella.svg"></ion-icon>
+        <ion-label>Bebidas</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="dulces">
+        <ion-icon src="assets/icon/galleta.svg"></ion-icon>
+        <ion-label>Dulces</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="postres">
+        <ion-icon src="assets/icon/postre.svg"></ion-icon>
+        <ion-label>Postres</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="tortas">
+        <ion-icon src="assets/icon/torta.svg"></ion-icon>
+        <ion-label>Tortas</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="promociones">
+        <ion-icon src="assets/icon/oferta.svg"></ion-icon>
+        <ion-label>Promociones</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-content>

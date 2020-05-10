@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar color="omipali">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-img src="assets/logos/logoTexto.jpeg"></ion-img>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <!-- Sliding item with icon bottom options on end side -->
+    <ion-item-sliding>
+      <ion-item>
+        <ion-thumbnail>
+          <img src="https://i2.wp.com/www.diegocoquillat.com/wp-content/uploads/2018/06/tapa_bebidas.png?fit=700%2C336&ssl=1&resize=1280%2C720" onerror="this.src='/assets/img/404.jpg';">
+        </ion-thumbnail>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12">
+              Torta de chocolate
+            </ion-col>
+            <ion-col size="2"></ion-col>
+            <ion-col size="3" class="spinnerIzq" (click)="decrementarProducto()">
+              <ion-icon class="iconosSpinner" *ngIf="cantidad>1" name="remove-circle-outline"></ion-icon>
+              <ion-icon class="iconosSpinner" *ngIf="cantidad==1" name="trash-outline"></ion-icon>
+            </ion-col>
+            <ion-col size="2" class="spinnerCentrar">{{cantidad}}</ion-col>
+            <ion-col size="3" class="spinnerDer" (click)="incrementarProducto()">
+              <ion-icon class="iconosSpinner" name="add-circle-outline"></ion-icon>
+            </ion-col>
+            <ion-col size="2"></ion-col>
+            <ion-col size="12">
+              $ 10.00
+            </ion-col>
+            <ion-icon color="danger" class="flechaItem" name="chevron-back-outline"></ion-icon>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item-options>
+        <ion-item-option color="danger">
+          <ion-icon slot="bottom" name="trash-outline"></ion-icon>
+          Eliminar
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="omipali">
+      <ion-icon name="trash-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <p class="ion-text-justify ion-text-wrap ion-padding-start">
+      Subtotal (1 producto): <strong>$ 10.00</strong>
+    </p>
+    <ion-button expand="block" class="ion-margin-start ion-margin-end">A block button</ion-button>
+  </ion-toolbar>
+</ion-footer>

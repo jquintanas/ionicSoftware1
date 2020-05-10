@@ -1,0 +1,65 @@
+.imgProducto{
+    width: 100%;
+    height: 100%;
+}
+
+.padding2P {
+    padding-right: 2% !important;
+}
+
+.botonesIcionos {
+    width: 100% !important;
+    --background: transparent;
+    --border-style: none;
+    --border-width: 0px;
+    --box-shadow: transparent;
+}
+
+ion-icon {
+    color: black;
+  }
+
+.colorFavorito {
+    color: red !important;
+}
+
+ion-card-title {
+    font-size: medium !important;
+}
+
+.textAbstract {
+    font-size: x-small;
+}
+
+.bordesCentro1 {
+    border-top: solid var(--ion-color-omipali) !important;
+    border-bottom: solid var(--ion-color-omipali) !important;
+}
+
+.bordesDerecho1 {
+    border-top: solid var(--ion-color-omipali) !important;
+    border-bottom: solid var(--ion-color-omipali) !important;
+    border-right: solid var(--ion-color-omipali) !important;
+}
+
+.bordesCentro1 {
+    border-top: solid var(--ion-color-omipali) !important;
+    border-bottom: solid var(--ion-color-omipali) !important;
+}
+
+.bordesDerecho1 {
+    border-top: solid var(--ion-color-omipali) !important;
+    border-bottom: solid var(--ion-color-omipali) !important;
+    border-right: solid var(--ion-color-omipali) !important;
+}
+
+.bordesCentro2 {
+    border-top: solid var(--ion-color-omipalidark) !important;
+    border-bottom: solid var(--ion-color-omipalidark) !important;
+}
+
+.bordesDerecho2 {
+    border-top: solid var(--ion-color-omipalidark) !important;
+    border-bottom: solid var(--ion-color-omipalidark) !important;
+    border-right: solid var(--ion-color-omipalidark) !important;
+}

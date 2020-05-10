@@ -1,0 +1,7 @@
+{
+  "name": "omiPali",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

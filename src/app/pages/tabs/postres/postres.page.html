@@ -1,0 +1,13 @@
+<ion-content>
+  <ion-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" *ngFor="let postre of dataPostres">
+          <app-card-productos [Imagen]="postre.Imagen" [Titulo]="postre.Titulo" [Descripcion]="postre.Descripcion"
+            [Precio]="postre.Precio" [Favorito]="postre.Favorito" [esPar]="postre.esPar"></app-card-productos>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
+
+</ion-content>
