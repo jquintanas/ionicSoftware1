@@ -39,6 +39,14 @@ const routes: Routes = [
     path: 'carrito-compras',
     loadChildren: () => import('./pages/carrito-compras/carrito-compras.module').then( m => m.CarritoComprasPageModule)
   },
+  {
+    path: 'rastreo',
+    loadChildren: () => import('./rastreo/rastreo.module').then( m => m.RastreoPageModule)
+  },
+  {
+    path: 'historial-compras',
+    loadChildren: () => import('./historial-compras/historial-compras.module').then( m => m.HistorialComprasPageModule)
+  },
 ];
 
 @NgModule({
