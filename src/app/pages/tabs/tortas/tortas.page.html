@@ -2,8 +2,8 @@
   <ion-content>
     <ion-grid>
       <ion-row> 
-        <ion-col size="12" *ngFor="let torta of dataTorta">
-          <app-card-productos [Imagen]="torta.Imagen" [Titulo]="torta.Titulo" [Descripcion]="torta.Descripcion" [Precio]="torta.Precio" [Favorito]="torta.Favorito" [esPar]="torta.esPar"></app-card-productos>
+        <ion-col size="12" *ngFor="let torta of dataMostrar">
+          <app-card-productos [Imagen]="torta.ImagenP" [Titulo]="torta.Titulo" [Descripcion]="torta.Descripcion" [Precio]="torta.Precio" [Favorito]="torta.Favorito" [id]="torta.id" [carrusel]="torta.carrusel" [categoria]="torta.categoria"></app-card-productos>
         </ion-col>
       </ion-row>
     </ion-grid>

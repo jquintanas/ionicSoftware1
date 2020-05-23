@@ -1,46 +1,47 @@
 <ion-header>
-  <ion-toolbar color="omipali">
+  <ion-toolbar color="omipalidarkd" class="toolbar">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>
-      <ion-img src="assets/logos/logoTexto.jpeg"></ion-img>
+      <!-- <ion-img src="assets/logos/logoTexto.jpeg"></ion-img> -->
+      Omi Pali
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <!-- Sliding item with icon bottom options on end side -->
-    <ion-item-sliding>
+  <ion-list *ngFor="let clave of productos | keyvalue">
+    <ion-item-sliding *ngFor="let producto of clave.value | keyvalue">
       <ion-item>
         <ion-thumbnail>
-          <img src="https://i2.wp.com/www.diegocoquillat.com/wp-content/uploads/2018/06/tapa_bebidas.png?fit=700%2C336&ssl=1&resize=1280%2C720" onerror="this.src='/assets/img/404.jpg';">
+          <img src="{{producto.value.producto.ImagenP}}" onerror="this.src='/assets/img/404.jpg';">
         </ion-thumbnail>
         <ion-grid>
           <ion-row>
             <ion-col size="12">
-              Torta de chocolate
+              <h5 class="ion-text-capitalize ion-text-wrap">{{producto.value.producto.Titulo}}</h5>
+            </ion-col>
+            <ion-col size="12">
+              Precio: $ <strong>{{producto.value.producto.Precio}}</strong>
             </ion-col>
             <ion-col size="2"></ion-col>
-            <ion-col size="3" class="spinnerIzq" (click)="decrementarProducto()">
-              <ion-icon class="iconosSpinner" *ngIf="cantidad>1" name="remove-circle-outline"></ion-icon>
-              <ion-icon class="iconosSpinner" *ngIf="cantidad==1" name="trash-outline"></ion-icon>
+            <ion-col size="3" class="spinnerIzq" (click)="decrementarProducto(1,clave.key,producto.key)">
+              <ion-icon class="iconosSpinner" *ngIf="producto.value.cantidad>1" name="remove-circle-outline"></ion-icon>
+              <ion-icon class="iconosSpinner" *ngIf="producto.value.cantidad==1" name="trash-outline"></ion-icon>
             </ion-col>
-            <ion-col size="2" class="spinnerCentrar">{{cantidad}}</ion-col>
-            <ion-col size="3" class="spinnerDer" (click)="incrementarProducto()">
+            <ion-col size="2" class="spinnerCentrar">{{producto.value.cantidad}}</ion-col>
+            <ion-col size="3" class="spinnerDer" (click)="incrementarProducto(1,clave.key,producto.key)">
               <ion-icon class="iconosSpinner" name="add-circle-outline"></ion-icon>
             </ion-col>
             <ion-col size="2"></ion-col>
-            <ion-col size="12">
-              $ 10.00
-            </ion-col>
+
             <ion-icon color="danger" class="flechaItem" name="chevron-back-outline"></ion-icon>
           </ion-row>
         </ion-grid>
       </ion-item>
       <ion-item-options>
-        <ion-item-option color="danger">
+        <ion-item-option color="danger" (click)="borrarProductoLista(clave.key,producto.key)">
           <ion-icon slot="bottom" name="trash-outline"></ion-icon>
           Eliminar
         </ion-item-option>
@@ -48,17 +49,20 @@
     </ion-item-sliding>
   </ion-list>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="omipali">
-      <ion-icon name="trash-outline"></ion-icon>
+    <ion-fab-button color="omipalidarkd" (click)="eliminarTodo()">
+      <ion-icon color="omipali" name="trash-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 </ion-content>
 
-<ion-footer>
+<ion-footer *ngIf="cantidad>0">
   <ion-toolbar>
-    <p class="ion-text-justify ion-text-wrap ion-padding-start">
-      Subtotal (1 producto): <strong>$ 10.00</strong>
+    <p class="ion-text-justify ion-text-wrap ion-padding-start" *ngIf="cantidad == 1">
+      Subtotal ({{cantidad}} producto): <strong>$ {{total}}</strong>
     </p>
-    <ion-button expand="block" class="ion-margin-start ion-margin-end">A block button</ion-button>
+    <p class="ion-text-justify ion-text-wrap ion-padding-start" *ngIf="cantidad >1">
+      Subtotal ({{cantidad}} productos): <strong>$ {{total}}</strong>
+    </p>
+    <!-- <ion-button expand="block" class="ion-margin-start ion-margin-end">A block button</ion-button> -->
   </ion-toolbar>
 </ion-footer>

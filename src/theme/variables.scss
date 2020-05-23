@@ -17,8 +17,25 @@
   --ion-color-shade: var(--ion-color-omipalidark-shade);
   --ion-color-tint: var(--ion-color-omipalidark-tint);
 }
+
+.ion-color-omipalidarkd {
+  --ion-color-base: var(--ion-color-omipalidarkd);
+  --ion-color-base-rgb: var(--ion-color-omipalidarkd-rgb);
+  --ion-color-contrast: var(--ion-color-omipalidarkd-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-omipalidarkd-contrast-rgb);
+  --ion-color-shade: var(--ion-color-omipalidarkd-shade);
+  --ion-color-tint: var(--ion-color-omipalidarkd-tint);
+}
+
 /** Ionic CSS Variables **/
 :root {
+  --ion-color-omipalidarkd: #252424;
+  --ion-color-omipalidarkd-rgb: 37,36,36;
+  --ion-color-omipalidarkd-contrast: #ffffff;
+  --ion-color-omipalidarkd-contrast-rgb: 255,255,255;
+  --ion-color-omipalidarkd-shade: #212020;
+  --ion-color-omipalidarkd-tint: #3b3a3a;
+
   --ion-color-omipali: #98DBD9;
   --ion-color-omipali-rgb: 152,219,217;
   --ion-color-omipali-contrast: #000000;

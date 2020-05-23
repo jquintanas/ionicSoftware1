@@ -1,6 +1,8 @@
 .imgProducto{
     width: 100%;
     height: 100%;
+    max-height: 100px !important;
+    border-radius: 10px;
 }
 
 .padding2P {
@@ -16,7 +18,7 @@
 }
 
 ion-icon {
-    color: black;
+    color: var(--ion-color-omipali);
   }
 
 .colorFavorito {
@@ -25,41 +27,55 @@ ion-icon {
 
 ion-card-title {
     font-size: medium !important;
+    color: var(--ion-color-omipalidarkd-tint) !important;
+}
+
+.precio {
+    color: var(--ion-color-omipalidarkd-shade) !important;
 }
 
 .textAbstract {
-    font-size: x-small;
+    font-size: small;
+    color: var(--ion-color-omipalidarkd-shade);
 }
 
-.bordesCentro1 {
-    border-top: solid var(--ion-color-omipali) !important;
-    border-bottom: solid var(--ion-color-omipali) !important;
+.bordesDerecho {
+    padding-top: 5px !important;
+    padding-left: 5px !important;
+    max-height: 100px !important;
 }
 
-.bordesDerecho1 {
-    border-top: solid var(--ion-color-omipali) !important;
-    border-bottom: solid var(--ion-color-omipali) !important;
-    border-right: solid var(--ion-color-omipali) !important;
+ion-card  {
+    max-height: 100px !important;
+    border-radius: 10px !important;
 }
 
-.bordesCentro1 {
-    border-top: solid var(--ion-color-omipali) !important;
-    border-bottom: solid var(--ion-color-omipali) !important;
+.fondoOscuro {
+    background-color: var(--ion-color-omipalidarkd) !important;
+    border-top-right-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
 }
 
-.bordesDerecho1 {
-    border-top: solid var(--ion-color-omipali) !important;
-    border-bottom: solid var(--ion-color-omipali) !important;
-    border-right: solid var(--ion-color-omipali) !important;
+.bordeActivo {
+    border-right: solid 7px var(--ion-color-omipali) !important;
 }
 
-.bordesCentro2 {
-    border-top: solid var(--ion-color-omipalidark) !important;
-    border-bottom: solid var(--ion-color-omipalidark) !important;
+.altoMaximo {
+    max-height: 100px !important;
 }
 
-.bordesDerecho2 {
-    border-top: solid var(--ion-color-omipalidark) !important;
-    border-bottom: solid var(--ion-color-omipalidark) !important;
-    border-right: solid var(--ion-color-omipalidark) !important;
+.maximizar {
+    height: 100% !important;
+    border-top-right-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
+}
+
+.oculto {
+    height: 0px;
+    width: 100%;
+}
+
+.spinner {
+    width: 100%;
+    height: 100%;
 }

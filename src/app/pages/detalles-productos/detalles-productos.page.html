@@ -1,67 +1,81 @@
 <ion-header>
-  <ion-toolbar color="omipali">
+  <ion-toolbar color="omipalidarkd" class="toolbar">
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <!-- <ion-back-button></ion-back-button> -->
+      <ion-button (click)="regresar()">
+        <ion-icon name="arrow-back-outline" color="omipali"></ion-icon>
+      </ion-button>
     </ion-buttons>
     <ion-title>
-      <ion-img src="assets/logos/logoTexto.jpeg"></ion-img>
+      <!-- <ion-img src="assets/logos/logoTexto.jpeg"></ion-img> -->
+      Omi Pali
     </ion-title>
+    <ion-buttons slot="primary">
+      <ion-button *ngIf="!banderaCorazon" (click)="marcarFavorito()" class="ion-no-padding botonesIcionos">
+        <ion-icon slot="icon-only" name="heart-outline" color="omipali"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="banderaCorazon" (click)="marcarFavorito()" class="ion-no-padding botonesIcionos">
+        <ion-icon class="colorFavorito" slot="icon-only" name="heart-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-slides #slide pager="false" [options]="slideOpts">
-    <ion-slide *ngFor="let data of listaImagenes">
-      <img [src]="data" onerror="this.src='/assets/img/404.jpg';" class="imagenCarrusel" />
-    </ion-slide>
-  </ion-slides>
-  <ion-grid>
-    <ion-row>
-      <ion-col size="10">
-        <strong>
-          <p class="ion-text-center ion-text-wrap colorPrimario">
-            {{nombreProducto}}
-          </p>
-        </strong>
-        <ion-text class="ion-no-margin">
-          <h5 class="ion-no-margin ion-text-wrap ">Precio: <strong class="colorPrimario">${{precioProducto}}</strong></h5>
-        </ion-text>
-        <p class="ion-no-margin ion-no-padding ion-text-justify ion-text-wrap textoDescripcion">
-          {{descripcionProducto}}
-        </p>
-      </ion-col>
-      <ion-col size="2">
-        <ion-button *ngIf="!banderaCorazon" (click)="marcarFavorito()" class="ion-no-padding botonesIcionos">
-          <ion-icon slot="icon-only" name="heart-outline"></ion-icon>
-        </ion-button>
-        <ion-button *ngIf="banderaCorazon" (click)="marcarFavorito()" class="ion-no-padding botonesIcionos">
-          <ion-icon class="colorFavorito" slot="icon-only" name="heart-sharp"></ion-icon>
-        </ion-button>
+  <ion-grid class="ion-no-padding">
+    <ion-row class="ion-no-padding" class="fondoOscuro">
+      <ion-col size="12" class="ion-no-padding">
+        <ion-slides pager="false" [options]="slideOpts">
+          <ion-slide *ngFor="let data of listaImagenes">
+            <img [src]="data" onerror="this.src='/assets/img/404.jpg';" />
+          </ion-slide>
+        </ion-slides>
       </ion-col>
     </ion-row>
-    <ion-row class="containerSpinner">
-      <ion-col size="2"></ion-col>
-      <ion-col size="3" class="spinnerIzq" (click)="decrementarProducto()">
-        <ion-icon class="iconosSpinner" *ngIf="cantidad>1" name="remove-circle-outline"></ion-icon>
-        <ion-icon class="iconosSpinner" *ngIf="cantidad==1" name="trash-outline"></ion-icon>
-      </ion-col>
-      <ion-col size="2" class="spinnerCentrar">{{cantidad}}</ion-col>
-      <ion-col size="3" class="spinnerDer" (click)="incrementarProducto()">
-        <ion-icon class="iconosSpinner" name="add-circle-outline"></ion-icon>
-      </ion-col>
-      <ion-col size="2"></ion-col>
-    </ion-row>
     <ion-row>
+      <ion-col size="6" class="cols-cabecera ion-padding ion-text-center">
+        <h5 class="ion-no-margin ion-text-wrap ">Precio: <strong color="omipali">${{precioProducto}}</strong>
+        </h5>
+      </ion-col>
+      <ion-col size="6" class="cols-cabecera2 ion-text-center">
+        <ion-row class="containerSpinner">
+          <ion-col size="5" class="spinnerIzq" (click)="decrementarProducto()">
+            <ion-icon class="iconosSpinner" *ngIf="cantidad>1" name="remove-circle-outline"></ion-icon>
+            <ion-icon class="iconosSpinner" *ngIf="cantidad==1" name="trash-outline"></ion-icon>
+          </ion-col>
+          <ion-col size="2" class="spinnerCentrar">{{cantidad}}</ion-col>
+          <ion-col size="5" class="spinnerDer" (click)="incrementarProducto(1)">
+            <ion-icon class="iconosSpinner" name="add-circle-outline"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-col>
       <ion-col size="12">
-        <p class="ion-text-center ion-text-wrap colorPrimario">
-          Ingredientes
-        </p>
-        <ion-item *ngFor="let ingrediente of listaIngredientes">
-          <ion-label>
-            {{ingrediente}}
-          </ion-label>
-        </ion-item>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title class="ion-text-center colorPrimario"> {{nombreProducto}}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content class="ion-text-justify ion-text-wrap textoDescripcion">
+            {{descripcionProducto}}
+          </ion-card-content>
+        </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button color="omipalidarkd">
+      <ion-icon md="caret-up" ios="chevron-up-circle-outline" color="omipali"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button color="omipalidarkd" (click)="borrarProducto()">
+        <ion-icon name="trash-outline" color="danger"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="omipalidarkd" (click)="marcarFavorito()">
+        <ion-icon *ngIf="!banderaCorazon" name="heart-outline" color="omipali"></ion-icon>
+        <ion-icon class="colorFavorito" *ngIf="banderaCorazon" name="heart-sharp"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="omipalidarkd" (click)="incrementarPersonalizado()">
+        <ion-icon name="cart-outline" color="omipali"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
 </ion-content>

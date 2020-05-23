@@ -25,10 +25,10 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
-.eliminar {
-    color: black !important;
-    border: solid 2px red !important;
-    background-color: red !important;
+.btnPintado {
+    color: var(--ion-color-omipali) !important;
+    border: solid 2px var(--ion-color-omipalidarkd) !important;
+    background-color: var(--ion-color-omipalidarkd) !important;
     padding-top: 0px !important;
     padding-bottom: 0px !important;
 }
