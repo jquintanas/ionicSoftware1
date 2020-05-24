@@ -3,10 +3,13 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { CardProductosComponent } from "./card-productos/card-productos.component";
 import { DetallesProductosPage } from "src/app/pages/detalles-productos/detalles-productos.page";
+import { PopinfoComponent } from './popinfo/popinfo.component';
+
 @NgModule({
   declarations: [
     CardProductosComponent,
-    DetallesProductosPage
+    DetallesProductosPage,
+    PopinfoComponent
   ],
   imports: [
     CommonModule,
@@ -14,6 +17,7 @@ import { DetallesProductosPage } from "src/app/pages/detalles-productos/detalles
   ],
   exports: [
     CardProductosComponent,
+    PopinfoComponent
   ],
   entryComponents: [
     DetallesProductosPage
