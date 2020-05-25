@@ -8,7 +8,8 @@ export const environment = {
   codigoCategoriaDulces: 1,
   codigoCategoriaPostres: 2,
   codigoCategoriaTortas: 4,
-  codigoCategoriaPromociones: 5
+  codigoCategoriaPromociones: 5,
+  codigoFavoritos: "favoritos"
 };
 
 /*

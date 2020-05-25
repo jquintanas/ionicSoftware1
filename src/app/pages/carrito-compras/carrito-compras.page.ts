@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { CarritoService } from 'src/app/services/cart/carrito.service';
-import { productoCarrito } from 'src/app/interface/productoCarrito';
 
 @Component({
   selector: 'app-carrito-compras',
@@ -17,6 +16,7 @@ export class CarritoComprasPage implements OnInit {
   ngOnInit() {
     this.carrito.observarCarrito().subscribe((data: any) => {
       if (data) {
+        this.total = 0;
         this.productos = data;
         for (let valor of this.productos.values()) {
           for (let data of valor.values()) {
@@ -33,51 +33,6 @@ export class CarritoComprasPage implements OnInit {
     }, (err: any) => {
       console.log(err);
     })
-  }
-
-  async decrementarProducto(cantidad: number, clave1: any, clave2: any) {
-    let tmp: productoCarrito = this.productos.get(clave1).get(clave2);
-    if (tmp.cantidad > 1) {
-      this.incrementarProducto(-cantidad, clave1, clave2);
-      return;
-    }
-    let alert = await this.alertController.create({
-      header: 'Seguro que desea continuar!',
-      message: 'Desea <strong>eliminar</strong> el producto!!!',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: "btnPintado",
-          handler: () => {
-            console.log('Confirm Cancel');
-          }
-        }, {
-          text: 'Ok',
-          handler: () => {
-            this.incrementarProducto(-1, clave1, clave2);
-            this.eliminarProducto(clave1, clave2);
-          }
-        }
-      ]
-    });
-    await alert.present();
-
-  }
-
-  incrementarProducto(incremento: number, clave: any, clave2: any) {
-    let tmp: productoCarrito = this.productos.get(clave).get(clave2);
-    let te: productoCarrito = {
-      id: tmp.id,
-      cantidad: incremento,
-      producto: tmp.producto
-    };
-    this.carrito.agregarAlCarrito(tmp.producto.categoria, te);
-  }
-
-  eliminarProducto(clave: any, clave2: any) {
-    let tmp: productoCarrito = this.productos.get(clave).get(clave2);
-    this.carrito.eliminarProducto(tmp.producto.categoria, tmp);
   }
 
   async eliminarTodo() {
@@ -103,30 +58,4 @@ export class CarritoComprasPage implements OnInit {
     await alert.present();
   }
 
-  async borrarProductoLista(clave1: any, clave2: any) {
-    let alert = await this.alertController.create({
-      header: 'Seguro que desea continuar!',
-      message: 'Desea <strong>eliminar</strong> el producto!!!',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: "btnPintado",
-          handler: () => {
-            console.log('Confirm Cancel');
-          }
-        }, {
-          text: 'Ok',
-          handler: () => {
-            let tmp: productoCarrito = this.productos.get(clave1).get(clave2);
-            let cant = tmp.cantidad;
-            this.decrementarProducto(cant, clave1, clave2);
-            this.eliminarProducto(clave1, clave2);
-          }
-        }
-      ]
-    });
-    await alert.present();
-
-  }
 }

@@ -81,4 +81,8 @@ export class CarritoService {
     this.mapaSubject.next(this.mapaProductos);
   }
 
+  getMapaProductos(){
+    return this.mapaProductos;
+  }
+
 }

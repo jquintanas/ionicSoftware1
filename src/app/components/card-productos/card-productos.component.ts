@@ -4,7 +4,9 @@ import { DetallesProductosPage } from "src/app/pages/detalles-productos/detalles
 import { detalleProducto } from "src/app/interface/productoDetalle";
 import { CarritoService } from "src/app/services/cart/carrito.service";
 import { productoCarrito } from "src/app/interface/productoCarrito";
-
+import { Storage } from '@ionic/storage';
+import { environment } from "src/environments/environment";
+import { Favoritos } from "src/app/interface/favoritosStorage";
 @Component({
   selector: 'app-card-productos',
   templateUrl: './card-productos.component.html',
@@ -30,7 +32,8 @@ export class CardProductosComponent implements OnInit {
   constructor(
     private modalController: ModalController,
     private carrito: CarritoService,
-    private alertController: AlertController) { }
+    private alertController: AlertController,
+    private storage: Storage) { }
 
   ngOnInit() {
     if (this.titulo == null || this.titulo == "") {
@@ -52,7 +55,7 @@ export class CardProductosComponent implements OnInit {
       Precio: this.precio,
       Titulo: this.titulo,
       categoria: this.categoria
-    }
+    };
     this.carrito.observarCarrito().subscribe((data: Map<any, Map<string, productoCarrito>>) => {
       if (data != null) {
         if (data.get(this.detalle.categoria) != null) {
@@ -62,12 +65,57 @@ export class CardProductosComponent implements OnInit {
         }
       }
 
-    })
+    });
+    this.verificarFavorito();
   }
 
   marcarFavorito() {
     this.banderaCorazon = !this.banderaCorazon;
     this.detalle.Favorito = this.banderaCorazon;
+    if (this.banderaCorazon) {
+      this.storage.get(environment.codigoFavoritos).then((data: Favoritos[]) => {
+        if(data){
+          if(data.length < 10){
+            let tmp: Favoritos = {
+              categoria: this.categoria,
+              idProducto: this.id
+            };
+            if(!this.EstaEnFavoritos(data,tmp)){
+              data.push(tmp);
+              this.storage.set(environment.codigoFavoritos, data);
+            }
+          }
+        }
+        else {
+          let tmp: Favoritos = {
+            categoria: this.categoria,
+            idProducto: this.id
+          };
+          let arrayTmp: Favoritos[] = [];
+          arrayTmp.push(tmp);
+          console.log(arrayTmp)
+          this.storage.set(environment.codigoFavoritos, arrayTmp);
+        }
+      }).catch((err: any) => {
+        console.log(err);
+      })
+    }
+    else {
+      this.storage.get(environment.codigoFavoritos).then((data: Favoritos[]) => {
+        if(data){
+          let tmp: Favoritos = {
+            categoria: this.categoria,
+            idProducto: this.id
+          };
+          let tmpData: Favoritos[] = this.eliminarDeFavoritos(data,tmp);
+          this.storage.set(environment.codigoFavoritos,tmpData);
+        }
+       
+      }).catch((err:any) => {
+        console.log(err);
+      })
+    }
+
   }
 
   async agregarAlCarrito() {
@@ -137,6 +185,37 @@ export class CardProductosComponent implements OnInit {
       return Number(data.values.cantidad);
     }
     return 0;
+  }
+
+  private EstaEnFavoritos(data: Favoritos[], producto: Favoritos){
+    for(let i=0; i<data.length;i++){
+      if(data[i].categoria == producto.categoria && data[i].idProducto == producto.idProducto){
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private eliminarDeFavoritos(data : Favoritos[], producto: Favoritos){
+    let tmp: Favoritos[] = [];
+    for(let i=0; i<data.length;i++){
+      if(data[i].categoria == producto.categoria && data[i].idProducto != producto.idProducto){
+        tmp.push(data[i])
+      }
+    }
+    return tmp;
+  }
+
+  private verificarFavorito(){
+    this.storage.get(environment.codigoFavoritos).then((data: Favoritos[]) => {
+      let tmp: Favoritos = {
+        categoria: this.categoria,
+        idProducto: this.id
+      }
+      this.banderaCorazon = this.EstaEnFavoritos(data,tmp);
+    }).catch((err:any) => {
+      console.log(err);
+    })
   }
 
 

@@ -28,7 +28,7 @@ export class DulcesPage implements OnInit, OnDestroy {
       Descripcion: "Donas surtidas",
       Precio: 1.25,
       Favorito: true,
-      id: "1",
+      id: "2",
       carrusel:["https://recetasfacil.online/wp-content/uploads/2018/06/postres-sin-horno-1.jpg", "https://cdn.aarp.net/content/dam/aarp/food/recipes/2018/10/1140-limofresa-gas-drink-esp.jpg", "https://i2.wp.com/www.diegocoquillat.com/wp-content/uploads/2018/06/tapa_bebidas.png?fit=700%2C336&ssl=1&resize=1280%2C720"],
       categoria: this.categoria
     },
@@ -38,7 +38,7 @@ export class DulcesPage implements OnInit, OnDestroy {
       Descripcion: "Gomitas de sabores por libra",
       Precio: 2.5,
       Favorito: false,
-      id: "1",
+      id: "3",
       carrusel:["https://recetasfacil.online/wp-content/uploads/2018/06/postres-sin-horno-1.jpg", "https://cdn.aarp.net/content/dam/aarp/food/recipes/2018/10/1140-limofresa-gas-drink-esp.jpg", "https://i2.wp.com/www.diegocoquillat.com/wp-content/uploads/2018/06/tapa_bebidas.png?fit=700%2C336&ssl=1&resize=1280%2C720"],
       categoria: this.categoria
     }

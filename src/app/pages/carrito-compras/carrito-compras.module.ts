@@ -7,13 +7,14 @@ import { IonicModule } from '@ionic/angular';
 import { CarritoComprasPageRoutingModule } from './carrito-compras-routing.module';
 
 import { CarritoComprasPage } from './carrito-compras.page';
-
+import { CommonsComponentsModule } from "src/app/components/commons-components.module";
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CarritoComprasPageRoutingModule
+    CarritoComprasPageRoutingModule,
+    CommonsComponentsModule
   ],
   declarations: [CarritoComprasPage]
 })
