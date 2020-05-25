@@ -54,16 +54,11 @@ export class LoginPage implements OnInit {
     this.formulario_login.reset();
   }
 
-
+  abrirRegistro(){
+    this.router.navigateByUrl('registro');
+    //[routerLink]="['/registro']
+  }
+  
 
 }
 
-
-
-/*
-<div class="error-div" >
-            <span class="error" *ngIf="isSubmitted && errorControl.telefono.errors?.required">
-              Debe ingresar su nombre y apellido maximo.
-            </span>
-          </div>
-          */

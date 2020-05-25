@@ -39,8 +39,8 @@
             Ingresar
           </ion-button>
         </div>
-        <div class="registrar" >
-          <span slot="end" class="cuenta">¿No tienes una cuenta?&nbsp;<a href="./"  class="registro" [routerLink]="['/registro']">Registrate</a></span>   
+        <div class="registrar" (click)="abrirRegistro()">
+          <span slot="end" class="cuenta">¿No tienes una cuenta?&nbsp;<a  class="registro">Registrate</a></span>   
         </div>  
     </form>
     

@@ -1,14 +1,73 @@
-<ion-header>
-  <ion-toolbar>
+<ion-header class="ion-border">
+  <ion-toolbar class="header">
     <ion-buttons slot="start">
       <ion-button [routerLink]="['/login']">
-        <ion-icon name="chevron-back-outline" ></ion-icon>
+        <ion-icon name="chevron-back-outline"  ></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>registro</ion-title>
+    <ion-title class="nuevac">Nueva Cuenta</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-input type="text" placeholder="Awesome Input"></ion-input>
+<ion-content class="contenedor">
+  <div class="ion-margin contendorf">
+    <div class="datos">
+      <ion-label >Datos Personales</ion-label>
+    </div> 
+    <hr color="white" class="lineahr ">
+    <div  [ngSwitch]="paso_formulario">
+      <div  *ngSwitchCase="1">
+        <form  [formGroup]="form" (ngSubmit)="save()" class="formulario">
+          <ion-item  lines="none" class="cedula " color="none" >
+            <ion-input type="text" placeholder="Cédula" class="inputced" formControlName="cedula" ></ion-input>
+          </ion-item>
+          <ion-item  lines="none" class="nombres " color="none" >
+            <ion-input type="text" placeholder="Nombres" class="inputnom" formControlName="nombres" ></ion-input>
+          </ion-item>
+          <ion-item  lines="none" class="apellidos " color="none" >
+            <ion-input type="text" placeholder="Apellidos" class="inputape" formControlName="apellidos" ></ion-input>
+          </ion-item>
+          <ion-item  lines="none" class="telefono " color="none" >
+            <ion-input type="text" placeholder="Teléfono" class="inputel" formControlName="telefono" ></ion-input>
+          </ion-item>
+          <ion-item  lines="none" class="correo " color="none" >
+            <ion-input type="text" placeholder="Correo Electrónico" class="inputcor" formControlName="correo" ></ion-input>
+          </ion-item>
+          <ion-item  lines="none" class="correo " color="none" >
+            <ion-input type="text" placeholder="Contraseña" class="inputcor" formControlName="contrasena" ></ion-input>
+          </ion-item>
+          <ion-item  lines="none" class="correo " color="none" >
+            <ion-input type="text" placeholder="Confirmar Contraseña" class="inputcor" formControlName="contrasenac" ></ion-input>
+          </ion-item>
+          <div class="contenedorboton ion-padding-horizontal">
+            <ion-button  type="submit" expand="block" fill="clear"  class="siguiente ion-margin-vertical " [disabled]="false" >
+              Siguiente
+            </ion-button>
+          </div>    
+        </form>
+      </div>
+      <div  *ngSwitchCase="2">
+        <form  [formGroup]="form2" (ngSubmit)="save2()" class="formulario">
+          <ion-item  lines="none" class="cedula " color="none" >
+            <ion-input type="text" placeholder="Dirección de domicilio" class="inputced" formControlName="domicilio" ></ion-input>
+          </ion-item>
+          <ion-item  lines="none" class="referencias " color="none" >
+            <ion-textarea type="text" placeholder="Puede poner las referencias aquí" class="inputref" formControlName="referencias" ></ion-textarea>
+          </ion-item>
+          <div class="padre" >
+            <div class="hijo"><ion-button  type="button" expand="block" fill="clear"  class="registrar ion-margin-vertical " (click)= "regresar()" >
+              Regresar
+            </ion-button></div>
+            <div class="hijo"><ion-button  type="submit" expand="block" fill="clear"  class="registrar ion-margin-vertical " [disabled]="false" >
+              Registrar
+            </ion-button></div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+      
+  </div>
+
+  
 </ion-content>
