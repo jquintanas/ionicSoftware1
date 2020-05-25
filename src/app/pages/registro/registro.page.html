@@ -21,26 +21,88 @@
           <ion-item  lines="none" class="cedula " color="none" >
             <ion-input type="text" placeholder="Cédula" class="inputced" formControlName="cedula" ></ion-input>
           </ion-item>
+          <div class="alert-danger" *ngIf="cedula.invalid && (cedula.dirty || cedula.touched)">
+            <div class="container-error-message" *ngIf="cedula.errors.required">
+              Debe ingresar su número de cédula
+            </div>
+            <div class="container-error-message" *ngIf="cedula.errors.minlength">
+              La cédula debe tener 10 dígitos
+            </div>
+            <div class="container-error-message" *ngIf="cedula.errors.maxlength">
+              La cédula debe tener 10 dígitos
+            </div>
+          </div>
           <ion-item  lines="none" class="nombres " color="none" >
             <ion-input type="text" placeholder="Nombres" class="inputnom" formControlName="nombres" ></ion-input>
           </ion-item>
+          <div class="alert-danger" *ngIf="nombres.invalid && (nombres.dirty || nombres.touched)">
+            <div class="container-error-message" *ngIf="nombres.errors.required">
+              Debe ingresar sus nombres
+            </div>
+            <div class="container-error-message" *ngIf="nombres.errors.minlength">
+              Debe ingresar al menos 1 nombre
+            </div>
+          </div>
           <ion-item  lines="none" class="apellidos " color="none" >
             <ion-input type="text" placeholder="Apellidos" class="inputape" formControlName="apellidos" ></ion-input>
           </ion-item>
+          <div class="alert-danger" *ngIf="apellidos.invalid && (apellidos.dirty || apellidos.touched)">
+            <div class="container-error-message" *ngIf="apellidos.errors.required">
+              Debe ingresar sus apellidos
+            </div>
+            <div class="container-error-message" *ngIf="apellidos.errors.minlength">
+              Debe ingresar al menos 1 apellido
+            </div>
+          </div>
           <ion-item  lines="none" class="telefono " color="none" >
             <ion-input type="text" placeholder="Teléfono" class="inputel" formControlName="telefono" ></ion-input>
           </ion-item>
+          <div class="alert-danger" *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)">
+            <div class="container-error-message" *ngIf="telefono.errors.required">
+             Debe ingresar su número de teléfono
+            </div>
+            <div class="container-error-message" *ngIf="telefono.errors.minlength">
+              El número debe ser de 10 dígitos
+            </div>
+            <div class="container-error-message" *ngIf="telefono.errors.pattern">
+              El número debe ser válido
+            </div>
+          </div>
           <ion-item  lines="none" class="correo " color="none" >
             <ion-input type="text" placeholder="Correo Electrónico" class="inputcor" formControlName="correo" ></ion-input>
           </ion-item>
-          <ion-item  lines="none" class="correo " color="none" >
+          <div class="alert-danger" *ngIf="correo.invalid && (correo.dirty || correo.touched)">
+            <div class="container-error-message" *ngIf="correo.errors.required">
+             Debe ingresar su correo electrónico
+            </div>
+            <div class="container-error-message" *ngIf="correo.errors.pattern">
+             El correo debe ser válido  
+            </div>
+          </div>
+          <ion-item  lines="none" class="contrasena " color="none" >
             <ion-input type="text" placeholder="Contraseña" class="inputcor" formControlName="contrasena" ></ion-input>
           </ion-item>
-          <ion-item  lines="none" class="correo " color="none" >
+          <div class="alert-danger" *ngIf="contrasena.invalid && (contrasena.dirty || contrasena.touched)">
+            <div class="container-error-message" *ngIf="contrasena.errors.required">
+             Debe ingresar una contraseña
+            </div>
+            <div class="container-error-message" *ngIf="contrasena.errors.minlength">
+             La contraseña debe tener mínimo 8 caracteres
+            </div>
+          </div>
+          <ion-item  lines="none" class="contrasenac " color="none" >
             <ion-input type="text" placeholder="Confirmar Contraseña" class="inputcor" formControlName="contrasenac" ></ion-input>
           </ion-item>
+          <div class="alert-danger" *ngIf="contrasenac.invalid && (contrasenac.dirty || contrasenac.touched)">
+            <div class="container-error-message" *ngIf="contrasenac.errors.required">
+             Debe confirmar la contraseña
+            </div>
+            <div class="container-error-message" *ngIf="contrasenac.errors.validarContrasena">
+             Las contraseñas no coinciden
+            </div>
+          </div>
           <div class="contenedorboton ion-padding-horizontal">
-            <ion-button  type="submit" expand="block" fill="clear"  class="siguiente ion-margin-vertical " [disabled]="false" >
+            <ion-button  type="submit" expand="block" fill="clear"  class="siguiente ion-margin-vertical "  >
               Siguiente
             </ion-button>
           </div>    
@@ -49,8 +111,16 @@
       <div  *ngSwitchCase="2">
         <form  [formGroup]="form2" (ngSubmit)="save2()" class="formulario">
           <ion-item  lines="none" class="cedula " color="none" >
+            <ion-button (click)="onClick()" slot="end" fill="clear" class="icono_mapa">
+              <ion-icon name="map"></ion-icon>
+            </ion-button>
             <ion-input type="text" placeholder="Dirección de domicilio" class="inputced" formControlName="domicilio" ></ion-input>
           </ion-item>
+          <div class="alert-danger" *ngIf="domicilio.invalid && (domicilio.dirty || domicilio.touched)">
+            <div class="container-error-message" *ngIf="domicilio.errors.required">
+             Debe ingresar su domicilio
+            </div>
+          </div>
           <ion-item  lines="none" class="referencias " color="none" >
             <ion-textarea type="text" placeholder="Puede poner las referencias aquí" class="inputref" formControlName="referencias" ></ion-textarea>
           </ion-item>
@@ -59,7 +129,7 @@
               Regresar
             </ion-button></div>
             <div class="hijo"><ion-button  type="submit" expand="block" fill="clear"  class="registrar ion-margin-vertical " [disabled]="false" >
-              Registrar
+              Registrarse
             </ion-button></div>
           </div>
 

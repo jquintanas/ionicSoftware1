@@ -13,7 +13,7 @@ export class RegistroPage implements OnInit {
   form2 : FormGroup;
   paso_formulario : number;
   private emailPattern: any = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  private idPattern : any = /^[0-9]{10}$/;
+ //private idPattern : any = /^[0-9]{1}$/;
   private phonepattern : any = /^(09){1}[0-9]{8}$/;
 
   constructor(private formBuilder: FormBuilder, private router: Router) { 
@@ -29,20 +29,20 @@ export class RegistroPage implements OnInit {
 
   buildForm(){
     this.form = this.formBuilder.group({
-      cedula: ['',[Validators.required,Validators.maxLength(10),Validators.minLength(10),Validators.pattern(this.idPattern)]],
+      cedula: ['',[Validators.required,Validators.maxLength(10),Validators.minLength(10)]],
       nombres: ['',[Validators.required,Validators.minLength(5)]],
-      apellidos: ['',[Validators.required,Validators.minLength(5)]],
+      apellidos: ['',[Validators.required,Validators.minLength(4)]],
       telefono: ['',[Validators.required,Validators.maxLength(10),Validators.minLength(10), Validators.pattern(this.phonepattern)]],
       correo: ['',[Validators.required, Validators.pattern(this.emailPattern)]],
-      contrasena: ['',[Validators.required,]],
+      contrasena: ['',[Validators.required, Validators.minLength(8)]],
       contrasenac: ['',[Validators.required,this.validarContrasena('contrasena')]]
 
     });
   }
-
+//[disabled]="!form.valid"
   buildForm2(){
     this.form2 = this.formBuilder.group({
-      domicilio:['',[Validators.required,Validators.minLength(10)]],
+      domicilio:['',[Validators.required]],
       referencias:['']
     });
   }
@@ -66,13 +66,35 @@ export class RegistroPage implements OnInit {
   }
   
   save2(){
-    console.log("hola");
+    console.log("entra a la segunda parte del formulario");
     this.paso_formulario = 1;
   }
   regresar(){
     console.log("regresa a la primera parte del formulario");
     this.paso_formulario = 1;
   }
+  get cedula(){
+    return this.form.get('cedula');
+  }
+  get nombres(){
+    return this.form.get('nombres');
+  }
+  get apellidos(){
+    return this.form.get('apellidos');
+  }
+  get telefono(){
+    return this.form.get('telefono');
+  }
+  get correo(){
+    return this.form.get('correo');
+  }
+  get contrasena(){
+    return this.form.get('contrasena');
+  }
+  get contrasenac(){
+    return this.form.get('contrasenac');
+  }
+  get domicilio(){
+    return this.form2.get('domicilio');
+  }
 }
-
-//^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$

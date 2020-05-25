@@ -103,13 +103,11 @@
     border: 2px solid white;
     padding-left: 10px;
 }
-/*
-.contenedorboton{
-    text-align: center;
+
+.icono_mapa{
+    color: white;
+    border: 2px solid white;
 }
-
-*/
-
 .padre {
     display: flex;
     justify-content: center;
@@ -120,7 +118,16 @@
     
 }
 
+.alert-danger{
+    color: red;
+    text-align: left;
+    margin-left: 1rem;
 
+}
+.container-error-message{
+    padding: 3px;
+    font-size: 0.8rem;
+}
 
 
 
