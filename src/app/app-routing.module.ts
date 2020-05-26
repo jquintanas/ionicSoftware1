@@ -40,24 +40,25 @@ const routes: Routes = [
     loadChildren: () => import('./pages/carrito-compras/carrito-compras.module').then( m => m.CarritoComprasPageModule)
   },
   {
-    path: 'rastreo',
-    loadChildren: () => import('./rastreo/rastreo.module').then( m => m.RastreoPageModule)
-  },
-  {
-    path: 'historial-compras',
-    loadChildren: () => import('./historial-compras/historial-compras.module').then( m => m.HistorialComprasPageModule)
-  },
-  {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   },
   {
     path: 'registro',
     loadChildren: () => import('./pages/registro/registro.module').then( m => m.RegistroPageModule)
-  },  {
+  },
+  {
     path: 'mapa-mapbox',
     loadChildren: () => import('./pages/mapa-mapbox/mapa-mapbox.module').then( m => m.MapaMapboxPageModule)
+  },  {
+    path: 'historial',
+    loadChildren: () => import('./pages/historial/historial.module').then( m => m.HistorialPageModule)
   },
+  {
+    path: 'rastreo',
+    loadChildren: () => import('./pages/rastreo/rastreo.module').then( m => m.RastreoPageModule)
+  },
+
 
 
 
