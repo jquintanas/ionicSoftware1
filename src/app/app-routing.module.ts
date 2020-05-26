@@ -54,7 +54,11 @@ const routes: Routes = [
   {
     path: 'registro',
     loadChildren: () => import('./pages/registro/registro.module').then( m => m.RegistroPageModule)
+  },  {
+    path: 'mapa-mapbox',
+    loadChildren: () => import('./pages/mapa-mapbox/mapa-mapbox.module').then( m => m.MapaMapboxPageModule)
   },
+
 
 
 ];

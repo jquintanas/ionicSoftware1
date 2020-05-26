@@ -9,7 +9,8 @@ export const environment = {
   codigoCategoriaPostres: 2,
   codigoCategoriaTortas: 4,
   codigoCategoriaPromociones: 5,
-  codigoFavoritos: "favoritos"
+  codigoFavoritos: "favoritos",
+  mapboxkey : 'pk.eyJ1IjoiZGFubnBhcjk2IiwiYSI6ImNrYWJiaW44MjFlc2kydG96YXVxc2JiMHYifQ.iWfA_z-InyvNliI_EysoBw'
 };
 
 /*
