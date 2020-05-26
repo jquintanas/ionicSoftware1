@@ -1,3 +1,4 @@
+import { MapaDatosService } from './../../services/mapa-datos/mapa-datos.service';
 import { Component, OnInit } from '@angular/core';
 import * as Mapboxgl from 'mapbox-gl';
 import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
@@ -19,7 +20,7 @@ export class MapaMapboxPage implements OnInit {
   crear = true;
   eliminar = false;
   guardar = false;
-  constructor(private modalController: ModalController, public alertController: AlertController) { }
+  constructor(private modalController: ModalController, public alertController: AlertController, private mapaDatosService: MapaDatosService) { }
 
   ngOnInit() {
     (Mapboxgl as any).accessToken = environment.mapboxkey;
@@ -77,6 +78,7 @@ export class MapaMapboxPage implements OnInit {
       var posicion = e.lngLat;
       this.latitud = posicion.lat;
       this.longitud = posicion.lng;
+      
     });    
   }
   
@@ -98,7 +100,7 @@ export class MapaMapboxPage implements OnInit {
       this.crear = false;
       this.eliminar = true;
       this.guardar = true;
-
+      
       console.log("marcador creado");
     }else{
       this.presentAlert(); 
@@ -115,6 +117,10 @@ export class MapaMapboxPage implements OnInit {
   guardar_marcador(){
     if(this.crear == false){
       console.log('esta es la posicion del marcador',this.latitud +' ' + this.longitud);
+      this.mapaDatosService.latitud = this.latitud;
+      this.mapaDatosService.longitud = this.longitud;
+      console.log('cuando el mouse dejo de tocar: '+this.mapaDatosService.latitud);
+      console.log('cuando el mouse dejo de tocar: '+this.mapaDatosService.longitud);
       this.marcadorGuardado();
     }else{
       this.infocreacion();
@@ -171,7 +177,9 @@ export class MapaMapboxPage implements OnInit {
   }
 
   async closeModal() {
+    Mapboxgl.clearStorage();
     await this.modalController.dismiss();
+    
   }
 
 }

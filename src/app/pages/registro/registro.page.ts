@@ -1,7 +1,9 @@
+import { MapaDatosService } from './../../services/mapa-datos/mapa-datos.service';
+import { ModalController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators,ValidatorFn,AbstractControl } from '@angular/forms';
-
+import { MapaMapboxPage } from './../mapa-mapbox/mapa-mapbox.page';
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.page.html',
@@ -16,15 +18,17 @@ export class RegistroPage implements OnInit {
  //private idPattern : any = /^[0-9]{1}$/;
   private phonepattern : any = /^(09){1}[0-9]{8}$/;
 
-  constructor(private formBuilder: FormBuilder, private router: Router) { 
+  constructor(private formBuilder: FormBuilder, 
+              private router: Router,public modalController:ModalController,
+              public mapaDatosService: MapaDatosService) { 
     this.buildForm(); 
     this.buildForm2();
-    this.paso_formulario = 1;
-  
+    this.paso_formulario = 1; 
+    
   }
 
   ngOnInit() {
-
+    console.log(this.mapaDatosService.longitud);
   }
 
   buildForm(){
@@ -42,7 +46,6 @@ export class RegistroPage implements OnInit {
 //[disabled]="!form.valid"
   buildForm2(){
     this.form2 = this.formBuilder.group({
-      domicilio:['',[Validators.required]],
       referencias:['']
     });
   }
@@ -96,5 +99,13 @@ export class RegistroPage implements OnInit {
   }
   get domicilio(){
     return this.form2.get('domicilio');
+  }
+
+  async openModal() {
+    const modal = await this.modalController.create({
+      component: MapaMapboxPage
+    });
+    return await modal.present();
+    
   }
 }

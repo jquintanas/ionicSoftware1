@@ -111,18 +111,15 @@
       <div  *ngSwitchCase="2">
         <form  [formGroup]="form2" (ngSubmit)="save2()" class="formulario">
           <ion-item  lines="none" class="cedula " color="none" >
-            <ion-button (click)="onClick()" slot="end" fill="clear" class="icono_mapa">
+            <ion-button (click)="openModal()" slot="end" fill="clear" class="icono_mapa">
               <ion-icon name="map"></ion-icon>
             </ion-button>
-            <ion-input type="text" placeholder="Dirección de domicilio" class="inputced" formControlName="domicilio" ></ion-input>
+            <ion-label type="text"  class="lbldom">Dirección de domicilio</ion-label>
           </ion-item>
-          <div class="alert-danger" *ngIf="domicilio.invalid && (domicilio.dirty || domicilio.touched)">
-            <div class="container-error-message" *ngIf="domicilio.errors.required">
-             Debe ingresar su domicilio
-            </div>
-          </div>
           <ion-item  lines="none" class="referencias " color="none" >
-            <ion-textarea type="text" placeholder="Puede poner las referencias aquí" class="inputref" formControlName="referencias" ></ion-textarea>
+            <ion-textarea id="referencias" type="text" placeholder="Puede indicar alguna referencia de su domicilio" class="inputref" formControlName="referencias" >
+              <span>latitud:{{mapaDatosService.latitud}}  longitud:{{mapaDatosService.longitud}} </span>
+            </ion-textarea>
           </ion-item>
           <div class="padre" >
             <div class="hijo"><ion-button  type="button" expand="block" fill="clear"  class="registrar ion-margin-vertical " (click)= "regresar()" >
