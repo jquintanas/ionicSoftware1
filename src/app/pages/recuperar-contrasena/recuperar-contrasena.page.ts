@@ -52,4 +52,7 @@ export class RecuperarContrasenaPage implements OnInit {
     this.formulario_r.reset();
   }
 
+  async regresar(){
+    await this.modalController.dismiss();
+  }
 }

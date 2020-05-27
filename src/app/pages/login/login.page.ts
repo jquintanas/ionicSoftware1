@@ -1,7 +1,9 @@
+import { ModalController } from '@ionic/angular';
+import { RecuperarContrasenaPage } from './../recuperar-contrasena/recuperar-contrasena.page';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup,Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
+ 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -13,7 +15,7 @@ export class LoginPage implements OnInit {
   currentPopover = null;
   formulario_login : FormGroup;
   private phonepattern : any = /^(09){1}[0-9]{8}$/;
-  constructor(private formBuilder: FormBuilder, private router: Router) { 
+  constructor(private formBuilder: FormBuilder, private router: Router, public modalController:ModalController) { 
     this.buildForm();
   }
 
@@ -58,7 +60,14 @@ export class LoginPage implements OnInit {
     this.router.navigateByUrl('registro');
     //[routerLink]="['/registro']
   }
-  
+
+  async abrirContrasena() {
+    const modal = await this.modalController.create({
+      component: RecuperarContrasenaPage
+    });
+    return await modal.present();
+    
+  }
 
 }
 

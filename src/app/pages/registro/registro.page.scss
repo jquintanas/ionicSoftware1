@@ -1,20 +1,22 @@
 .header{
    // --background: rgba(0, 255, 162, 0.479);
-   --background: rgb(162, 216, 209);
+   // --background: rgb(162, 216, 209);
+   --background:#252424;
 }
+
 .contenedor{
     //--background: linear-gradient(rgba(0, 255, 162, 0.479),rgb(2, 41, 66));
-    --background: linear-gradient(rgb(162, 216, 209),rgb(2, 41, 66));
+    //--background: linear-gradient(rgb(162, 216, 209),rgb(2, 41, 66));
+    --background:#252424;
     //--background:rgb(162, 216, 209);
 }
 .nuevac{
     color:white;
+
     font-size: 1.25rem;
     font-weight: bold;
 }
-.lista_registro{
-    --background: rgba(0, 255, 162, 0.479);
-}
+
 
 .contendorf{
     background: rgba(0, 0, 0, 0.514);
@@ -23,63 +25,78 @@
 .datos{
     padding-top: 10px;
     padding-left: 10px;
-    color: white;
+    //color: white;
+    color: #98DBD9;
     font-weight: bold;
 }
 .lbldom{
-    color:white;
+    //color:white;
+    color: #98DBD9;
     font-size: 0.9rem;
 }
 .lineahr{
-    border-bottom: 2px solid white;
+    //border-bottom: 2px solid white;
+    border-bottom: 2px solid #98DBD9;
 }
 .inputced{
     text-align: left;
-    color:white;
+    //color:white;
+    color: #98DBD9;
     font-size: 0.9rem;
     border: 0;
     outline: 0;
-    border-bottom: 2px solid white;
+    //border-bottom: 2px solid white;
+    border-bottom: 2px solid #98DBD9;
 }
 .inputnom{
     text-align: left;
-    color:white;
+    //color:white;
+    color: #98DBD9;
     font-size: 0.9rem;
     border: 0;
     outline: 0;
-    border-bottom: 2px solid white;
+    //border-bottom: 2px solid white;
+    border-bottom: 2px solid #98DBD9;
 }
 .inputape{
     text-align: left;
-    color:white;
+    //color:white;
+    color: #98DBD9;
     font-size: 0.9rem;
     border: 0;
     outline: 0;
-    border-bottom: 2px solid white;
+    //border-bottom: 2px solid white;
+    border-bottom: 2px solid #98DBD9;
 }
 .inputel{
     text-align: left;
-    color:white;
+    //color:white;
+    color: #98DBD9;
     font-size: 0.9rem;
     border: 0;
     outline: 0;
-    border-bottom: 2px solid white;
+    //border-bottom: 2px solid white;
+    border-bottom: 2px solid #98DBD9;
 }
 .inputcor{
     text-align: left;
-    color:white;
+    //color:white;
+    color: #98DBD9;
     font-size: 0.9rem;
     border: 0;
     outline: 0;
-    border-bottom: 2px solid white;
+    //border-bottom: 2px solid white;
+    border-bottom: 2px solid #98DBD9;
 }
 
 
 .siguiente{
 
     //--background:white;
-    color: white;
-    border: 2px solid white;
+    //color: white;
+    color:#98DBD9;
+    //border: 2px solid white;
+    border: 2px solid #98DBD9;
     border-radius: 5px;
     font-size: 0.9rem;
 }
@@ -87,20 +104,26 @@
 .registrar{
 
     //--background:white;
-    color: white;
-    border: 2px solid white;
+    //color: white;
+    color:#98DBD9;
+    //border: 2px solid white;
+     border: 2px solid #98DBD9;
     border-radius: 5px;
     font-size: 0.9rem;
 }
 .regresar{
-    color: white;  
-    border: 2px solid white;
+    //color: white;
+    color:#98DBD9;
+    //border: 2px solid white;
+    border: 2px solid #98DBD9;
     border-radius: 5px;
     font-size: 0.9rem;
 }
 .verubi{
-    color: white;
-    border: 2px solid white;
+    //color: white;
+    color:#98DBD9;
+    //border: 2px solid white;
+    border: 2px solid #98DBD9;
     border-radius: 5px;
     font-size: 0.9rem;
 }
@@ -113,23 +136,29 @@
 .inputref{
     height: 80px;
     text-align: left;
-    color:white;
+    //color:white;
+    color: #98DBD9;
     font-size: 0.9rem;
-    border: 2px solid white;
+    //border: 2px solid white;
+    border: 2px solid #98DBD9;
     padding-left: 10px;
 }
 .inputdom{
     text-align: left;
-    color:white;
+    //color:white;
+    color: #98DBD9;
     font-size: 0.9rem;
     border: 0;
     outline: 0;
-    border-bottom: 2px solid white;
+    //border-bottom: 2px solid white;
+    border-bottom: 2px solid #98DBD9;
 }
 
 .icono_mapa{
-    color: white;
-    border: 2px solid white;
+    //color: white;
+    color: #98DBD9;
+    //border-bottom: 2px solid white;
+    border-bottom: 2px solid #98DBD9;
 }
 .padre {
     display: flex;

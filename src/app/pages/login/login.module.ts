@@ -1,16 +1,12 @@
+import { RecuperarContrasenaPage } from './../recuperar-contrasena/recuperar-contrasena.page';
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-
 import { LoginPageRoutingModule } from './login-routing.module';
-
 import { LoginPage } from './login.page';
-
 @NgModule({
-  entryComponents: [
-    
-  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -19,6 +15,7 @@ import { LoginPage } from './login.page';
     ReactiveFormsModule
     
   ],
-  declarations: [LoginPage]
+  declarations: [LoginPage,RecuperarContrasenaPage],
+  entryComponents: [RecuperarContrasenaPage]
 })
 export class LoginPageModule {}
