@@ -1,6 +1,6 @@
 import { MapaDatosService } from './../../services/mapa-datos/mapa-datos.service';
-import { ModalController } from '@ionic/angular';
-import { Component, OnInit } from '@angular/core';
+import { ModalController} from '@ionic/angular';
+import { Component, OnInit,ViewChild,Renderer2, ElementRef, ViewChildren, AfterViewInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators,ValidatorFn,AbstractControl } from '@angular/forms';
 import { MapaMapboxPage } from './../mapa-mapbox/mapa-mapbox.page';
@@ -9,27 +9,38 @@ import { MapaMapboxPage } from './../mapa-mapbox/mapa-mapbox.page';
   templateUrl: './registro.page.html',
   styleUrls: ['./registro.page.scss'],
 })
-export class RegistroPage implements OnInit {
-
+export class RegistroPage implements OnInit,AfterViewInit {
+  imagen = false;
+  verubicacion = true;
   form : FormGroup;
   form2 : FormGroup;
   paso_formulario : number;
   private emailPattern: any = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
- //private idPattern : any = /^[0-9]{1}$/;
   private phonepattern : any = /^(09){1}[0-9]{8}$/;
+  img:string = ",15,0/300x300?access_token=pk.eyJ1IjoiZGFubnBhcjk2IiwiYSI6ImNrYWJiaW44MjFlc2kydG96YXVxc2JiMHYifQ.iWfA_z-InyvNliI_EysoBw";
+  url_completa :string ;
+  latlng :string;
 
-  constructor(private formBuilder: FormBuilder, 
-              private router: Router,public modalController:ModalController,
-              public mapaDatosService: MapaDatosService) { 
+  constructor(private formBuilder: FormBuilder, private router: Router,public modalController:ModalController,  public mapaDatosService: MapaDatosService,public renderer:Renderer2,public el:ElementRef) { 
     this.buildForm(); 
     this.buildForm2();
     this.paso_formulario = 1; 
+    console.log('servicio latitud: ',this.mapaDatosService.latitud);
+    console.log(this.mapaDatosService.marcador_guardado);
     
   }
 
   ngOnInit() {
-    console.log(this.mapaDatosService.longitud);
+    
+   
   }
+  ngAfterViewInit(){
+    this.latlng= this.mapaDatosService.latitud.toString() +','+ this.mapaDatosService.longitud.toString();
+    this.url_completa = this.latlng+this.img;
+    console.log('urlfinal:', this.url_completa);
+    
+  }
+
 
   buildForm(){
     this.form = this.formBuilder.group({
@@ -43,9 +54,10 @@ export class RegistroPage implements OnInit {
 
     });
   }
-//[disabled]="!form.valid"
+
   buildForm2(){
     this.form2 = this.formBuilder.group({
+      domicilio: ['',Validators.required],
       referencias:['']
     });
   }
@@ -69,11 +81,11 @@ export class RegistroPage implements OnInit {
   }
   
   save2(){
-    console.log("entra a la segunda parte del formulario");
+
     this.paso_formulario = 1;
   }
   regresar(){
-    console.log("regresa a la primera parte del formulario");
+
     this.paso_formulario = 1;
   }
   get cedula(){
@@ -102,10 +114,24 @@ export class RegistroPage implements OnInit {
   }
 
   async openModal() {
+    this.imagen = false;
+    if(this.verubicacion ==true){
+      this.verubicacion =false;
+    }
     const modal = await this.modalController.create({
       component: MapaMapboxPage
     });
     return await modal.present();
     
+  }
+
+  mostrarimagen(){    
+    this.latlng= this.mapaDatosService.longitud.toString()+','+ this.mapaDatosService.latitud.toString() ;
+    this.url_completa = this.latlng+this.img;
+    console.log('urlfinal:', this.url_completa);
+    console.log('servicio latitud: ',this.mapaDatosService.latitud);
+    if(this.url_completa != ""){
+      this.imagen = true;
+    }
   }
 }

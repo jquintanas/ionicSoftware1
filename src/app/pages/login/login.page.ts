@@ -12,7 +12,7 @@ export class LoginPage implements OnInit {
   isSubmitted = false;
   currentPopover = null;
   formulario_login : FormGroup;
-
+  private phonepattern : any = /^(09){1}[0-9]{8}$/;
   constructor(private formBuilder: FormBuilder, private router: Router) { 
     this.buildForm();
   }
@@ -23,7 +23,7 @@ export class LoginPage implements OnInit {
 
   buildForm(){
     this.formulario_login =this.formBuilder.group({
-      telefono: ['',[Validators.required,Validators.maxLength(10),Validators.minLength(10)]],
+      telefono: ['',[Validators.required,Validators.maxLength(10),Validators.minLength(10), Validators.pattern(this.phonepattern)]],
       contrasena: ['',[Validators.required,Validators.minLength(8)]],
     });
   }

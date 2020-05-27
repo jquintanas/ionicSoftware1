@@ -18,6 +18,9 @@
           <div class="container-error-message parpadea" *ngIf="telefono.errors.maxlength">
             El teléfono debe tener 10 dígitos
           </div>
+          <div class="container-error-message parpadea" *ngIf="telefono.errors.pattern">
+            El número debe ser válido
+          </div>
         </div>
         <ion-item  lines="none" class="contrasena" color="none">
           <ion-icon slot="start" name="lock-closed-sharp" class="iconocontra"></ion-icon>

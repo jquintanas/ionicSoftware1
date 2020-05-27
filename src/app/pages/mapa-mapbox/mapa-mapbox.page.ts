@@ -78,7 +78,8 @@ export class MapaMapboxPage implements OnInit {
       var posicion = e.lngLat;
       this.latitud = posicion.lat;
       this.longitud = posicion.lng;
-      
+      this.mapaDatosService.latitud = this.latitud;
+      this.mapaDatosService.longitud = this.longitud;
     });    
   }
   
@@ -119,6 +120,7 @@ export class MapaMapboxPage implements OnInit {
       console.log('esta es la posicion del marcador',this.latitud +' ' + this.longitud);
       this.mapaDatosService.latitud = this.latitud;
       this.mapaDatosService.longitud = this.longitud;
+      this.mapaDatosService.marcador_guardado = true;
       console.log('cuando el mouse dejo de tocar: '+this.mapaDatosService.latitud);
       console.log('cuando el mouse dejo de tocar: '+this.mapaDatosService.longitud);
       this.marcadorGuardado();

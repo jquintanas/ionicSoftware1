@@ -5,8 +5,9 @@ import { Injectable } from '@angular/core';
 })
 export class MapaDatosService {
 
-  latitud: number;
-  longitud: number;
+  latitud:number= -79.5419038;
+  longitud: number= -1.8017518;
+  marcador_guardado : boolean = false;
   nombre : string = "sin nombre";
 
   constructor() { }
