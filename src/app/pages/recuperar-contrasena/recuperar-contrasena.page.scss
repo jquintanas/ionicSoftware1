@@ -1,48 +1,38 @@
 .contenedor{
-    //--background: linear-gradient(#AED5C3,#B2D2DD);
-    // 5 --background: linear-gradient(rgb(166, 230, 200),rgb(62, 139, 165));
-    // --background: linear-gradient(rgb(145, 177, 162),rgb(42, 109, 131));
-    // 3 --background: linear-gradient(rgb(62, 139, 165),rgb(149, 229, 192));
-    // 2 --background: linear-gradient(rgb(34, 44, 48),rgb(103, 207, 167));
     // --background: linear-gradient(rgba(0, 255, 162, 0.479),rgb(2, 41, 66));
     // --background: linear-gradient(rgb(175, 233, 223),rgb(2, 41, 66));
-     --background: linear-gradient(rgb(162, 216, 209),rgb(2, 41, 66));
-    // 6 --background:rgba(39, 177, 124, 0.726);
-    // 7 --background:rgb(57, 139, 135);
-    // 8 --background:rgba(69, 179, 199, 0.911);
-    // 9 --background:rgb(54, 93, 119);
-    // 10 --background: linear-gradient(rgb(54, 93, 119),rgb(78, 176, 209));
-    //--background: linear-gradient(rgb(19, 61, 88),rgb(28, 175, 224));
-    //--background: linear-gradient(rgba(107, 72, 42, 0.747),rgba(206, 157, 33, 0.726));
-    //--background: linear-gradient(rgba(102, 56, 15, 0.37),rgba(209, 165, 54, 0.842));
-    //--background: linear-gradient(rgba(236, 129, 34, 0.747),rgba(144, 184, 201, 0.945));
-    //--background: linear-gradient(rgba(93, 193, 185, 0.747),rgb(108, 172, 199));
-    //--background: linear-gradient(rgba(253, 216, 168, 0.856),rgba(141, 73, 37));
-    //--background: linear-gradient(rgba(22, 100, 236, 0.897),rgba(45, 214, 236, 0.952),rgba(6, 67, 136, 0.904));
-    //--background:rgb(255, 233, 176);
+    //--background: linear-gradient(rgb(162, 216, 209),rgb(2, 41, 66));
+     --background:#252424;
 }
 .toolbar{
-    --background: rgb(162, 216, 209);
-    
+    //--background: rgb(162, 216, 209);
+    --background:#252424;
 }
-
+ion-header{
+    border-bottom: 2px solid #98DBD9;
+}
 .enviarc{
     
     //--border-radius: 0;
-    --background:white;
+    //--background:white;
+    color: #98DBD9;
     //--background:rgb(190, 229, 211);
-    color: rgb(2, 41, 66);
+    //color: rgb(2, 41, 66);
     //color:white;
+    border: 2px solid #98DBD9;
+    border-radius: 5px;
     margin-top: 10%;
 }
 .texto{
-    color: white;  
+    //color: white;  
+    color: #98DBD9;
     //border: 2px solid white;
     //border-radius: 5px;
     font-size: 0.9rem;
 }
 .labelcorreo{
-    color:white;
+    //color: white;  
+    color: #98DBD9;
     text-align: center;
     font-size: 1.25rem;
     font-weight: bold;
@@ -70,15 +60,15 @@ img.imagenlogo{
 
 .correo{
     text-align: left;
-    //color: white;
-    color:white;
+    //color: white;  
+    color: #98DBD9;
     //color: rgb(176, 210, 209);
     //padding-bottom: 2%;
     font-size: 0.9rem;
     border: 0;
     outline: 0;
-    //border-bottom: 2px solid rgb(176, 210, 209);
-    border-bottom: 2px solid white;
+    border-bottom: 2px solid #98DBD9;
+    //border-bottom: 2px solid white;
 }
 
 .itemmensaje{

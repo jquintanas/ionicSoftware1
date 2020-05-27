@@ -1,0 +1,41 @@
+
+<ion-content class="contenedor">
+  <div class="contenedorlogo">
+      <img src="../../../assets/logos/logo.png" class="imagenlogo">
+  </div>
+  <div class="ion-margin contendorf">
+    <form class="ion-margin formulario" [formGroup]="formulario_r" (ngSubmit)="save()">
+      <ion-item color="none" lines="none" class="mensaje ion-no-padding">
+        <p class="restablecerContra">Restablecimiento de contraseña</p>
+      </ion-item>
+      <ion-item  lines="none" class="contrasena " color="none" >
+        <ion-input type="text" placeholder="Nueva contraseña"  formControlName="contrasena" ></ion-input>
+      </ion-item>
+      <div class="alert-danger" *ngIf="contrasena.invalid && (contrasena.dirty || contrasena.touched)">
+        <div class="container-error-message " *ngIf="contrasena.errors.required">
+          Debe ingresar una nueva contraseña
+        </div>
+        <div class="container-error-message " *ngIf="contrasena.errors.minlength">
+          La contraseña debe tener mínimo 8 caracteres
+        </div>
+      </div>  
+      <ion-item  lines="none" class="contrasenac " color="none" >
+        <ion-input type="text" placeholder="Confirmar contraseña"  formControlName="contrasenac" ></ion-input>
+      </ion-item>
+      <div class="alert-danger" *ngIf="contrasenac.invalid && (contrasenac.dirty || contrasenac.touched)">
+        <div class="container-error-message " *ngIf="contrasenac.errors.required">
+          Debe ingresar una nueva contraseña
+        </div>
+        <div class="container-error-message " *ngIf="contrasenac.errors.validarContrasena">
+          Las contraseñas no coinciden
+        </div>
+      </div>           
+      <div class="contenedorboton">
+        <ion-button  type="submit" expand="block" fill="clear"  class="enviarc" [disabled]="!formulario_r.valid" >
+          Aceptar
+        </ion-button>
+      </div>
+    </form>
+  </div>
+    
+</ion-content>

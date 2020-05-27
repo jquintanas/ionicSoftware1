@@ -1,7 +1,7 @@
 <ion-header class="ion-border">
-  <ion-toolbar class="header">
+  <ion-toolbar  class="header">
     <ion-buttons slot="start" color="omipali">
-      <ion-button [routerLink]="['/login']">
+      <ion-button (click)="salirRegistro()">
         <ion-icon name="chevron-back-outline" color="omipali" ></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -102,7 +102,7 @@
             </div>
           </div>
           <div class="contenedorboton ion-padding-horizontal">
-            <ion-button  type="submit" expand="block" fill="clear"  class="siguiente ion-margin-vertical "  >
+            <ion-button  type="submit" expand="block" fill="clear"  class="siguiente ion-margin-vertical " [disabled]="!form.valid">
               Siguiente
             </ion-button>
             <!--[disabled]="!form.valid"-->

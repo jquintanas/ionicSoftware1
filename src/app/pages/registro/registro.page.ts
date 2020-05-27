@@ -25,8 +25,6 @@ export class RegistroPage implements OnInit,AfterViewInit {
     this.buildForm(); 
     this.buildForm2();
     this.paso_formulario = 1; 
-    console.log('servicio latitud: ',this.mapaDatosService.latitud);
-    console.log(this.mapaDatosService.marcador_guardado);
     
   }
 
@@ -37,7 +35,6 @@ export class RegistroPage implements OnInit,AfterViewInit {
   ngAfterViewInit(){
     this.latlng= this.mapaDatosService.latitud.toString() +','+ this.mapaDatosService.longitud.toString();
     this.url_completa = this.latlng+this.img;
-    console.log('urlfinal:', this.url_completa);
     
   }
 
@@ -78,6 +75,9 @@ export class RegistroPage implements OnInit,AfterViewInit {
         return null;
       }
     };
+  }
+  salirRegistro(){
+    this.router.navigateByUrl('login');
   }
   
   save2(){
@@ -128,8 +128,6 @@ export class RegistroPage implements OnInit,AfterViewInit {
   mostrarimagen(){    
     this.latlng= this.mapaDatosService.longitud.toString()+','+ this.mapaDatosService.latitud.toString() ;
     this.url_completa = this.latlng+this.img;
-    console.log('urlfinal:', this.url_completa);
-    console.log('servicio latitud: ',this.mapaDatosService.latitud);
     if(this.url_completa != ""){
       this.imagen = true;
     }

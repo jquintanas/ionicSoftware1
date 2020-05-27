@@ -1,3 +1,4 @@
+import { RegistroPage } from './../registro/registro.page';
 import { ModalController } from '@ionic/angular';
 import { RecuperarContrasenaPage } from './../recuperar-contrasena/recuperar-contrasena.page';
 import { Component, OnInit } from '@angular/core';
@@ -38,7 +39,6 @@ export class LoginPage implements OnInit {
       console.log(this.formulario_login);
     }else{
       console.log('formulario inválido',this.formulario_login);
-      //this.isSubmitted = true;
       this.onResetForm();
       
     }
@@ -59,8 +59,15 @@ export class LoginPage implements OnInit {
   abrirRegistro(){
     this.router.navigateByUrl('registro');
     //[routerLink]="['/registro']
+    /*const modal = await this.modalController.create({
+      component: RegistroPage
+    });
+    return await modal.present();*/
   }
 
+  abrirRecuperarContra(){
+    this.router.navigateByUrl('recuperar-contrasena');
+  }
   async abrirContrasena() {
     const modal = await this.modalController.create({
       component: RecuperarContrasenaPage

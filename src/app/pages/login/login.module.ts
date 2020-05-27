@@ -1,5 +1,5 @@
 import { RecuperarContrasenaPage } from './../recuperar-contrasena/recuperar-contrasena.page';
-
+import { RegistroPage} from './../registro/registro.page';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
@@ -15,7 +15,7 @@ import { LoginPage } from './login.page';
     ReactiveFormsModule
     
   ],
-  declarations: [LoginPage,RecuperarContrasenaPage],
-  entryComponents: [RecuperarContrasenaPage]
+  declarations: [LoginPage],
+
 })
 export class LoginPageModule {}
