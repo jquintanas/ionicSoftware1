@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'registro',
+    redirectTo: 'recuperar-contrasena',
     pathMatch: 'full'
   },
   {
@@ -59,6 +59,12 @@ const routes: Routes = [
     path: 'rastreo',
     loadChildren: () => import('./pages/rastreo/rastreo.module').then( m => m.RastreoPageModule)
   },
+  {
+    path: 'recuperar-contrasena',
+    loadChildren: () => import('./pages/recuperar-contrasena/recuperar-contrasena.module').then( m => m.RecuperarContrasenaPageModule)
+  },
+
+
 
 
 

@@ -102,7 +102,7 @@
             </div>
           </div>
           <div class="contenedorboton ion-padding-horizontal">
-            <ion-button  type="submit" expand="block" fill="clear"  class="siguiente ion-margin-vertical "  >
+            <ion-button  type="submit" expand="block" fill="clear"  class="siguiente ion-margin-vertical " [disabled]="!form.valid" >
               Siguiente
             </ion-button>
           </div>               
@@ -144,7 +144,7 @@
             <div class="hijo"><ion-button  type="button" expand="block" fill="clear"  class="regresar ion-margin-vertical " (click)= "regresar()" >
               Regresar
             </ion-button></div>
-            <div class="hijo"><ion-button  type="submit" expand="block" fill="clear"  class="registrar ion-margin-vertical" [disabled]="false" >
+            <div class="hijo"><ion-button  type="submit" expand="block" fill="clear"  class="registrar ion-margin-vertical" [disabled]="!form.valid && !form.valid"  >
               Registrarse
             </ion-button></div>
           </div>
