@@ -1,0 +1,28 @@
+<!--div *ngIf="mostrarPanel()"-->
+  <ion-col size="4" class="ion-no-padding">
+    <img class="img" src="{{ url }}"  />
+  </ion-col>
+
+  <ion-button
+    *ngIf="!banderaCorazon"
+    (click)="desmarcarFavorito()"
+    class="ion-no-padding botonesIcionos"
+  >
+    <ion-icon slot="icon-only" name="heart-outline"></ion-icon>
+  </ion-button>
+  <ion-button
+    *ngIf="banderaCorazon"
+    (click)="desmarcarFavorito()"
+    class="ion-no-padding botonesIcionos"
+  >
+    <ion-icon
+      class="colorFavorito"
+      slot="icon-only"
+      name="heart-sharp"
+    ></ion-icon>
+  </ion-button>
+<!--/div-->
+
+
+
+

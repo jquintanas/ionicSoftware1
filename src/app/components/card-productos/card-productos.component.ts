@@ -72,13 +72,17 @@ export class CardProductosComponent implements OnInit {
   marcarFavorito() {
     this.banderaCorazon = !this.banderaCorazon;
     this.detalle.Favorito = this.banderaCorazon;
+
+    console.log("DETALLE ",this.detalle)
+
     if (this.banderaCorazon) {
       this.storage.get(environment.codigoFavoritos).then((data: Favoritos[]) => {
         if(data){
           if(data.length < 10){
             let tmp: Favoritos = {
               categoria: this.categoria,
-              idProducto: this.id
+              idProducto: this.id,
+              url:this.urlImagen,
             };
             if(!this.EstaEnFavoritos(data,tmp)){
               data.push(tmp);
@@ -89,8 +93,10 @@ export class CardProductosComponent implements OnInit {
         else {
           let tmp: Favoritos = {
             categoria: this.categoria,
-            idProducto: this.id
+            idProducto: this.id,
+            url:this.urlImagen
           };
+          console.log("tmp ",tmp)
           let arrayTmp: Favoritos[] = [];
           arrayTmp.push(tmp);
           console.log(arrayTmp)
@@ -105,7 +111,8 @@ export class CardProductosComponent implements OnInit {
         if(data){
           let tmp: Favoritos = {
             categoria: this.categoria,
-            idProducto: this.id
+            idProducto: this.id,
+            url:this.urlImagen
           };
           let tmpData: Favoritos[] = this.eliminarDeFavoritos(data,tmp);
           this.storage.set(environment.codigoFavoritos,tmpData);
@@ -210,7 +217,8 @@ export class CardProductosComponent implements OnInit {
     this.storage.get(environment.codigoFavoritos).then((data: Favoritos[]) => {
       let tmp: Favoritos = {
         categoria: this.categoria,
-        idProducto: this.id
+        idProducto: this.id,
+        url:this.urlImagen
       }
       this.banderaCorazon = this.EstaEnFavoritos(data,tmp);
     }).catch((err:any) => {

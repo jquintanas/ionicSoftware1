@@ -1,0 +1,176 @@
+<ion-header>
+  <ion-toolbar class="toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="contenedor">
+  <div class="content-perfil">
+    <ion-grid class="usuario">
+      <ion-row>
+        <ion-col>
+          <ion-row class="text-center" id="text">
+            <div>
+              34
+            </div>
+          </ion-row>
+          <ion-row class="text-center" id="text2">
+            <div>
+              Promociones
+            </div>
+          </ion-row>
+        </ion-col>
+        <ion-col>
+          <img
+            class="profile-photo"
+            src="/assets/img/user.png"
+            (click)="zoomImage()"
+          />
+        </ion-col>
+        <ion-col>
+          <ion-row class="text-center" id="text">
+            <div>
+              12
+            </div>
+          </ion-row>
+          <ion-row class="text-center" id="text2">
+            <div>
+              Pedidos
+            </div>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <label class="centrado-usuario">
+          Karla Burgos Gayrey
+        </label>
+      </ion-row>
+    </ion-grid>
+
+    <ion-fab>
+      <button class="fab-button" (click)="abrirEdicion()">
+        Editar Perfil
+      </button>
+    </ion-fab>
+  </div>
+
+  <ion-row class="option-menu">
+    <ion-col>
+      <ion-button class="menu-button" color="Light"
+        ><ion-icon name="chatbox-ellipses"></ion-icon
+      ></ion-button>
+    </ion-col>
+    <ion-col>
+      <ion-button class="menu-button" color="Light"
+        ><ion-icon name="cash"></ion-icon
+      ></ion-button>
+    </ion-col>
+    <ion-col>
+      <ion-button class="menu-button" color="Light"
+        ><ion-icon name="receipt"></ion-icon
+      ></ion-button>
+    </ion-col>
+    <ion-col>
+      <ion-button class="menu-button" color="Light">
+        <ion-icon name="help"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="centrado">
+    <ion-col class="centrado">
+      <label class="centrado">Novedad</label>
+    </ion-col>
+    <ion-col class="centrado">
+      <label class="centrado">Pago</label>
+    </ion-col>
+    <ion-col class="centrado">
+      <label class="centrado">Compra</label>
+    </ion-col>
+    <ion-col class="centrado">
+      <label class="centrado">Ayuda</label>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="fav centradoDivider">
+    <ion-item-divider class="centradoDivider">
+      <ion-label class="centradoDivider">
+        Mis favoritos
+      </ion-label>
+    </ion-item-divider>
+  </ion-row>
+
+  <ion-toolbar>
+    <ion-segment class="aver" [(ngModel)]="segment" mode="ios">
+      <ion-segment-button value="bebidas">
+        Bebidas
+      </ion-segment-button>
+      <ion-segment-button value="dulces">
+        Dulces
+      </ion-segment-button>
+      <ion-segment-button value="postres">
+        Postres
+      </ion-segment-button>
+      <ion-segment-button value="tortas">
+        Tortas
+      </ion-segment-button>
+      <ion-segment-button value="promociones">
+        Promociones
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
+  <div [ngSwitch]="segment">
+    <ion-row *ngSwitchCase="'bebidas'">
+      <ion-col size="4" *ngFor="let data of dataBebidas">
+        <app-favorite-producto
+          [Imagen]="data.url"
+          [id]="data.idProducto"
+          [categoria]="data.categoria"
+        ></app-favorite-producto>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngSwitchCase="'dulces'">
+      <ion-col size="4" *ngFor="let data of dataDulces">
+        <app-favorite-producto
+          [Imagen]="data.url"
+          [id]="data.idProducto"
+          [categoria]="data.categoria"
+        ></app-favorite-producto>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngSwitchCase="'postres'">
+      <ion-col size="4" *ngFor="let data of dataPostres">
+        <app-favorite-producto
+          [Imagen]="data.url"
+          [id]="data.idProducto"
+          [categoria]="data.categoria"
+        ></app-favorite-producto>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngSwitchCase="'tortas'">
+      <ion-col size="4" *ngFor="let data of dataTortas">
+        <app-favorite-producto
+          [Imagen]="data.url"
+          [id]="data.idProducto"
+          [categoria]="data.categoria"
+        ></app-favorite-producto>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngSwitchCase="'promociones'">
+      <ion-col size="4" *ngFor="let data of dataPromociones">
+        <app-favorite-producto
+          [Imagen]="data.url"
+          [id]="data.idProducto"
+          [categoria]="data.categoria"
+        ></app-favorite-producto>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

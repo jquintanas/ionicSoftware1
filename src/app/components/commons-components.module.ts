@@ -5,12 +5,20 @@ import { CardProductosComponent } from "./card-productos/card-productos.componen
 import { DetallesProductosPage } from "src/app/pages/detalles-productos/detalles-productos.page";
 import { PopinfoComponent } from './popinfo/popinfo.component';
 import { CardCarritoComponent } from "./card-carrito/card-carrito.component";
+import { FavoriteProductoComponent } from "./favorite-producto/favorite-producto.component"
+//import { FavoriteTabComponent } from './favorite-tab/favorite-tab.component';
+
+
+
+
 @NgModule({
   declarations: [
     CardProductosComponent,
     DetallesProductosPage,
     PopinfoComponent,
-    CardCarritoComponent
+    CardCarritoComponent,
+    FavoriteProductoComponent,
+   // FavoriteTabComponent
   ],
   imports: [
     CommonModule,
@@ -19,7 +27,9 @@ import { CardCarritoComponent } from "./card-carrito/card-carrito.component";
   exports: [
     CardProductosComponent,
     PopinfoComponent,
-    CardCarritoComponent
+    CardCarritoComponent,
+    FavoriteProductoComponent,
+  //  FavoriteTabComponent
   ],
   entryComponents: [
     DetallesProductosPage

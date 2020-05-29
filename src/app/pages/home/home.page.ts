@@ -61,6 +61,9 @@ export class HomePage implements OnInit, OnDestroy {
 
  
 
+  abrirPerfil(){
+    this.router.navigateByUrl("perfil-usuario");
+  }
 
   limpiarBusqueda(){
     this.busqueda.generarBusqueda("all");

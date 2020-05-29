@@ -1,0 +1,107 @@
+.ios #logo {
+    height: 50%;
+    width: 120px;
+  }
+  
+  textarea{
+    background-color: transparent !important;
+    height: 5rem;
+  }
+
+  #logo {
+    height: 15%;
+    width: 120px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .content-perfil {
+    position: relative;
+  }
+  
+  .profile-photo {
+    border-radius: 50% !important;
+    overflow: hidden;
+    width: 100px;
+    z-index: 1;
+  }
+  
+  .centrado {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    color: white;
+  }
+  
+  ion-fab {
+    //background-color: yellow;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    align-content: center;
+    position: absolute;
+    left: 35px;
+    top: 110px;
+    z-index: 3;
+    //margin-top: 10px;
+  }
+  
+  .fab-button {
+    height: 40px;
+    border-radius: 20px 20px 20px 20px;
+    background-color: transparent;
+    width: 150px;
+    //margin-right: 15px;
+    font-size: 20px;
+    color: white;
+  }
+  
+  /*
+  .centrado-usuario {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 10px;
+  }*/
+  
+  ion-input {
+    color: grey;
+  }
+  
+  ion-label {
+    //background-color: red;
+    margin-right: 30px;
+  }
+  
+  ion-item-divider {
+    margin-top: 40px;
+    color: black;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+  
+  .label-input {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  ion-button {
+    margin-top: 30px;
+    color: white;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    
+    border: 1px solid #b8bbbb !important;
+    --box-shadow: none;
+    border-radius: 20px 20px 20px 20px;
+    -webkit-box-shadow: 0px 4px 7px -1px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0px 4px 7px -1px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 4px 7px -1px rgba(0, 0, 0, 0.3);
+  
+  }
+  

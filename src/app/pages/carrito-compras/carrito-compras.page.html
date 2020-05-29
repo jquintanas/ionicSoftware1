@@ -22,9 +22,14 @@
     </ion-row>
     <ion-row *ngFor="let clave of productos | keyvalue">
       <ion-col size="12" *ngFor="let producto of clave.value | keyvalue">
-        <app-card-carrito [precio]="producto.value.producto.Precio" [Titulo]="producto.value.producto.Titulo"
-          [imagen]="producto.value.producto.ImagenP" [clave1]="clave.key" [clave2]="producto.key"
-          [cantidad]="producto.value.cantidad"></app-card-carrito>
+        <app-card-carrito
+          [precio]="producto.value.producto.Precio"
+          [Titulo]="producto.value.producto.Titulo"
+          [imagen]="producto.value.producto.ImagenP"
+          [clave1]="clave.key"
+          [clave2]="producto.key"
+          [cantidad]="producto.value.cantidad"
+        ></app-card-carrito>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -37,13 +42,23 @@
 
 <ion-footer *ngIf="cantidad>0">
   <ion-toolbar>
-    <p class="ion-text-justify ion-text-wrap ion-padding-start" *ngIf="cantidad == 1">
+    <p
+      class="ion-text-justify ion-text-wrap ion-padding-start"
+      *ngIf="cantidad == 1"
+    >
       Subtotal ({{cantidad}} producto): <strong>$ {{total}}</strong>
     </p>
-    <p class="ion-text-justify ion-text-wrap ion-padding-start" *ngIf="cantidad >1">
+    <p
+      class="ion-text-justify ion-text-wrap ion-padding-start"
+      *ngIf="cantidad >1"
+    >
       Subtotal ({{cantidad}} productos): <strong>$ {{total}}</strong>
     </p>
-    <ion-button expand="block" class="ion-margin-start ion-margin-end" color="omipalidarkd">
+    <ion-button
+      expand="block"
+      class="ion-margin-start ion-margin-end"
+      color="omipalidarkd"
+    >
       <ion-icon slot="start" name="cash" color="omipali"></ion-icon>
       <ion-text color="omipali">Pagar</ion-text>
     </ion-button>

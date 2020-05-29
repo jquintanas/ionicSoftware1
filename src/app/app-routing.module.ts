@@ -50,13 +50,22 @@ const routes: Routes = [
   {
     path: 'mapa-mapbox',
     loadChildren: () => import('./pages/mapa-mapbox/mapa-mapbox.module').then( m => m.MapaMapboxPageModule)
-  },  {
+  },
+  {
     path: 'historial',
     loadChildren: () => import('./pages/historial/historial.module').then( m => m.HistorialPageModule)
   },
   {
     path: 'rastreo',
     loadChildren: () => import('./pages/rastreo/rastreo.module').then( m => m.RastreoPageModule)
+  },
+  {
+    path: 'perfil-usuario',
+    loadChildren: () => import('./pages/perfil-usuario/perfil-usuario.module').then( m => m.PerfilUsuarioPageModule)
+  },
+  {
+    path: 'editar-perfil',
+    loadChildren: () => import('./pages/editar-perfil/editar-perfil.module').then(m=>m.EditarPerfilPageModule)
   },
 
 
