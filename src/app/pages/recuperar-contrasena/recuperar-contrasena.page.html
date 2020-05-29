@@ -1,0 +1,47 @@
+<ion-header   >
+  <ion-toolbar  class="toolbar" >
+    <ion-buttons slot="start">
+      <ion-button (click)="regresar()" >
+        <ion-icon slot="start" name="chevron-back-outline" color="omipali"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="contenedor">
+  <div class="contenedorlogo">
+      <img src="../../../assets/logos/logo.png" class="imagenlogo">
+  </div>
+  <div class="ion-margin contendorf">
+    <form class="ion-margin formulario" [formGroup]="formulario_r" (ngSubmit)="save()">
+      <div class="itemmensaje">
+        <ion-item color="none" lines="none" class="itemmensaje ion-no-padding">
+          <h1 class="labelcorreo">Recuperar contraseña</h1>
+        </ion-item>
+      </div>  
+      <ion-item color="none" lines="none" class="texto">
+        <p class="p">Ingresa tu correo electrónico para recibir mas iformación de como recuperar tu contraseña</p>  
+      </ion-item>
+      
+      <ion-item  lines="none" class="correo " color="none" >
+        <ion-icon slot="start" name="mail" ></ion-icon>
+        <ion-input type="text" placeholder="Ingrese su correo electrónico" class="inputel" formControlName="correo" ></ion-input>
+      </ion-item>
+      <div class="alert-danger" *ngIf="correo.invalid && (correo.dirty || correo.touched)">
+        <div class="container-error-message " *ngIf="correo.errors.required">
+          Debe ingresar su correo electrónico
+        </div>
+        <div class="container-error-message " *ngIf="correo.errors.pattern">
+          Debe ingresar un correo válido
+        </div>
+      </div>         
+      <div class="contenedorboton">
+        <ion-button  type="submit" expand="block" fill="clear"  class="enviarc" [disabled]="!formulario_r.valid" >
+          Enviar correo
+        </ion-button>
+      </div>
+    </form>
+  </div>
+    
+</ion-content>

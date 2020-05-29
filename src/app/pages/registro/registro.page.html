@@ -1,11 +1,11 @@
 <ion-header class="ion-border">
-  <ion-toolbar class="header">
-    <ion-buttons slot="start">
-      <ion-button [routerLink]="['/login']">
-        <ion-icon name="chevron-back-outline"  ></ion-icon>
+  <ion-toolbar  class="header">
+    <ion-buttons slot="start" color="omipali">
+      <ion-button (click)="salirRegistro()">
+        <ion-icon name="chevron-back-outline" color="omipali" ></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title class="nuevac">Nueva Cuenta</ion-title>
+    <ion-title  color="omipali">Nueva Cuenta</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -102,30 +102,50 @@
             </div>
           </div>
           <div class="contenedorboton ion-padding-horizontal">
-            <ion-button  type="submit" expand="block" fill="clear"  class="siguiente ion-margin-vertical "  >
+            <ion-button  type="submit" expand="block" fill="clear"  class="siguiente ion-margin-vertical " [disabled]="!form.valid">
               Siguiente
             </ion-button>
-          </div>    
+            <!--[disabled]="!form.valid"-->
+          </div>               
         </form>
       </div>
       <div  *ngSwitchCase="2">
         <form  [formGroup]="form2" (ngSubmit)="save2()" class="formulario">
           <ion-item  lines="none" class="cedula " color="none" >
+            <ion-input type="text"  placeholder = "Dirección de domicilio" class="inputdom" formControlName="domicilio"></ion-input>
+          </ion-item>
+          <div class="alert-danger" *ngIf="domicilio.invalid && (domicilio.dirty || domicilio.touched)">
+            <div class="container-error-message" *ngIf="domicilio.errors.required">
+              Debe ingresar su domicilio
+             </div>
+          </div>    
+          <ion-item lines="none" class="ubicacion " color="none" >
+            <ion-label class="lbldom">
+              Para una mayor precisión indique <br>
+              con un marcador en el mapa su asasa <br>
+              ubicación
+            </ion-label>
             <ion-button (click)="openModal()" slot="end" fill="clear" class="icono_mapa">
               <ion-icon name="map"></ion-icon>
             </ion-button>
-            <ion-label type="text"  class="lbldom">Dirección de domicilio</ion-label>
+          </ion-item> 
+          <div class="contenedorboton ion-padding-horizontal" >
+            <ion-button  type="button" expand="block" fill="clear"  class="verubi ion-margin-vertical " [disabled]="verubicacion" (click)="mostrarimagen()" >
+              Ver ubicación selecionada
+            </ion-button>
+          </div>    
+          <ion-item  color="none" lines="none" *ngIf="imagen">
+            <img src="https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/{{url_completa}}" >
           </ion-item>
           <ion-item  lines="none" class="referencias " color="none" >
-            <ion-textarea id="referencias" type="text" placeholder="Puede indicar alguna referencia de su domicilio" class="inputref" formControlName="referencias" >
-              <span>latitud:{{mapaDatosService.latitud}}  longitud:{{mapaDatosService.longitud}} </span>
+            <ion-textarea id="referencias" type="text" placeholder="Puede indicar alguna referencia de su domicilio" class="inputref" formControlName="referencias" >  
             </ion-textarea>
           </ion-item>
           <div class="padre" >
-            <div class="hijo"><ion-button  type="button" expand="block" fill="clear"  class="registrar ion-margin-vertical " (click)= "regresar()" >
+            <div class="hijo"><ion-button  type="button" expand="block" fill="clear"  class="regresar ion-margin-vertical " (click)= "regresar()" >
               Regresar
             </ion-button></div>
-            <div class="hijo"><ion-button  type="submit" expand="block" fill="clear"  class="registrar ion-margin-vertical " [disabled]="false" >
+            <div class="hijo"><ion-button  type="submit" expand="block" fill="clear"  class="registrar ion-margin-vertical" [disabled]="!form.valid && !form.valid"  >
               Registrarse
             </ion-button></div>
           </div>

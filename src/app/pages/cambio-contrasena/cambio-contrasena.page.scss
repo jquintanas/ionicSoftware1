@@ -1,24 +1,46 @@
-
 .contenedor{
     // --background: linear-gradient(rgba(0, 255, 162, 0.479),rgb(2, 41, 66));
     // --background: linear-gradient(rgb(175, 233, 223),rgb(2, 41, 66));
     //--background: linear-gradient(rgb(162, 216, 209),rgb(2, 41, 66));
-    --background: #252424;
-    // 6 --background:rgba(39, 177, 124, 0.726);
-    // 7 --background:rgb(57, 139, 135);
-    // 8 --background:rgba(69, 179, 199, 0.911);
-    // 9 --background:rgb(54, 93, 119);
-    // 10 --background: linear-gradient(rgb(54, 93, 119),rgb(78, 176, 209));
+     --background:#252424;
 }
-.login{
+.toolbar{
+    //--background: rgb(162, 216, 209);
+    --background:#252424;
+}
+
+.enviarc{
+    
+    //--border-radius: 0;
     //--background:white;
-    //--background: #98DBD9;
     color: #98DBD9;
+    //--background:rgb(190, 229, 211);
+    //color: rgb(2, 41, 66);
+    //color:white;
     border: 2px solid #98DBD9;
     border-radius: 5px;
     margin-top: 10%;
 }
+.texto{
+    //color: white;  
+    color: #98DBD9;
+    //border: 2px solid white;
+    //border-radius: 5px;
+    font-size: 0.9rem;
+}
+.labelrestablecer{
+    //color: white;  
+    color: #98DBD9;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+}
 
+.contendorf{
+    background: rgba(0, 0, 0, 0.514);
+    border-radius: 5px;
+    //height: 300px;
+}
 img.imagenlogo{
     
     height: 125px;
@@ -28,52 +50,45 @@ img.imagenlogo{
     padding-top: 2.5rem;
     padding-bottom: 1rem;
 }
-
-.telefono{
-    text-align: left;
-    //color:white;
-    color:#98DBD9;
-    font-size: 0.9rem;
-    border: 0;
-    outline: 0;
-    border-bottom: 2px solid #98DBD9;
+.formulario{
+    padding-bottom: 10px;
 }
 
 .contrasena{
     text-align: left;
-    //color: white;
+    //color: white;  
     color: #98DBD9;
-    padding-top: 2%;
+    //color: rgb(176, 210, 209);
+    //padding-bottom: 2%;
     font-size: 0.9rem;
     border: 0;
     outline: 0;
     border-bottom: 2px solid #98DBD9;
+
+}
+.contrasenac{
+    text-align: left;
+    //color: white;  
+    color: #98DBD9;
+    //color: rgb(176, 210, 209);
+    //padding-bottom: 2%;
+    font-size: 0.9rem;
+    border: 0;
+    outline: 0;
+    border-bottom: 2px solid #98DBD9;
+
 }
 
-.linea{
-    border-bottom: 1px solid  #98DBD9;
+.mensaje{
+   color: #98DBD9;
+   font-size: large;
+   font-weight: bold;
 }
-.recuperarcontra{
-    text-align: right;
-    font-size: 0.8rem;
-    padding-top: 5%;
-    //color:white;
-    color: #98DBD9;
-}
-.linkcontra{
-   
-    //color:white;
-    color: #98DBD9;
-   
-}
-.cuenta,.registro{
-    //color:white;
-    color: #98DBD9;
-}
+
 
 .error-div{
-    text-align: center;
-    justify-content: start;
+    text-align: left;
+    justify-content: left;
 }
 .span{
     text-decoration: none;
@@ -83,43 +98,7 @@ img.imagenlogo{
     color: red;
     font-size: 0.8rem;
 }
-.contenedor_division{
-    text-align: center;
-    //color: white;
-    color: #98DBD9;
-    margin-top: 4rem;
-}
 
-.google{
-    font-size: 2rem;
-    //color: white;
-    color: #98DBD9;
-}
-.facebook{
-    font-size: 2rem;
-    //color: white;
-    color: #98DBD9;
-}
-
-.padre {
-    display: flex;
-    justify-content: center;
-}
-.hijo {
-    padding: 10px;
-    margin: 10px;
-    
-}
-
-.opcion{
-    font-size: .9rem;
-}
-
-.registrar{
-    text-align: center;
-    font-size: 0.8rem;
-    margin-top: 0.8rem;
-}
 
 .alert-danger{
     color: red;
@@ -128,17 +107,9 @@ img.imagenlogo{
 
 }
 .container-error-message{
-    padding: 3px;
+    padding-top: 2px;
     font-size: 0.8rem;
 }
-/*
-.contenedorform{
-    //background: rgb(63, 63, 63);
-    //border-radius: 5px;
-    height: 250px;
-    background: rgba(0, 0, 0, 0.514);
-    border-radius: 5px;
-}*/
 
 .parpadea {
   

@@ -3,6 +3,7 @@
   <div class="contenedorlogo">
       <img src="../../../assets/logos/logo.png" class="imagenlogo">
   </div>
+  <div class="ion-margin ">
     <form class="ion-margin" [formGroup]="formulario_login" (ngSubmit)="save()">
         <ion-item  lines="none" class="telefono" color="none" >
           <ion-icon slot="start" name="call-sharp" ></ion-icon>
@@ -18,6 +19,9 @@
           <div class="container-error-message parpadea" *ngIf="telefono.errors.maxlength">
             El teléfono debe tener 10 dígitos
           </div>
+          <div class="container-error-message parpadea" *ngIf="telefono.errors.pattern">
+            El número debe ser válido
+          </div>
         </div>
         <ion-item  lines="none" class="contrasena" color="none">
           <ion-icon slot="start" name="lock-closed-sharp" class="iconocontra"></ion-icon>
@@ -31,20 +35,22 @@
             La contraseña debe tener más de 7 caracteres
           </div>
         </div>
-        <div class="recuperarcontra">
-          <span slot="end"><a   class="linkcontra"> ¿Olvidó su contraseña?</a></span>       
+        <div class="recuperarcontra" (click)="abrirRecuperarContra()" >
+          <span slot="end"><a   class="linkcontra" > ¿Olvidó su contraseña?</a></span>       
         </div>        
         <div class="contenedorboton">
+          <!--[disabled]="!formulario_login.valid"-->
           <ion-button  type="submit" expand="block" fill="clear"  class="login" [disabled]="!formulario_login.valid" >
             Ingresar
           </ion-button>
         </div>
-        <div class="registrar" (click)="abrirRegistro()">
+        <div class="registrar" (click)="abrirRegistro()" >
           <span slot="end" class="cuenta">¿No tienes una cuenta?&nbsp;<a  class="registro">Registrate</a></span>   
         </div>  
     </form>
+  </div>
     
-    <div class="contenedor_division">
+    <div class="contenedor_division ion-margin">
       <ion-label class="opcion">Iniciar sesión con</ion-label>
       <hr width=90% color="white" class="linea" >
     </div>  

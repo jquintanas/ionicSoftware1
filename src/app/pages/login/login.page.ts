@@ -1,7 +1,10 @@
+import { RegistroPage } from './../registro/registro.page';
+import { ModalController } from '@ionic/angular';
+import { RecuperarContrasenaPage } from './../recuperar-contrasena/recuperar-contrasena.page';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup,Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
+ 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -12,8 +15,8 @@ export class LoginPage implements OnInit {
   isSubmitted = false;
   currentPopover = null;
   formulario_login : FormGroup;
-
-  constructor(private formBuilder: FormBuilder, private router: Router) { 
+  private phonepattern : any = /^(09){1}[0-9]{8}$/;
+  constructor(private formBuilder: FormBuilder, private router: Router, public modalController:ModalController) { 
     this.buildForm();
   }
 
@@ -23,7 +26,7 @@ export class LoginPage implements OnInit {
 
   buildForm(){
     this.formulario_login =this.formBuilder.group({
-      telefono: ['',[Validators.required,Validators.maxLength(10),Validators.minLength(10)]],
+      telefono: ['',[Validators.required,Validators.maxLength(10),Validators.minLength(10), Validators.pattern(this.phonepattern)]],
       contrasena: ['',[Validators.required,Validators.minLength(8)]],
     });
   }
@@ -36,7 +39,6 @@ export class LoginPage implements OnInit {
       console.log(this.formulario_login);
     }else{
       console.log('formulario inválido',this.formulario_login);
-      //this.isSubmitted = true;
       this.onResetForm();
       
     }
@@ -57,8 +59,22 @@ export class LoginPage implements OnInit {
   abrirRegistro(){
     this.router.navigateByUrl('registro');
     //[routerLink]="['/registro']
+    /*const modal = await this.modalController.create({
+      component: RegistroPage
+    });
+    return await modal.present();*/
   }
-  
+
+  abrirRecuperarContra(){
+    this.router.navigateByUrl('recuperar-contrasena');
+  }
+  async abrirContrasena() {
+    const modal = await this.modalController.create({
+      component: RecuperarContrasenaPage
+    });
+    return await modal.present();
+    
+  }
 
 }
 
