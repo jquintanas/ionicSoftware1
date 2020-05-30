@@ -10,17 +10,21 @@
           <ion-icon slot="start" name="call-sharp" ></ion-icon>
           <ion-input type="text" placeholder="Teléfono" class="inputel" formControlName="telefono" ></ion-input>
         </ion-item>
-        <div class="alert-danger" *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)">
-          <div class="container-error-message " *ngIf="telefono.errors.required">
+        <div class="alert-danger" *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)">          
+          <div class="container-error-message " *ngIf="telefono.errors.required &&  telefono.touched">
+            <ion-icon slot="start" name="information-circle-sharp" color="danger" ></ion-icon>
             Debe ingresar su número de teléfono
           </div>
-          <div class="container-error-message " *ngIf="telefono.errors.minlength">
+          <!--<div class="container-error-message " *ngIf="telefono.errors.minlength">
+            <ion-icon slot="start" name="information-circle-sharp" color="danger" ></ion-icon>
             El teléfono debe tener 10 dígitos
           </div>
           <div class="container-error-message " *ngIf="telefono.errors.maxlength">
+            <ion-icon slot="start" name="information-circle-sharp" color="danger" ></ion-icon>
             El teléfono debe tener 10 dígitos
-          </div>
+          </div>-->
           <div class="container-error-message " *ngIf="telefono.errors.pattern">
+            <ion-icon slot="start" name="information-circle-sharp" color="danger" ></ion-icon>
             El número debe ser válido
           </div>
         </div>
@@ -30,10 +34,12 @@
         </ion-item>
         <div class="alert-danger" *ngIf="contrasena.invalid && (contrasena.dirty || contrasena.touched)">
           <div class="container-error-message " *ngIf="contrasena.errors.required">
+            <ion-icon slot="start" name="information-circle-sharp" color="danger" ></ion-icon>
             Debe ingresar su contraseña
           </div>
           <div class="container-error-message " *ngIf="contrasena.errors.minlength">
-            La contraseña debe tener más de 7 caracteres
+            <ion-icon slot="start" name="information-circle-sharp" color="danger" ></ion-icon>
+            La contraseña debe tener mínimo 8 caracteres 
           </div>
         </div>
         <div class="recuperarcontra" (click)="abrirRecuperarContra()" >

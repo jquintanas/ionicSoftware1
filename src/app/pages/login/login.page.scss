@@ -1,17 +1,8 @@
 
 .contenedor{
-    // --background: linear-gradient(rgba(0, 255, 162, 0.479),rgb(2, 41, 66));
-    // --background: linear-gradient(rgb(175, 233, 223),rgb(2, 41, 66));
-    //--background: linear-gradient(rgb(162, 216, 209),rgb(2, 41, 66));
-    //--background: #252424;
-    //--background: var(--ion-color-omipali);
     --background: url(/assets/fondos/fondo_capaomipali.jpg) 50% 50%/ 100% 100% no-repeat;
-    // 6 --background:rgba(39, 177, 124, 0.726);
-    // 7 --background:rgb(57, 139, 135);
-    // 8 --background:rgba(69, 179, 199, 0.911);
-    // 9 --background:rgb(54, 93, 119);
-    // 10 --background: linear-gradient(rgb(54, 93, 119),rgb(78, 176, 209));
 }
+
 .login{
     //--background:white;
     //--background: #98DBD9;
@@ -24,9 +15,9 @@
  
 }
 .contenedorlogin{
-    margin-top: 12.5% ;
+    margin-top: 10% ;
     //background: rgba(152, 219, 217, 0.301);
-    background: rgba(0, 0, 0, 0.493);
+    background: rgba(0, 0, 0, 0.527);
     border-radius: 5px;
     
 }
