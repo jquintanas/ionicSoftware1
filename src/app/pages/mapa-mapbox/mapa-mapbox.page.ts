@@ -69,9 +69,9 @@ export class MapaMapboxPage implements OnInit {
       
     });    
    
-    this.mapa.on('click', function(e) {
+    /*this.mapa.on('click', function(e) {
       console.log('A click event has occurred at ' + e.lngLat);
-    });
+    });*/
 
     document.getElementById('geocoder').appendChild(geocoder.onAdd(this.mapa));   
     this.mapa.on('touchend',(e) => {
@@ -93,15 +93,25 @@ export class MapaMapboxPage implements OnInit {
       .setLngLat([this.longitud,this.latitud])
       .setPopup(
         new Mapboxgl.Popup({ offset: 30 }) // add popups
-          .setHTML('<h3> Información </h3>'+
-                  '<hr color="black">'+
-                  '<p>'+'Este marcador indica su ubicación'+'</p>'+'<style> h3 { color: orange; font-size: 1rem}</style>'))
+          .setHTML('<body>'+ 
+                      '<div class="title">'+
+                        '<h3> Información </h3>'+
+                        '<hr color="black">'+
+                        '<p> Este marcador indica su ubicación </p>'+
+                      '</div>'+
+                    '</body>'+
+                    '<style> h3 { color: orange; font-size: 1rem}</style>'          
+          ))
       .addTo(this.mapa);
       this.marcadroCreado();
       this.crear = false;
       this.eliminar = true;
       this.guardar = true;
-      
+      /*
+       .setHTML('<h3 class="parah3"> Información </h3>'+
+                  '<hr color="black">'+
+                  '<p>'+'Este marcador indica su ubicación'+'</p>'+'<style> h3 { color: orange; font-size: 1rem}</style>'))
+                  */
       console.log("marcador creado");
     }else{
       this.presentAlert(); 
@@ -117,12 +127,12 @@ export class MapaMapboxPage implements OnInit {
   }
   guardar_marcador(){
     if(this.crear == false){
-      console.log('esta es la posicion del marcador',this.latitud +' ' + this.longitud);
+      //console.log('esta es la posicion del marcador',this.latitud +' ' + this.longitud);
       this.mapaDatosService.latitud = this.latitud;
       this.mapaDatosService.longitud = this.longitud;
       this.mapaDatosService.marcador_guardado = true;
-      console.log('cuando el mouse dejo de tocar: '+this.mapaDatosService.latitud);
-      console.log('cuando el mouse dejo de tocar: '+this.mapaDatosService.longitud);
+      //console.log('cuando el mouse dejo de tocar: '+this.mapaDatosService.latitud);
+      //console.log('cuando el mouse dejo de tocar: '+this.mapaDatosService.longitud);
       this.marcadorGuardado();
     }else{
       this.infocreacion();

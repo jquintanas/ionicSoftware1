@@ -1,38 +1,29 @@
 .contenedor{
-    // --background: linear-gradient(rgba(0, 255, 162, 0.479),rgb(2, 41, 66));
-    // --background: linear-gradient(rgb(175, 233, 223),rgb(2, 41, 66));
-    //--background: linear-gradient(rgb(162, 216, 209),rgb(2, 41, 66));
-     --background:#252424;
+    --background: url(/assets/fondos/fondo_capaomipali.jpg) 50% 50%/ 100% 100% no-repeat;
+    //--background:#252424;
 }
-.toolbar{
-    //--background: rgb(162, 216, 209);
-    --background:#252424;
+ion-toolbar {
+    --background: transparent;
+    --ion-color-base: transparent !important;
 }
-ion-header{
-    border-bottom: 2px solid #98DBD9;
-}
+
 .enviarc{
-    
-    //--border-radius: 0;
-    //--background:white;
-    color: #98DBD9;
-    //--background:rgb(190, 229, 211);
-    //color: rgb(2, 41, 66);
-    //color:white;
-    border: 2px solid #98DBD9;
+
+    color:white;
+    border: 2px solid white;
     border-radius: 5px;
     margin-top: 10%;
 }
 .texto{
-    //color: white;  
-    color: #98DBD9;
+    color: white;  
+    //color: #98DBD9;
     //border: 2px solid white;
     //border-radius: 5px;
     font-size: 0.9rem;
 }
 .labelcorreo{
-    //color: white;  
-    color: #98DBD9;
+    color: white;  
+    //color: #98DBD9;
     text-align: center;
     font-size: 1.25rem;
     font-weight: bold;
@@ -41,7 +32,7 @@ ion-header{
     padding-left: 10px;
 }
 .contendorf{
-    background: rgba(0, 0, 0, 0.514);
+    background: rgba(0, 0, 0, 0.527);
     border-radius: 5px;
     //height: 300px;
 }
@@ -51,8 +42,8 @@ img.imagenlogo{
 };
 .contenedorlogo{
     text-align: center;
-    padding-top: 2.5rem;
-    padding-bottom: 1rem;
+    padding-top: 10%;
+    padding-bottom: 1%;
 }
 .formulario{
     padding-bottom: 10px;
@@ -60,15 +51,11 @@ img.imagenlogo{
 
 .correo{
     text-align: left;
-    //color: white;  
-    color: #98DBD9;
-    //color: rgb(176, 210, 209);
-    //padding-bottom: 2%;
+    color: white;  
     font-size: 0.9rem;
     border: 0;
     outline: 0;
-    border-bottom: 2px solid #98DBD9;
-    //border-bottom: 2px solid white;
+    border-bottom: 2px solid white;
 }
 
 .itemmensaje{
@@ -100,34 +87,3 @@ img.imagenlogo{
     padding-top: 2px;
     font-size: 0.8rem;
 }
-
-.parpadea {
-  
-    animation-name: parpadeo;
-    animation-duration: 2.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-  
-    -webkit-animation-name:parpadeo;
-    -webkit-animation-duration: 2.5s;
-    -webkit-animation-timing-function: linear;
-    -webkit-animation-iteration-count: infinite;
-  }
-  
-  @-moz-keyframes parpadeo{  
-    0% { opacity: 1.0; }
-    50% { opacity: 0.0; }
-    100% { opacity: 1.0; }
-  }
-  
-  @-webkit-keyframes parpadeo {  
-    0% { opacity: 1.0; }
-    50% { opacity: 0.0; }
-     100% { opacity: 1.0; }
-  }
-  
-  @keyframes parpadeo {  
-    0% { opacity: 1.0; }
-     50% { opacity: 0.0; }
-    100% { opacity: 1.0; }
-  }

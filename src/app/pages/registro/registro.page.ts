@@ -42,7 +42,7 @@ export class RegistroPage implements OnInit,AfterViewInit {
   buildForm(){
     this.form = this.formBuilder.group({
       cedula: ['',[Validators.required,Validators.maxLength(10),Validators.minLength(10)]],
-      nombres: ['',[Validators.required,Validators.minLength(5)]],
+      nombres: ['',[Validators.required,Validators.minLength(4)]],
       apellidos: ['',[Validators.required,Validators.minLength(4)]],
       telefono: ['',[Validators.required,Validators.maxLength(10),Validators.minLength(10), Validators.pattern(this.phonepattern)]],
       correo: ['',[Validators.required, Validators.pattern(this.emailPattern)]],

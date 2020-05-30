@@ -1,15 +1,30 @@
-<ion-header class="ion-border">
-  <ion-toolbar  class="header">
-    <ion-buttons slot="start" color="omipali">
+<!--<ion-header class="ion-no-border">
+  <ion-toolbar  >
+    <ion-buttons slot="start" >
       <ion-button (click)="salirRegistro()">
-        <ion-icon name="chevron-back-outline" color="omipali" ></ion-icon>
+        <ion-icon name="chevron-back-outline" color="light" ></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title  color="omipali">Nueva Cuenta</ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title  class="title">Nueva Cuenta</ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header>-->
 
-<ion-content class="contenedor">
+<ion-content class="contenedor" fullscreen>
+  <ion-toolbar  >
+
+    <ion-buttons slot="start" >
+      <ion-button (click)="salirRegistro()">
+        <ion-icon name="chevron-back-outline" color="light" ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title  class="title">Nueva Cuenta</ion-title>
+  </ion-toolbar>
   <div class="ion-margin contendorf">
     <div class="datos">
       <ion-label >Datos Personales</ion-label>
@@ -23,12 +38,15 @@
           </ion-item>
           <div class="alert-danger" *ngIf="cedula.invalid && (cedula.dirty || cedula.touched)">
             <div class="container-error-message" *ngIf="cedula.errors.required">
+              <ion-icon slot="start" name="information-circle-sharp" color="danger" ></ion-icon>
               Debe ingresar su número de cédula
             </div>
             <div class="container-error-message" *ngIf="cedula.errors.minlength">
+              <ion-icon slot="start" name="information-circle-sharp" color="danger" ></ion-icon>
               La cédula debe tener 10 dígitos
             </div>
             <div class="container-error-message" *ngIf="cedula.errors.maxlength">
+              <ion-icon slot="start" name="information-circle-sharp" color="danger" ></ion-icon>
               La cédula debe tener 10 dígitos
             </div>
           </div>
@@ -37,34 +55,41 @@
           </ion-item>
           <div class="alert-danger" *ngIf="nombres.invalid && (nombres.dirty || nombres.touched)">
             <div class="container-error-message" *ngIf="nombres.errors.required">
-              Debe ingresar sus nombres
+              <ion-icon slot="start" name="information-circle-sharp" color="danger" ></ion-icon>
+              Debe ingresar su nombre
             </div>
-            <div class="container-error-message" *ngIf="nombres.errors.minlength">
-              Debe ingresar al menos 1 nombre
-            </div>
+            <!--<div class="container-error-message" *ngIf="nombres.errors.minlength">
+              <ion-icon slot="start" name="information-circle-sharp" color="danger" ></ion-icon>
+              Debe ingresar su nombre
+            </div>-->
           </div>
           <ion-item  lines="none" class="apellidos " color="none" >
             <ion-input type="text" placeholder="Apellidos" class="inputape" formControlName="apellidos" ></ion-input>
           </ion-item>
           <div class="alert-danger" *ngIf="apellidos.invalid && (apellidos.dirty || apellidos.touched)">
             <div class="container-error-message" *ngIf="apellidos.errors.required">
-              Debe ingresar sus apellidos
+              <ion-icon slot="start" name="information-circle-sharp" color="danger" ></ion-icon>
+              Debe ingresar su apellido
             </div>
-            <div class="container-error-message" *ngIf="apellidos.errors.minlength">
+            <!--<div class="container-error-message" *ngIf="apellidos.errors.minlength">
+              <ion-icon slot="start" name="information-circle-sharp" color="danger" ></ion-icon>
               Debe ingresar al menos 1 apellido
-            </div>
+            </div>-->
           </div>
           <ion-item  lines="none" class="telefono " color="none" >
             <ion-input type="text" placeholder="Teléfono" class="inputel" formControlName="telefono" ></ion-input>
           </ion-item>
           <div class="alert-danger" *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)">
             <div class="container-error-message" *ngIf="telefono.errors.required">
-             Debe ingresar su número de teléfono
+              <ion-icon slot="start" name="information-circle-sharp" color="danger" ></ion-icon>
+              Debe ingresar su número de teléfono
             </div>
-            <div class="container-error-message" *ngIf="telefono.errors.minlength">
+            <!--<div class="container-error-message" *ngIf="telefono.errors.minlength">
+              <ion-icon slot="start" name="information-circle-sharp" color="danger" ></ion-icon>
               El número debe ser de 10 dígitos
-            </div>
+            </div>-->
             <div class="container-error-message" *ngIf="telefono.errors.pattern">
+              <ion-icon slot="start" name="information-circle-sharp" color="danger" ></ion-icon>
               El número debe ser válido
             </div>
           </div>
@@ -73,9 +98,11 @@
           </ion-item>
           <div class="alert-danger" *ngIf="correo.invalid && (correo.dirty || correo.touched)">
             <div class="container-error-message" *ngIf="correo.errors.required">
-             Debe ingresar su correo electrónico
+              <ion-icon slot="start" name="information-circle-sharp" color="danger" ></ion-icon>
+             Debe ingresar un correo electrónico
             </div>
             <div class="container-error-message" *ngIf="correo.errors.pattern">
+              <ion-icon slot="start" name="information-circle-sharp" color="danger" ></ion-icon>
              El correo debe ser válido  
             </div>
           </div>
@@ -84,9 +111,11 @@
           </ion-item>
           <div class="alert-danger" *ngIf="contrasena.invalid && (contrasena.dirty || contrasena.touched)">
             <div class="container-error-message" *ngIf="contrasena.errors.required">
+              <ion-icon slot="start" name="information-circle-sharp" color="danger" ></ion-icon>
              Debe ingresar una contraseña
             </div>
             <div class="container-error-message" *ngIf="contrasena.errors.minlength">
+              <ion-icon slot="start" name="information-circle-sharp" color="danger" ></ion-icon>
              La contraseña debe tener mínimo 8 caracteres
             </div>
           </div>
@@ -95,14 +124,16 @@
           </ion-item>
           <div class="alert-danger" *ngIf="contrasenac.invalid && (contrasenac.dirty || contrasenac.touched)">
             <div class="container-error-message" *ngIf="contrasenac.errors.required">
+              <ion-icon slot="start" name="information-circle-sharp" color="danger" ></ion-icon>
              Debe confirmar la contraseña
             </div>
             <div class="container-error-message" *ngIf="contrasenac.errors.validarContrasena">
+              <ion-icon slot="start" name="information-circle-sharp" color="danger" ></ion-icon>
              Las contraseñas no coinciden
             </div>
           </div>
           <div class="contenedorboton ion-padding-horizontal">
-            <ion-button  type="submit" expand="block" fill="clear"  class="siguiente ion-margin-vertical " [disabled]="!form.valid">
+            <ion-button  type="submit" expand="block" fill="clear"  class="siguiente ion-margin-vertical " [disabled]="!form.valid" >
               Siguiente
             </ion-button>
             <!--[disabled]="!form.valid"-->
@@ -116,26 +147,23 @@
           </ion-item>
           <div class="alert-danger" *ngIf="domicilio.invalid && (domicilio.dirty || domicilio.touched)">
             <div class="container-error-message" *ngIf="domicilio.errors.required">
+              <ion-icon slot="start" name="information-circle-sharp" color="danger" ></ion-icon>
               Debe ingresar su domicilio
              </div>
           </div>    
-          <ion-item lines="none" class="ubicacion " color="none" >
-            <ion-label class="lbldom">
-              Para una mayor precisión indique <br>
-              con un marcador en el mapa su asasa <br>
-              ubicación
-            </ion-label>
-            <ion-button (click)="openModal()" slot="end" fill="clear" class="icono_mapa">
-              <ion-icon name="map"></ion-icon>
+          <div class="contenedorboton ion-padding-horizontal" >
+            <ion-button  type="button" expand="block" fill="clear"  class="verubi ion-margin-vertical " (click)="openModal()" >
+              <ion-icon name="map" slot="start"></ion-icon>
+              Indicar Ubicación
             </ion-button>
-          </ion-item> 
+          </div>    
           <div class="contenedorboton ion-padding-horizontal" >
             <ion-button  type="button" expand="block" fill="clear"  class="verubi ion-margin-vertical " [disabled]="verubicacion" (click)="mostrarimagen()" >
               Ver ubicación selecionada
             </ion-button>
           </div>    
           <ion-item  color="none" lines="none" *ngIf="imagen">
-            <img src="https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/{{url_completa}}" >
+            <img src="https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/{{url_completa}}" class="imagen" >
           </ion-item>
           <ion-item  lines="none" class="referencias " color="none" >
             <ion-textarea id="referencias" type="text" placeholder="Puede indicar alguna referencia de su domicilio" class="inputref" formControlName="referencias" >  
