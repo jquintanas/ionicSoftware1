@@ -3,7 +3,9 @@
     // --background: linear-gradient(rgba(0, 255, 162, 0.479),rgb(2, 41, 66));
     // --background: linear-gradient(rgb(175, 233, 223),rgb(2, 41, 66));
     //--background: linear-gradient(rgb(162, 216, 209),rgb(2, 41, 66));
-    --background: #252424;
+    //--background: #252424;
+    //--background: var(--ion-color-omipali);
+    --background: url(/assets/fondos/fondo_capaomipali.jpg) 50% 50%/ 100% 100% no-repeat;
     // 6 --background:rgba(39, 177, 124, 0.726);
     // 7 --background:rgb(57, 139, 135);
     // 8 --background:rgba(69, 179, 199, 0.911);
@@ -13,10 +15,20 @@
 .login{
     //--background:white;
     //--background: #98DBD9;
-    color: #98DBD9;
-    border: 2px solid #98DBD9;
+    //color: #98DBD9;
+    //color: black;
+    color: white;
+    border: 2px solid white;
     border-radius: 5px;
-    margin-top: 10%;
+    //margin-top: 5%;
+ 
+}
+.contenedorlogin{
+    margin-top: 12.5% ;
+    //background: rgba(152, 219, 217, 0.301);
+    background: rgba(0, 0, 0, 0.493);
+    border-radius: 5px;
+    
 }
 
 img.imagenlogo{
@@ -25,50 +37,60 @@ img.imagenlogo{
 };
 .contenedorlogo{
     text-align: center;
-    padding-top: 2.5rem;
-    padding-bottom: 1rem;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    
 }
 
 .telefono{
     text-align: left;
-    //color:white;
-    color:#98DBD9;
+    color:white;
+    //color:#98DBD9;
+    //color:var(--ion-color-omipalidark);
+    //color: black;
     font-size: 0.9rem;
     border: 0;
     outline: 0;
-    border-bottom: 2px solid #98DBD9;
+    border-bottom: 2px solid white;
+    //border-bottom: 2px solid black;
 }
 
 .contrasena{
     text-align: left;
-    //color: white;
-    color: #98DBD9;
-    padding-top: 2%;
+    color:white;
+    //color:#98DBD9;
+    //color:var(--ion-color-omipalidark);
+    //color: black;
     font-size: 0.9rem;
     border: 0;
     outline: 0;
-    border-bottom: 2px solid #98DBD9;
+    border-bottom: 2px solid white;
+    //border-bottom: 2px solid black;
 }
 
 .linea{
-    border-bottom: 1px solid  #98DBD9;
+    border-bottom: 1px solid  white;
 }
 .recuperarcontra{
     text-align: right;
     font-size: 0.8rem;
-    padding-top: 5%;
-    //color:white;
-    color: #98DBD9;
+    margin-top: 4.5%;
+    margin-bottom: 4.5%;
+    color:white;
+    //color: #98DBD9;
+    //color: black;
 }
 .linkcontra{
    
-    //color:white;
-    color: #98DBD9;
+    color:white;
+    //color: #98DBD9;
+    //color: black;
    
 }
 .cuenta,.registro{
-    //color:white;
-    color: #98DBD9;
+    color:white;
+    //color: #98DBD9;
+    //color: black;
 }
 
 .error-div{
@@ -85,20 +107,23 @@ img.imagenlogo{
 }
 .contenedor_division{
     text-align: center;
-    //color: white;
-    color: #98DBD9;
-    margin-top: 4rem;
+    color: white;
+    //color: #98DBD9;
+    //color: black;
+    margin-top: 15%;
 }
 
 .google{
     font-size: 2rem;
-    //color: white;
-    color: #98DBD9;
+    color: white;
+    //color: #98DBD9;
+    //color: black;
 }
 .facebook{
     font-size: 2rem;
-    //color: white;
-    color: #98DBD9;
+    color: white;
+    //color: #98DBD9;
+    //color: black;
 }
 
 .padre {

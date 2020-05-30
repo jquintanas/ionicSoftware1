@@ -1,25 +1,26 @@
 
 <ion-content class="contenedor">
-  <div class="contenedorlogo">
-      <img src="../../../assets/logos/logo.png" class="imagenlogo">
-  </div>
-  <div class="ion-margin ">
+  <div class="ion-margin contenedorlogin" >
+    <div class="contenedorlogo">
+        <img src="/assets/logos/logo.png" class="imagenlogo">
+    </div>
+ 
     <form class="ion-margin" [formGroup]="formulario_login" (ngSubmit)="save()">
         <ion-item  lines="none" class="telefono" color="none" >
           <ion-icon slot="start" name="call-sharp" ></ion-icon>
           <ion-input type="text" placeholder="Teléfono" class="inputel" formControlName="telefono" ></ion-input>
         </ion-item>
         <div class="alert-danger" *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)">
-          <div class="container-error-message parpadea" *ngIf="telefono.errors.required">
+          <div class="container-error-message " *ngIf="telefono.errors.required">
             Debe ingresar su número de teléfono
           </div>
-          <div class="container-error-message parpadea" *ngIf="telefono.errors.minlength">
+          <div class="container-error-message " *ngIf="telefono.errors.minlength">
             El teléfono debe tener 10 dígitos
           </div>
-          <div class="container-error-message parpadea" *ngIf="telefono.errors.maxlength">
+          <div class="container-error-message " *ngIf="telefono.errors.maxlength">
             El teléfono debe tener 10 dígitos
           </div>
-          <div class="container-error-message parpadea" *ngIf="telefono.errors.pattern">
+          <div class="container-error-message " *ngIf="telefono.errors.pattern">
             El número debe ser válido
           </div>
         </div>
@@ -28,10 +29,10 @@
           <ion-input type="password" placeholder="Contraseña" class="inputcontra" formControlName="contrasena" ></ion-input>
         </ion-item>
         <div class="alert-danger" *ngIf="contrasena.invalid && (contrasena.dirty || contrasena.touched)">
-          <div class="container-error-message parpadea" *ngIf="contrasena.errors.required">
+          <div class="container-error-message " *ngIf="contrasena.errors.required">
             Debe ingresar su contraseña
           </div>
-          <div class="container-error-message parpadea" *ngIf="contrasena.errors.minlength">
+          <div class="container-error-message " *ngIf="contrasena.errors.minlength">
             La contraseña debe tener más de 7 caracteres
           </div>
         </div>
@@ -48,7 +49,7 @@
           <span slot="end" class="cuenta">¿No tienes una cuenta?&nbsp;<a  class="registro">Registrate</a></span>   
         </div>  
     </form>
-  </div>
+  
     
     <div class="contenedor_division ion-margin">
       <ion-label class="opcion">Iniciar sesión con</ion-label>
@@ -59,5 +60,5 @@
       <div class="hijo"><ion-icon name="logo-google" class="google" ></ion-icon></div>
       <div class="hijo"><ion-icon name="logo-facebook" class="facebook" ></ion-icon></div>
     </div>
-    
+  </div>    
 </ion-content>
