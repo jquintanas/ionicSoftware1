@@ -1,5 +1,4 @@
-import { RecuperarContrasenaPage } from './../recuperar-contrasena/recuperar-contrasena.page';
-import { RegistroPage} from './../registro/registro.page';
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
