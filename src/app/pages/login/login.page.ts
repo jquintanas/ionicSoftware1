@@ -58,11 +58,7 @@ export class LoginPage implements OnInit {
 
   abrirRegistro(){
     this.router.navigateByUrl('registro');
-    //[routerLink]="['/registro']
-    /*const modal = await this.modalController.create({
-      component: RegistroPage
-    });
-    return await modal.present();*/
+
   }
 
   abrirRecuperarContra(){

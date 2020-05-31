@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
+import { LoginPage } from './../app/pages/login/login.page';
 
 const routes: Routes = [
   {
@@ -74,6 +75,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: "recuperar-contrasena",
+    loadChildren: () =>
+      import("./pages/recuperar-contrasena/recuperar-contrasena.module").then(
+        (m) => m.RecuperarContrasenaPageModule
+      ),
+  },
+  {
     path: "mapa-mapbox",
     loadChildren: () =>
       import("./pages/mapa-mapbox/mapa-mapbox.module").then(
@@ -104,13 +112,6 @@ const routes: Routes = [
     loadChildren: () =>
       import("./pages/editar-perfil/editar-perfil.module").then(
         (m) => m.EditarPerfilPageModule
-      ),
-  },
-  {
-    path: "recuperar-contrasena",
-    loadChildren: () =>
-      import("./pages/recuperar-contrasena/recuperar-contrasena.module").then(
-        (m) => m.RecuperarContrasenaPageModule
       ),
   },
   {
