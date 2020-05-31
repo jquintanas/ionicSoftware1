@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup,Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ModalController, NavController } from '@ionic/angular';
+import { AlertsService } from 'src/app/services/alerts/alerts.service';
+AlertsService
 @Component({
   selector: 'app-recuperar-contrasena',
   templateUrl: './recuperar-contrasena.page.html',
@@ -12,7 +14,7 @@ export class RecuperarContrasenaPage implements OnInit {
 
   formulario_r : FormGroup;
   private emailPattern: any = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  constructor(private formBuilder: FormBuilder, private router: Router,private modalController: ModalController,) { 
+  constructor(private formBuilder: FormBuilder, private router: Router,private modalController: ModalController,public alertsService: AlertsService) { 
     this.buildForm();
   }
 
@@ -34,6 +36,7 @@ export class RecuperarContrasenaPage implements OnInit {
       const value = this.formulario_r.value;
       console.log(value);
       console.log(this.formulario_r);
+      this.alertsService.presentLoading("Enviando Correo");
     }else{
       console.log('formulario inválido',this.formulario_r);
       //this.isSubmitted = true;

@@ -4,6 +4,7 @@ import { Component, OnInit,ViewChild,Renderer2, ElementRef, ViewChildren, AfterV
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators,ValidatorFn,AbstractControl } from '@angular/forms';
 import { MapaMapboxPage } from './../mapa-mapbox/mapa-mapbox.page';
+import { AlertsService } from 'src/app/services/alerts/alerts.service';
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.page.html',
@@ -22,7 +23,7 @@ export class RegistroPage implements OnInit,AfterViewInit {
   url_completa :string ;
   latlng :string;
 
-  constructor(private formBuilder: FormBuilder, private router: Router,public modalController:ModalController,  public mapaDatosService: MapaDatosService,public renderer:Renderer2,public el:ElementRef) { 
+  constructor(public alertsService: AlertsService,private formBuilder: FormBuilder, private router: Router,public modalController:ModalController,  public mapaDatosService: MapaDatosService,public renderer:Renderer2,public el:ElementRef) { 
     this.buildForm(); 
     this.buildForm2();
     this.paso_formulario = 1; 
@@ -82,8 +83,11 @@ export class RegistroPage implements OnInit,AfterViewInit {
   }
   
   save2(){
-
-    this.paso_formulario = 1;
+    if(this.form.valid && this.form2.valid){
+      this.alertsService.presentLoading("Registrando Usuario");
+      this.router.navigateByUrl('login');
+    }
+    //this.paso_formulario = 1;
   }
   regresar(){
 

@@ -1,3 +1,4 @@
+import { AlertsService } from 'src/app/services/alerts/alerts.service';
 import { MapaDatosService } from './../../services/mapa-datos/mapa-datos.service';
 import { Component, OnInit } from '@angular/core';
 import * as Mapboxgl from 'mapbox-gl';
@@ -5,6 +6,7 @@ import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import { environment} from './../../../environments/environment';
 import { ModalController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @Component({
   selector: 'app-mapa-mapbox',
@@ -16,81 +18,50 @@ export class MapaMapboxPage implements OnInit {
   element: any;
   latitud: number;
   longitud : number;
+  latitudCentro: number;
+  longitudCentro: number;
   nuevoMarcador: Mapboxgl.Marker;
-  crear = true;
-  eliminar = false;
-  guardar = false;
-  constructor(private modalController: ModalController, public alertController: AlertController, private mapaDatosService: MapaDatosService) { }
+  guardar = true;
+  constructor(private modalController: ModalController, public alertController: AlertController, private mapaDatosService: MapaDatosService,public geolocation: Geolocation, public alertsService: AlertsService) {
+    
+   }
+
+  ionViewWillEnter(){
+  }
 
   ngOnInit() {
-    (Mapboxgl as any).accessToken = environment.mapboxkey;
-    this.mapa = new Mapboxgl.Map({
-      container: 'mapa', // container id
-      style: 'mapbox://styles/mapbox/streets-v11',
-      center: [-79.5419038,-1.8017518], // starting position
-      zoom: 13 // starting zoom
-    });
-    this.mapa.on('load', ()=> {
-      this.mapa.resize();
-      
-    });
-    
-    const marker_omipali = new Mapboxgl.Marker({draggable: false,color: 'red'})     
-      .setLngLat([-79.5419038,-1.8017518])
-      .setPopup(
-        new Mapboxgl.Popup({ offset: 30 }) // add popups
-          .setHTML('<h1> <STRONG>Omi&Pali</STRONG> </h1>'+
-                    '<hr color="black">'+
-                    '<p>'+'<STRONG>Pastelería </STRONG>'+'<style> h1 { color: #FF0000; font-size: 1rem}</style>')              
-      )
-      .addTo(this.mapa);
+    this.geolocation.getCurrentPosition().then((resp) => {
+      this.latitudCentro = resp.coords.latitude;
+      this.longitudCentro = resp.coords.longitude;
+      //console.log(resp.coords.longitude,resp.coords.latitude);
+      (Mapboxgl as any).accessToken = environment.mapboxkey;
+      this.mapa = new Mapboxgl.Map({
+        container: 'mapa', // container id
+        style: 'mapbox://styles/mapbox/streets-v11',
+        //center:[-79.5419038,-1.8017518],
+        center: [ resp.coords.longitude,resp.coords.latitude], // coordenadas del usuario
+        zoom: 13 // starting zoom
+      });
 
-    const geolocalizacion = new Mapboxgl.GeolocateControl({
-      positionOptions: {enableHighAccuracy: true},
-      trackUserLocation: true,      
-    });
-    this.mapa.addControl(geolocalizacion);
-    geolocalizacion.on('geolocate', function(e) {
-      var lon = e.coords.longitude;
-      var lat = e.coords.latitude
-      var position = [lon, lat];
-      //console.log('posicion del usuario',position);
-    });
+      this.mapa.on('load', ()=> {
+        this.mapa.resize();        
+        });
+      /*
+        Posicion del local OmiPali
+      */
+      const marker_omipali = new Mapboxgl.Marker({draggable: false,color: 'red'})     
+        .setLngLat([-79.5419038,-1.8017518])
+        .setPopup(
+          new Mapboxgl.Popup({ offset: 30 }) // add popups
+            .setHTML('<h1> <STRONG>Omi&Pali</STRONG> </h1>'+
+                      '<hr color="black">'+
+                      '<p>'+'<STRONG>Pastelería </STRONG>'+'<style> h1 { color: #FF0000; font-size: 1rem}</style>')              
+        )
+        .addTo(this.mapa);
 
-
-    const geocoder = new MapboxGeocoder({
-      accessToken: Mapboxgl.accessToken,
-      countries: 'ec',
-      mapboxgl: Mapboxgl,
-      zoom: 15,
-      marker: {color:'green'},
-      placeholder: "Buscar",
-      language: 'es-EC',
-      
-    });    
-   
-    /*this.mapa.on('click', function(e) {
-      console.log('A click event has occurred at ' + e.lngLat);
-    });*/
-
-    document.getElementById('geocoder').appendChild(geocoder.onAdd(this.mapa));   
-    this.mapa.on('touchend',(e) => {
-      var posicion = e.lngLat;
-      this.latitud = posicion.lat;
-      this.longitud = posicion.lng;
-      //this.mapaDatosService.latitud = this.latitud;
-      //this.mapaDatosService.longitud = this.longitud;
-    });    
-  }
-  
-  crear_marcador(){
-    if(this.latitud != null || this.longitud != null){
-      //console.log(this.latitud+"--"+this.longitud);
-      this.nuevoMarcador = new Mapboxgl.Marker({
-        draggable : true,
-        color:"orange"
-      })
-      .setLngLat([this.longitud,this.latitud])
+      //marcador en ubicacion de usuario
+      const marker_user= new Mapboxgl.Marker({draggable: true,color: 'orange'})     
+      .setLngLat([resp.coords.longitude,resp.coords.latitude])
       .setPopup(
         new Mapboxgl.Popup({ offset: 30 }) // add popups
           .setHTML('<body>'+ 
@@ -100,72 +71,64 @@ export class MapaMapboxPage implements OnInit {
                         '<p> Este marcador indica su ubicación </p>'+
                       '</div>'+
                     '</body>'+
-                    '<style> h3 { color: orange; font-size: 1rem}</style>'          
-          ))
+                    '<style> h3 { color: orange; font-size: 1rem}</style>'                
+                  ))
       .addTo(this.mapa);
-      this.marcadroCreado();
-      this.crear = false;
-      this.eliminar = true;
-      this.guardar = true;
-      //console.log("marcador creado");
-    }else{
-      this.presentAlert(); 
-    }
+      marker_user.on('dragend',()=>{
+        var lngLat = marker_user.getLngLat();
+        this.latitud = lngLat.lat;
+        this.longitud = lngLat.lng;
+
+      })
+      this.latitud = marker_user.getLngLat().lat;
+      this.longitud = marker_user.getLngLat().lng;
+      //console.log(marker_user.getLngLat().lat);
+
+      
+   
+  
+      const geocoder = new MapboxGeocoder({
+        accessToken: Mapboxgl.accessToken,
+        countries: 'ec',
+        mapboxgl: Mapboxgl,
+        zoom: 15,
+        marker: {color:'blue'},
+        placeholder: "Buscar",
+        language: 'es-EC',
+        
+      });    
+      this.mapa.addControl(geocoder);
+     // document.getElementById('geocoder').appendChild(geocoder.onAdd(this.mapa));   
+
+     const geolocalizacion = new Mapboxgl.GeolocateControl({
+        positionOptions: {enableHighAccuracy: true},
+        trackUserLocation: true,      
+      });
+      this.mapa.addControl(geolocalizacion);
+     }).catch((error) => {
+       console.log('Error al capturar su ubicación', error);
+    });
+    
   }
-  eliminar_marcador(){
-    if(this.crear == false){
-      this.nuevoMarcador.remove();
-      this.marcadorEliminado();
-      this.crear = true;
-      this.eliminar = false;
-    }
-  }
+
+
   guardar_marcador(){
-    if(this.crear == false){
       //console.log('esta es la posicion del marcador',this.latitud +' ' + this.longitud);
       this.mapaDatosService.latitud = this.latitud;
       this.mapaDatosService.longitud = this.longitud;
       this.mapaDatosService.marcador_guardado = true;
-      //console.log('cuando el mouse dejo de tocar: '+this.mapaDatosService.latitud);
-      //console.log('cuando el mouse dejo de tocar: '+this.mapaDatosService.longitud);
-      this.marcadorGuardado();
-    }else{
-      this.infocreacion();
-    }
+      console.log('la posicion del marcador en lat: '+this.mapaDatosService.latitud);
+      console.log('la posicion del marcador en lng: '+this.mapaDatosService.longitud);
+      //this.marcadorGuardado();
+      this.alertsService.presentToast("Marcador guardado");
+
   }
 
-  async infocreacion() {
-    const alert = await this.alertController.create({
-      header: 'Error - Guardar Marcador',
-      message: '<hr>'+'<STRONG>Para guardar un marcador, primero debe crearlo. </strong>',
-      buttons: ['OK']
-    });
-
-    await alert.present();
-  }
-  async marcadorEliminado() {
-    const alert = await this.alertController.create({
-      header: 'Eliminación exitosa',
-      message: '<hr>'+'<STRONG>Su marcador ha sido eliminado. </strong>',
-      buttons: ['OK']
-    });
-
-    await alert.present();
-  }
-  async marcadroCreado() {
-    const alert = await this.alertController.create({
-      header: 'Confirmación de creación',
-      message: '<hr>'+'<STRONG>Su marcador ha sido creado, puede desplazarlo a otro punto en el mapa.</strong>',
-      buttons: ['OK']
-    });
-
-    await alert.present();
-  }
-
+  
   async marcadorGuardado() {
     const alert = await this.alertController.create({
       header: 'Guardado exitoso',
-      message: '<hr>'+'<STRONG>La ubicación de su marcador se guardó con éxito. </strong>',
+      message: '<hr>'+'<STRONG>La ubicación se guardó con éxito. </strong>',
       buttons: ['OK']
     });
 
@@ -173,15 +136,6 @@ export class MapaMapboxPage implements OnInit {
   }
 
 
-  async presentAlert() {
-    const alert = await this.alertController.create({
-      header: 'Error - Crear Marcador',
-      message: '<hr>'+'<STRONG> Debe seleccionar un punto en el mapa y luego seleccione crear marcador </strong>',
-      buttons: ['OK']
-    });
-
-    await alert.present();
-  }
 
   async closeModal() {
     Mapboxgl.clearStorage();
