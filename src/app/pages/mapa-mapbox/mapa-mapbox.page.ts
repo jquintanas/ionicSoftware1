@@ -54,7 +54,7 @@ export class MapaMapboxPage implements OnInit {
       var lon = e.coords.longitude;
       var lat = e.coords.latitude
       var position = [lon, lat];
-      console.log('posicion del usuario',position);
+      //console.log('posicion del usuario',position);
     });
 
 
@@ -78,14 +78,14 @@ export class MapaMapboxPage implements OnInit {
       var posicion = e.lngLat;
       this.latitud = posicion.lat;
       this.longitud = posicion.lng;
-      this.mapaDatosService.latitud = this.latitud;
-      this.mapaDatosService.longitud = this.longitud;
+      //this.mapaDatosService.latitud = this.latitud;
+      //this.mapaDatosService.longitud = this.longitud;
     });    
   }
   
   crear_marcador(){
     if(this.latitud != null || this.longitud != null){
-      console.log(this.latitud+"--"+this.longitud);
+      //console.log(this.latitud+"--"+this.longitud);
       this.nuevoMarcador = new Mapboxgl.Marker({
         draggable : true,
         color:"orange"
@@ -107,12 +107,7 @@ export class MapaMapboxPage implements OnInit {
       this.crear = false;
       this.eliminar = true;
       this.guardar = true;
-      /*
-       .setHTML('<h3 class="parah3"> Información </h3>'+
-                  '<hr color="black">'+
-                  '<p>'+'Este marcador indica su ubicación'+'</p>'+'<style> h3 { color: orange; font-size: 1rem}</style>'))
-                  */
-      console.log("marcador creado");
+      //console.log("marcador creado");
     }else{
       this.presentAlert(); 
     }
