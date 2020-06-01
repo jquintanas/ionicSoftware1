@@ -4,48 +4,13 @@ import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
 const routes: Routes = [
   {
     path: "",
-    redirectTo: "login",
+    redirectTo: "home",
     pathMatch: "full",
   },
   {
     path: "home",
     loadChildren: () =>
       import("./pages/home/home.module").then((m) => m.HomePageModule),
-  },
-  {
-    path: "bebidas",
-    loadChildren: () =>
-      import("./pages/tabs/bebidas/bebidas.module").then(
-        (m) => m.BebidasPageModule
-      ),
-  },
-  {
-    path: "dulces",
-    loadChildren: () =>
-      import("./pages/tabs/dulces/dulces.module").then(
-        (m) => m.DulcesPageModule
-      ),
-  },
-  {
-    path: "postres",
-    loadChildren: () =>
-      import("./pages/tabs/postres/postres.module").then(
-        (m) => m.PostresPageModule
-      ),
-  },
-  {
-    path: "tortas",
-    loadChildren: () =>
-      import("./pages/tabs/tortas/tortas.module").then(
-        (m) => m.TortasPageModule
-      ),
-  },
-  {
-    path: "promociones",
-    loadChildren: () =>
-      import("./pages/tabs/promociones/promociones.module").then(
-        (m) => m.PromocionesPageModule
-      ),
   },
   {
     path: "detalles-productos",

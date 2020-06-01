@@ -22,60 +22,85 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid class="ion-no-padding">
-    <ion-row class="ion-no-padding" class="fondoOscuro">
-      <ion-col size="12" class="ion-no-padding">
-        <ion-slides pager="false" [options]="slideOpts">
-          <ion-slide *ngFor="let data of listaImagenes">
-            <img [src]="data" onerror="this.src='/assets/img/404.jpg';" />
-          </ion-slide>
-        </ion-slides>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="6" class="cols-cabecera ion-padding ion-text-center">
-        <h5 class="ion-no-margin ion-text-wrap ">Precio: <strong color="omipali">${{precioProducto}}</strong>
-        </h5>
-      </ion-col>
-      <ion-col size="6" class="cols-cabecera2 ion-text-center">
-        <ion-row class="containerSpinner">
-          <ion-col size="5" class="spinnerIzq" (click)="decrementarProducto()">
-            <ion-icon class="iconosSpinner" *ngIf="cantidad>1" name="remove-circle-outline"></ion-icon>
-            <ion-icon class="iconosSpinner" *ngIf="cantidad==1" name="trash-outline"></ion-icon>
+  <ion-slides pager="false" [options]="slideOpts">
+    <ion-slide *ngFor="let data of listaImagenes">
+      <div class="slide">
+        <img [src]="data" onerror="this.src='/assets/img/404.jpg';" />
+      </div>
+    </ion-slide>
+  </ion-slides>
+  <div class="actionSheetInferior" [@popOverState]="stateName" *ngIf="!ocultarSheetInferior">
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="12" class="ion-no-padding">
+          <ion-buttons *ngIf="show" (click)="bajarSheetFooter()">
+            <ion-button class="btnFlecha">
+              <ion-icon name="chevron-down-outline" color="omipali"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          <ion-buttons *ngIf="!show" (click)="bajarSheetFooter()">
+            <ion-button class="btnFlecha">
+              <ion-icon name="chevron-up-outline" color="omipali"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-col>
+        <ion-col size="12" *ngIf="contenidoFooter">
+          <ion-card>
+            <ion-item style="border-bottom: solid 2px var(--ion-color-omipali);">
+              <ion-label class="ion-text-center colorPrimario ion-text-uppercase">{{nombreProducto}}</ion-label>
+              <ion-button fill="outline" slot="end" color="omipali">
+                <strong class="colorPrimario">${{precioProducto | number: ".2"}}</strong>
+              </ion-button>
+            </ion-item>
+            <ion-card-content class="ion-text-justify ion-text-wrap textoDescripcion">
+              {{descripcionProducto}}
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="12" class="ion-padding" *ngIf="contenidoFooter">
+          <ion-button expand="block" fill="clear" class="btnAddCard" (click)="bajarSheetTop()">
+            Agregar al carrito
+            <ion-icon slot="start" name="cart" color="omipali"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <h5 class="promociones">PROMOCIONES</h5>
+    <app-slider-recomendados></app-slider-recomendados>
+  </div>
+
+  <div class="actionSheetSuperior" [@venta]="stateNameVentas">
+    <div class="wrapSuperior">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6">
+            <p class="textoTitulo">
+              {{nombreProducto}}
+            </p>
+            <p class="textoPrecioSuperior">
+              ${{precioProducto | number: ".2"}}
+            </p>
           </ion-col>
-          <ion-col size="2" class="spinnerCentrar">{{cantidad}}</ion-col>
-          <ion-col size="5" class="spinnerDer" (click)="incrementarProducto(1)">
-            <ion-icon class="iconosSpinner" name="add-circle-outline"></ion-icon>
+          <ion-col size="6">
+            <ion-row class="containerSpinner">
+              <ion-col size="4" class="spinnerIzq" (click)="decrementarProducto()" *ngIf="cantidad>0">
+                <ion-icon class="iconosSpinner" name="remove-circle-outline"></ion-icon>
+              </ion-col>
+              <ion-col size="3" class="spinnerCentrar">{{cantidad}}</ion-col>
+              <ion-col size="4" class="spinnerIzq" (click)="incrementarProducto(1)">
+                <ion-icon class="iconosSpinner" name="add-circle-outline"></ion-icon>
+              </ion-col>
+            </ion-row>
           </ion-col>
         </ion-row>
-      </ion-col>
-      <ion-col size="12">
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title class="ion-text-center colorPrimario"> {{nombreProducto}}</ion-card-title>
-          </ion-card-header>
-          <ion-card-content class="ion-text-justify ion-text-wrap textoDescripcion">
-            {{descripcionProducto}}
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
-    <ion-fab-button color="omipalidarkd">
-      <ion-icon md="caret-up" ios="chevron-up-circle-outline" color="omipali"></ion-icon>
-    </ion-fab-button>
-    <ion-fab-list side="top">
-      <ion-fab-button color="omipalidarkd" (click)="borrarProducto()">
-        <ion-icon name="trash-outline" color="danger"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-button color="omipalidarkd" (click)="marcarFavorito()">
-        <ion-icon *ngIf="!banderaCorazon" name="heart-outline" color="omipali"></ion-icon>
-        <ion-icon class="colorFavorito" *ngIf="banderaCorazon" name="heart-sharp"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-button color="omipalidarkd" (click)="incrementarPersonalizado()">
-        <ion-icon name="cart-outline" color="omipali"></ion-icon>
-      </ion-fab-button>
-    </ion-fab-list>
-  </ion-fab>
+      </ion-grid>
+    </div>
+
+  </div>
+
+  <ion-button expand="block" color="omipalidarkd" class="botonOK" (click)="bajarSheetTop()"
+    *ngIf="ocultarSheetInferior">
+    OK
+  </ion-button>
+
 </ion-content>

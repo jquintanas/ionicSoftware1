@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { detalleProducto } from "src/app/interface/productoDetalle";
 import { BehaviorSubject, Observable } from 'rxjs';
 import { productoCarrito } from "src/app/interface/productoCarrito";
-import { AngularDelegate } from '@ionic/angular';
 @Injectable({
   providedIn: 'root'
 })

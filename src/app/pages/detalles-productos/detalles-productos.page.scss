@@ -11,7 +11,7 @@
 }
 
 ion-icon {
-    color: black;
+    color: var(--ion-color-omipalidarkd);
 }
 
 .colorFavorito {
@@ -28,27 +28,16 @@ ion-icon {
     text-align: center;
     font-weight: bold;
     font-size: 0.8rem;
-    border-top: solid 1px var(--ion-color-omipalidarkd);
-    border-left: solid 1px var(--ion-color-omipalidarkd);
-    border-bottom: solid 1px var(--ion-color-omipalidarkd);
+    border: solid 1px var(--ion-color-omipalidarkd);
+    background-color: var(--ion-color-omipali);
 }
 
 .spinnerCentrar {
     text-align: center;
     font-weight: bold;
     font-size: large;
-    border-top: solid 1px var(--ion-color-omipalidarkd);
-    border-bottom: solid 1px var(--ion-color-omipalidarkd);
 }
 
-.spinnerDer {
-    text-align: center;
-    font-weight: bold;
-    font-size: 0.8rem;
-    border-top: solid 1px var(--ion-color-omipalidarkd);
-    border-right: solid 1px var(--ion-color-omipalidarkd);
-    border-bottom: solid 1px var(--ion-color-omipalidarkd);
-}
 
 .iconosSpinner {
     font-size: x-large !important;
@@ -69,11 +58,7 @@ ion-icon {
     color: var(--ion-color-omipali);
 }
 
-.cols-cabecera2 {
-    background-color: var(--ion-color-omipali);
-    height: 50px;
-    color: var(--ion-color-omipalidarkd);
-}
+
 
 //slider
 .swiper-slide img {
@@ -90,6 +75,106 @@ ion-slides {
     display: block;
  }
 
- .fondoOscuro {
-     background-color: var(--ion-color-omipalidarkd);
+
+
+ //nuevos css
+ .actionSheetInferior {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    border-top: solid 2px;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    background-color: rgba(var(--ion-color-omipalidarkd-rgb), 0.7);
+    //background-size: cover;
+    z-index: 2;
  }
+
+ .btnFlecha {
+     margin: auto;
+ }
+
+ ion-slides {
+    height: 100%;
+}
+
+.swiper-slide {
+    display: block;
+  }
+
+  .swiper-slide img {
+    pointer-events: none;
+  }
+
+  .slide {
+    height: 100%;
+    width: 100%;
+  }
+
+  .btnAddCard {
+    color: white;
+    border: 2px solid var(--ion-color-omipali);
+    border-radius: 5px;
+  }
+
+  .textoPrecio {
+    position: absolute;
+    z-index: 3;
+    top: 10%;
+    right: 10px;
+    font-size: larger;
+    padding: 10px;
+    border: solid 1px var(--ion-color-omipalidarkd);
+    color: white;
+    background-color: rgba(var(--ion-color-omipalidarkd-rgb), 0.7);
+    border-radius: 25%;
+  }
+
+  .actionSheetSuperior {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    border-bottom: solid 2px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    background-color: rgba(var(--ion-color-omipalidarkd-rgb), 0.7);
+    z-index: 2;
+  }
+
+  .wrapSuperior {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+  }
+
+
+  .textoTitulo {
+    font-size: x-large;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: white;
+    text-transform: capitalize;
+  }
+
+  .textoPrecioSuperior {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: var(--ion-color-omipali);
+    font-size: large;
+    font-weight: bold;
+  }
+
+.botonOK {
+    position: absolute;
+    bottom: 0;
+    z-index: 3;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    height: 8%;
+}
+
+.promociones {
+  margin-left: 16px;
+    color: white;
+}
