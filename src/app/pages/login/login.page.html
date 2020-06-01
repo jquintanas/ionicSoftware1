@@ -8,7 +8,7 @@
     <form class="ion-margin" [formGroup]="formulario_login" (ngSubmit)="save()">
         <ion-item  lines="none" class="telefono" color="none" >
           <ion-icon slot="start" name="call-sharp" ></ion-icon>
-          <ion-input type="text" placeholder="Teléfono" class="inputel" formControlName="telefono" ></ion-input>
+          <ion-input type="text" placeholder="Teléfono" class="inputel" formControlName="telefono" autofocus="true" ></ion-input>
         </ion-item>
         <div class="alert-danger" *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)">          
           <div class="container-error-message " *ngIf="telefono.errors.required &&  telefono.touched">

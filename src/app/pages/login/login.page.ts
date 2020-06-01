@@ -1,3 +1,4 @@
+import { AlertsService } from './../../services/alerts/alerts.service';
 import { RegistroPage } from './../registro/registro.page';
 import { ModalController } from '@ionic/angular';
 import { RecuperarContrasenaPage } from './../recuperar-contrasena/recuperar-contrasena.page';
@@ -16,7 +17,7 @@ export class LoginPage implements OnInit {
   currentPopover = null;
   formulario_login : FormGroup;
   private phonepattern : any = /^(09){1}[0-9]{8}$/;
-  constructor(private formBuilder: FormBuilder, private router: Router, public modalController:ModalController) { 
+  constructor(private formBuilder: FormBuilder, private router: Router, public modalController:ModalController, public alertsService: AlertsService) { 
     this.buildForm();
   }
 
@@ -37,6 +38,8 @@ export class LoginPage implements OnInit {
       const value = this.formulario_login.value;
       console.log(value);
       console.log(this.formulario_login);
+      this.alertsService.presentLoading("Bienvenido"+" Danny");
+      //this.router.navigateByUrl('/home/bebidas');
     }else{
       console.log('formulario inválido',this.formulario_login);
       this.onResetForm();
@@ -58,11 +61,7 @@ export class LoginPage implements OnInit {
 
   abrirRegistro(){
     this.router.navigateByUrl('registro');
-    //[routerLink]="['/registro']
-    /*const modal = await this.modalController.create({
-      component: RegistroPage
-    });
-    return await modal.present();*/
+
   }
 
   abrirRecuperarContra(){

@@ -8,27 +8,17 @@
     <ion-title>Domicilio</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content scroll-y="false">
   <div id="mapa"></div>
-  <div id="geocoder" class="geocoder"></div>
+  <!--<div id="geocoder" class="geocoder"></div>-->
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar class="toolbarFooter" color="dark">
-    <ion-buttons slot="start" *ngIf="crear">
-      <ion-button (click)="crear_marcador()" class="crear" id="crear">
-         Crear marcador
-      </ion-button>
-    </ion-buttons>
-    <ion-buttons slot="start" *ngIf="eliminar">
-      <ion-button (click)="eliminar_marcador()" class="eliminar" id="eliminar">
-         Eliminar marcador
-      </ion-button>
-    </ion-buttons>
-    <ion-buttons slot="end" *ngIf="guardar">
+  <ion-toolbar class="toolbarFooter" color="dark">     
+    <ion-buttons  *ngIf="guardar">
       <ion-button (click)="guardar_marcador()" class="guardar" id="guardar">
-         Guardar marcador
+        Guardar marcador
       </ion-button>
-    </ion-buttons>
+    </ion-buttons>       
   </ion-toolbar>
 </ion-footer>

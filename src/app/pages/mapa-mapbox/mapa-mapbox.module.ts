@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
 
 import { MapaMapboxPageRoutingModule } from './mapa-mapbox-routing.module';
@@ -13,7 +12,8 @@ import { MapaMapboxPage } from './mapa-mapbox.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    MapaMapboxPageRoutingModule
+    MapaMapboxPageRoutingModule,
+    
   ],
   declarations: [MapaMapboxPage]
 })

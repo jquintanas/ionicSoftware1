@@ -133,7 +133,7 @@
             </div>
           </div>
           <div class="contenedorboton ion-padding-horizontal">
-            <ion-button  type="submit" expand="block" fill="clear"  class="siguiente ion-margin-vertical " [disabled]="!form.valid" >
+            <ion-button  type="submit" expand="block" fill="clear"  class="siguiente ion-margin-vertical "  >
               Siguiente
             </ion-button>
             <!--[disabled]="!form.valid"-->
@@ -144,28 +144,32 @@
         <form  [formGroup]="form2" (ngSubmit)="save2()" class="formulario">
           <ion-item  lines="none" class="cedula " color="none" >
             <ion-input type="text"  placeholder = "Dirección de domicilio" class="inputdom" formControlName="domicilio"></ion-input>
+            <button  type="button" slot="end" (click)="openModal()">
+              <ion-icon name="map-sharp" slot="start"></ion-icon>
+            </button>
           </ion-item>
           <div class="alert-danger" *ngIf="domicilio.invalid && (domicilio.dirty || domicilio.touched)">
             <div class="container-error-message" *ngIf="domicilio.errors.required">
               <ion-icon slot="start" name="information-circle-sharp" color="danger" ></ion-icon>
               Debe ingresar su domicilio
              </div>
-          </div>    
+          </div>  
+          <!--   
           <div class="contenedorboton ion-padding-horizontal" >
             <ion-button  type="button" expand="block" fill="clear"  class="verubi ion-margin-vertical " (click)="openModal()" >
               <ion-icon name="map" slot="start"></ion-icon>
               Indicar Ubicación
             </ion-button>
-          </div>    
+          </div>  -->    
           <div class="contenedorboton ion-padding-horizontal" >
             <ion-button  type="button" expand="block" fill="clear"  class="verubi ion-margin-vertical " [disabled]="verubicacion" (click)="mostrarimagen()" >
               Ver ubicación selecionada
             </ion-button>
-          </div>    
+          </div>  
           <ion-item  color="none" lines="none" *ngIf="imagen">
-            <img src="https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/{{url_completa}}" class="imagen" >
+            <img width="300" src="https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/pin-s-marker+ffa500({{url_completa}}" alt="Mapbox Map of -79.5419038,-1.8017518">
           </ion-item>
-          <ion-item  lines="none" class="referencias " color="none" >
+          <ion-item  lines="none" class="referencias " color="none"  class="referenciasdom">
             <ion-textarea id="referencias" type="text" placeholder="Puede indicar alguna referencia de su domicilio" class="inputref" formControlName="referencias" >  
             </ion-textarea>
           </ion-item>
@@ -173,7 +177,7 @@
             <div class="hijo"><ion-button  type="button" expand="block" fill="clear"  class="regresar ion-margin-vertical " (click)= "regresar()" >
               Regresar
             </ion-button></div>
-            <div class="hijo"><ion-button  type="submit" expand="block" fill="clear"  class="registrar ion-margin-vertical" [disabled]="!form.valid && !form.valid"  >
+            <div class="hijo"><ion-button  type="submit" expand="block" fill="clear"  class="registrar ion-margin-vertical" [disabled]="!form.valid || !form2.valid"  >
               Registrarse
             </ion-button></div>
           </div>

@@ -33,7 +33,7 @@
         
         <ion-item  lines="none" class="correo " color="none" >
           <ion-icon slot="start" name="mail" ></ion-icon>
-          <ion-input type="text" placeholder="Ingrese su correo electrónico" class="inputel" formControlName="correo" ></ion-input>
+          <ion-input type="text" placeholder="Ingrese su correo electrónico" class="inputel" formControlName="correo"  autofocus="true"></ion-input>
         </ion-item>
         <div class="alert-danger" *ngIf="correo.invalid && (correo.dirty || correo.touched)">
           <div class="container-error-message " *ngIf="correo.errors.required">
