@@ -3,7 +3,7 @@ import { Router } from "@angular/router";
 import { Storage } from "@ionic/storage";
 import { Favoritos } from "src/app/interface/favoritosStorage";
 import { environment } from "src/environments/environment";
-//import {FavoritoService} from "src/app/services/favorito/favorito.service"
+import {FavoritosService} from "src/app/services/cart/favoritos.service"
 
 @Component({
   selector: "app-perfil-usuario",
@@ -12,7 +12,7 @@ import { environment } from "src/environments/environment";
 })
 export class PerfilUsuarioPage implements OnInit {
   @Input("Favorito") banderaCorazon: boolean;
-  
+  data=[];
   dataBebidas: any[];
   dataDulces: any[];
   dataPostres: any[];
@@ -24,13 +24,22 @@ export class PerfilUsuarioPage implements OnInit {
   tmp4 = [];
   tmp5 = [];
 
-  constructor(private router: Router, private storage: Storage) {
-    this.mostrarFavorito();
-
+  constructor(private router: Router, private storage: Storage, private favoritos: FavoritosService) {
+    //this.mostrarFavorito();
+    
   }
 
   ngOnInit() {
     //return this.mostrarFavorito()
+    /*let favMap: Map<string, Map<string, Favoritos>>;
+    this.favoritos.observadorFavoritos().subscribe(async (data:boolean)=>{
+      await this.favoritos.obtenerFavoritos().then((Map:any)=>{
+        favMap= Map;
+      })
+     this.data.push(this.favoritos.convertirMapaALista(favMap))
+    })
+
+    console.log(this.data)*/
   }
 
   segment: string;

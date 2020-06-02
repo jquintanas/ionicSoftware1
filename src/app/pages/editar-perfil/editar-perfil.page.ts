@@ -11,6 +11,9 @@ export class EditarPerfilPage implements OnInit {
 
   //form : FormGroup;
 
+  username: string= "";
+  password: string= "";
+
   constructor(public modalController:ModalController) {
    // this.buildForm(); 
    }

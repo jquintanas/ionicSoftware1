@@ -1,53 +1,59 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="omipalidarkd" class="toolbar">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
+    <ion-title>
+      Omi Pali
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div class="content-perfil">
-    <ion-grid class="usuario">
-      <ion-row class="centrado">
-        <ion-col class="centrado">
-          <img
-            class="profile-photo centrado"
-            src="/assets/img/user.png"
-            (click)="zoomImage()"
-          />
-        </ion-col>
-        <ion-fab>
-          <button class="fab-button">
-            <ion-icon name="add-circle-sharp"></ion-icon>
-          </button>
-        </ion-fab>
-      </ion-row>
-    </ion-grid>
-  </div>
+<ion-content class="contenedor">
+  <ion-row class="centrado image-perfil">
+    <ion-col class="centrado">
+      <img
+        class="profile-photo"
+        src="/assets/img/user.png"
+        (click)="zoomImage()"
+      />
+    </ion-col>
+  </ion-row>
 
-  <ion-list>
-    <ion-item>
-      <ion-label>Usuario</ion-label>
-      <ion-input>Jane Doe</ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Email</ion-label>
-      <ion-input>example@example.com</ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Contacto</ion-label>
-      <ion-input>098547126</ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Dirección</ion-label>
-      <ion-input>Villa Example RocaFuerte</ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Contraseña</ion-label>
-      <ion-input>*************</ion-input>
-    </ion-item>
-  </ion-list>
+  <ion-row class="centrado">
+    <ion-col>
+      <ion-button
+        class="ion-margin-start ion-margin-end"
+        color="omipalidarkd"
+        (click)="abrirEdicion()"
+      >
+        Cargar imagen
+      </ion-button>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-list>
+      <ion-item>
+        <ion-label>Usuario</ion-label>
+        <ion-input type="text" [(ngModel)]="username">Jane Doe</ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Email</ion-label>
+        <ion-input type="text" [(ngModel)]="email"
+          >example@example.com</ion-input
+        >
+      </ion-item>
+      <ion-item>
+        <ion-label>Contacto</ion-label>
+        <ion-input>098547126</ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Contraseña</ion-label>
+        <ion-input type="password" [(ngModel)]="password">1234567890</ion-input>
+      </ion-item>
+    </ion-list>
+  </ion-row>
 
   <ion-row class="centrado">
     <ion-item-divider class="centrado">
@@ -61,14 +67,14 @@
     <ion-item>
       <ion-label>Referencia</ion-label>
       <textarea>
-Entrando tres cuadras atras del Mall del Sur.
+        Entrando tres cuadras atras del Mall del Sur.
       </textarea>
     </ion-item>
   </ion-list>
 
   <ion-row class="save-change centrado">
     <ion-col class="save-change centrado">
-      <ion-button color="Light" (click)="guardarCambios()"
+      <ion-button color="omipalidarkd" (click)="guardarCambios()"
         >Guardar Cambios
       </ion-button>
     </ion-col>
