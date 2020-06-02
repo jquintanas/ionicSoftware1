@@ -3,7 +3,7 @@ import { Router } from "@angular/router";
 import { Storage } from "@ionic/storage";
 import { Favoritos } from "src/app/interface/favoritosStorage";
 import { environment } from "src/environments/environment";
-import {FavoritosService} from "src/app/services/cart/favoritos.service"
+import { FavoritosService } from "src/app/services/cart/favoritos.service";
 
 @Component({
   selector: "app-perfil-usuario",

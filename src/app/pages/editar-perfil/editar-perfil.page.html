@@ -32,51 +32,95 @@
     </ion-col>
   </ion-row>
 
-  <ion-row>
-    <ion-list>
-      <ion-item>
-        <ion-label>Usuario</ion-label>
-        <ion-input type="text" [(ngModel)]="username">Jane Doe</ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Email</ion-label>
-        <ion-input type="text" [(ngModel)]="email"
-          >example@example.com</ion-input
+  <ion-content>
+    <div class="ion-padding">
+      <form [formGroup]="registrationForm" (ngSubmit)="submit()">
+        <ion-list>
+          <ion-item>
+            <ion-label >Usuario</ion-label>
+            <ion-input
+              class="input-from"
+              autocapitalize
+              inputmode="text"
+              formControlName="name"
+            ></ion-input>
+          </ion-item>
+          <div *ngFor="let error of errorMessages.name">
+            <ng-container
+              *ngIf="name.hasError(error.type) && (name.dirty || name.touched)"
+            >
+              <small class="error-message">{{error.message}}</small>
+            </ng-container>
+          </div>
+          <ion-item>
+            <ion-label >Celular</ion-label>
+            <ion-input
+              class="input-from"
+              inputmode="tel"
+              formControlName="phone"
+            ></ion-input>
+          </ion-item>
+          <div *ngFor="let error of errorMessages.phone">
+            <ng-container
+              *ngIf="phone.hasError(error.type) && (phone.dirty || phone.touched)"
+            >
+              <small class="error-message">{{error.message}}</small>
+            </ng-container>
+          </div>
+          <ion-item>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input
+              class="input-from"
+              inputmode="email"
+              formControlName="email"
+            ></ion-input>
+          </ion-item>
+          <div *ngFor="let error of errorMessages.email">
+            <ng-container
+              *ngIf="email.hasError(error.type) && (email.dirty || email.touched)"
+            >
+              <small class="error-message">{{error.message}}</small>
+            </ng-container>
+          </div>
+        </ion-list>
+
+        <ion-item-divider>
+          <ion-label>
+            Ubicación
+          </ion-label>
+        </ion-item-divider>
+
+        <ion-list>
+          <ion-item>
+            <ion-label>Dirección</ion-label
+            ><ion-button
+              class="ion-margin-start ion-margin-end"
+              color="omipalidarkd"
+              expand="block"
+            >
+              <ion-icon color="omipali" name="map-outline"></ion-icon>
+            </ion-button>
+            <ion-input class="input-from" type="text"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Referencia</ion-label>
+            <textarea class="input-from text-area">
+Entrando tres cuadras atras del Mall del Sur.
+            </textarea>
+          </ion-item>
+        </ion-list>
+
+        <ion-button
+          [disabled]="!registrationForm.valid"
+          class="ion-margin-start ion-margin-end ion-butt-save"
+          color="omipalidarkd"
+          type="submit"
+          expand="block"
         >
-      </ion-item>
-      <ion-item>
-        <ion-label>Contacto</ion-label>
-        <ion-input>098547126</ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Contraseña</ion-label>
-        <ion-input type="password" [(ngModel)]="password">1234567890</ion-input>
-      </ion-item>
-    </ion-list>
-  </ion-row>
-
-  <ion-row class="centrado">
-    <ion-item-divider class="centrado">
-      <ion-label class="label-input">
-        Detalles de entrega
-      </ion-label>
-    </ion-item-divider>
-  </ion-row>
-
-  <ion-list>
-    <ion-item>
-      <ion-label>Referencia</ion-label>
-      <textarea>
-        Entrando tres cuadras atras del Mall del Sur.
-      </textarea>
-    </ion-item>
-  </ion-list>
-
-  <ion-row class="save-change centrado">
-    <ion-col class="save-change centrado">
-      <ion-button color="omipalidarkd" (click)="guardarCambios()"
-        >Guardar Cambios
-      </ion-button>
-    </ion-col>
-  </ion-row>
+          Guardar Cambios
+        </ion-button>
+      </form>
+    </div>
+  </ion-content>
 </ion-content>

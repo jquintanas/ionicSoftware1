@@ -31,3 +31,37 @@ div {
 .fab-button{
   width: 30%;
 }
+
+.error-message {
+  color: var(--ion-color-danger);
+  font-size: 1rem;
+}
+
+.input-from{
+  margin-top: 1rem;
+}
+
+.text-area{
+  font-size: 1rem;
+  padding: 2px;
+}
+
+
+.ion-butt-save{
+  margin-top: 2rem;
+}
+
+
+ion-item-divider ion-label{
+  font-size: 1.5rem;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+  align-content: center;
+}
+
+
+.contenedor{
+  font-size: 1rem;
+}
