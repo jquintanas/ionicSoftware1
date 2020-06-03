@@ -22,6 +22,7 @@ export class MapaMapboxPage implements OnInit {
   longitudCentro: number;
   nuevoMarcador: Mapboxgl.Marker;
   guardar = true;
+  posicion: string = "";
   constructor(private modalController: ModalController, public alertController: AlertController, private mapaDatosService: MapaDatosService,public geolocation: Geolocation, public alertsService: AlertsService) {
     
    }
@@ -119,6 +120,7 @@ export class MapaMapboxPage implements OnInit {
       this.mapaDatosService.marcador_guardado = true;
       console.log('la posicion del marcador en lat: '+this.mapaDatosService.latitud);
       console.log('la posicion del marcador en lng: '+this.mapaDatosService.longitud);
+      this.posicion = this.latitud.toString() +"|"+this.longitud.toString();
       //this.marcadorGuardado();
       this.alertsService.presentToast("Marcador guardado");
 
@@ -139,7 +141,7 @@ export class MapaMapboxPage implements OnInit {
 
   async closeModal() {
     Mapboxgl.clearStorage();
-    await this.modalController.dismiss();
+    await this.modalController.dismiss(this.posicion);
     
   }
 

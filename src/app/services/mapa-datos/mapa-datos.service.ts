@@ -9,6 +9,6 @@ export class MapaDatosService {
   longitud: number= -1.8017518;
   marcador_guardado : boolean = false;
   nombre : string = "sin nombre";
-
+  cerrarmodal: number = 0;
   constructor() { }
 }
