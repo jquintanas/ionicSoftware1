@@ -14,12 +14,14 @@
 
 <ion-content class="contenedor" fullscreen>
   <ion-toolbar  >
-
-    <ion-buttons slot="start" >
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" color="light"></ion-back-button>
+    </ion-buttons>
+    <!--<ion-buttons slot="start" >
       <ion-button (click)="salirRegistro()">
         <ion-icon name="chevron-back-outline" color="light" ></ion-icon>
       </ion-button>
-    </ion-buttons>
+    </ion-buttons>-->
     <ion-buttons slot="end">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -160,14 +162,14 @@
               <ion-icon name="map" slot="start"></ion-icon>
               Indicar Ubicación
             </ion-button>
-          </div>  -->    
+          </div>     
           <div class="contenedorboton ion-padding-horizontal" >
             <ion-button  type="button" expand="block" fill="clear"  class="verubi ion-margin-vertical " [disabled]="verubicacion" (click)="mostrarimagen()" >
               Ver ubicación selecionada
             </ion-button>
-          </div>  
+          </div> --> 
           <ion-item  color="none" lines="none" *ngIf="imagen">
-            <img width="300" src="https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/pin-s-marker+ffa500({{url_completa}}" alt="Mapbox Map of -79.5419038,-1.8017518">
+            <img width="300" src="https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/pin-s-marker+ffa500({{url_completa}}" alt="Mapbox Map of -79.5419038,-1.8017518" class="imagen">
           </ion-item>
           <ion-item  lines="none" class="referencias " color="none"  class="referenciasdom">
             <ion-textarea id="referencias" type="text" placeholder="Puede indicar alguna referencia de su domicilio" class="inputref" formControlName="referencias" >  

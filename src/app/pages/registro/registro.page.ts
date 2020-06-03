@@ -22,6 +22,7 @@ export class RegistroPage implements OnInit,AfterViewInit {
   img_markers = ",14,0/300x300@2x?access_token=pk.eyJ1IjoiZGFubnBhcjk2IiwiYSI6ImNrYWJiaW44MjFlc2kydG96YXVxc2JiMHYifQ.iWfA_z-InyvNliI_EysoBw&attribution=false&logo=false";
   url_completa :string ;
   latlng :string;
+  posicionmarcador:String[] = [];
 
   constructor(public alertsService: AlertsService,private formBuilder: FormBuilder, private router: Router,public modalController:ModalController,  public mapaDatosService: MapaDatosService,public renderer:Renderer2,public el:ElementRef) { 
     this.buildForm(); 
@@ -120,22 +121,38 @@ export class RegistroPage implements OnInit,AfterViewInit {
 
   async openModal() {
     this.imagen = false;
-    if(this.verubicacion ==true){
+    /*if(this.verubicacion ==true){
       this.verubicacion =false;
-    }
+    }*/
     const modal = await this.modalController.create({
       component: MapaMapboxPage
     });
+    
+    modal.onDidDismiss().then((data) =>{
+      console.log(data);
+      this.posicionmarcador = data.data.split('|');
+      console.log(this.posicionmarcador);
+      this.latlng= this.posicionmarcador[1]+','+ this.posicionmarcador[0];
+      console.log(this.latlng);
+      this.url_completa = this.latlng+this.img+this.latlng+this.img_markers;
+      console.log(this.url_completa);
+      if(this.url_completa != ""){
+        this.imagen = true;
+      }
+    });
+
+    
     return await modal.present();
+    
     
   }
 
-  mostrarimagen(){    
-    this.latlng= this.mapaDatosService.longitud.toString()+','+ this.mapaDatosService.latitud.toString() ;
-    this.url_completa = this.latlng+this.img+this.latlng+this.img_markers;
+ /* mostrarimagen() {
+    this.latlng =this.mapaDatosService.longitud.toString() +"," + this.mapaDatosService.latitud.toString();
+    this.url_completa = this.latlng + this.img + this.latlng + this.img_markers;
     console.log(this.url_completa);
-    if(this.url_completa != ""){
+    if (this.url_completa != "") {
       this.imagen = true;
     }
-  }
+  }*/
 }

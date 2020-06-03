@@ -39,7 +39,7 @@ export class LoginPage implements OnInit {
       console.log(value);
       console.log(this.formulario_login);
       this.alertsService.presentLoading("Bienvenido"+" Danny");
-      //this.router.navigateByUrl('/home/bebidas');
+      //this.router.navigateByUrl('/home');
     }else{
       console.log('formulario inválido',this.formulario_login);
       this.onResetForm();
@@ -67,6 +67,7 @@ export class LoginPage implements OnInit {
   abrirRecuperarContra(){
     this.router.navigateByUrl('recuperar-contrasena');
   }
+  
   async abrirContrasena() {
     const modal = await this.modalController.create({
       component: RecuperarContrasenaPage
