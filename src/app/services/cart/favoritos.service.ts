@@ -50,13 +50,16 @@ export class FavoritosService {
     let favoritos: Map<string, Map<string, Favoritos>>;
     await this.obtenerFavoritos().then((data: any) => {
       favoritos = data;
+      //console.log(typeof favoritos)
     });
     if (favoritos == null) {
       return false;
     }
+
     if (favoritos.get(categoria) == null){
       return false;
     }
+    
     return favoritos.get(categoria).get(idProducto) != null;
 
   }
