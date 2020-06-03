@@ -29,17 +29,26 @@ export class PerfilUsuarioPage implements OnInit {
     
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     //return this.mostrarFavorito()
-    /*let favMap: Map<string, Map<string, Favoritos>>;
-    this.favoritos.observadorFavoritos().subscribe(async (data:boolean)=>{
-      await this.favoritos.obtenerFavoritos().then((Map:any)=>{
-        favMap= Map;
-      })
-     this.data.push(this.favoritos.convertirMapaALista(favMap))
-    })
+    let favMap: Map<string, Map<string, Favoritos>>;
+    await this.favoritos.obtenerFavoritos().then((data:any) => {
+      favMap = data;
+      console.log("primero")
+    });
+    console.log("segundo")
+    console.log(favMap);
+    let lista = this.favoritos.convertirMapaALista(favMap);
+    console.log(lista)
+    this.dataBebidas = lista;
+    // this.favoritos.observadorFavoritos().subscribe(async (data:boolean)=>{
+    //   await this.favoritos.obtenerFavoritos().then((Map:any)=>{
+    //     favMap= Map;
+    //   })
+    //  this.data.push(this.favoritos.convertirMapaALista(favMap))
+    // })
 
-    console.log(this.data)*/
+    console.log(this.data)
   }
 
   segment: string;
