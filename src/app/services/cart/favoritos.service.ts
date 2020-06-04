@@ -8,15 +8,15 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class FavoritosService {
 
-  private favoritosSubject  = new BehaviorSubject(false);
+  private favoritosSubject = new BehaviorSubject(false);
 
   constructor(private storage: Storage) { }
 
-  observadorFavoritos(): Observable<boolean>{
+  observadorFavoritos(): Observable<boolean> {
     return this.favoritosSubject.asObservable();
   }
 
-  notificarCambio(bandera: boolean){
+  notificarCambio(bandera: boolean) {
     this.favoritosSubject.next(bandera);
   }
 
@@ -38,7 +38,7 @@ export class FavoritosService {
       let data = mapaFavoritos.get(categoria);
       if (data.get(favorito.idProducto) == null) {
         data.set(favorito.idProducto, favorito);
-        mapaFavoritos.set(categoria,data)
+        mapaFavoritos.set(categoria, data)
         this.storage.set(environment.codigoFavoritos, mapaFavoritos);
         return true;
       }
@@ -56,10 +56,10 @@ export class FavoritosService {
       return false;
     }
 
-    if (favoritos.get(categoria) == null){
+    if (favoritos.get(categoria) == null) {
       return false;
     }
-    
+
     return favoritos.get(categoria).get(idProducto) != null;
 
   }
@@ -72,9 +72,11 @@ export class FavoritosService {
 
   convertirMapaALista(favoritos: Map<string, Map<string, Favoritos>>) {
     let tmp: Favoritos[] = [];
-    for (let data of favoritos.values()) {
-      for (let favorito of data.values()) {
-        tmp.push(favorito);
+    if (favoritos) {
+      for (let data of favoritos.values()) {
+        for (let favorito of data.values()) {
+          tmp.push(favorito);
+        }
       }
     }
     return tmp;
