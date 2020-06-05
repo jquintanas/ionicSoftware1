@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {AlertController, IonSegment} from '@ionic/angular';
 import { detalleHistorial} from "src/app/interface/historial-pedido";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-historial',
@@ -16,7 +17,7 @@ dataHistorial: detalleHistorial[]=[
  
   @ViewChild(IonSegment, {static: true}) segment: IonSegment;
 
-  constructor(private alertController: AlertController) { }
+  constructor(private alertController: AlertController, private router: Router) { }
 
   ngOnInit() {
     this.segment.value= 'active';
@@ -54,6 +55,10 @@ dataHistorial: detalleHistorial[]=[
         ]
       });
       await alert.present();
+    }
+
+    goCarrito(){
+      this.router.navigateByUrl('carrito-compras');
     }
 
     /*segmentChanged(event){
