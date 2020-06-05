@@ -39,7 +39,7 @@ export class LoginPage implements OnInit {
       console.log(value);
       console.log(this.formulario_login);
       this.alertsService.presentLoading("Bienvenido"+" Danny");
-      //this.router.navigateByUrl('/home');
+      this.router.navigateByUrl('/home');
     }else{
       console.log('formulario inválido',this.formulario_login);
       this.onResetForm();
