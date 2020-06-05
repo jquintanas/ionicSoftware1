@@ -1,8 +1,11 @@
 <ion-header>
   <ion-toolbar color="dark">
     <ion-buttons slot="start">
-      <ion-button (click)="closeModal()">
-        <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
+     <ion-back-button defaultHref="/registro" (click)="closeModal()"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="guardar_marcador()"> 
+        <ion-icon slot="start" name="save"></ion-icon>
       </ion-button>
     </ion-buttons>
     <ion-title>Domicilio</ion-title>
@@ -12,7 +15,7 @@
   <div id="mapa"></div>
   <!--<div id="geocoder" class="geocoder"></div>-->
 </ion-content>
-
+<!--
 <ion-footer>
   <ion-toolbar class="toolbarFooter" color="dark">     
     <ion-buttons  *ngIf="guardar">
@@ -21,4 +24,4 @@
       </ion-button>
     </ion-buttons>       
   </ion-toolbar>
-</ion-footer>
+</ion-footer>-->
