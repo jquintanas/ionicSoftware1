@@ -38,7 +38,11 @@ export class PerfilUsuarioPage implements OnInit {
     });
     console.log("segundo")
     console.log(favMap);
-    let lista = this.favoritos.convertirMapaALista(favMap);
+    let lista;
+    if(favMap!= null){
+      lista = this.favoritos.convertirMapaALista(favMap);
+    }
+    
     console.log(lista)
     this.dataBebidas = lista;
     // this.favoritos.observadorFavoritos().subscribe(async (data:boolean)=>{

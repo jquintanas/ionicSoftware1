@@ -140,7 +140,12 @@ export class MapaMapboxPage implements OnInit {
 
 
   async closeModal() {
-    Mapboxgl.clearStorage();
+    this.mapaDatosService.latitud = this.latitud;
+    this.mapaDatosService.longitud = this.longitud;
+    this.mapaDatosService.marcador_guardado = true;
+    console.log('la posicion del marcador en lat: '+this.mapaDatosService.latitud);
+    console.log('la posicion del marcador en lng: '+this.mapaDatosService.longitud);
+    this.posicion = this.latitud.toString() +"|"+this.longitud.toString();
     await this.modalController.dismiss(this.posicion);
     
   }
