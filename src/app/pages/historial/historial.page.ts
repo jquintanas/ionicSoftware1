@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import {AlertController, IonSegment} from '@ionic/angular';
+import { detalleHistorial} from "src/app/interface/historial-pedido";
 
 @Component({
   selector: 'app-historial',
@@ -7,9 +9,61 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HistorialPage implements OnInit {
 
-  constructor() { }
+
+dataHistorial: detalleHistorial[]=[
+  
+]
+ 
+  @ViewChild(IonSegment, {static: true}) segment: IonSegment;
+
+  constructor(private alertController: AlertController) { }
 
   ngOnInit() {
+    this.segment.value= 'active';
   }
+
+    async cancelarAlert(){
+      const alert = await this.alertController.create({
+        header: 'Cancelar Pedido',
+        cssClass: 'alertCancel',
+        inputs : [
+          {
+            type:'radio',
+            label:'Pedido equivocado',
+            value:'pedidoEquivocad'
+          },
+          {
+            type:'radio',
+            label:'Repartidor demorado',
+            value:'repDemorado'
+          }
+          ],
+        buttons: [
+          {
+            text: 'Regresar',
+            role: 'regresar',
+            handler: (blah) => {
+              console.log('Regresar, no cancelar');
+            }
+          }, {
+            text: 'Cancelar',
+            handler: () => {
+              console.log('Cancelar Pedido');
+            }
+          }
+        ]
+      });
+      await alert.present();
+    }
+
+    /*segmentChanged(event){
+      const valorSegmento = event.detail.value;
+
+      if (valorSegmento == 'active'){
+        this.
+      }
+
+      console.log(valorSegmento);
+    }*/
 
 }
