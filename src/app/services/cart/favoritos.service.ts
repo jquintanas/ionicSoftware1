@@ -36,6 +36,11 @@ export class FavoritosService {
     let tmp = this.convertirMapaALista(mapaFavoritos);
     if (this.soportaMasElementos(tmp)) {
       let data = mapaFavoritos.get(categoria);
+      if (data == null) {
+        let map: Map<string, Favoritos> = new Map();
+        mapaFavoritos.set(categoria,map);
+        data = mapaFavoritos.get(categoria);
+      }
       if (data.get(favorito.idProducto) == null) {
         data.set(favorito.idProducto, favorito);
         mapaFavoritos.set(categoria, data)
