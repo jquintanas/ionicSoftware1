@@ -15,6 +15,8 @@ import { MapaMapboxPage } from './mapa-mapbox.page';
     MapaMapboxPageRoutingModule,
     
   ],
-  declarations: [MapaMapboxPage]
+  declarations: [MapaMapboxPage],
+  entryComponents: [MapaMapboxPage],
+  exports: [MapaMapboxPage]
 })
 export class MapaMapboxPageModule {}
