@@ -15,6 +15,7 @@ export class PedidoPage implements OnInit {
   horapedido = false;
   efectivo = false;
   depotran = false;
+  envio = false;
   constructor(public modalController: ModalController,public alertController:AlertController,public router:Router) { }
 
   ngOnInit() {
@@ -26,10 +27,12 @@ export class PedidoPage implements OnInit {
     if(value == 'Domicilio'){
       this.domicilio = true;
       this.local = false;
+      this.envio = true;
     }else if (value == 'Local'){
       this.local = true;
       this.domicilio = false;
       this.horapedido = true;
+      this.envio = false;
     }
  }
   public onOptionsSelected2(value:string) {
@@ -65,11 +68,11 @@ export class PedidoPage implements OnInit {
                   '<p class="p">Cuenta de Ahorros #45789657479  FARID ALVARADO CI:1207684521 Omiypali@gmail.com <br></p>'+
                   '<p class="title"><strong>Banco Guayaquil</strong></p>'+
                   '<p class="p">Cuenta de Ahorros #45789657479  FARID ALVARADO CI:1207684521 Omiypali@gmail.com <br></p>'+
-                  '<p class="comentario">Envíanos una foto del comprobante del depósito/transferencia para confirmar tu pedido <br> </p>',
+                  '<p class="comentario">Envíanos una foto del comprobante del depósito/transferencia para confirmar tu pedido al 0955744347<br> </p>',
         buttons: [{
             text:'Aceptar',
             handler: ()=>{
-              this.router.navigateByUrl("/login");
+              this.router.navigateByUrl("/home");
             }
         }]
       });
@@ -81,7 +84,7 @@ export class PedidoPage implements OnInit {
         buttons: [{
           text:'Aceptar',
           handler: ()=>{
-            this.router.navigateByUrl("/home/bebidas");
+            this.router.navigateByUrl("/home");
           }
         }]
       });
