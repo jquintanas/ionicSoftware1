@@ -151,7 +151,8 @@ export class CardProductosComponent implements OnInit, OnDestroy {
         {
           name: 'cantidad',
           type: 'number',
-          placeholder: 'Cantidad..'
+          placeholder: 'Cantidad..',
+          value: 1
         }
       ],
       buttons: [
