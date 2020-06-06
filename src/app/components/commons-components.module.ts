@@ -6,9 +6,7 @@ import { DetallesProductosPage } from "src/app/pages/detalles-productos/detalles
 import { PopinfoComponent } from './popinfo/popinfo.component';
 import { CardCarritoComponent } from "./card-carrito/card-carrito.component";
 import { FavoriteProductoComponent } from "./favorite-producto/favorite-producto.component"
-//import { FavoriteTabComponent } from './favorite-tab/favorite-tab.component';
 import { SliderRecomendadosComponent } from "./slider-recomendados/slider-recomendados.component";
-
 
 
 @NgModule({
