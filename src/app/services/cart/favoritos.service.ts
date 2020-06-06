@@ -1,15 +1,16 @@
-import { Injectable } from "@angular/core";
-import { Storage } from "@ionic/storage";
+import { Injectable } from '@angular/core';
+import { Storage } from '@ionic/storage';
 import { environment } from "src/environments/environment";
 import { Favoritos } from "src/app/interface/favoritosStorage";
-import { BehaviorSubject, Observable } from "rxjs";
+import { BehaviorSubject, Observable } from 'rxjs';
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root'
 })
 export class FavoritosService {
+
   private favoritosSubject = new BehaviorSubject(false);
 
-  constructor(private storage: Storage) {}
+  constructor(private storage: Storage) { }
 
   observadorFavoritos(): Observable<boolean> {
     return this.favoritosSubject.asObservable();
@@ -21,11 +22,9 @@ export class FavoritosService {
 
   async agregarFavorito(categoria: string, favorito: Favoritos) {
     let mapaFavoritos: Map<string, Map<string, Favoritos>>;
-    await this.obtenerFavoritos().then(
-      (data: Map<string, Map<string, Favoritos>>) => {
-        mapaFavoritos = data;
-      }
-    );
+    await this.obtenerFavoritos().then((data: Map<string, Map<string, Favoritos>>) => {
+      mapaFavoritos = data;
+    });
     if (mapaFavoritos == null) {
       let favoritos: Map<string, Map<string, Favoritos>> = new Map();
       let tmp: Map<string, Favoritos> = new Map();
@@ -39,12 +38,12 @@ export class FavoritosService {
       let data = mapaFavoritos.get(categoria);
       if (data == null) {
         let map: Map<string, Favoritos> = new Map();
-        mapaFavoritos.set(categoria, map);
+        mapaFavoritos.set(categoria,map);
         data = mapaFavoritos.get(categoria);
       }
       if (data.get(favorito.idProducto) == null) {
         data.set(favorito.idProducto, favorito);
-        mapaFavoritos.set(categoria, data);
+        mapaFavoritos.set(categoria, data)
         this.storage.set(environment.codigoFavoritos, mapaFavoritos);
         return true;
       }
@@ -56,37 +55,30 @@ export class FavoritosService {
     let favoritos: Map<string, Map<string, Favoritos>>;
     await this.obtenerFavoritos().then((data: any) => {
       favoritos = data;
+      //console.log(typeof favoritos)
     });
-    if (favoritos === null) {
+    if (favoritos == null) {
       return false;
-    } 
+    }
 
-    console.log(favoritos)
-    for (let value of favoritos.values()) {
-      console.log(value);                
-  }
-    /*else {
-      if (favoritos.get(categoria) == null) {
-        return false;
-      } else {
-        return favoritos.get(categoria).get(idProducto) != null;
-      }
-    }*/
+    if (favoritos.get(categoria) == null) {
+      return false;
+    }
+
+    return favoritos.get(categoria).get(idProducto) != null;
+
   }
 
   async obtenerFavoritos(): Promise<Map<string, Map<string, Favoritos>>> {
-    return await this.storage
-      .get(environment.codigoFavoritos)
-      .then((data: Map<string, Map<string, Favoritos>>) => {
-        return data;
-      });
+    return await this.storage.get(environment.codigoFavoritos).then((data: Map<string, Map<string, Favoritos>>) => {
+      return data;
+    })
   }
 
   convertirMapaALista(favoritos: Map<string, Map<string, Favoritos>>) {
     let tmp: Favoritos[] = [];
     if (favoritos) {
       for (let data of favoritos.values()) {
-        console.log(data);
         for (let favorito of data.values()) {
           tmp.push(favorito);
         }

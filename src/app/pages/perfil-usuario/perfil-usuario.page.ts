@@ -29,8 +29,10 @@ export class PerfilUsuarioPage implements OnInit {
     
   }
 
-  async ngOnInit() {
+  //async 
+  ngOnInit() {
     //return this.mostrarFavorito()
+    /*
     let favMap: Map<string, Map<string, Favoritos>>;
     await this.favoritos.obtenerFavoritos().then((data:any) => {
       favMap = data;
@@ -44,13 +46,15 @@ export class PerfilUsuarioPage implements OnInit {
     }
     
     console.log(lista)
-    this.dataBebidas = lista;
+    this.dataBebidas = lista;*/
     // this.favoritos.observadorFavoritos().subscribe(async (data:boolean)=>{
     //   await this.favoritos.obtenerFavoritos().then((Map:any)=>{
     //     favMap= Map;
     //   })
     //  this.data.push(this.favoritos.convertirMapaALista(favMap))
     // })
+
+    this.storage
 
     console.log(this.data)
   }
