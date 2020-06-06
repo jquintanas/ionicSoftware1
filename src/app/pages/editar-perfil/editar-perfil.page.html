@@ -92,16 +92,22 @@
 
         <ion-list>
           <ion-item>
-            <ion-label>Dirección</ion-label
-            ><ion-button
-              class="ion-margin-start ion-margin-end"
-              color="omipalidarkd"
-              expand="block"
-            >
-              <ion-icon color="omipali" name="map-outline"></ion-icon>
+            <ion-label>Dirección</ion-label    >
+              <ion-button   type="button"   class="ion-margin-start ion-margin-end"      color="omipalidarkd"    expand="block"  (click)="openModal()"   >
+              <ion-icon color="omipali" name="map-outline" ></ion-icon>
             </ion-button>
             <ion-input class="input-from" type="text"></ion-input>
           </ion-item>
+
+
+
+          <ion-item>
+            <ion-label position="floating">Description</ion-label>
+            <ion-textarea rows="1"></ion-textarea>
+          </ion-item>
+
+
+
 
           <ion-item>
             <ion-label>Referencia</ion-label>

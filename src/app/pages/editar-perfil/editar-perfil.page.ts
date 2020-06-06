@@ -8,6 +8,7 @@ import {
 } from "@angular/core";
 import { ModalController } from "@ionic/angular";
 import { ToastController } from "@ionic/angular";
+import { MapaMapboxPage } from './../mapa-mapbox/mapa-mapbox.page';
 import {
   FormBuilder,
   FormGroup,
@@ -81,4 +82,14 @@ export class EditarPerfilPage implements OnInit {
   public submit() {
     console.log(this.registrationForm.value);
   }
+
+  async openModal() {
+
+    const modal = await this.modalController.create({
+      component: MapaMapboxPage,
+    });
+    return await modal.present();
+
+  }
+
 }

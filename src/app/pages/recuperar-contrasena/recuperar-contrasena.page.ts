@@ -11,7 +11,7 @@ AlertsService
 })
 export class RecuperarContrasenaPage implements OnInit {
 
-
+  private phonepattern : any = /^(09){1}[0-9]{8}$/;
   formulario_r : FormGroup;
   private emailPattern: any = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   constructor(private formBuilder: FormBuilder, private router: Router,private modalController: ModalController,public alertsService: AlertsService) { 
@@ -24,7 +24,8 @@ export class RecuperarContrasenaPage implements OnInit {
 
   buildForm(){
     this.formulario_r =this.formBuilder.group({
-      correo: ['',[Validators.required,Validators.pattern(this.emailPattern)]],
+      telefono: ['',[Validators.required,Validators.maxLength(10),Validators.minLength(10), Validators.pattern(this.phonepattern)]],
+      //correo: ['',[Validators.required,Validators.pattern(this.emailPattern)]],
     });
   }
 
@@ -36,7 +37,7 @@ export class RecuperarContrasenaPage implements OnInit {
       const value = this.formulario_r.value;
       console.log(value);
       console.log(this.formulario_r);
-      this.alertsService.presentLoading("Enviando Correo");
+      this.alertsService.presentLoading("Enviando Mensaje");
     }else{
       console.log('formulario inválido',this.formulario_r);
       //this.isSubmitted = true;
@@ -46,8 +47,8 @@ export class RecuperarContrasenaPage implements OnInit {
   }
 
 
-  get correo(){
-    return this.formulario_r.get('correo');
+  get telefono(){
+    return this.formulario_r.get('telefono');
   }
 
 

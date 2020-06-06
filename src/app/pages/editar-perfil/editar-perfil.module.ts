@@ -1,3 +1,4 @@
+import { MapaMapboxPage } from './../mapa-mapbox/mapa-mapbox.page';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -15,7 +16,8 @@ import { EditarPerfilPage } from './editar-perfil.page';
     IonicModule,
     EditarPerfilPageRoutingModule
   ],
-  declarations: [EditarPerfilPage],
+  declarations: [EditarPerfilPage,MapaMapboxPage],
+  entryComponents: [MapaMapboxPage]
  
 })
 export class EditarPerfilPageModule {}

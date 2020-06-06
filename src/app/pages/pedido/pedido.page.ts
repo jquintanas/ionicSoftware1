@@ -87,7 +87,7 @@ export class PedidoPage implements OnInit {
       });
       await alert.present();
     }
-    
+    //this.router.navigateByUrl("/home");
 
     
   }
