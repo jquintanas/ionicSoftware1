@@ -1,0 +1,106 @@
+.tipoEntrega{
+    /*--padding-start:0%;
+    --padding-end:0%;
+    --padding-bottom:0%;/*/
+    font-size: 0.8rem;
+}
+.tipoPago{
+    --padding-start:0%;
+    --padding-end:0%;
+    font-size: 0.8rem;
+}
+.confirmacion{
+    --padding-start:2%;
+    font-size: 1rem;
+    font-weight: bold;
+}
+.local{
+    --padding-start:0%;
+    --padding-end:0%;
+    font-size: 0.8rem;
+}
+.total{
+    --padding-start:0%;
+    --padding-end:0%;
+}
+.realizarcomp{
+    color:   rgb(255, 255, 255);
+    --border-radius: 5px;   
+    --background: var(--ion-color-omipalidarkd);
+}
+
+.griduser,.direccionEntrega,.gridcarrito,.gridresumen,.pago{
+    //font-size: 0.9rem;
+    background: white ;
+}
+.rowdatos,.rowdatospago{
+    font-size: 0.9rem;
+    font-weight: bold;
+    
+}
+.checkbox{
+    width: 15px;
+    height: 15px;
+}
+.titlechek{
+    font-size: 0.8rem;
+}
+
+.rowvaloresuser{
+    font-size: 0.8rem;
+}
+.rowdatoscarrito{
+    font-size: 0.8rem;
+}
+.rowdatoscarritotitle{
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+.rowdatosresumen{
+    font-size: 0.8rem;
+}
+
+.item{
+    margin-bottom: 2%;
+}
+
+.content{
+    --background: rgb(231, 231, 231);
+}
+
+.totalpago{
+    background: rgb(231, 231, 231);
+}
+.divtot{
+    background:  var(--ion-color-omipali);
+}
+.rowdatostot{
+    font-size: 1rem;
+}
+
+.valor,.cantidad{
+    text-align: center;
+}
+.badge{
+    background:  var(--ion-color-omipali);
+    color: white;
+}
+.mapallega{
+    font-size: 0.5rem;
+}
+.hora{
+    font-size: 0.8rem;
+    left: 0;
+    --padding-start:0%;
+}
+.reloj{
+    font-size: 0.8rem;
+}
+.mensajtiempo{
+    font-size: 0.8rem;
+}
+.direccionlocal{
+    --padding-start:0%;
+    --padding-end:0%;
+    font-size: 0.8rem;
+}

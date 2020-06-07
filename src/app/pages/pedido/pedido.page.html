@@ -1,0 +1,231 @@
+<ion-header>
+  <ion-toolbar color="omipalidarkd">
+    <ion-buttons slot="start">
+      <ion-back-button ></ion-back-button>
+    </ion-buttons>
+    <ion-title>Pedido</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen class="content">
+  <div class="item">
+    <ion-item class="confirmacion">
+      <ion-label>Confirmación del pedido</ion-label>
+    </ion-item>
+    <ion-grid fixed class="griduser">
+      <ion-row class="rowdatos">
+        <ion-col size="12">
+          <ion-label class="label">Datos de pedido</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row class="rowvaloresuser">
+        <ion-col size="6">
+          <ion-label>Cliente</ion-label>
+        </ion-col>
+        <ion-col size="6">
+          <ion-label>Danny Rios</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row class="rowvaloresuser">
+        <ion-col size="6">
+          <ion-label>Cédula</ion-label>
+        </ion-col>
+        <ion-col size="6">
+          <ion-label>0955744347</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row class="rowvaloresuser">
+        <ion-col size="6">
+          <ion-label>Teléfono</ion-label>
+        </ion-col>
+        <ion-col size="6">
+          <ion-label>0968918012</ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+    
+
+  <div class="item">
+    <ion-grid fixed class="direccionEntrega">
+      <ion-row class="rowdatos">
+        <ion-col size="12">
+          <ion-label>Dirección de Entrega</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row >
+        <ion-col size="12">
+          <ion-item class = "ion-no-padding tipoEntrega" lines="none">
+            <ion-label >Elija el tipo de entrega</ion-label>
+            <ion-select interface="popover" class="item_seleccion" #mySelect (ionChange)='onOptionsSelected(mySelect.value)'>
+              <ion-select-option value="Domicilio" >Domicilio</ion-select-option>
+              <ion-select-option value="Local">Retiro en Local</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row  *ngIf="domicilio">
+        <ion-col size="12">
+          <ion-item class = "ion-no-padding tipoEntrega" lines="none">
+            <ion-label >Elija la dirección</ion-label>
+            <ion-select interface="popover" class="item_seleccion" #mySelect2 (ionChange)='onOptionsSelected2(mySelect2.value)'>
+              <ion-select-option value="Vergeles" >Vergeles</ion-select-option>
+              <ion-select-option value="Alborada">Alborada 6ta etapa</ion-select-option>
+              <ion-select-option value="Nueva">Nueva dirección</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="domicilio" class="mensajtiempo">
+        <ion-col size="1"></ion-col>
+        <ion-col size="10">
+          <ion-label>Tiempo estimado de espera 10 - 20 minutos</ion-label>      
+        </ion-col>
+        <ion-col size="1"></ion-col>
+      </ion-row>
+      <ion-row *ngIf="local" >
+        <ion-col size="12">
+          <ion-item class="ion-no-border direccionlocal" lines="none">
+            <ion-label> <strong>Dirección Local</strong> &nbsp; Jaime Roldós Avenue 220, Babahoyo</ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="horapedido">
+        <ion-col size="8">
+          <ion-item class="ion-no-border hora" lines="none">
+            <ion-label>Elija la hora a retirar el pedido</ion-label>
+          </ion-item>         
+        </ion-col>
+        <ion-col size="4" >
+          <ion-item class="ion-no-border reloj" lines="none">
+            <ion-datetime display-format="h:mm A" picker-format="h:mm A" value="1990-02-19T07:43Z"></ion-datetime>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </div>
+    
+  <div class="item">
+    <ion-grid fixed class="gridcarrito">
+      <ion-row class="rowdatos">
+        <ion-col size="12">
+          <ion-label>Carrito</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row class="rowdatoscarritotitle">
+        <ion-col size="6">
+          <ion-label>Producto</ion-label>
+        </ion-col>
+        <ion-col size="3">
+          <ion-label>Cantidad</ion-label>
+        </ion-col>
+        <ion-col size="3">
+          <ion-label>Precio</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row class="rowdatoscarrito">
+        <ion-col size="6">
+          <ion-label>Chickcake</ion-label>
+        </ion-col>
+        <ion-col size="3">
+          <ion-badge class="badge">5</ion-badge>
+        </ion-col>
+        <ion-col size="3">
+          <ion-label>$10.00</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row class="rowdatoscarrito">
+        <ion-col size="6">
+          <ion-label>Brwoniede chocolate</ion-label>
+        </ion-col>
+        <ion-col size="3">
+          <ion-badge class="badge">3</ion-badge>
+        </ion-col>
+        <ion-col size="3">
+          <ion-label>$5.50</ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <div class="item">
+    <ion-grid fixed class="pago">
+      <ion-row class="rowdatospago">
+        <ion-col size="12">
+          <ion-label>Pago</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row >
+        <ion-col size="12">
+          <ion-item class = "ion-no-padding tipoPago" lines="none">
+            <ion-label >Elija el método de pago</ion-label>
+            <ion-select interface="popover" class="item_seleccion" #mySelect3 (ionChange)='onOptionsSelected3(mySelect3.value)'>
+              <ion-select-option value="Efectivo" >Efectivo</ion-select-option>
+              <ion-select-option value="Deposito" >Depósito</ion-select-option>
+              <ion-select-option value="Transferencia">Transferencia</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </div>
+    
+  <div class="item">
+    <ion-grid fixed class="gridresumen">
+      <ion-row class="rowdatos">
+        <ion-col size="12">
+          <ion-label>Resumen</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row  class="rowdatosresumen">
+        <ion-col size="9">
+          <ion-label>Subtotal</ion-label>
+        </ion-col>
+        <ion-col size="3">
+          <ion-label>$15.50</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="envio" class="rowdatosresumen">
+        <ion-col size="9">
+          <ion-label>Envío</ion-label>
+        </ion-col>
+        <ion-col size="3">
+          <ion-label>$1.50</ion-label>
+        </ion-col>
+      </ion-row>      
+    </ion-grid>
+  </div>
+
+  <div class="item divtot">
+    <ion-grid fixed >
+      <ion-row  class="rowdatostot">
+        <ion-col size="9">
+          <ion-label>Total</ion-label>
+        </ion-col>
+        <ion-col size="3">
+          <ion-label >$17.00</ion-label>
+        </ion-col>
+      </ion-row> 
+    </ion-grid>
+  </div>
+
+  <div>
+    <ion-grid fixed class="gridbutton">
+      <ion-row>
+        <ion-col size="2">
+        </ion-col>
+        <ion-col size="8">
+          <ion-button expand="block" fill="clear"class="realizarcomp" (click)="comprar()">Realizar compra</ion-button>
+        </ion-col>
+        <ion-col size="2">
+        </ion-col>
+      </ion-row>  
+    </ion-grid>
+  </div>
+
+    
+
+
+</ion-content>

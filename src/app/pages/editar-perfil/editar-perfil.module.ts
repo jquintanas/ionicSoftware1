@@ -7,15 +7,18 @@ import { IonicModule } from '@ionic/angular';
 import { EditarPerfilPageRoutingModule } from './editar-perfil-routing.module';
 
 import { EditarPerfilPage } from './editar-perfil.page';
+import { MapaMapboxPageModule } from "src/app/pages/mapa-mapbox/mapa-mapbox.module";
 @NgModule({
   imports: [
     ReactiveFormsModule,
     CommonModule,
     FormsModule,
     IonicModule,
-    EditarPerfilPageRoutingModule
+    EditarPerfilPageRoutingModule,
+    MapaMapboxPageModule
   ],
   declarations: [EditarPerfilPage],
+  entryComponents: []
  
 })
 export class EditarPerfilPageModule {}

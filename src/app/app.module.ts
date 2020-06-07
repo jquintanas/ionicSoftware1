@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { IonicStorageModule } from '@ionic/storage';
 import { FavoritosService } from './services/cart/favoritos.service';
+//import { HideHeaderDirective } from './directives/hide-header.directive';
 
 @NgModule({
   declarations: [AppComponent],

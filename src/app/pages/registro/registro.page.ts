@@ -159,9 +159,7 @@ export class RegistroPage implements OnInit, AfterViewInit {
 
   async openModal() {
     this.imagen = false;
-    /*if(this.verubicacion ==true){
-      this.verubicacion =false;
-    }*/
+
 
     const modal = await this.modalController.create({
       component: MapaMapboxPage,

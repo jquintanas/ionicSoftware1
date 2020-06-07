@@ -5,7 +5,7 @@ import { LoginPage } from './../app/pages/login/login.page';
 const routes: Routes = [
   {
     path: "",
-    redirectTo: "home",
+    redirectTo: "login",
     pathMatch: "full",
   },
   {
@@ -86,6 +86,11 @@ const routes: Routes = [
         (m) => m.CambioContrasenaPageModule
       ),
   },
+  {
+    path: 'pedido',
+    loadChildren: () => import('./pages/pedido/pedido.module').then( m => m.PedidoPageModule)
+  },
+
 ];
 
 @NgModule({

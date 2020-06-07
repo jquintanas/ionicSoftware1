@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { CarritoService } from 'src/app/services/cart/carrito.service';
@@ -11,7 +12,7 @@ export class CarritoComprasPage implements OnInit {
   cantidad: number = 0;
   total: number = 0;
   productos: Map<any, any>;
-  constructor(private alertController: AlertController, private carrito: CarritoService) { }
+  constructor(private alertController: AlertController, private carrito: CarritoService,private router:Router) { }
 
   ngOnInit() {
     this.carrito.observarCarrito().subscribe((data: any) => {
@@ -57,5 +58,7 @@ export class CarritoComprasPage implements OnInit {
     });
     await alert.present();
   }
-
+  comprar(){
+    this.router.navigateByUrl('/pedido');
+  }
 }

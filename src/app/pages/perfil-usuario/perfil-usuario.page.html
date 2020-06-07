@@ -3,55 +3,58 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title >
+    <ion-title>
       Omi Pali
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="contenedor">
+<ion-header hidenav-header="page1" header-height="50">
   <div class="bg-image"></div>
-
   <div class="bg-text">
     <img
       class="profile-photo"
       src="/assets/img/user.png"
       (click)="zoomImage()"
     />
+
+    <ion-fab class="edit-perfil">
+      <ion-button
+        class="ion-margin-start ion-margin-end fab-button"
+        color="omipalidarkd"
+        (click)="abrirEdicion()"
+      >
+        <ion-text>Editar Perfil</ion-text>
+      </ion-button>
+    </ion-fab>
   </div>
   <label class="bg-text-name">
     Karla Burgos Gayrey
   </label>
-  <ion-fab class="edit-perfil">
-    <ion-button
-      class="ion-margin-start ion-margin-end fab-button"
-      color="omipalidarkd"
-      (click)="abrirEdicion()"
-    >
-      <ion-text>Editar Perfil</ion-text>
-    </ion-button>
-  </ion-fab>
+  
+</ion-header>
 
-  <ion-row class="option-menu centrado">
+<ion-content class="contenedor" padding hidenav-content="page1">
+  <ion-row class="option-menu centrado ion-no-margin">
     <ion-col>
-      <ion-button color="omipalidarkd" class="menu-button"
-        ><ion-icon color="omipali" name="chatbox-ellipses"></ion-icon
-      ></ion-button>
+      <ion-button color="omipalidarkd" class="menu-button">
+        <ion-icon color="omipali" name="chatbox-ellipses"></ion-icon>
+      </ion-button>
     </ion-col>
     <ion-col>
-      <ion-button color="omipalidarkd" class="menu-button"
-        ><ion-icon color="omipali" name="cash"></ion-icon
-      ></ion-button>
+      <ion-button color="omipalidarkd" class="menu-button">
+        <ion-icon color="omipali" name="cash"></ion-icon>
+      </ion-button>
     </ion-col>
     <ion-col>
-      <ion-button color="omipalidarkd" class="menu-button"
-        ><ion-icon color="omipali" name="receipt"></ion-icon
-      ></ion-button>
+      <ion-button color="omipalidarkd" class="menu-button">
+        <ion-icon color="omipali" name="receipt"></ion-icon>
+      </ion-button>
     </ion-col>
     <ion-col>
-      <ion-button color="omipalidarkd" class="menu-button"
-        ><ion-icon color="omipali" name="help"></ion-icon
-      ></ion-button>
+      <ion-button color="omipalidarkd" class="menu-button">
+        <ion-icon color="omipali" name="help"></ion-icon>
+      </ion-button>
     </ion-col>
   </ion-row>
 
@@ -70,62 +73,28 @@
     </ion-col>
   </ion-row>
 
-  <ion-row class="fav centradoDivider">
-    <ion-item-divider class="centradoDivider">
-      <ion-label class="centradoDivider">
-        Favoritos
-      </ion-label>
-    </ion-item-divider>
-  </ion-row>
+  <ion-item-divider class="centrado">
+    <ion-label class="centrado favDiv">
+      MIS FAVORITOS
+    </ion-label>
+  </ion-item-divider>
 
   <div>
     <ion-row>
-      <ion-col size="4" *ngFor="let data of dataBebidas">
+      <ion-col
+        size="4"
+        *ngFor="let data of dataBebidas"
+        style="height: 100px;"
+        class="ion-margin-top col-favo"
+      >
         <app-favorite-producto
           [Imagen]="data.url"
           [id]="data.idProducto"
           [categoria]="data.categoria"
-        ></app-favorite-producto>
+          (notificar)="actualizarPantalla($event)"
+        >
+        </app-favorite-producto>
       </ion-col>
-      <!-- <ion-col size="4" *ngFor="let data of dataBebidas">
-        <app-favorite-producto
-          [Imagen]="data.url"
-          [id]="data.idProducto"
-          [categoria]="data.categoria"
-        ></app-favorite-producto>
-      </ion-col>
-
-      <ion-col size="4" *ngFor="let data of dataDulces">
-        <app-favorite-producto
-          [Imagen]="data.url"
-          [id]="data.idProducto"
-          [categoria]="data.categoria"
-        ></app-favorite-producto>
-      </ion-col>
-
-      <ion-col size="4" *ngFor="let data of dataPostres">
-        <app-favorite-producto
-          [Imagen]="data.url"
-          [id]="data.idProducto"
-          [categoria]="data.categoria"
-        ></app-favorite-producto>
-      </ion-col>
-
-      <ion-col size="4" *ngFor="let data of dataTortas">
-        <app-favorite-producto
-          [Imagen]="data.url"
-          [id]="data.idProducto"
-          [categoria]="data.categoria"
-        ></app-favorite-producto>
-      </ion-col>
-
-      <ion-col size="4" *ngFor="let data of dataPromociones">
-        <app-favorite-producto
-          [Imagen]="data.url"
-          [id]="data.idProducto"
-          [categoria]="data.categoria"
-        ></app-favorite-producto>
-      </ion-col> -->
     </ion-row>
   </div>
-</ion-content>
+  </ion-content>

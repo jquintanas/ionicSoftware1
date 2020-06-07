@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import * as Mapboxgl from 'mapbox-gl';
 import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import { environment} from './../../../environments/environment';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
@@ -23,7 +23,7 @@ export class MapaMapboxPage implements OnInit {
   nuevoMarcador: Mapboxgl.Marker;
   guardar = true;
   posicion: string = "";
-  constructor(private modalController: ModalController, public alertController: AlertController, private mapaDatosService: MapaDatosService,public geolocation: Geolocation, public alertsService: AlertsService) {
+  constructor(private modalController: ModalController, public alertController: AlertController, private mapaDatosService: MapaDatosService,public geolocation: Geolocation, public alertsService: AlertsService, public navCtrl: NavController) {
     
    }
 
@@ -118,11 +118,11 @@ export class MapaMapboxPage implements OnInit {
       this.mapaDatosService.latitud = this.latitud;
       this.mapaDatosService.longitud = this.longitud;
       this.mapaDatosService.marcador_guardado = true;
-      console.log('la posicion del marcador en lat: '+this.mapaDatosService.latitud);
-      console.log('la posicion del marcador en lng: '+this.mapaDatosService.longitud);
+      //console.log('la posicion del marcador en lat: '+this.mapaDatosService.latitud);
+      //console.log('la posicion del marcador en lng: '+this.mapaDatosService.longitud);
       this.posicion = this.latitud.toString() +"|"+this.longitud.toString();
       //this.marcadorGuardado();
-      this.alertsService.presentToast("Marcador guardado");
+      this.alertsService.presentToast("Posición guardada");
 
   }
 
@@ -143,8 +143,8 @@ export class MapaMapboxPage implements OnInit {
     this.mapaDatosService.latitud = this.latitud;
     this.mapaDatosService.longitud = this.longitud;
     this.mapaDatosService.marcador_guardado = true;
-    console.log('la posicion del marcador en lat: '+this.mapaDatosService.latitud);
-    console.log('la posicion del marcador en lng: '+this.mapaDatosService.longitud);
+    //console.log('la posicion del marcador en lat: '+this.mapaDatosService.latitud);
+    //console.log('la posicion del marcador en lng: '+this.mapaDatosService.longitud);
     this.posicion = this.latitud.toString() +"|"+this.longitud.toString();
     await this.modalController.dismiss(this.posicion);
     
