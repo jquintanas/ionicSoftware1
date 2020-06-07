@@ -10,11 +10,13 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { IonicStorageModule } from '@ionic/storage';
 import { FavoritosService } from './services/cart/favoritos.service';
+import {HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, BrowserAnimationsModule,IonicModule.forRoot(), AppRoutingModule,IonicStorageModule.forRoot()],
+  imports: [BrowserModule,HttpClientModule, BrowserAnimationsModule,IonicModule.forRoot(), AppRoutingModule,IonicStorageModule.forRoot() ],
   providers: [
     FavoritosService,
     StatusBar,

@@ -10,7 +10,7 @@
     font-size: 0.8rem;
 }
 .confirmacion{
-    --padding-start:2%;
+    --padding-start:0%;
     font-size: 1rem;
     font-weight: bold;
 }
@@ -71,7 +71,8 @@
 .totalpago{
     background: rgb(231, 231, 231);
 }
-.divtot{
+
+.gridtot{
     background:  var(--ion-color-omipali);
 }
 .rowdatostot{

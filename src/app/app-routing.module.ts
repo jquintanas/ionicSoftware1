@@ -5,7 +5,7 @@ import { LoginPage } from './../app/pages/login/login.page';
 const routes: Routes = [
   {
     path: "",
-    redirectTo: "login",
+    redirectTo: "pedido",
     pathMatch: "full",
   },
   {
