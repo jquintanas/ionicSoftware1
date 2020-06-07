@@ -1,8 +1,9 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import { Favoritos } from "src/app/interface/favoritosStorage";
 import { FavoritosService } from "src/app/services/cart/favoritos.service";
 import { LoadingController } from '@ionic/angular';
+import {IonContent} from '@ionic/angular';
 
 @Component({
   selector: "app-perfil-usuario",
@@ -11,6 +12,8 @@ import { LoadingController } from '@ionic/angular';
 })
 export class PerfilUsuarioPage implements OnInit {
   @Input("Favorito") banderaCorazon: boolean;
+
+  @ViewChild(IonContent,{static:true}) content: IonContent;
   // data = [];
   dataBebidas: any[];
   // dataDulces: any[];
@@ -43,6 +46,7 @@ export class PerfilUsuarioPage implements OnInit {
   }
 
   abrirEdicion() {
+    console.log("hello there")
     this.router.navigateByUrl("editar-perfil");
   }
 

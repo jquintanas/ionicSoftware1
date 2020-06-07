@@ -9,7 +9,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="contenedor">
+<ion-content class="contenedor content">
   <ion-row class="centrado image-perfil">
     <ion-col class="centrado">
       <img
@@ -32,101 +32,138 @@
     </ion-col>
   </ion-row>
 
-  <ion-content>
-    <div class="ion-padding">
-      <form [formGroup]="registrationForm" (ngSubmit)="submit()">
-        <ion-list>
+  <ion-content class="content">
+    <form [formGroup]="registrationForm" (ngSubmit)="submit()">
+      <ion-list>
+        <div class="item">
           <ion-item>
-            <ion-label >Usuario</ion-label>
-            <ion-input
+            <ion-label position="floating">Usuario</ion-label>
+            <ion-textarea
               class="input-from"
               autocapitalize
               inputmode="text"
               formControlName="name"
-            ></ion-input>
+              rows="1"
+            ></ion-textarea>
           </ion-item>
           <div *ngFor="let error of errorMessages.name">
             <ng-container
               *ngIf="name.hasError(error.type) && (name.dirty || name.touched)"
             >
-              <small class="error-message">{{error.message}}</small>
+              <div class="error-message">
+                <ion-icon
+                  slot="start"
+                  name="information-circle-sharp"
+                  color="danger"
+                ></ion-icon>
+                {{error.message}}
+              </div>
             </ng-container>
           </div>
+        </div>
+
+        <div class="item">
           <ion-item>
-            <ion-label >Celular</ion-label>
-            <ion-input
+            <ion-label position="floating">Celular</ion-label>
+            <ion-textarea
               class="input-from"
               inputmode="tel"
               formControlName="phone"
-            ></ion-input>
+              rows="1"
+            ></ion-textarea>
           </ion-item>
           <div *ngFor="let error of errorMessages.phone">
             <ng-container
               *ngIf="phone.hasError(error.type) && (phone.dirty || phone.touched)"
             >
-              <small class="error-message">{{error.message}}</small>
+              <div class="error-message">
+                <ion-icon
+                  slot="start"
+                  name="information-circle-sharp"
+                  color="danger"
+                ></ion-icon>
+                {{error.message}}
+              </div>
             </ng-container>
           </div>
+        </div>
+
+        <div class="item">
           <ion-item>
             <ion-label position="floating">Email</ion-label>
-            <ion-input
+            <ion-textarea
               class="input-from"
               inputmode="email"
               formControlName="email"
-            ></ion-input>
+              rows="1"
+            ></ion-textarea>
           </ion-item>
           <div *ngFor="let error of errorMessages.email">
             <ng-container
               *ngIf="email.hasError(error.type) && (email.dirty || email.touched)"
             >
-              <small class="error-message">{{error.message}}</small>
+              <div class="error-message">
+                <ion-icon
+                  slot="start"
+                  name="information-circle-sharp"
+                  color="danger"
+                ></ion-icon>
+                {{error.message}}
+              </div>
             </ng-container>
           </div>
-        </ion-list>
+        </div>
 
-        <ion-item-divider>
-          <ion-label>
-            Ubicación
+        <ion-item-divider class="centrado">
+          <ion-label class="centrado divider">
+            UBICACIÓN
           </ion-label>
         </ion-item-divider>
 
-        <ion-list>
+        <div >
           <ion-item>
-            <ion-label>Dirección</ion-label    >
-              <ion-button   type="button"   class="ion-margin-start ion-margin-end"      color="omipalidarkd"    expand="block"  (click)="openModal()"   >
-              <ion-icon color="omipali" name="map-outline" ></ion-icon>
+            <ion-label position="floating" class="direccion item-direcc">Dirección</ion-label>
+            <ion-button
+              type="button"
+              class="ion-map-button"
+              color="omipalidarkd"
+              expand="block"
+              (click)="openModal()"
+            >
+              <ion-icon color="omipali" name="map-outline"></ion-icon>
             </ion-button>
-            <ion-input class="input-from" type="text"></ion-input>
+            <ion-textarea
+              class="input-from"
+              autocapitalize
+              inputmode="text"
+              rows="1"
+            ></ion-textarea>
           </ion-item>
+        </div>
 
-
-
+        <div >
           <ion-item>
-            <ion-label position="floating">Description</ion-label>
-            <ion-textarea rows="1"></ion-textarea>
+            <ion-label position="floating" class="direccion item-direcc">Referencias</ion-label>
+           
+            <ion-textarea
+              class="input-from"
+              autocapitalize
+              inputmode="text"
+             
+            ></ion-textarea>
           </ion-item>
+        </div>
+      </ion-list>
+    </form>
 
-
-
-
-          <ion-item>
-            <ion-label>Referencia</ion-label>
-            <textarea class="input-from text-area">
-Entrando tres cuadras atras del Mall del Sur.
-            </textarea>
-          </ion-item>
-        </ion-list>
-
-        <ion-button
-          [disabled]="!registrationForm.valid"
-          class="ion-margin-start ion-margin-end ion-butt-save"
-          color="omipalidarkd"
-          type="submit"
-          expand="block"
-        >
-          Guardar Cambios
-        </ion-button>
-      </form>
-    </div>
+    <ion-button
+      [disabled]="!registrationForm.valid"
+      class="ion-margin-start ion-margin-end ion-butt-save"
+      color="omipalidarkd"
+      type="submit"
+      expand="block"
+    >
+      Guardar Cambios
+    </ion-button>
   </ion-content>
 </ion-content>

@@ -8,7 +8,7 @@ import {
 } from "@angular/core";
 import { ModalController } from "@ionic/angular";
 import { ToastController } from "@ionic/angular";
-import { MapaMapboxPage } from './../mapa-mapbox/mapa-mapbox.page';
+import { MapaMapboxPage } from "./../mapa-mapbox/mapa-mapbox.page";
 import {
   FormBuilder,
   FormGroup,
@@ -25,6 +25,8 @@ import {
   styleUrls: ["./editar-perfil.page.scss"],
 })
 export class EditarPerfilPage implements OnInit {
+  private phonepattern: any = /^(09){1}[0-9]{8}$/;
+
   constructor(
     private toastController: ToastController,
     private formBuilder: FormBuilder,
@@ -35,6 +37,7 @@ export class EditarPerfilPage implements OnInit {
 
   registrationForm = this.formBuilder.group({
     name: ["", [Validators.required, Validators.maxLength(100)]],
+    direccion: ["", [Validators.required]],
     email: [
       "",
       [
@@ -46,7 +49,9 @@ export class EditarPerfilPage implements OnInit {
       "",
       [
         Validators.required,
-        Validators.pattern("^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-s./0-9]*$"),
+        Validators.maxLength(10),
+        Validators.minLength(10),
+        Validators.pattern(this.phonepattern),
       ],
     ],
   });
@@ -63,19 +68,37 @@ export class EditarPerfilPage implements OnInit {
   get phone() {
     return this.registrationForm.get("phone");
   }
+  get direccion() {
+    return this.registrationForm.get("direccion");
+  }
 
   public errorMessages = {
     name: [
       { type: "required", message: "Usuario es requerido" },
-      { type: "maxlength", message: "El usuario no puede tener más de 100 caracteres" },
+      {
+        type: "maxlength",
+        message: "El usuario no puede tener más de 100 caracteres",
+      },
     ],
     email: [
       { type: "required", message: "Email es requerido" },
       { type: "pattern", message: "El email es inválido" },
     ],
+    direccion: [
+      { type: "required", message: "Dirección es requerida" },
+     
+    ],
     phone: [
       { type: "required", message: "Celular es requerido" },
       { type: "pattern", message: "El número es inválido" },
+      {
+        type: "maxlength",
+        message: "El número es inválido",
+      },
+      {
+        type: "minLength",
+        message: "El número es inválido",
+      },
     ],
   };
 
@@ -84,12 +107,9 @@ export class EditarPerfilPage implements OnInit {
   }
 
   async openModal() {
-
     const modal = await this.modalController.create({
       component: MapaMapboxPage,
     });
     return await modal.present();
-
   }
-
 }

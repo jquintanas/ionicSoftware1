@@ -9,7 +9,13 @@ div {
 }
 
 .edit-perfil {
-  top: 14.5rem;
+  margin-top: 3rem;
+  width: 100%;
+  margin-left: 0.1rem;
+  position: absolute;
+  //
+  //background-color: "omipalidarkd";
+  //color=""
 }
 
 .profile-photo {
@@ -23,21 +29,24 @@ div {
   width: 9.5rem;
   height: 9.5rem;
 
-  z-index: 3;
+  //z-index: 3;
   //width: 80%;
 }
+
+
+
 
 .bg-image {
   /* The image used */
   background-image: url("/assets/img/user.png");
 
   /* Add the blur effect */
-  filter: blur(8px);
-  -webkit-filter: blur(8px);
+  // filter: blur(2px);
+  //-webkit-filter: blur(2px);
   width: 100%;
   /* Full height */
-  height: 16rem;
-  z-index: 1;
+  height: 18rem;
+  //z-index: 1;
   /* Center and scale the image nicely */
   background-position: center;
   background-repeat: no-repeat;
@@ -47,17 +56,17 @@ div {
 /* Position text in the middle of the page/image */
 .bg-text {
   background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/opacity/see-through */
+  background-color: rgba(0, 0, 0, 0.6); /* Black w/opacity/see-through */
   //color: white;
   //font-weight: bold;
   // border: 3px solid #f1f1f1;
   position: absolute;
   top: 0rem;
-  height: 16rem;
+  height: 18rem;
   padding-top: 1.5rem;
   //left: 11.25rem;
   //transform: translate(-50%, -50%);
-  z-index: 3;
+  //z-index: 3;
 
   //position: absolute;
 }
@@ -75,7 +84,20 @@ div {
   align-content: center;
   //left: 11.25rem;
   //transform: translate(-50%, -50%);
-  z-index: 3;
+  // z-index: 3;
+}
+
+.favDiv {
+  margin-top: 2rem;
+  font-weight: 1rem;
+}
+
+.tool-header {
+  //top: 5rem;
+}
+
+.tool-cont {
+  // z-index: 1;
 }
 
 ion-fab {
@@ -92,9 +114,8 @@ ion-fab {
   //margin-top: 10px;
 }
 
-
 .option-menu {
-  margin-top: 2rem;
+  margin-top: 1rem;
   margin-left: auto;
   margin-right: auto;
 }
@@ -102,7 +123,7 @@ ion-fab {
 .menu-button {
   //color: black;
   // font-size: 2rem;
- // background: #55afc7;
+  // background: #55afc7;
   //background: linear-gradient(90deg, rgba(151,208,229,0.5820203081232493) 0%, rgba(85,175,199,0.6996673669467788) 50%, rgba(43,161,191,0.33272058823529416) 100%);
 
   border-radius: 100% !important;
@@ -129,4 +150,11 @@ ion-fab {
   background-color: transparent !important;
   color: black;
   font-weight: bold;
+  background-color: yellow;
+}
+
+.divider {
+  background-color: yellow;
+  margin-top: 1.5rem;
+  font-weight: 1rem;
 }

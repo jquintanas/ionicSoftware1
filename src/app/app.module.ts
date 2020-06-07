@@ -13,6 +13,7 @@ import { FavoritosService } from './services/cart/favoritos.service';
 import {HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
