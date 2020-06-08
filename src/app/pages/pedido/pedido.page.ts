@@ -12,6 +12,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./pedido.page.scss'],
 })
 export class PedidoPage implements OnInit {
+  imagen = false;
   domicilio = false;
   local =false;
   mapa = false;
@@ -24,7 +25,9 @@ export class PedidoPage implements OnInit {
   latlng :string;
   address :string = "";
   referencias = false;
-
+  img:string = "),pin-s-cafe+e00000(-79.5419038,-1.8017518)/";
+  img_markers = ",14,0/300x300@2x?access_token=pk.eyJ1IjoiZGFubnBhcjk2IiwiYSI6ImNrYWJiaW44MjFlc2kydG96YXVxc2JiMHYifQ.iWfA_z-InyvNliI_EysoBw&attribution=false&logo=false";
+  url_completa :string ;
 
   constructor(private htttp: HttpClient , public modalController: ModalController,public alertController:AlertController,public router:Router,public mapaService: MapaDatosService) { }
 
@@ -54,9 +57,11 @@ export class PedidoPage implements OnInit {
     if(value == 'Nueva'){   
       this.mapaService.NuevaUbicacion = true;
       this.mapa = true;
-    }else{
+    }else if (value == 'Registrada'){
       this.mapaService.NuevaUbicacion = false;
       this.mapa = false;
+      //this.imagen = false;
+      this.referencias = false;
     }
   }
 
@@ -76,10 +81,16 @@ export class PedidoPage implements OnInit {
       component: MapaMapboxPage,
     });
     modal.onDidDismiss().then((data) =>{
-      this.referencias = true;
-      this.posicionmarcador = data.data.split('|');
-      this.latlng= this.posicionmarcador[1]+','+ this.posicionmarcador[0];
+
       if( this.mapa == true){
+        this.referencias = true;
+        this.posicionmarcador = data.data.split('|');
+        this.latlng= this.posicionmarcador[1]+','+ this.posicionmarcador[0];
+        this.url_completa = this.latlng+this.img+this.latlng+this.img_markers;
+        //console.log(this.url_completa);
+        if(this.url_completa != ""){
+          this.imagen = true;
+        }
         var gps =  this.posicionmarcador[0]+','+this.posicionmarcador[1];
         var mode = "retrieveAddresses";
         var maxresults = 1;

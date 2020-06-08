@@ -95,18 +95,29 @@
       </ion-row>
       <ion-row *ngIf="referencias" class="mensajtiempo">
         <ion-col >
-          <ion-item class = "ion-no-padding tipoEntrega" lines="none">
-            <ion-label position="floating">Nueva Dirección</ion-label>
-            <ion-textarea rows="1" value={{address}}> </ion-textarea>
-          </ion-item>
+            <ion-label class="labeldir">Nueva Dirección</ion-label>
         </ion-col>
       </ion-row>
       <ion-row *ngIf="referencias" class="mensajtiempo">
         <ion-col >
-          <ion-item class = "ion-no-padding tipoEntrega" lines="none">
-            <ion-label position="floating">Referencias de la dirección</ion-label>
-            <ion-textarea autofocus = "true"></ion-textarea>
+            <ion-textarea rows="1" value={{address}} class="textareadir ion-no-padding"> </ion-textarea>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="referencias" class="mensajtiempo">
+        <ion-col >
+          <ion-item  color="none" lines="none" *ngIf="imagen" >
+            <img width="100%" src="https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/pin-s-marker+ffa500({{url_completa}}" alt="UBICACION" class="imagen mapaimagen">
           </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="referencias" class="mensajtiempo filareferenia" >
+        <ion-col >
+            <ion-label class="labeldir">Referencia de la dirección añadida</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="referencias" class="mensajtiempo">
+        <ion-col >
+            <ion-textarea rows="2" class="textareadir ion-no-padding"> </ion-textarea>
         </ion-col>
       </ion-row>
       <ion-row *ngIf="domicilio" class="mensajtiempo">     
