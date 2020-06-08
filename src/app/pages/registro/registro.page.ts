@@ -1,5 +1,5 @@
 import { MapaDatosService } from "./../../services/mapa-datos/mapa-datos.service";
-import { ModalController } from "@ionic/angular";
+import { ModalController, Platform } from "@ionic/angular";
 import {
   Component,
   OnInit,
@@ -20,6 +20,7 @@ import {
 import { MapaMapboxPage } from "./../mapa-mapbox/mapa-mapbox.page";
 import { AlertsService } from "src/app/services/alerts/alerts.service";
 import { HttpClient } from '@angular/common/http';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 @Component({
   selector: "app-registro",
   templateUrl: "./registro.page.html",
@@ -48,12 +49,21 @@ export class RegistroPage implements OnInit, AfterViewInit {
     public mapaDatosService: MapaDatosService,
     public renderer: Renderer2,
     public el: ElementRef,
-    private htttp: HttpClient
+    private htttp: HttpClient,
+    private platform: Platform
   ) {
     this.buildForm();
     this.buildForm2();
     this.paso_formulario = 1;
     this.mapaDatosService.NuevaUbicacion = true;
+    this.platform.backButton.subscribeWithPriority(5, () => {
+      console.log('Another handler was called!');
+    });
+    this.platform.backButton.subscribeWithPriority(10, (processNextHandler) => {
+      console.log('Handler was called!');
+  
+      processNextHandler();
+    });
   }
 
   ngOnInit() {}
