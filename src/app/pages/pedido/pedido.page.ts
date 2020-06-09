@@ -1,13 +1,18 @@
+import { environment } from 'src/environments/environment.prod';
+import { MapaDatosService } from './../../services/mapa-datos/mapa-datos.service';
 import { Router } from '@angular/router';
 import { ModalController, AlertController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { MapaMapboxPage} from './../mapa-mapbox/mapa-mapbox.page';
+import { HttpClient } from '@angular/common/http';
+
 @Component({
   selector: 'app-pedido',
   templateUrl: './pedido.page.html',
   styleUrls: ['./pedido.page.scss'],
 })
 export class PedidoPage implements OnInit {
+  imagen = false;
   domicilio = false;
   local =false;
   mapa = false;
@@ -15,7 +20,16 @@ export class PedidoPage implements OnInit {
   horapedido = false;
   efectivo = false;
   depotran = false;
-  constructor(public modalController: ModalController,public alertController:AlertController,public router:Router) { }
+  envio = false;
+  posicionmarcador:String[] = [];
+  latlng :string;
+  address :string = "";
+  referencias = false;
+  img:string = "),pin-s-cafe+e00000(-79.5419038,-1.8017518)/";
+  img_markers = ",14,0/300x300@2x?access_token=pk.eyJ1IjoiZGFubnBhcjk2IiwiYSI6ImNrYWJiaW44MjFlc2kydG96YXVxc2JiMHYifQ.iWfA_z-InyvNliI_EysoBw&attribution=false&logo=false";
+  url_completa :string ;
+
+  constructor(private htttp: HttpClient , public modalController: ModalController,public alertController:AlertController,public router:Router,public mapaService: MapaDatosService) { }
 
   ngOnInit() {
   }
@@ -26,16 +40,28 @@ export class PedidoPage implements OnInit {
     if(value == 'Domicilio'){
       this.domicilio = true;
       this.local = false;
+      this.horapedido = false;
+      this.envio = true;
     }else if (value == 'Local'){
       this.local = true;
       this.domicilio = false;
       this.horapedido = true;
+      this.envio = false;
+      this.mapa = false;
+      this.referencias = false;
+      this.mapaService.NuevaUbicacion = false;
     }
  }
   public onOptionsSelected2(value:string) {
     //console.log("the selected value is " + value);
-    if(value == 'Nueva'){
-      console.log("nueva");
+    if(value == 'Nueva'){   
+      this.mapaService.NuevaUbicacion = true;
+      this.mapa = true;
+    }else if (value == 'Registrada'){
+      this.mapaService.NuevaUbicacion = false;
+      this.mapa = false;
+      //this.imagen = false;
+      this.referencias = false;
     }
   }
 
@@ -49,13 +75,44 @@ export class PedidoPage implements OnInit {
     }
   }
 
-  /*async verMapa() {
+  async openModal() {
+    this.referencias = false;
     const modal = await this.modalController.create({
       component: MapaMapboxPage,
-    });    
-    return await modal.present();
+    });
+    modal.onDidDismiss().then((data) =>{
 
-  }*/
+      if( this.mapa == true){
+        this.referencias = true;
+        this.posicionmarcador = data.data.split('|');
+        this.latlng= this.posicionmarcador[1]+','+ this.posicionmarcador[0];
+        this.url_completa = this.latlng+this.img+this.latlng+this.img_markers;
+        //console.log(this.url_completa);
+        if(this.url_completa != ""){
+          this.imagen = true;
+        }
+        var gps =  this.posicionmarcador[0]+','+this.posicionmarcador[1];
+        var mode = "retrieveAddresses";
+        var maxresults = 1;
+        var apikey ='br0SMC9w-btXVeA6WT-wYrBTIfogArUcMII7vwnj3CQ';
+        console.log(gps);
+        var url = "https://reverse.geocoder.ls.hereapi.com/6.2/reversegeocode.json?prox="+gps+"&mode="+mode+"&maxresults="+maxresults+"&apikey="+apikey;
+        console.log(url);
+        this.htttp.get(url).subscribe((results:any)=>{
+          this.address = results.Response.View[0].Result[0].Location.Address.Label;
+          console.log(results.Response.View[0].Result[0].Location.Address.Label);
+        });
+        console.log(this.address);
+      }     
+    });
+
+    
+
+    return await modal.present();
+    
+  }
+
+  
 
   async comprar(){
     if(this.depotran){
@@ -65,11 +122,11 @@ export class PedidoPage implements OnInit {
                   '<p class="p">Cuenta de Ahorros #45789657479  FARID ALVARADO CI:1207684521 Omiypali@gmail.com <br></p>'+
                   '<p class="title"><strong>Banco Guayaquil</strong></p>'+
                   '<p class="p">Cuenta de Ahorros #45789657479  FARID ALVARADO CI:1207684521 Omiypali@gmail.com <br></p>'+
-                  '<p class="comentario">Envíanos una foto del comprobante del depósito/transferencia para confirmar tu pedido <br> </p>',
+                  '<p class="comentario">Envíanos una foto del comprobante del depósito/transferencia para confirmar tu pedido al 0955744347<br> </p>',
         buttons: [{
             text:'Aceptar',
             handler: ()=>{
-              this.router.navigateByUrl("/login");
+              this.router.navigateByUrl("/historial");
             }
         }]
       });
@@ -81,7 +138,7 @@ export class PedidoPage implements OnInit {
         buttons: [{
           text:'Aceptar',
           handler: ()=>{
-            this.router.navigateByUrl("/home/bebidas");
+            this.router.navigateByUrl("/historial");
           }
         }]
       });

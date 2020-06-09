@@ -31,6 +31,7 @@ export class FavoritosService {
       tmp.set(favorito.idProducto, favorito);
       favoritos.set(categoria, tmp);
       this.storage.set(environment.codigoFavoritos, favoritos);
+
       return true;
     }
     let tmp = this.convertirMapaALista(mapaFavoritos);

@@ -1,26 +1,14 @@
-<!--<ion-header   >
+
+<ion-header class="ion-no-border">
   <ion-toolbar  class="toolbar" >
     <ion-buttons slot="start">
-      <ion-button (click)="regresar()" >
-        <ion-icon slot="start" name="chevron-back-outline" color="omipali"></ion-icon>
-      </ion-button>
+      <ion-back-button defaultHref="/" color="light"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
-</ion-header>-->
+</ion-header>
 
 
 <ion-content class="contenedor" fullscreen>
-  <ion-toolbar  class="toolbar" >
-    <ion-buttons slot="start">
-      <!--<ion-back-button></ion-back-button>-->
-      <ion-back-button defaultHref="/" color="light"></ion-back-button>
-    </ion-buttons>
-    <!--<ion-buttons slot="start">
-      <ion-button (click)="regresar()" >
-        <ion-icon slot="start" name="chevron-back-outline" color="light"></ion-icon>
-      </ion-button>
-    </ion-buttons>-->
-  </ion-toolbar>
   <div class="ion-margin contendorf">
     <div class="contenedorlogo">
       <img src="assets/logos/logo.png" class="imagenlogo">
@@ -32,23 +20,33 @@
           </ion-item>
         </div>  
         <ion-item color="none" lines="none" class="texto">
-          <p class="p">Ingresa tu número de telefono para recibir mas iformación de como recuperar tu contraseña</p>  
+          <p class="p">Ingresa tu correo electrónico para recibir mas información de como recuperar tu contraseña</p>  
         </ion-item>
         
         <ion-item  lines="none" class="correo " color="none" >
-          <ion-icon slot="start" name="call-sharp" ></ion-icon>
-          <ion-input type="text" placeholder="Ingrese su teléfono" class="inputel" formControlName="telefono"  autofocus="true"></ion-input>
+          <ion-icon slot="start" name="mail" ></ion-icon>
+          <ion-input type="text" placeholder="Ingrese su correo electrónico" class="inputel" formControlName="correo"  autofocus="true"></ion-input>
         </ion-item>
-        <div class="alert-danger" *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)">          
-          <div class="container-error-message " *ngIf="telefono.errors.required &&  telefono.touched">
-            <ion-icon slot="start" name="information-circle-sharp" color="danger" ></ion-icon>
-            Debe ingresar su número de teléfono
-          </div>
-          <div class="container-error-message " *ngIf="telefono.errors.pattern">
-            <ion-icon slot="start" name="information-circle-sharp" color="danger" ></ion-icon>
-            El número debe ser válido
-          </div>
-        </div>    
+        <div
+        class="alert-danger"
+        *ngIf="correo.invalid && (correo.dirty || correo.touched)">
+        <div class="container-error-message" *ngIf="correo.errors.required">
+          <ion-icon
+            slot="start"
+            name="information-circle-sharp"
+            color="danger"
+          ></ion-icon>
+          Debe ingresar un correo electrónico
+        </div>
+        <div class="container-error-message" *ngIf="correo.errors.pattern">
+          <ion-icon
+            slot="start"
+            name="information-circle-sharp"
+            color="danger"
+          ></ion-icon>
+          El correo debe ser válido
+        </div>
+      </div>
         <div class="contenedorboton">
           <ion-button  type="submit" expand="block" fill="clear"  class="enviarc" [disabled]="!formulario_r.valid" >
             Enviar 

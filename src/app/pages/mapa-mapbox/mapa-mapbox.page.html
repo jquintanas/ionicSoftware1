@@ -1,27 +1,19 @@
 <ion-header >
-  <ion-toolbar color="dark" >
+  <ion-toolbar color="dark" >   
     <ion-buttons slot="start">     
-     <ion-back-button defaultHref="/registro" (click)="closeModal()"></ion-back-button>
+      <ion-button (click)="closeModal()"> 
+        <ion-icon slot="start" name="arrow-back-outline"></ion-icon>
+      </ion-button>
     </ion-buttons>
-    <ion-buttons slot="end">
+    <ion-buttons slot="end" *ngIf="botonGuardarnuevo">
       <ion-button (click)="guardar_marcador()"> 
         <ion-icon slot="start" name="save"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>Domicilio</ion-title>
+    <ion-title *ngIf="omipaliubi">OmiPali</ion-title>
+    <ion-title *ngIf="direccionDom">Domicilio</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content scroll-y="false">
   <div id="mapa"></div>
-  <!--<div id="geocoder" class="geocoder"></div>-->
 </ion-content>
-<!--
-<ion-footer>
-  <ion-toolbar class="toolbarFooter" color="dark">     
-    <ion-buttons  *ngIf="guardar">
-      <ion-button (click)="guardar_marcador()" class="guardar" id="guardar">
-        Guardar marcador
-      </ion-button>
-    </ion-buttons>       
-  </ion-toolbar>
-</ion-footer>-->

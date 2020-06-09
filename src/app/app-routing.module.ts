@@ -5,7 +5,7 @@ import { LoginPage } from './../app/pages/login/login.page';
 const routes: Routes = [
   {
     path: "",
-    redirectTo: "login",
+    redirectTo: "pedido",
     pathMatch: "full",
   },
   {
@@ -59,11 +59,6 @@ const routes: Routes = [
       import("./pages/historial/historial.module").then(
         (m) => m.HistorialPageModule
       ),
-  },
-  {
-    path: "rastreo",
-    loadChildren: () =>
-      import("./pages/rastreo/rastreo.module").then((m) => m.RastreoPageModule),
   },
   {
     path: "perfil-usuario",

@@ -23,92 +23,106 @@ export class MapaMapboxPage implements OnInit {
   nuevoMarcador: Mapboxgl.Marker;
   guardar = true;
   posicion: string = "";
+  reverseGeocode: MapboxGeocoder;
+  omipaliubi= false;
+  botonGuardarnuevo = true;
+  direccionDom = true;
   constructor(private modalController: ModalController, public alertController: AlertController, private mapaDatosService: MapaDatosService,public geolocation: Geolocation, public alertsService: AlertsService, public navCtrl: NavController) {
-    
+    //console.log("constructor: ",this.mapaDatosService.NuevaUbicacion );
+    if(this.mapaDatosService.NuevaUbicacion == false){
+      this.omipaliubi = true;
+      this.botonGuardarnuevo = false;
+      this.direccionDom = false
+    }
    }
 
   ionViewWillEnter(){
   }
 
   ngOnInit() {
-    this.geolocation.getCurrentPosition().then((resp) => {
-      this.latitudCentro = resp.coords.latitude;
-      this.longitudCentro = resp.coords.longitude;
-      //console.log(resp.coords.longitude,resp.coords.latitude);
-      (Mapboxgl as any).accessToken = environment.mapboxkey;
-      this.mapa = new Mapboxgl.Map({
-        container: 'mapa', // container id
-        style: 'mapbox://styles/mapbox/streets-v11',
-        //center:[-79.5419038,-1.8017518],
-        center: [ resp.coords.longitude,resp.coords.latitude], // coordenadas del usuario
-        zoom: 13 // starting zoom
-      });
-
-      this.mapa.on('load', ()=> {
-        this.mapa.resize();        
+    this.geolocation.getCurrentPosition().then((resp) => {       
+        if(this.mapaDatosService.NuevaUbicacion == false){
+          this.latitudCentro = -1.8025916;
+          this.longitudCentro = -79.539615;
+        }else{
+          this.latitudCentro = resp.coords.latitude;
+          this.longitudCentro = resp.coords.longitude;
+        }
+        (Mapboxgl as any).accessToken = environment.mapboxkey;
+        this.mapa = new Mapboxgl.Map({
+          container: 'mapa', // container id
+          style: 'mapbox://styles/mapbox/streets-v11',
+          //center:[-79.5419038,-1.8017518],
+          center: [ this.longitudCentro,this.latitudCentro], // coordenadas del usuario
+          zoom: 13 // starting zoom
         });
-      /*
-        Posicion del local OmiPali
-      */
-      const marker_omipali = new Mapboxgl.Marker({draggable: false,color: 'red'})     
-        .setLngLat([-79.5419038,-1.8017518])
+  
+        this.mapa.on('load', ()=> {
+          this.mapa.resize();        
+          });
+        /*
+          Posicion del local OmiPali
+        */
+        const marker_omipali = new Mapboxgl.Marker({draggable: false,color: 'red'})     
+          .setLngLat([-79.5419038,-1.8017518])
+          .setPopup(
+            new Mapboxgl.Popup({ offset: 30 }) // add popups
+              .setHTML('<h1> <STRONG>Omi&Pali</STRONG> </h1>'+
+                        '<hr color="black">'+
+                        '<p>'+'<STRONG>Pastelería </STRONG>'+'<style> h1 { color: #FF0000; font-size: 1rem}</style>')              
+          )
+          .addTo(this.mapa);
+  
+        //marcador en ubicacion de usuario
+        const marker_user= new Mapboxgl.Marker({draggable: true,color: 'orange'})     
+        .setLngLat([resp.coords.longitude,resp.coords.latitude])
         .setPopup(
           new Mapboxgl.Popup({ offset: 30 }) // add popups
-            .setHTML('<h1> <STRONG>Omi&Pali</STRONG> </h1>'+
-                      '<hr color="black">'+
-                      '<p>'+'<STRONG>Pastelería </STRONG>'+'<style> h1 { color: #FF0000; font-size: 1rem}</style>')              
-        )
+            .setHTML('<body>'+ 
+                        '<div class="title">'+
+                          '<h3> Información </h3>'+
+                          '<hr color="black">'+
+                          '<p> Este marcador indica su ubicación </p>'+
+                        '</div>'+
+                      '</body>'+
+                      '<style> h3 { color: orange; font-size: 1rem}</style>'                
+                    ))
         .addTo(this.mapa);
-
-      //marcador en ubicacion de usuario
-      const marker_user= new Mapboxgl.Marker({draggable: true,color: 'orange'})     
-      .setLngLat([resp.coords.longitude,resp.coords.latitude])
-      .setPopup(
-        new Mapboxgl.Popup({ offset: 30 }) // add popups
-          .setHTML('<body>'+ 
-                      '<div class="title">'+
-                        '<h3> Información </h3>'+
-                        '<hr color="black">'+
-                        '<p> Este marcador indica su ubicación </p>'+
-                      '</div>'+
-                    '</body>'+
-                    '<style> h3 { color: orange; font-size: 1rem}</style>'                
-                  ))
-      .addTo(this.mapa);
-      marker_user.on('dragend',()=>{
-        var lngLat = marker_user.getLngLat();
-        this.latitud = lngLat.lat;
-        this.longitud = lngLat.lng;
-
-      })
-      this.latitud = marker_user.getLngLat().lat;
-      this.longitud = marker_user.getLngLat().lng;
-      //console.log(marker_user.getLngLat().lat);
-
-      
-   
+        marker_user.on('dragend',()=>{
+          var lngLat = marker_user.getLngLat();
+          this.latitud = lngLat.lat;
+          this.longitud = lngLat.lng;
   
-      const geocoder = new MapboxGeocoder({
-        accessToken: Mapboxgl.accessToken,
-        countries: 'ec',
-        mapboxgl: Mapboxgl,
-        zoom: 15,
-        marker: {color:'blue'},
-        placeholder: "Buscar",
-        language: 'es-EC',
+        })
+        this.latitud = marker_user.getLngLat().lat;
+        this.longitud = marker_user.getLngLat().lng;
+        //console.log(marker_user.getLngLat().lat);
+  
         
-      });    
-      this.mapa.addControl(geocoder);
-     // document.getElementById('geocoder').appendChild(geocoder.onAdd(this.mapa));   
+     
+    
+        const geocoder = new MapboxGeocoder({
+          accessToken: Mapboxgl.accessToken,
+          countries: 'ec',
+          mapboxgl: Mapboxgl,
+          zoom: 15,
+          marker: {color:'blue'},
+          placeholder: "Buscar",
+          language: 'es-EC',
+          
+        });    
+        this.mapa.addControl(geocoder);
+       const geolocalizacion = new Mapboxgl.GeolocateControl({
+          positionOptions: {enableHighAccuracy: true},
+          trackUserLocation: true,      
+        });
+        this.mapa.addControl(geolocalizacion);
+      
 
-     const geolocalizacion = new Mapboxgl.GeolocateControl({
-        positionOptions: {enableHighAccuracy: true},
-        trackUserLocation: true,      
-      });
-      this.mapa.addControl(geolocalizacion);
      }).catch((error) => {
        console.log('Error al capturar su ubicación', error);
     });
+    
     
   }
 

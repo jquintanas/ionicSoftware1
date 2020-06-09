@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MapaMapboxPage } from './../mapa-mapbox/mapa-mapbox.page';
 import { IonicModule } from '@ionic/angular';
-
+import { HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { PedidoPageRoutingModule } from './pedido-routing.module';
-
+import { MapaMapboxPageModule } from "src/app/pages/mapa-mapbox/mapa-mapbox.module";
 import { PedidoPage } from './pedido.page';
 
 @NgModule({
@@ -13,7 +13,9 @@ import { PedidoPage } from './pedido.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    PedidoPageRoutingModule
+    PedidoPageRoutingModule,
+    MapaMapboxPageModule,
+    HttpClientModule
   ],
   declarations: [PedidoPage]
 })

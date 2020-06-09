@@ -10,5 +10,6 @@ export class MapaDatosService {
   marcador_guardado : boolean = false;
   nombre : string = "sin nombre";
   cerrarmodal: number = 0;
+  NuevaUbicacion: boolean = false;
   constructor() { }
 }

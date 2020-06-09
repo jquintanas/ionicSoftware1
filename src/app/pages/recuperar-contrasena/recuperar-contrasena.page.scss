@@ -32,9 +32,13 @@ ion-toolbar {
     padding-left: 10px;
 }
 .contendorf{
-    background: rgba(0, 0, 0, 0.527);
+    background: rgba(0, 0, 0, 0.664);
     border-radius: 5px;
     //height: 300px;
+}
+ion-toolbar {
+    --background: transparent;
+    --ion-color-base: transparent !important;
 }
 img.imagenlogo{
     
