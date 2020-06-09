@@ -30,6 +30,10 @@ export class PerfilUsuarioPage implements OnInit {
 
   }
 
+  abrirHistorial(){
+    this.router.navigateByUrl("historial");
+  }
+
   async ngOnInit() {
     await this.cargarDatos();
   }

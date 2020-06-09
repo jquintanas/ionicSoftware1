@@ -61,11 +61,6 @@ const routes: Routes = [
       ),
   },
   {
-    path: "rastreo",
-    loadChildren: () =>
-      import("./pages/rastreo/rastreo.module").then((m) => m.RastreoPageModule),
-  },
-  {
     path: "perfil-usuario",
     loadChildren: () =>
       import("./pages/perfil-usuario/perfil-usuario.module").then(

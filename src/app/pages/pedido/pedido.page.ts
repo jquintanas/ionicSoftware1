@@ -126,7 +126,7 @@ export class PedidoPage implements OnInit {
         buttons: [{
             text:'Aceptar',
             handler: ()=>{
-              this.router.navigateByUrl("/home");
+              this.router.navigateByUrl("/historial");
             }
         }]
       });
@@ -138,7 +138,7 @@ export class PedidoPage implements OnInit {
         buttons: [{
           text:'Aceptar',
           handler: ()=>{
-            this.router.navigateByUrl("/home");
+            this.router.navigateByUrl("/historial");
           }
         }]
       });

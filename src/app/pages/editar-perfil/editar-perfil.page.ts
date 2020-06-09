@@ -110,6 +110,8 @@ export class EditarPerfilPage implements OnInit {
     const modal = await this.modalController.create({
       component: MapaMapboxPage,
     });
+
+    
     return await modal.present();
   }
 }
