@@ -8,6 +8,8 @@ import { CardCarritoComponent } from "./card-carrito/card-carrito.component";
 import { FavoriteProductoComponent } from "./favorite-producto/favorite-producto.component"
 //import { FavoriteTabComponent } from './favorite-tab/favorite-tab.component';
 import { SliderRecomendadosComponent } from "./slider-recomendados/slider-recomendados.component";
+import { AccordionComponent } from './accordion/accordion.component';
+
 
 
 
@@ -18,7 +20,8 @@ import { SliderRecomendadosComponent } from "./slider-recomendados/slider-recome
     PopinfoComponent,
     CardCarritoComponent,
     FavoriteProductoComponent,
-    SliderRecomendadosComponent
+    SliderRecomendadosComponent,
+    AccordionComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +32,8 @@ import { SliderRecomendadosComponent } from "./slider-recomendados/slider-recome
     PopinfoComponent,
     CardCarritoComponent,
     FavoriteProductoComponent,
-    SliderRecomendadosComponent
+    SliderRecomendadosComponent,
+    AccordionComponent
   ],
   entryComponents: [
     DetallesProductosPage

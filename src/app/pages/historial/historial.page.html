@@ -1,12 +1,12 @@
 <ion-header translucent>
     <ion-toolbar color="omipalidarkd">
         <ion-buttons slot="start">
-            <ion-back-button defaultHref="home"></ion-back-button>
+            <ion-back-button></ion-back-button>
           </ion-buttons>
       <ion-title>Historial de Pedidos</ion-title>
     </ion-toolbar>
     <ion-toolbar color="omipalidarkd">
-      <ion-segment [(ngModel)]="opcionTab">
+      <ion-segment [(ngModel)]="segment" >
           <ion-segment-button value="active">
             <ion-label>ACTIVO</ion-label>
           </ion-segment-button>
@@ -17,15 +17,16 @@
     </ion-toolbar>
   </ion-header>
 
-
+ 
   <ion-content>
-    <div *ngIf="opcionTab == 'active'">
+    <div *ngIf="segment == 'active'">
         <section>
             <br><br>
 
             <section>
             <div class="centrado">
-            <ion-label>TIEMPO RESTANTE: 16 MINUTOS</ion-label>
+            <ion-label>TIEMPO RESTANTE: {{time | async}}</ion-label> <BR>
+            <ion-button color="primary" (click)="startTimer(20)">START</ion-button>
             </div>
           
             <div class="container">
@@ -106,17 +107,17 @@
     
           </section>
     </div>
-    <div *ngIf="opcionTab == 'past'">
+    <div *ngIf="segment == 'past'">
 
-        <section>
+        <section >
           <ion-card>
 
               <ion-item>
                   <ion-avatar item-start>
                     <img src="assets/icon/check.png">
                   </ion-avatar>
-                  <ion-card-header>PEDIDO #1234</ion-card-header>
-                  <ion-card-subtitle>Mayo 5, 2020</ion-card-subtitle>
+                  <ion-card-header >PEDIDO</ion-card-header>
+                  <ion-card-subtitle>Mes 5, 2020</ion-card-subtitle>
                 </ion-item>
 
       
@@ -133,58 +134,6 @@
                     </ion-row>
                 </ion-card-content>
             </ion-card>
-
-
-            <ion-card>
-
-                <ion-item>
-                    <ion-avatar item-start>
-                      <img src="assets/icon/check.png">
-                    </ion-avatar>
-                    <ion-card-header>PEDIDO #1234</ion-card-header>
-                    <ion-card-subtitle>Mayo 5, 2020</ion-card-subtitle>
-                  </ion-item>
-  
-        
-                <ion-card-content>
-                    <ion-row>
-                        <ion-col>
-                          <ion-label>ENVIO A DOMICILIO</ion-label><br>
-                        </ion-col>
-                        <ion-col>
-                          <button class="boton" ion-button icon-start clear small (click)="goCarrito()">
-                            <ion-label>REPETIR</ion-label>
-                          </button>
-                        </ion-col>
-                      </ion-row>
-                  </ion-card-content>
-              </ion-card>
-
-
-              <ion-card>
-
-                  <ion-item>
-                      <ion-avatar item-start>
-                        <img src="assets/icon/check.png">
-                      </ion-avatar>
-                      <ion-card-header>PEDIDO #1234</ion-card-header>
-                      <ion-card-subtitle>Mayo 5, 2020</ion-card-subtitle>
-                    </ion-item>
-    
-          
-                  <ion-card-content>
-                      <ion-row>
-                          <ion-col>
-                            <ion-label>ENVIO A DOMICILIO</ion-label><br>
-                          </ion-col>
-                          <ion-col>
-                            <button class="boton" ion-button icon-start clear small (click)="goCarrito()">
-                              <ion-label>REPETIR</ion-label>
-                            </button>
-                          </ion-col>
-                        </ion-row>
-                    </ion-card-content>
-                </ion-card>
 
           </section>
 

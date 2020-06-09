@@ -6,6 +6,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { RastreoPageRoutingModule } from './rastreo-routing.module';
 
+import { CommonsComponentsModule } from "src/app/components/commons-components.module";
 import { RastreoPage } from './rastreo.page';
 
 @NgModule({
@@ -13,7 +14,8 @@ import { RastreoPage } from './rastreo.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    RastreoPageRoutingModule
+    RastreoPageRoutingModule,
+    CommonsComponentsModule 
   ],
   declarations: [RastreoPage]
 })
