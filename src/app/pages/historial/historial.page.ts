@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {AlertController, IonSegment} from '@ionic/angular';
 import { detalleHistorial} from "src/app/interface/historial-pedido";
 import { Router } from '@angular/router';
@@ -11,9 +11,9 @@ import {BehaviorSubject} from 'rxjs';
 })
 export class HistorialPage implements OnInit {
 
+//TEMPORIZADOR
 time: BehaviorSubject<string> = new BehaviorSubject ('00');
-
-timer: number; //en segundos
+timer: number;
 
 dataHistorial: detalleHistorial[]=[
     {
@@ -45,17 +45,14 @@ dataHistorial: detalleHistorial[]=[
   
 dataMostrar: any[];
 
-  segment: string = "active";
- 
-  //@ViewChild(IonSegment, {static: true}) segment: IonSegment;
+//INICIAR SEGMENTO EN 'ACTIVE'
+segment: string = "active";
 
   constructor(private alertController: AlertController, private router: Router) { 
     this.dataMostrar = this.dataHistorial;
   }
 
-  ngOnInit() {
-   // this.segment.value= 'active';
-  }
+  ngOnInit() {}
 
     async cancelarAlert(){
       const alert = await this.alertController.create({
@@ -76,16 +73,39 @@ dataMostrar: any[];
           ],
         buttons: [
           {
-            text: 'Regresar',
+            text: 'Volver',
             role: 'regresar',
             handler: (blah) => {
               console.log('Regresar, no cancelar');
             }
           }, {
-            text: 'Cancelar',
+            text: 'Enviar',
             role: 'cancelar',
             handler: () => {
-              console.log('Cancelar Pedido');
+              this.motivoAlert();
+            }
+          }
+        ]
+      });
+      await alert.present();
+    }
+  
+    async motivoAlert(){
+      const alert = await this.alertController.create({
+        header: 'Motivo',
+        inputs : [
+          {
+            name: 'name1',
+            type: 'text',
+            placeholder: 'Cuentanos que paso con tu pedido'
+          }
+          ],
+        buttons: [
+          {
+            text: 'Enviar',
+            role: 'cancelar',
+            handler: () => {
+              console.log('Motivo ingresado');
             }
           }
         ]

@@ -1,6 +1,6 @@
 <ion-header translucent>
     <ion-toolbar color="omipalidarkd">
-        <ion-buttons slot="start">
+        <ion-buttons slot="start" c>
             <ion-back-button></ion-back-button>
           </ion-buttons>
       <ion-title>Historial de Pedidos</ion-title>
@@ -90,7 +90,7 @@
                             <ion-label>ENVIO A DOMICILIO</ion-label><br>
                     </ion-col>
                     <ion-col>
-                      <button (click)=cancelarAlert() class="boton" ion-button icon-start clear small>
+                      <button class="boton" (click)="cancelarAlert()" ion-button icon-start clear small>
                         <ion-label>CANCELAR</ion-label>
                       </button>
                     </ion-col>
