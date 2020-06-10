@@ -79,6 +79,11 @@ ion-progress-bar{
     width:95%;
 }
 
+
 .alertCancel{
-    text-align: justify;
+    background-color: white;
+    color: red;
+    button{
+        color: red;
+    }
 }

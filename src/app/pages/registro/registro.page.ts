@@ -1,5 +1,5 @@
 import { MapaDatosService } from "./../../services/mapa-datos/mapa-datos.service";
-import { ModalController } from "@ionic/angular";
+import { ModalController, Platform } from "@ionic/angular";
 import {
   Component,
   OnInit,
@@ -19,6 +19,8 @@ import {
 } from "@angular/forms";
 import { MapaMapboxPage } from "./../mapa-mapbox/mapa-mapbox.page";
 import { AlertsService } from "src/app/services/alerts/alerts.service";
+import { HttpClient } from '@angular/common/http';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 @Component({
   selector: "app-registro",
   templateUrl: "./registro.page.html",
@@ -37,7 +39,7 @@ export class RegistroPage implements OnInit, AfterViewInit {
   url_completa :string ;
   latlng :string;
   posicionmarcador:String[] = [];
-
+  address:string = "";
 
   constructor(
     public alertsService: AlertsService,
@@ -46,11 +48,22 @@ export class RegistroPage implements OnInit, AfterViewInit {
     public modalController: ModalController,
     public mapaDatosService: MapaDatosService,
     public renderer: Renderer2,
-    public el: ElementRef
+    public el: ElementRef,
+    private htttp: HttpClient,
+    private platform: Platform
   ) {
     this.buildForm();
     this.buildForm2();
     this.paso_formulario = 1;
+    this.mapaDatosService.NuevaUbicacion = true;
+    this.platform.backButton.subscribeWithPriority(5, () => {
+      console.log('Another handler was called!');
+    });
+    this.platform.backButton.subscribeWithPriority(10, (processNextHandler) => {
+      console.log('Handler was called!');
+  
+      processNextHandler();
+    });
   }
 
   ngOnInit() {}
@@ -123,6 +136,7 @@ export class RegistroPage implements OnInit, AfterViewInit {
   }
 
   save2() {
+    
     if (this.form.valid && this.form2.valid) {
       this.alertsService.presentLoading("Registrando Usuario");
       this.router.navigateByUrl("login");
@@ -166,16 +180,29 @@ export class RegistroPage implements OnInit, AfterViewInit {
     });
     
     modal.onDidDismiss().then((data) =>{
-      console.log(data);
+      //console.log(data);
       this.posicionmarcador = data.data.split('|');
-      console.log(this.posicionmarcador);
+      //console.log(this.posicionmarcador);
       this.latlng= this.posicionmarcador[1]+','+ this.posicionmarcador[0];
-      console.log(this.latlng);
+      //console.log(this.latlng);
       this.url_completa = this.latlng+this.img+this.latlng+this.img_markers;
-      console.log(this.url_completa);
+      //console.log(this.url_completa);
       if(this.url_completa != ""){
         this.imagen = true;
       }
+      var gps =  this.posicionmarcador[0]+','+this.posicionmarcador[1];
+      var mode = "retrieveAddresses";
+      var maxresults = 1;
+      var apikey ='br0SMC9w-btXVeA6WT-wYrBTIfogArUcMII7vwnj3CQ';
+      //console.log(gps);
+      var url = "https://reverse.geocoder.ls.hereapi.com/6.2/reversegeocode.json?prox="+gps+"&mode="+mode+"&maxresults="+maxresults+"&apikey="+apikey;
+      //console.log(url);
+      this.htttp.get(url).subscribe((results:any)=>{
+        this.address = results.Response.View[0].Result[0].Location.Address.Label;
+        //console.log(results.Response.View[0].Result[0].Location.Address.Label);
+      });
+      console.log(this.address);
+          
     });
 
     
@@ -183,12 +210,5 @@ export class RegistroPage implements OnInit, AfterViewInit {
 
   }
 
- /* mostrarimagen() {
-    this.latlng =this.mapaDatosService.longitud.toString() +"," + this.mapaDatosService.latitud.toString();
-    this.url_completa = this.latlng + this.img + this.latlng + this.img_markers;
-    console.log(this.url_completa);
-    if (this.url_completa != "") {
-      this.imagen = true;
-    }
-  }*/
+
 }

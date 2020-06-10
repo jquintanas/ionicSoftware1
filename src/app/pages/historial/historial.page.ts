@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {AlertController, IonSegment} from '@ionic/angular';
 import { detalleHistorial} from "src/app/interface/historial-pedido";
 import { Router } from '@angular/router';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'app-historial',
@@ -10,46 +11,101 @@ import { Router } from '@angular/router';
 })
 export class HistorialPage implements OnInit {
 
+//TEMPORIZADOR
+time: BehaviorSubject<string> = new BehaviorSubject ('00');
+timer: number;
 
 dataHistorial: detalleHistorial[]=[
-  
+    {
+      idpedido: "1406",
+      producto: "Mojada de chocolate",
+      cantidad: 2,
+      valor: 2,
+      metodoEnvio: true,
+      fecha: "2019-05-12"
+    },
+    {
+      idpedido: "1230",
+      producto: "Mojada de chocolate",
+      cantidad: 3,
+      valor: 2,
+      metodoEnvio: true,
+      fecha: "2019-05-10"
+    },
+    {
+      idpedido: "1500",
+      producto: "Mojada de chocolate",
+      cantidad: 2,
+      valor: 2,
+      metodoEnvio: true,
+      fecha: "2019-07-12"
+    }
+
 ]
- 
-  @ViewChild(IonSegment, {static: true}) segment: IonSegment;
+  
+dataMostrar: any[];
 
-  constructor(private alertController: AlertController, private router: Router) { }
+//INICIAR SEGMENTO EN 'ACTIVE'
+segment: string = "active";
 
-  ngOnInit() {
-    this.segment.value= 'active';
+  constructor(private alertController: AlertController, private router: Router) { 
+    this.dataMostrar = this.dataHistorial;
   }
+
+  ngOnInit() {}
 
     async cancelarAlert(){
       const alert = await this.alertController.create({
         header: 'Cancelar Pedido',
-        cssClass: 'alertCancel',
         inputs : [
           {
             type:'radio',
+            name:'motivo',
             label:'Pedido equivocado',
             value:'pedidoEquivocad'
           },
           {
             type:'radio',
+            name: 'motivo',
             label:'Repartidor demorado',
             value:'repDemorado'
           }
           ],
         buttons: [
           {
-            text: 'Regresar',
+            text: 'Volver',
             role: 'regresar',
             handler: (blah) => {
               console.log('Regresar, no cancelar');
             }
           }, {
-            text: 'Cancelar',
+            text: 'Enviar',
+            role: 'cancelar',
             handler: () => {
-              console.log('Cancelar Pedido');
+              this.motivoAlert();
+            }
+          }
+        ]
+      });
+      await alert.present();
+    }
+  
+    async motivoAlert(){
+      const alert = await this.alertController.create({
+        header: 'Motivo',
+        inputs : [
+          {
+            name: 'name1',
+            type: 'text',
+            placeholder: 'Cuentanos que paso con tu pedido'
+          }
+          ],
+        buttons: [
+          {
+            text: 'Enviar',
+            role: 'cancelar',
+            handler: () => {
+              console.log('Motivo ingresado');
             }
           }
         ]
@@ -61,14 +117,23 @@ dataHistorial: detalleHistorial[]=[
       this.router.navigateByUrl('carrito-compras');
     }
 
-    /*segmentChanged(event){
-      const valorSegmento = event.detail.value;
-
-      if (valorSegmento == 'active'){
-        this.
-      }
-
-      console.log(valorSegmento);
-    }*/
-
+    startTimer(duration: number){
+      this.timer= duration * 60;
+      setInterval( () => {
+        this.updateTimeValue();
+      }, 1000);
+    }
+  
+    updateTimeValue(){
+      let minutes: any = this.timer /60;
+      let seconds: any = this.timer %60;
+  
+      minutes = String('0' + Math.floor(minutes)).slice(-2);
+      seconds = String('0' + Math.floor(seconds)).slice(-2);
+    
+      const text = minutes + ' MINUTOS';
+      this.time.next(text);
+  
+      --this.timer;
+    }
 }

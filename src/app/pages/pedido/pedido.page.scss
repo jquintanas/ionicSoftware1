@@ -10,7 +10,7 @@
     font-size: 0.8rem;
 }
 .confirmacion{
-    --padding-start:2%;
+    --padding-start:0%;
     font-size: 1rem;
     font-weight: bold;
 }
@@ -71,7 +71,8 @@
 .totalpago{
     background: rgb(231, 231, 231);
 }
-.divtot{
+
+.gridtot{
     background:  var(--ion-color-omipali);
 }
 .rowdatostot{
@@ -103,4 +104,21 @@
     --padding-start:0%;
     --padding-end:0%;
     font-size: 0.8rem;
+}
+.mapaimagen{
+
+    //width: 100%;
+    height: 100%;
+
+}
+.imagen{
+    margin-top: 2%;
+    border-radius: 5px;
+}
+
+.labeldir{
+    font-weight: bold;
+}
+.textareadir{
+    border-bottom: 1px solid black;
 }

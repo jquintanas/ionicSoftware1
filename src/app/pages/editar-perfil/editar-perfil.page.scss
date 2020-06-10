@@ -14,8 +14,16 @@ div {
   height: 9rem;
 }
 
+.item {
+  margin-top: 0px;
+  background-color:white
+}
 
-.centrado{
+ion-list {
+  padding: 0px;
+}
+
+.centrado {
   margin-right: auto;
   margin-left: auto;
   align-content: center;
@@ -23,45 +31,64 @@ div {
   text-align: center;
 }
 
-.image-perfil{
+
+
+.image-perfil {
   margin-top: 1rem;
 }
 
-
-.fab-button{
+.fab-button {
   width: 30%;
 }
 
 .error-message {
   color: var(--ion-color-danger);
-  font-size: 1rem;
+  font-size: 0.8rem;
 }
 
-.input-from{
-  margin-top: 1rem;
+.input-from {
+  // margin-top: 1rem;
 }
 
-.text-area{
+.text-area {
   font-size: 1rem;
   padding: 2px;
 }
 
-
-.ion-butt-save{
+.ion-butt-save {
   margin-top: 2rem;
 }
 
-
-ion-item-divider ion-label{
-  font-size: 1.5rem;
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-  align-items: center;
-  align-content: center;
-}
-
-
-.contenedor{
+.contenedor {
   font-size: 1rem;
 }
+
+.content {
+  --background: rgb(231, 231, 231);
+}
+
+form{
+  background-color: yellow;
+}
+
+.divider{
+  //background-color: red !important;
+ // --background: white !important;
+  margin-top: 2rem;
+}
+
+.item-direcc{
+  margin-top: 2rem;
+}
+
+.ion-map-button{
+margin-top: 0px;
+  margin-left: 5rem;
+}
+
+
+.direccion{
+
+}
+
+

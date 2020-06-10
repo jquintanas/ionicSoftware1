@@ -1,32 +1,13 @@
-<!--<ion-header class="ion-no-border">
+<ion-header class="ion-no-border">
   <ion-toolbar  >
-    <ion-buttons slot="start" >
-      <ion-button (click)="salirRegistro()">
-        <ion-icon name="chevron-back-outline" color="light" ></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-buttons slot="end">
-      <ion-back-button></ion-back-button>
+    <ion-buttons slot="start">
+      <ion-back-button  color="light" ></ion-back-button>      
     </ion-buttons>
     <ion-title  class="title">Nueva Cuenta</ion-title>
   </ion-toolbar>
-</ion-header>-->
+</ion-header>
 
 <ion-content class="contenedor" fullscreen>
-  <ion-toolbar  >
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/" color="light"></ion-back-button>
-    </ion-buttons>
-    <!--<ion-buttons slot="start" >
-      <ion-button (click)="salirRegistro()">
-        <ion-icon name="chevron-back-outline" color="light"></ion-icon>
-      </ion-button>
-    </ion-buttons>-->
-    <ion-buttons slot="end">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title class="title">Nueva Cuenta</ion-title>
-  </ion-toolbar>
   <div class="ion-margin contendorf">
     <div class="datos">
       <ion-label>Datos Personales</ion-label>
@@ -101,10 +82,6 @@
               ></ion-icon>
               Debe ingresar su nombre
             </div>
-            <!--<div class="container-error-message" *ngIf="nombres.errors.minlength">
-              <ion-icon slot="start" name="information-circle-sharp" color="danger" ></ion-icon>
-              Debe ingresar su nombre
-            </div>-->
           </div>
           <ion-item lines="none" class="apellidos" color="none">
             <ion-input
@@ -129,10 +106,6 @@
               ></ion-icon>
               Debe ingresar su apellido
             </div>
-            <!--<div class="container-error-message" *ngIf="apellidos.errors.minlength">
-              <ion-icon slot="start" name="information-circle-sharp" color="danger" ></ion-icon>
-              Debe ingresar al menos 1 apellido
-            </div>-->
           </div>
           <ion-item lines="none" class="telefono" color="none">
             <ion-input
@@ -157,10 +130,6 @@
               ></ion-icon>
               Debe ingresar su número de teléfono
             </div>
-            <!--<div class="container-error-message" *ngIf="telefono.errors.minlength">
-              <ion-icon slot="start" name="information-circle-sharp" color="danger" ></ion-icon>
-              El número debe ser de 10 dígitos
-            </div>-->
             <div
               class="container-error-message"
               *ngIf="telefono.errors.pattern"
@@ -293,6 +262,7 @@
               placeholder="Dirección de domicilio"
               class="inputdom"
               formControlName="domicilio"
+              value= {{address}}
             ></ion-input>
             <button type="button" slot="end" (click)="openModal()">
               <ion-icon name="map-sharp" slot="start"></ion-icon>
@@ -314,20 +284,8 @@
               Debe ingresar su domicilio
             </div>
           </div>
-          <!--   
-          <div class="contenedorboton ion-padding-horizontal" >
-            <ion-button  type="button" expand="block" fill="clear"  class="verubi ion-margin-vertical " (click)="openModal()" >
-              <ion-icon name="map" slot="start"></ion-icon>
-              Indicar Ubicación
-            </ion-button>
-          </div>     
-          <div class="contenedorboton ion-padding-horizontal" >
-            <ion-button  type="button" expand="block" fill="clear"  class="verubi ion-margin-vertical " [disabled]="verubicacion" (click)="mostrarimagen()" >
-              Ver ubicación selecionada
-            </ion-button>
-          </div> --> 
-          <ion-item  color="none" lines="none" *ngIf="imagen" class="mapaimagen">
-            <img width="300" src="https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/pin-s-marker+ffa500({{url_completa}}" alt="Mapbox Map of -79.5419038,-1.8017518" class="imagen">
+          <ion-item  color="none" lines="none" *ngIf="imagen" >
+            <img width="100%" src="https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/pin-s-marker+ffa500({{url_completa}}" alt="Mapbox Map of -79.5419038,-1.8017518" class="imagen mapaimagen">
 
           </ion-item>
           <ion-item

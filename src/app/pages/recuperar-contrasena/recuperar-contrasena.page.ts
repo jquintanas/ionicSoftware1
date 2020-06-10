@@ -24,8 +24,8 @@ export class RecuperarContrasenaPage implements OnInit {
 
   buildForm(){
     this.formulario_r =this.formBuilder.group({
-      telefono: ['',[Validators.required,Validators.maxLength(10),Validators.minLength(10), Validators.pattern(this.phonepattern)]],
-      //correo: ['',[Validators.required,Validators.pattern(this.emailPattern)]],
+      //telefono: ['',[Validators.required,Validators.maxLength(10),Validators.minLength(10), Validators.pattern(this.phonepattern)]],
+      correo: ['',[Validators.required,Validators.pattern(this.emailPattern)]],
     });
   }
 
@@ -51,6 +51,9 @@ export class RecuperarContrasenaPage implements OnInit {
     return this.formulario_r.get('telefono');
   }
 
+  get correo(){
+    return this.formulario_r.get('correo');
+  }
 
   onResetForm(){
     this.formulario_r.reset();
