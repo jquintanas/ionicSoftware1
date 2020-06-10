@@ -23,6 +23,7 @@
             <ion-col size="3" class="fondoOscuro" [ngClass]="{'bordeActivo': cantidad>0}">
               <ion-button (click)="agregarAlCarrito()" class="ion-no-padding botonesIcionos">
                 <ion-icon size="large" slot="icon-only" name="add-circle-outline"></ion-icon>
+                <ion-badge slot="start" class="badget" color="omipali" *ngIf="cantidad>0">{{cantidad}}</ion-badge>
               </ion-button>
               <ion-button *ngIf="!banderaCorazon" (click)="marcarFavorito()" class="ion-no-padding botonesIcionos">
                 <ion-icon slot="icon-only" name="heart-outline"></ion-icon>
