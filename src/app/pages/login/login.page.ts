@@ -5,6 +5,9 @@ import { RecuperarContrasenaPage } from './../recuperar-contrasena/recuperar-con
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import {AuthService} from '../../services/auth/auth.service';
+
+
 
 @Component({
   selector: 'app-login',
@@ -17,12 +20,15 @@ export class LoginPage implements OnInit {
   currentPopover = null;
   formulario_login: FormGroup;
   private phonepattern: any = /^(09){1}[0-9]{8}$/;
+  phoneNumber: string;
+  password: string;
   constructor(
     private formBuilder: FormBuilder,
     private navController: NavController,
     private router: Router,
     public modalController: ModalController,
-    public alertsService: AlertsService) {
+    public alertsService: AlertsService,
+    private auth: AuthService ){
     this.buildForm();
   }
 
@@ -81,5 +87,13 @@ export class LoginPage implements OnInit {
 
   }
 
+  onSubmitLogin(){
+    this.auth.login(this.phoneNumber, this.password);
+  }
+
+  loginGoogle(){
+    alert("estas iniciando sesion")
+  }
+  
 }
 

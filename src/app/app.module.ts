@@ -12,16 +12,21 @@ import { IonicStorageModule } from '@ionic/storage';
 import { FavoritosService } from './services/cart/favoritos.service';
 import {HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
-
+import {firebaseConfig}  from '../environments/environment'
+import {AngularFireModule} from "@angular/fire"
+import {AngularFireAuthModule} from "@angular/fire/auth"
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule,HttpClientModule, BrowserAnimationsModule,IonicModule.forRoot(), AppRoutingModule,IonicStorageModule.forRoot() ],
+  imports: [BrowserModule,HttpClientModule, BrowserAnimationsModule,
+    IonicModule.forRoot(), AppRoutingModule,IonicStorageModule.forRoot(), 
+    AngularFireModule.initializeApp(firebaseConfig), AngularFireAuthModule ],
   providers: [
     FavoritosService,
     StatusBar,
     SplashScreen,
+
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     Geolocation
   ],

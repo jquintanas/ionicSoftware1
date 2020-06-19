@@ -8,7 +8,7 @@
     <form class="ion-margin" [formGroup]="formulario_login" (ngSubmit)="save()">
         <ion-item  lines="none" class="telefono" color="none" >
           <ion-icon slot="start" name="call-sharp" ></ion-icon>
-          <ion-input type="text" placeholder="Teléfono" class="inputel" formControlName="telefono" autofocus="true" ></ion-input>
+          <ion-input type="text" [(ngModel)]="phoneNumber" placeholder="Teléfono" class="inputel" formControlName="telefono" autofocus="true" ></ion-input>
         </ion-item>
         <div class="alert-danger" *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)">          
           <div class="container-error-message " *ngIf="telefono.errors.required &&  telefono.touched">
@@ -30,7 +30,7 @@
         </div>
         <ion-item  lines="none" class="contrasena" color="none">
           <ion-icon slot="start" name="lock-closed-sharp" class="iconocontra"></ion-icon>
-          <ion-input type="password" placeholder="Contraseña" class="inputcontra" formControlName="contrasena" ></ion-input>
+          <ion-input type="password" [(ngModel)]="password" placeholder="Contraseña" class="inputcontra" formControlName="contrasena" ></ion-input>
         </ion-item>
         <div class="alert-danger" *ngIf="contrasena.invalid && (contrasena.dirty || contrasena.touched)">
           <div class="container-error-message " *ngIf="contrasena.errors.required">
@@ -47,7 +47,7 @@
         </div>        
         <div class="contenedorboton">
           <!--[disabled]="!formulario_login.valid"-->
-          <ion-button  type="submit" expand="block" fill="clear"  class="login" [disabled]="!formulario_login.valid" >
+          <ion-button (click)="onSubmitLogin()"  type="submit" expand="block" fill="clear"  class="login" [disabled]="!formulario_login.valid" >
             Ingresar
           </ion-button>
         </div>
@@ -57,13 +57,14 @@
     </form>
   
     
+    
     <div class="contenedor_division ion-margin">
       <ion-label class="opcion">Iniciar sesión con</ion-label>
       <hr width=90% color="white" class="linea" >
     </div>  
 
     <div class="padre">
-      <div class="hijo"><ion-icon name="logo-google" class="google" ></ion-icon></div>
+      <div class="hijo"><ion-icon (click)="loginGoogle()" name="logo-google" class="google" ></ion-icon></div>
       <div class="hijo"><ion-icon name="logo-facebook" class="facebook" ></ion-icon></div>
     </div>
   </div>    

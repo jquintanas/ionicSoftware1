@@ -13,6 +13,18 @@ export const environment = {
   mapboxkey : 'pk.eyJ1IjoiZGFubnBhcjk2IiwiYSI6ImNrYWJiaW44MjFlc2kydG96YXVxc2JiMHYifQ.iWfA_z-InyvNliI_EysoBw'
 };
 
+export const firebaseConfig = {
+  apiKey: "AIzaSyAiPTePHyltKbiZeyXkuzMHQCfOVSz_Ezo",
+  authDomain: "omi-y-pali-80d1d.firebaseapp.com",
+  databaseURL: "https://omi-y-pali-80d1d.firebaseio.com",
+  projectId: "omi-y-pali-80d1d",
+  storageBucket: "omi-y-pali-80d1d.appspot.com",
+  messagingSenderId: "1021916524711",
+  appId: "1:1021916524711:web:53ad66cdb16967169eeb82",
+  measurementId: "G-0WPXHE9SG1"
+};
+
+
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
