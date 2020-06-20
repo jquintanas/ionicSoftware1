@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Verificar teléfono</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <form onsubmit="processForm(event)">
+        <ion-list lines="full" class="ion-no-margin ion-no-padding">
+          <ion-item>
+            <ion-label position="stacked">Numero telefonico <ion-text color="danger">*</ion-text></ion-label>
+            <ion-input required type="number" ></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Codigo de verificacion <ion-text color="danger">*</ion-text></ion-label>
+            <ion-input required type="number" ></ion-input>
+          </ion-item>
+          
+          <div class="ion-padding">
+              <ion-button expand="block" type="submit" class="ion-no-margin">Create account</ion-button>
+          </div>
+      </form>
+
+</ion-content>
