@@ -10,20 +10,30 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { IonicStorageModule } from '@ionic/storage';
 import { FavoritosService } from './services/cart/favoritos.service';
-import {HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
-import {firebaseConfig}  from '../environments/environment'
-import {AngularFireModule} from "@angular/fire"
-import {AngularFireAuthModule} from "@angular/fire/auth"
+import { firebaseConfig } from '../environments/environment'
+import { AngularFireModule } from "@angular/fire"
+import { AngularFireAuthModule } from "@angular/fire/auth"
+import { AngularFirestoreModule } from "@angular/fire/firestore";
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule,HttpClientModule, BrowserAnimationsModule,
-    IonicModule.forRoot(), AppRoutingModule,IonicStorageModule.forRoot(), 
-    AngularFireModule.initializeApp(firebaseConfig), AngularFireAuthModule ],
+  imports: [
+    BrowserModule,
+    //HttpClientModule,
+    BrowserAnimationsModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    IonicStorageModule.forRoot(),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireAuthModule,
+    AngularFirestoreModule
+  ],
   providers: [
-    FavoritosService,
+    //HttpClient,
+    //FavoritosService,
     StatusBar,
     SplashScreen,
 
@@ -32,4 +42,4 @@ import {AngularFireAuthModule} from "@angular/fire/auth"
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
