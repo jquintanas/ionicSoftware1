@@ -101,6 +101,7 @@ ion-toolbar {
     border: 2px solid #98DBD9;
     border-radius: 5px;
     font-size: 0.9rem;
+    width: 100%;
 }
 .regresar{
     color: white;
@@ -153,6 +154,7 @@ ion-toolbar {
 }
 .title{
     color: white;
+    font-size: x-large;
 }
 .padre {
     display: flex;
@@ -161,6 +163,7 @@ ion-toolbar {
 .hijo {
     padding: 5px;
     margin: 10px;
+    width: 100%;
     
 }
 .imagen{

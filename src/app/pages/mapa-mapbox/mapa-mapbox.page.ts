@@ -127,7 +127,7 @@ export class MapaMapboxPage implements OnInit {
   }
 
 
-  guardar_marcador(){
+  async guardar_marcador(){
       //console.log('esta es la posicion del marcador',this.latitud +' ' + this.longitud);
       this.mapaDatosService.latitud = this.latitud;
       this.mapaDatosService.longitud = this.longitud;
@@ -137,6 +137,7 @@ export class MapaMapboxPage implements OnInit {
       this.posicion = this.latitud.toString() +"|"+this.longitud.toString();
       //this.marcadorGuardado();
       this.alertsService.presentToast("Posición guardada");
+      await this.modalController.dismiss(this.posicion);
 
   }
 
@@ -154,14 +155,14 @@ export class MapaMapboxPage implements OnInit {
 
 
   async closeModal() {
-    this.mapaDatosService.latitud = this.latitud;
-    this.mapaDatosService.longitud = this.longitud;
-    this.mapaDatosService.marcador_guardado = true;
-    //console.log('la posicion del marcador en lat: '+this.mapaDatosService.latitud);
-    //console.log('la posicion del marcador en lng: '+this.mapaDatosService.longitud);
-    this.posicion = this.latitud.toString() +"|"+this.longitud.toString();
-    await this.modalController.dismiss(this.posicion);
-    
+    // this.mapaDatosService.latitud = this.latitud;
+    // this.mapaDatosService.longitud = this.longitud;
+    // this.mapaDatosService.marcador_guardado = true;
+    // //console.log('la posicion del marcador en lat: '+this.mapaDatosService.latitud);
+    // //console.log('la posicion del marcador en lng: '+this.mapaDatosService.longitud);
+    // this.posicion = this.latitud.toString() +"|"+this.longitud.toString();
+    // await this.modalController.dismiss(this.posicion);
+    await this.guardar_marcador();
   }
 
 }
