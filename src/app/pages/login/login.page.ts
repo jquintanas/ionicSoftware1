@@ -1,12 +1,12 @@
 import { AlertsService } from './../../services/alerts/alerts.service';
-import { RegistroPage } from './../registro/registro.page';
 import { ModalController, NavController } from '@ionic/angular';
 import { RecuperarContrasenaPage } from './../recuperar-contrasena/recuperar-contrasena.page';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import {AuthService} from '../../services/auth/auth.service';
-
+import { AngularFireAuth } from '@angular/fire/auth';
+import * as firebase from 'firebase';;
 
 
 @Component({
@@ -15,7 +15,9 @@ import {AuthService} from '../../services/auth/auth.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-
+  picture;
+  name;
+  email;
   isSubmitted = false;
   currentPopover = null;
   formulario_login: FormGroup;
@@ -28,7 +30,8 @@ export class LoginPage implements OnInit {
     private router: Router,
     public modalController: ModalController,
     public alertsService: AlertsService,
-    private auth: AuthService ){
+    private auth: AuthService,
+    private afAuth: AngularFireAuth ){
     this.buildForm();
   }
 
@@ -91,8 +94,31 @@ export class LoginPage implements OnInit {
     this.auth.login(this.phoneNumber, this.password);
   }
 
-  loginGoogle(){
-    alert("estas iniciando sesion")
+  /*
+    Fecha de Creación: 22/06/2020
+    Fecha de Modificación: 22/06/2020
+    Usuario de creación: Fman
+    Usuario de Modificación: Fman
+    Iniciar sesion con google
+  */
+  async loginGoogle() {
+    const res = await this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    const user = res.user;
+    console.log(user);
+    this.picture = user.photoURL;
+    this.name = user.displayName;
+    this.email = user.email;
+  }
+
+  /*
+    Fecha de Creación: 22/06/2020
+    Fecha de Modificación: 22/06/2020
+    Usuario de creación: Fman
+    Usuario de Modificación: Fman
+    Iniciar sesion con Facebook
+  */
+  loginFacebook() {
+    console.log('Login con Facebook');
   }
   
 }

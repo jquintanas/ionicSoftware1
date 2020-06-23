@@ -44,8 +44,6 @@ dataHistorial: detalleHistorial[]=[
 ]
   
 dataMostrar: any[];
-
-//INICIAR SEGMENTO EN 'ACTIVE'
 segment: string = "active";
 
   constructor(private alertController: AlertController, private router: Router) { 
@@ -54,6 +52,13 @@ segment: string = "active";
 
   ngOnInit() {}
 
+    /*
+      Fecha de Creación: 25/05/2020
+      Fecha de Modificación: 25/05/2020
+      Usuario de creación: Fman
+      Usuario de Modificación: Fman
+      Alert para cancelar pedido
+    */
     async cancelarAlert(){
       const alert = await this.alertController.create({
         header: 'Cancelar Pedido',
@@ -90,6 +95,13 @@ segment: string = "active";
       await alert.present();
     }
   
+    /*
+      Fecha de Creación: 25/05/2020
+      Fecha de Modificación: 25/05/2020
+      Usuario de creación: Fman
+      Usuario de Modificación: Fman
+      Alert para ingresar el motivo de la cancelacion del producto
+    */
     async motivoAlert(){
       const alert = await this.alertController.create({
         header: 'Motivo',
@@ -113,10 +125,25 @@ segment: string = "active";
       await alert.present();
     }
 
+    /*
+      Fecha de Creación: 25/05/2020
+      Fecha de Modificación: 25/05/2020
+      Usuario de creación: Fman
+      Usuario de Modificación: Fman
+      Redireccion a la pagina del Carrito de compras
+    */
     goCarrito(){
       this.router.navigateByUrl('carrito-compras');
     }
 
+    /*
+      Fecha de Creación: 25/05/2020
+      Fecha de Modificación: 25/05/2020
+      Usuario de creación: Fman
+      Usuario de Modificación: Fman
+      Iniciar el temporizador 
+      Parámetro de entrada: number
+    */
     startTimer(duration: number){
       this.timer= duration * 60;
       setInterval( () => {
@@ -124,6 +151,13 @@ segment: string = "active";
       }, 1000);
     }
   
+    /*
+      Fecha de Creación: 25/05/2020
+      Fecha de Modificación: 25/05/2020
+      Usuario de creación: Fman
+      Usuario de Modificación: Fman
+      Activacion para que el temporizador funcione
+    */
     updateTimeValue(){
       let minutes: any = this.timer /60;
       let seconds: any = this.timer %60;
