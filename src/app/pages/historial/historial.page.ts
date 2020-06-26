@@ -59,8 +59,9 @@ segment: string = "active";
       Usuario de Modificación: Fman
       Alert para cancelar pedido
     */
-    async cancelarAlert(){
+    async cancelAlert(){
       const alert = await this.alertController.create({
+        cssClass: 'alertCancel',
         header: 'Cancelar Pedido',
         inputs : [
           {
@@ -80,14 +81,12 @@ segment: string = "active";
           {
             text: 'Volver',
             role: 'regresar',
-            handler: (blah) => {
-              console.log('Regresar, no cancelar');
-            }
+            handler: (blah) => {}
           }, {
             text: 'Enviar',
             role: 'cancelar',
             handler: () => {
-              this.motivoAlert();
+              this.motiveAlert();
             }
           }
         ]
@@ -102,7 +101,7 @@ segment: string = "active";
       Usuario de Modificación: Fman
       Alert para ingresar el motivo de la cancelacion del producto
     */
-    async motivoAlert(){
+    async motiveAlert(){
       const alert = await this.alertController.create({
         header: 'Motivo',
         inputs : [
@@ -117,10 +116,7 @@ segment: string = "active";
             text: 'Enviar',
             role: 'cancelar',
             handler: () => {
-              console.log('Motivo ingresado');
-            }
-          }
-        ]
+            }}]
       });
       await alert.present();
     }

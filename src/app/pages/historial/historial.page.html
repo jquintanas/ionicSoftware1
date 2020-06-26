@@ -1,143 +1,141 @@
 <ion-header translucent>
-    <ion-toolbar color="omipalidarkd">
-        <ion-buttons slot="start" c>
-            <ion-back-button></ion-back-button>
-          </ion-buttons>
-      <ion-title>Historial de Pedidos</ion-title>
-    </ion-toolbar>
-    <ion-toolbar color="omipalidarkd">
-      <ion-segment [(ngModel)]="segment" >
-          <ion-segment-button value="active">
-            <ion-label>ACTIVO</ion-label>
-          </ion-segment-button>
-          <ion-segment-button value="past">
-            <ion-label>PASADOS</ion-label>
-          </ion-segment-button>
-        </ion-segment>
-    </ion-toolbar>
-  </ion-header>
+  <ion-toolbar color="omipalidarkd" class="toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Historial de Pedidos</ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="omipalidarkd">
+    <ion-segment [(ngModel)]="segment"> 
+      <ion-segment-button value="active">
+        <ion-label>ACTIVO</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="past">
+        <ion-label>PASADOS</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
 
- 
-  <ion-content>
-    <div *ngIf="segment == 'active'">
-        <section>
-            <br><br>
 
-            <section>
-            <div class="centrado">
-            <ion-label>TIEMPO RESTANTE: {{time | async}}</ion-label> <BR>
-            <ion-button color="primary" (click)="startTimer(20)">START</ion-button>
-            </div>
-          
-            <div class="container">
-                <br> <br> 
-                <ion-progress-bar value="0.5"></ion-progress-bar>
-                
-                <ul class="progressbar">
-                  <li class="noactive">ELABORANDO PEDIDO</li>
-                  <li class="active">ENVIANDO PEDIDO</li>
-                  <li class="noactive">PEDIDO ENTREGADO</li>
-                  <br>
-                </ul>
-          
-              </div>
-            </section>
+<ion-content>
+  <div *ngIf="segment == 'active'">
+    <section>
+      <br><br>
 
-            <!--PEDIDO EN TRANSITO-->
-            
-            <section >
-            <ion-card class="repartidor">
-                <ion-item>
-                    <ion-avatar item-start>
-                      <img src="assets/img/zac.png">
-                    </ion-avatar>
-                    <ion-row>
-                      <ion-card-header>Pedro Riascos</ion-card-header>
-                    </ion-row>
-                    <ion-row>
-                      <ion-card-subtitle>REPARTIDOR</ion-card-subtitle>
-                      </ion-row>
-                  </ion-item>
-  
-        
-                <ion-card-content>
-                    <ion-row>
-                        <ion-col>
-                          <ion-label>+593 123 456 678</ion-label><br>
-                        </ion-col>
-                      </ion-row>
-                  </ion-card-content>
-              </ion-card>
+      <section>
+        <div class="center">
+          <ion-label>TIEMPO RESTANTE: {{time | async}}</ion-label> <BR>
+          <ion-button color="primary" (click)="startTimer(20)">START</ion-button>
+        </div>
 
-            </section>
+        <div class="container">
+          <br> <br>
+          <ion-progress-bar value="0.5"></ion-progress-bar>
 
-            <ion-card>
-
-              
-    
-                <ion-item>
-                  <ion-avatar item-start>
-                    <img src="assets/icon/checkverde.png">
-                  </ion-avatar>
-                  <ion-card-header>PEDIDO #1234</ion-card-header>
-                  <ion-card-subtitle slot="end">Total $5.50</ion-card-subtitle>
-                </ion-item>
-              
-    
-                <ion-card-content>
-                <ion-row>
-                    <ion-col>
-                            <ion-label>ENVIO A DOMICILIO</ion-label><br>
-                    </ion-col>
-                    <ion-col>
-                      <button class="boton" (click)="cancelarAlert()" ion-button icon-start clear small>
-                        <ion-label>CANCELAR</ion-label>
-                      </button>
-                    </ion-col>
-                  </ion-row>
-    
-    
-                  <ion-label>2 MOJADA DE CHOCOLATE</ion-label><br>
-                  <ion-label>2 MOJADA DE CHOCOLATE</ion-label><br>
-                  <ion-label>3 MOJADA DE CHOCOLATE</ion-label>
-    
-                </ion-card-content>
-    
-              </ion-card>
-    
-          </section>
-    </div>
-    <div *ngIf="segment == 'past'">
-
-        <section >
-          <ion-card>
-
-              <ion-item>
-                  <ion-avatar item-start>
-                    <img src="assets/icon/check.png">
-                  </ion-avatar>
-                  <ion-card-header >PEDIDO</ion-card-header>
-                  <ion-card-subtitle>Mes 5, 2020</ion-card-subtitle>
-                </ion-item>
-
-      
-              <ion-card-content>
-                  <ion-row>
-                      <ion-col>
-                        <ion-label>ENVIO A DOMICILIO</ion-label><br>
-                      </ion-col>
-                      <ion-col>
-                        <button class="boton" ion-button icon-start clear small (click)="goCarrito()">
-                          <ion-label>REPETIR</ion-label>
-                        </button>
-                      </ion-col>
-                    </ion-row>
-                </ion-card-content>
-            </ion-card>
-
-          </section>
+          <ul class="progressbar">
+            <li class="noactive">ELABORANDO PEDIDO</li>
+            <li class="active">ENVIANDO PEDIDO</li>
+            <li class="noactive">PEDIDO ENTREGADO</li>
+            <br>
+          </ul>
 
         </div>
-  </ion-content>
-  
-  
+      </section>
+
+      <!--PEDIDO EN TRANSITO-->
+
+      <section>
+        <ion-card class="delivery">
+          <ion-item>
+            <ion-avatar item-start>
+              <img src="assets/img/zac.png">
+            </ion-avatar>
+            <ion-row>
+              <ion-card-header>Pedro Riascos</ion-card-header>
+            </ion-row>
+            <ion-row>
+              <ion-card-subtitle>REPARTIDOR</ion-card-subtitle>
+            </ion-row>
+          </ion-item>
+
+
+          <ion-card-content>
+            <ion-row>
+              <ion-col>
+                <ion-label>+593 123 456 678</ion-label><br>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+
+      </section>
+
+      <ion-card>
+
+
+
+        <ion-item>
+          <ion-avatar item-start>
+            <img src="assets/icon/checkverde.png">
+          </ion-avatar>
+          <ion-card-header>PEDIDO #1234</ion-card-header>
+          <ion-card-subtitle slot="end">Total $5.50</ion-card-subtitle>
+        </ion-item>
+
+
+        <ion-card-content>
+          <ion-row>
+            <ion-col>
+              <ion-label>ENVIO A DOMICILIO</ion-label><br>
+            </ion-col>
+            <ion-col>
+              <button class="boton" (click)="cancelAlert()" ion-button icon-start clear small>
+                <ion-label>CANCELAR</ion-label>
+              </button>
+            </ion-col>
+          </ion-row>
+
+
+          <ion-label>2 MOJADA DE CHOCOLATE</ion-label><br>
+          <ion-label>2 MOJADA DE CHOCOLATE</ion-label><br>
+          <ion-label>3 MOJADA DE CHOCOLATE</ion-label>
+
+        </ion-card-content>
+
+      </ion-card>
+
+    </section>
+  </div>
+  <div *ngIf="segment == 'past'">
+
+    <section>
+      <ion-card>
+
+        <ion-item>
+          <ion-avatar item-start>
+            <img src="assets/icon/check.png">
+          </ion-avatar>
+          <ion-card-header>PEDIDO</ion-card-header>
+          <ion-card-subtitle>Mes 5, 2020</ion-card-subtitle>
+        </ion-item>
+
+
+        <ion-card-content>
+          <ion-row>
+            <ion-col>
+              <ion-label>ENVIO A DOMICILIO</ion-label><br>
+            </ion-col>
+            <ion-col>
+              <button class="boton" ion-button icon-start clear small (click)="goCarrito()">
+                <ion-label>REPETIR</ion-label>
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+
+    </section>
+
+  </div>
+</ion-content>

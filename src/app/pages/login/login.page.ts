@@ -16,8 +16,8 @@ import * as firebase from 'firebase';;
 })
 export class LoginPage implements OnInit {
   picture;
-  name;
-  email;
+  name: string;
+  email: string;
   isSubmitted = false;
   currentPopover = null;
   formulario_login: FormGroup;
@@ -86,7 +86,7 @@ export class LoginPage implements OnInit {
     const modal = await this.modalController.create({
       component: RecuperarContrasenaPage
     });
-    return await modal.present();
+    return await modal.present(); 
 
   }
 

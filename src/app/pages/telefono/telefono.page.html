@@ -1,26 +1,29 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Verificar teléfono</ion-title>
-  </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="contenedor">
+  <div class="ion-margin contenedorlogin">
+    <div class="contenedorlogo">
+      <img src="/assets/logos/logo.png" class="imagenlogo">
+    </div>
+    <form [formGroup]="phoneForm" class="phoneArea">
+      <ion-item>
+        <ion-label position="floating">Teléfono</ion-label>
+        <ion-input formControlName="phone"  autocapitalize inputmode="text"></ion-input>
+      </ion-item>
 
-    <form onsubmit="processForm(event)">
-        <ion-list lines="full" class="ion-no-margin ion-no-padding">
-          <ion-item>
-            <ion-label position="stacked">Numero telefonico <ion-text color="danger">*</ion-text></ion-label>
-            <ion-input required type="number" ></ion-input>
-          </ion-item>
+      <div *ngFor="let error of errorMessages.phone">
+        <ng-container *ngIf="phone.hasError(error.type) && (phone.dirty || phone.touched)">
+          <small class="error-message">{{error.message}}</small>
+        </ng-container>
+      </div>
 
-          <ion-item>
-            <ion-label position="stacked">Codigo de verificacion <ion-text color="danger">*</ion-text></ion-label>
-            <ion-input required type="number" ></ion-input>
-          </ion-item>
-          
-          <div class="ion-padding">
-              <ion-button expand="block" type="submit" class="ion-no-margin">Create account</ion-button>
-          </div>
-      </form>
+      <ion-button (click)="validateAlert()" class="askCodeButton"  expand="block" >
+        SOLICITAR CÓDIGO
+      </ion-button>
+     
 
+    </form>
+
+  </div>
 </ion-content>
