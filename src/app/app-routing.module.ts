@@ -5,7 +5,7 @@ import { LoginPage } from './../app/pages/login/login.page';
 const routes: Routes = [
   {
     path: "",
-    redirectTo: "pedido",
+    redirectTo: "login",
     pathMatch: "full",
   },
   {
@@ -84,6 +84,10 @@ const routes: Routes = [
   {
     path: 'pedido',
     loadChildren: () => import('./pages/pedido/pedido.module').then( m => m.PedidoPageModule)
+  },
+  {
+    path: 'telefono',
+    loadChildren: () => import('./pages/telefono/telefono.module').then( m => m.TelefonoPageModule)
   },
 
 ];

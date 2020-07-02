@@ -2,8 +2,9 @@ import { productoCarrito } from "./productoCarrito";
 
 export interface detalleHistorial {
     idpedido: string;
-    producto: productoCarrito;
+    producto: string;
+    cantidad: number;
     valor: number;
     metodoEnvio: boolean;
-    fecha: Date;
+    fecha: string;
 }

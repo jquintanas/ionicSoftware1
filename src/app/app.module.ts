@@ -10,21 +10,40 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { IonicStorageModule } from '@ionic/storage';
 import { FavoritosService } from './services/cart/favoritos.service';
-import {HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
-
+import { firebaseConfig } from '../environments/environment.prod'
+import { AngularFireModule } from "@angular/fire"
+import { AngularFireAuthModule } from "@angular/fire/auth"
+import { AngularFirestoreModule } from "@angular/fire/firestore";
+import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
+import { Facebook} from '@ionic-native/facebook/ngx';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule,HttpClientModule, BrowserAnimationsModule,IonicModule.forRoot(), AppRoutingModule,IonicStorageModule.forRoot() ],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    IonicStorageModule.forRoot(),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireAuthModule,
+    AngularFirestoreModule
+  ],
   providers: [
+    GooglePlus,
+    FirebaseAuthentication,
     FavoritosService,
     StatusBar,
+    Facebook,
     SplashScreen,
+
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     Geolocation
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

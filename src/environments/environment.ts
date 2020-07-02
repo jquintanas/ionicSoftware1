@@ -13,6 +13,11 @@ export const environment = {
   mapboxkey : 'pk.eyJ1IjoiZGFubnBhcjk2IiwiYSI6ImNrYWJiaW44MjFlc2kydG96YXVxc2JiMHYifQ.iWfA_z-InyvNliI_EysoBw',
   phonePatter: "^(09){1}[0-9]{8}$",
   emailPatter: "^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$",
+  idRol: 3,
+  secretEncryp: "71bec6b99ebd7fbd65d44410eeaf17852de12204f176635b200c17986534d8cfbbab73a34baf7f91f567b90f76d74d61ab6e30f097ed4f49f24d11581527b89a",
+  secretToken: "7187ba3735b821b9ae7bd7d5dd98b61a07ec2e9cef2aad92b97a4ed6080290e6",
+  urlPerfil: "/api/usuarios/",
+  urlBaseApi: "http://localhost:3000"
 };
 
 /*

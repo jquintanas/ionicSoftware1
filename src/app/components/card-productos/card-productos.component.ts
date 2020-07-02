@@ -107,7 +107,8 @@ export class CardProductosComponent implements OnInit, OnDestroy {
   }
 
   async agregarAlCarrito() {
-    let cantida = await this.presentAlertPrompt();
+    //let cantida = await this.presentAlertPrompt();
+    let cantida = 1;
     if (cantida > 0) {
       this.cantidad += cantida;
       this.detalle.cantidad = this.cantidad;
