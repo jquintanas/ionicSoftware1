@@ -10,7 +10,9 @@ export const environment = {
   codigoCategoriaTortas: 4,
   codigoCategoriaPromociones: 5,
   codigoFavoritos: "favoritos",
-  mapboxkey : 'pk.eyJ1IjoiZGFubnBhcjk2IiwiYSI6ImNrYWJiaW44MjFlc2kydG96YXVxc2JiMHYifQ.iWfA_z-InyvNliI_EysoBw'
+  mapboxkey : 'pk.eyJ1IjoiZGFubnBhcjk2IiwiYSI6ImNrYWJiaW44MjFlc2kydG96YXVxc2JiMHYifQ.iWfA_z-InyvNliI_EysoBw',
+  phonePatter: "^(09){1}[0-9]{8}$",
+  emailPatter: "^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$",
 };
 
 /*
