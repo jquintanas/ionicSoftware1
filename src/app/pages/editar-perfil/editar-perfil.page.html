@@ -33,7 +33,7 @@
   </ion-row>
 
   <ion-content class="content">
-    <form [formGroup]="registrationForm" (ngSubmit)="submit()">
+    <form [formGroup]="userDataForm" (ngSubmit)="submit()">
       <ion-list>
         <div class="item">
           <ion-item>
@@ -46,22 +46,19 @@
               rows="1"
             ></ion-textarea>
           </ion-item>
-          <div *ngFor="let error of errorMessages.name">
-            <ng-container
-              *ngIf="name.hasError(error.type) && (name.dirty || name.touched)"
-            >
+          <div>
+            <ng-container *ngIf="!name.valid && (name.dirty || name.touched)">
               <div class="error-message">
                 <ion-icon
                   slot="start"
                   name="information-circle-sharp"
                   color="danger"
                 ></ion-icon>
-                {{error.message}}
+                {{MessageValidator(name.hasError("required"))}}
               </div>
             </ng-container>
           </div>
         </div>
-
         <div class="item">
           <ion-item>
             <ion-label position="floating">Celular</ion-label>
@@ -72,9 +69,9 @@
               rows="1"
             ></ion-textarea>
           </ion-item>
-          <div *ngFor="let error of errorMessages.phone">
+          <div>
             <ng-container
-              *ngIf="phone.hasError(error.type) && (phone.dirty || phone.touched)"
+              *ngIf="!phone.valid && (phone.dirty || phone.touched)"
             >
               <div class="error-message">
                 <ion-icon
@@ -82,7 +79,7 @@
                   name="information-circle-sharp"
                   color="danger"
                 ></ion-icon>
-                {{error.message}}
+                {{MessageValidator(phone.hasError("required"))}}
               </div>
             </ng-container>
           </div>
@@ -98,9 +95,9 @@
               rows="1"
             ></ion-textarea>
           </ion-item>
-          <div *ngFor="let error of errorMessages.email">
+          <div>
             <ng-container
-              *ngIf="email.hasError(error.type) && (email.dirty || email.touched)"
+              *ngIf="!email.valid && (email.dirty || email.touched)"
             >
               <div class="error-message">
                 <ion-icon
@@ -108,7 +105,7 @@
                   name="information-circle-sharp"
                   color="danger"
                 ></ion-icon>
-                {{error.message}}
+                {{MessageValidator(email.hasError("required"))}}
               </div>
             </ng-container>
           </div>
@@ -160,7 +157,7 @@
     </form>
 
     <ion-button
-      [disabled]="!registrationForm.valid"
+      [disabled]="!userDataForm.valid"
       class="ion-margin-start ion-margin-end ion-butt-save"
       color="omipalidarkd"
       type="submit"

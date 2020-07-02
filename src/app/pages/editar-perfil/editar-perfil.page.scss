@@ -16,7 +16,7 @@ div {
 
 .item {
   margin-top: 0px;
-  background-color:white
+  background-color: white;
 }
 
 ion-list {
@@ -31,8 +31,6 @@ ion-list {
   text-align: center;
 }
 
-
-
 .image-perfil {
   margin-top: 1rem;
 }
@@ -44,10 +42,7 @@ ion-list {
 .error-message {
   color: var(--ion-color-danger);
   font-size: 0.8rem;
-}
-
-.input-from {
-  // margin-top: 1rem;
+  left: 0;
 }
 
 .text-area {
@@ -67,28 +62,19 @@ ion-list {
   --background: rgb(231, 231, 231);
 }
 
-form{
+form {
   background-color: yellow;
 }
 
-.divider{
-  //background-color: red !important;
- // --background: white !important;
+.divider {
   margin-top: 2rem;
 }
 
-.item-direcc{
+.item-direcc {
   margin-top: 2rem;
 }
 
-.ion-map-button{
-margin-top: 0px;
+.ion-map-button {
+  margin-top: 0px;
   margin-left: 5rem;
 }
-
-
-.direccion{
-
-}
-
-

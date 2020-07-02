@@ -44,8 +44,6 @@ dataHistorial: detalleHistorial[]=[
 ]
   
 dataMostrar: any[];
-
-//INICIAR SEGMENTO EN 'ACTIVE'
 segment: string = "active";
 
   constructor(private alertController: AlertController, private router: Router) { 
@@ -54,8 +52,16 @@ segment: string = "active";
 
   ngOnInit() {}
 
-    async cancelarAlert(){
+    /*
+      Fecha de Creación: 25/05/2020
+      Fecha de Modificación: 25/05/2020
+      Usuario de creación: Fman
+      Usuario de Modificación: Fman
+      Alert para cancelar pedido
+    */
+    async cancelAlert(){
       const alert = await this.alertController.create({
+        cssClass: 'alertCancel',
         header: 'Cancelar Pedido',
         inputs : [
           {
@@ -75,14 +81,12 @@ segment: string = "active";
           {
             text: 'Volver',
             role: 'regresar',
-            handler: (blah) => {
-              console.log('Regresar, no cancelar');
-            }
+            handler: (blah) => {}
           }, {
             text: 'Enviar',
             role: 'cancelar',
             handler: () => {
-              this.motivoAlert();
+              this.motiveAlert();
             }
           }
         ]
@@ -90,7 +94,14 @@ segment: string = "active";
       await alert.present();
     }
   
-    async motivoAlert(){
+    /*
+      Fecha de Creación: 25/05/2020
+      Fecha de Modificación: 25/05/2020
+      Usuario de creación: Fman
+      Usuario de Modificación: Fman
+      Alert para ingresar el motivo de la cancelacion del producto
+    */
+    async motiveAlert(){
       const alert = await this.alertController.create({
         header: 'Motivo',
         inputs : [
@@ -105,18 +116,30 @@ segment: string = "active";
             text: 'Enviar',
             role: 'cancelar',
             handler: () => {
-              console.log('Motivo ingresado');
-            }
-          }
-        ]
+            }}]
       });
       await alert.present();
     }
 
+    /*
+      Fecha de Creación: 25/05/2020
+      Fecha de Modificación: 25/05/2020
+      Usuario de creación: Fman
+      Usuario de Modificación: Fman
+      Redireccion a la pagina del Carrito de compras
+    */
     goCarrito(){
       this.router.navigateByUrl('carrito-compras');
     }
 
+    /*
+      Fecha de Creación: 25/05/2020
+      Fecha de Modificación: 25/05/2020
+      Usuario de creación: Fman
+      Usuario de Modificación: Fman
+      Iniciar el temporizador 
+      Parámetro de entrada: number
+    */
     startTimer(duration: number){
       this.timer= duration * 60;
       setInterval( () => {
@@ -124,6 +147,13 @@ segment: string = "active";
       }, 1000);
     }
   
+    /*
+      Fecha de Creación: 25/05/2020
+      Fecha de Modificación: 25/05/2020
+      Usuario de creación: Fman
+      Usuario de Modificación: Fman
+      Activacion para que el temporizador funcione
+    */
     updateTimeValue(){
       let minutes: any = this.timer /60;
       let seconds: any = this.timer %60;

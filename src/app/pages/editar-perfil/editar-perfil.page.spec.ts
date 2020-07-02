@@ -3,6 +3,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { EditarPerfilPage } from './editar-perfil.page';
 
+
 describe('EditarPerfilPage', () => {
   let component: EditarPerfilPage;
   let fixture: ComponentFixture<EditarPerfilPage>;

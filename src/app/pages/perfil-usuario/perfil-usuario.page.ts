@@ -2,8 +2,8 @@ import { Component, OnInit, Input, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import { Favoritos } from "src/app/interface/favoritosStorage";
 import { FavoritosService } from "src/app/services/cart/favoritos.service";
-import { LoadingController } from '@ionic/angular';
-import {IonContent} from '@ionic/angular';
+import { LoadingController } from "@ionic/angular";
+import { IonContent } from "@ionic/angular";
 
 @Component({
   selector: "app-perfil-usuario",
@@ -13,24 +13,16 @@ import {IonContent} from '@ionic/angular';
 export class PerfilUsuarioPage implements OnInit {
   @Input("Favorito") banderaCorazon: boolean;
 
-  @ViewChild(IonContent,{static:true}) content: IonContent;
-  // data = [];
+  @ViewChild(IonContent, { static: true }) content: IonContent;
   dataBebidas: any[];
-  // dataDulces: any[];
-  // dataPostres: any[];
-  // dataTortas: any[];
-  // dataPromociones: any[];
-  // tmp0 = [];
-  // tmp1 = [];
-  // tmp2 = [];
-  // tmp4 = [];
-  // tmp5 = [];
 
-  constructor(private router: Router, private favoritos: FavoritosService, private loadingController: LoadingController) {
+  constructor(
+    private router: Router,
+    private favoritos: FavoritosService,
+    private loadingController: LoadingController
+  ) {}
 
-  }
-
-  abrirHistorial(){
+  abrirHistorial() {
     this.router.navigateByUrl("historial");
   }
 
@@ -38,25 +30,16 @@ export class PerfilUsuarioPage implements OnInit {
     await this.cargarDatos();
   }
 
-  segment: string;
-
   ionViewWillEnter() {
-    this.segment = "bebidas";
     this.banderaCorazon = true;
   }
 
-  segmentChanged(ev: any) {
-    console.log("Segment changed", ev);
-  }
-
   abrirEdicion() {
-    console.log("hello there")
     this.router.navigateByUrl("editar-perfil");
   }
 
   zoomImage() {
-    console.log("jhvvnbvn");
-    //this.photoViewer.show('../../assets/imagen/user.png');
+    console.log("ZoomImage")
   }
 
   private async cargarDatos() {
@@ -72,9 +55,11 @@ export class PerfilUsuarioPage implements OnInit {
   }
 
   async actualizarPantalla(event: any) {
-    let loading = await this.loadingController.create({message: "Actualizando..."});
+    let loading = await this.loadingController.create({
+      message: "Actualizando...",
+    });
     await loading.present();
-    if(!event){
+    if (!event) {
       await this.cargarDatos();
     }
     loading.dismiss();
