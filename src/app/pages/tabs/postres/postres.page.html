@@ -4,7 +4,8 @@
       <ion-row>
         <ion-col size="12" *ngFor="let postre of dataMostrar">
           <app-card-productos [Imagen]="postre.ImagenP" [Titulo]="postre.Titulo" [Descripcion]="postre.Descripcion"
-            [Precio]="postre.Precio"  [id]="postre.id" [carrusel]="postre.carrusel" [categoria]="postre.categoria"></app-card-productos>
+            [Precio]="postre.Precio" [id]="postre.id" [carrusel]="postre.carrusel" [categoria]="postre.categoria">
+          </app-card-productos>
         </ion-col>
       </ion-row>
     </ion-grid>

@@ -12,9 +12,13 @@ export class CarritoComprasPage implements OnInit {
   cantidad: number = 0;
   total: number = 0;
   productos: Map<any, any>;
-  constructor(private alertController: AlertController, private carrito: CarritoService,private router:Router) { }
+  constructor(
+    private alertController: AlertController,
+    private carrito: CarritoService,
+    private router: Router) { }
 
   ngOnInit() {
+
     this.carrito.observarCarrito().subscribe((data: any) => {
       if (data) {
         this.total = 0;
@@ -29,6 +33,7 @@ export class CarritoComprasPage implements OnInit {
     }, (err: any) => {
       console.log(err);
     });
+
     this.carrito.observarCantidad().subscribe((data: number) => {
       this.cantidad = data;
     }, (err: any) => {
@@ -58,7 +63,8 @@ export class CarritoComprasPage implements OnInit {
     });
     await alert.present();
   }
-  comprar(){
+
+  comprar() {
     this.router.navigateByUrl('/pedido');
   }
 }

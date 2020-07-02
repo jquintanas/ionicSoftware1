@@ -6,7 +6,8 @@
     <ion-title *ngIf="!banderaDeBusqueda">
       Omi Pali
     </ion-title>
-    <ion-searchbar placeholder="Tres leches" [animated]="true" *ngIf="banderaDeBusqueda" class="searchBar"  (ionChange)="buscarProducto()" (ionClear)="limpiarBusqueda()" [(ngModel)]="productoBusqueda"></ion-searchbar>
+    <ion-searchbar placeholder="Tres leches" [animated]="true" *ngIf="banderaDeBusqueda" class="searchBar"
+      (ionChange)="buscarProducto()" (ionClear)="limpiarBusqueda()" [(ngModel)]="productoBusqueda"></ion-searchbar>
     <ion-buttons slot="primary">
       <ion-button (click)="habilitarBusqueda()" *ngIf="!banderaDeBusqueda">
         <ion-icon slot="icon-only" name="search" color="omipali"></ion-icon>
@@ -23,29 +24,34 @@
 </ion-header>
 
 <ion-content>
-  <ion-tabs >
+  <ion-tabs>
     <ion-tab-bar slot="bottom" color="omipalidarkd">
-      <ion-tab-button tab="bebidas" (click)="cambiarBanderaTabs(0)" [ngClass]="{'botonesTabS': banderasTabs[0], 'botonesTabN': !banderasTabs[0]}">
+      <ion-tab-button tab="bebidas" (click)="cambiarBanderaTabs(0)"
+        [ngClass]="{'botonesTabS': banderasTabs[0], 'botonesTabN': !banderasTabs[0]}">
         <ion-icon src="assets/icon/botella.svg"></ion-icon>
         <ion-label>Bebidas</ion-label>
       </ion-tab-button>
 
-      <ion-tab-button tab="dulces" (click)="cambiarBanderaTabs(1)" [ngClass]="{'botonesTabS': banderasTabs[1], 'botonesTabN': !banderasTabs[1]}">
+      <ion-tab-button tab="dulces" (click)="cambiarBanderaTabs(1)"
+        [ngClass]="{'botonesTabS': banderasTabs[1], 'botonesTabN': !banderasTabs[1]}">
         <ion-icon src="assets/icon/galleta.svg"></ion-icon>
         <ion-label>Dulces</ion-label>
       </ion-tab-button>
 
-      <ion-tab-button tab="postres" (click)="cambiarBanderaTabs(2)" [ngClass]="{'botonesTabS': banderasTabs[2], 'botonesTabN': !banderasTabs[2]}">
+      <ion-tab-button tab="postres" (click)="cambiarBanderaTabs(2)"
+        [ngClass]="{'botonesTabS': banderasTabs[2], 'botonesTabN': !banderasTabs[2]}">
         <ion-icon src="assets/icon/postre.svg"></ion-icon>
         <ion-label>Postres</ion-label>
       </ion-tab-button>
 
-      <ion-tab-button tab="tortas" (click)="cambiarBanderaTabs(3)" [ngClass]="{'botonesTabS': banderasTabs[3], 'botonesTabN': !banderasTabs[3]}">
+      <ion-tab-button tab="tortas" (click)="cambiarBanderaTabs(3)"
+        [ngClass]="{'botonesTabS': banderasTabs[3], 'botonesTabN': !banderasTabs[3]}">
         <ion-icon src="assets/icon/torta.svg"></ion-icon>
         <ion-label>Tortas</ion-label>
       </ion-tab-button>
 
-      <ion-tab-button tab="promociones" (click)="cambiarBanderaTabs(4)" [ngClass]="{'botonesTabS': banderasTabs[4], 'botonesTabN': !banderasTabs[4]}">
+      <ion-tab-button tab="promociones" (click)="cambiarBanderaTabs(4)"
+        [ngClass]="{'botonesTabS': banderasTabs[4], 'botonesTabN': !banderasTabs[4]}">
         <ion-icon src="assets/icon/oferta.svg"></ion-icon>
         <ion-label>Promociones</ion-label>
       </ion-tab-button>

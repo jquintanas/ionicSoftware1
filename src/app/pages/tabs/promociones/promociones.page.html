@@ -1,12 +1,14 @@
 <ion-content>
   <ion-content>
     <ion-grid>
-      <ion-row> 
+      <ion-row>
         <ion-col size="12" *ngFor="let promocion of dataMostrar">
-          <app-card-productos [Imagen]="promocion.ImagenP" [Titulo]="promocion.Titulo" [Descripcion]="promocion.Descripcion" [Precio]="promocion.Precio"  [id]="promocion.id" [carrusel]="promocion.carrusel" [categoria]="promocion.categoria"></app-card-productos>
+          <app-card-productos [Imagen]="promocion.ImagenP" [Titulo]="promocion.Titulo"
+            [Descripcion]="promocion.Descripcion" [Precio]="promocion.Precio" [id]="promocion.id"
+            [carrusel]="promocion.carrusel" [categoria]="promocion.categoria"></app-card-productos>
         </ion-col>
       </ion-row>
     </ion-grid>
   </ion-content>
-  
+
 </ion-content>

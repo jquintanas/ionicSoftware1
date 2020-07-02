@@ -41,8 +41,6 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   buscarProducto() {
-    console.log("buscando....")
-    console.log(this.productoBusqueda)
     this.busqueda.generarBusqueda(this.productoBusqueda);
   }
 

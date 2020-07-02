@@ -9,7 +9,7 @@ import { environment } from "src/environments/environment";
 })
 export class BebidasPage implements OnInit, OnDestroy {
   private subsDatos: any;
-  private categoria: number= environment.codigoCategoriaBebida;
+  private categoria: number = environment.codigoCategoriaBebida;
   dataBebidas: detalleProducto[] = [
     {
       ImagenP: "https://cdn.aarp.net/content/dam/aarp/food/recipes/2018/10/1140-limofresa-gas-drink-esp.jpg",
@@ -17,7 +17,7 @@ export class BebidasPage implements OnInit, OnDestroy {
       Descripcion: "Un jugo muy rico de fresa.",
       Precio: 10,
       Favorito: false,
-      carrusel:["https://recetasfacil.online/wp-content/uploads/2018/06/postres-sin-horno-1.jpg", "https://cdn.aarp.net/content/dam/aarp/food/recipes/2018/10/1140-limofresa-gas-drink-esp.jpg", "https://i2.wp.com/www.diegocoquillat.com/wp-content/uploads/2018/06/tapa_bebidas.png?fit=700%2C336&ssl=1&resize=1280%2C720"],
+      carrusel: ["https://recetasfacil.online/wp-content/uploads/2018/06/postres-sin-horno-1.jpg", "https://cdn.aarp.net/content/dam/aarp/food/recipes/2018/10/1140-limofresa-gas-drink-esp.jpg", "https://i2.wp.com/www.diegocoquillat.com/wp-content/uploads/2018/06/tapa_bebidas.png?fit=700%2C336&ssl=1&resize=1280%2C720"],
       id: "1",
       categoria: this.categoria
     },
@@ -27,7 +27,7 @@ export class BebidasPage implements OnInit, OnDestroy {
       Descripcion: "vino tinto muy rico.",
       Precio: 0,
       Favorito: true,
-      carrusel:["https://recetasfacil.online/wp-content/uploads/2018/06/postres-sin-horno-1.jpg", "https://cdn.aarp.net/content/dam/aarp/food/recipes/2018/10/1140-limofresa-gas-drink-esp.jpg", "https://i2.wp.com/www.diegocoquillat.com/wp-content/uploads/2018/06/tapa_bebidas.png?fit=700%2C336&ssl=1&resize=1280%2C720"],
+      carrusel: ["https://recetasfacil.online/wp-content/uploads/2018/06/postres-sin-horno-1.jpg", "https://cdn.aarp.net/content/dam/aarp/food/recipes/2018/10/1140-limofresa-gas-drink-esp.jpg", "https://i2.wp.com/www.diegocoquillat.com/wp-content/uploads/2018/06/tapa_bebidas.png?fit=700%2C336&ssl=1&resize=1280%2C720"],
       id: "2",
       categoria: this.categoria
     },
@@ -37,7 +37,7 @@ export class BebidasPage implements OnInit, OnDestroy {
       Descripcion: "",
       Precio: 2.5,
       Favorito: false,
-      carrusel:["https://recetasfacil.online/wp-content/uploads/2018/06/postres-sin-horno-1.jpg", "https://cdn.aarp.net/content/dam/aarp/food/recipes/2018/10/1140-limofresa-gas-drink-esp.jpg", "https://i2.wp.com/www.diegocoquillat.com/wp-content/uploads/2018/06/tapa_bebidas.png?fit=700%2C336&ssl=1&resize=1280%2C720"],
+      carrusel: ["https://recetasfacil.online/wp-content/uploads/2018/06/postres-sin-horno-1.jpg", "https://cdn.aarp.net/content/dam/aarp/food/recipes/2018/10/1140-limofresa-gas-drink-esp.jpg", "https://i2.wp.com/www.diegocoquillat.com/wp-content/uploads/2018/06/tapa_bebidas.png?fit=700%2C336&ssl=1&resize=1280%2C720"],
       id: "3",
       categoria: this.categoria
     }
@@ -48,7 +48,6 @@ export class BebidasPage implements OnInit, OnDestroy {
     this.dataMostrar = this.dataBebidas;
   }
   ngOnDestroy(): void {
-    console.log("sali")
     this.subsDatos.unsubscribe();
   }
 
