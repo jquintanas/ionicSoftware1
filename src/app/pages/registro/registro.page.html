@@ -1,7 +1,7 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button slot="start" color="omipali" (click)="regresar()">
+      <ion-button slot="start" color="omipali" (click)="return()">
         <ion-icon name="arrow-back-outline"></ion-icon>
       </ion-button>
       <!-- <ion-back-button color="omipali"></ion-back-button> -->
@@ -16,147 +16,230 @@
       <ion-label>Datos Personales</ion-label>
     </div>
     <hr color="white" class="lineahr" />
-    <div [ngSwitch]="paso_formulario">
+    <div [ngSwitch]="goToForm">
       <div *ngSwitchCase="1">
-        <form [formGroup]="form" (ngSubmit)="save()" class="formulario">
+        <form [formGroup]="form" class="formulario">
           <ion-item lines="none" class="cedula" color="none">
-            <ion-input type="tel" placeholder="Cédula" maxlength="10" class="inputced" formControlName="cedula">
+            <ion-input
+              type="tel"
+              placeholder="Cédula"
+              maxlength="10"
+              class="inputced"
+              formControlName="idField"
+            >
             </ion-input>
           </ion-item>
-          <div class="alert-danger" *ngIf="cedula.invalid && (cedula.dirty || cedula.touched)">
-            <div class="container-error-message" *ngIf="cedula.errors.required">
-              <ion-icon slot="start" name="information-circle-sharp" color="danger"></ion-icon>
-              Debe ingresar su número de cédula
-            </div>
-            <div class="container-error-message" *ngIf="cedula.errors.minlength">
-              <ion-icon slot="start" name="information-circle-sharp" color="danger"></ion-icon>
-              La cédula debe tener 10 dígitos
-            </div>
-            <div class="container-error-message" *ngIf="cedula.errors.maxlength">
-              <ion-icon slot="start" name="information-circle-sharp" color="danger"></ion-icon>
-              La cédula debe tener 10 dígitos
-            </div>
+          <div
+            class="container-error-message alert-danger"
+            *ngIf="getError('idField','1') != ''"
+          >
+            <ion-icon
+              slot="start"
+              name="information-circle-sharp"
+              color="danger"
+            ></ion-icon>
+            <strong> {{getError('idField','1')}}</strong>
           </div>
           <ion-item lines="none" class="nombres" color="none">
-            <ion-input type="text" placeholder="Nombres" class="inputnom" formControlName="nombres"></ion-input>
+            <ion-input
+              type="text"
+              placeholder="Nombres"
+              class="inputnom"
+              formControlName="namesField"
+            ></ion-input>
           </ion-item>
-          <div class="alert-danger" *ngIf="nombres.invalid && (nombres.dirty || nombres.touched)">
-            <div class="container-error-message" *ngIf="nombres.errors.required">
-              <ion-icon slot="start" name="information-circle-sharp" color="danger"></ion-icon>
-              Debe ingresar su nombre
-            </div>
+          <div
+            class="container-error-message alert-danger"
+            *ngIf="getError('namesField','1') != ''"
+          >
+            <ion-icon
+              slot="start"
+              name="information-circle-sharp"
+              color="danger"
+            ></ion-icon>
+            <strong> {{getError('namesField','1')}} </strong>
           </div>
           <ion-item lines="none" class="apellidos" color="none">
-            <ion-input type="text" placeholder="Apellidos" class="inputape" formControlName="apellidos"></ion-input>
+            <ion-input
+              type="text"
+              placeholder="Apellidos"
+              class="inputape"
+              formControlName="lastNamesField"
+            ></ion-input>
           </ion-item>
-          <div class="alert-danger" *ngIf="apellidos.invalid && (apellidos.dirty || apellidos.touched)">
-            <div class="container-error-message" *ngIf="apellidos.errors.required">
-              <ion-icon slot="start" name="information-circle-sharp" color="danger"></ion-icon>
-              Debe ingresar su apellido
-            </div>
+          <div
+            class="container-error-message alert-danger"
+            *ngIf="getError('lastNamesField','1') != ''"
+          >
+            <ion-icon
+              slot="start"
+              name="information-circle-sharp"
+              color="danger"
+            ></ion-icon>
+            <strong> {{getError('lastNamesField','1')}}</strong>
           </div>
           <ion-item lines="none" class="telefono" color="none">
-            <ion-input type="tel" maxlength="10" placeholder="Teléfono" class="inputel" formControlName="telefono">
+            <ion-input
+              type="tel"
+              maxlength="10"
+              placeholder="Teléfono"
+              class="inputel"
+              formControlName="phoneField"
+            >
             </ion-input>
           </ion-item>
-          <div class="alert-danger" *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)">
-            <div class="container-error-message" *ngIf="telefono.errors.required">
-              <ion-icon slot="start" name="information-circle-sharp" color="danger"></ion-icon>
-              Debe ingresar su número de teléfono
-            </div>
-            <div class="container-error-message" *ngIf="telefono.errors.pattern">
-              <ion-icon slot="start" name="information-circle-sharp" color="danger"></ion-icon>
-              El número debe ser válido
-            </div>
+          <div
+            class="container-error-message alert-danger"
+            *ngIf="getError('phoneField','1') != ''"
+          >
+            <ion-icon
+              slot="start"
+              name="information-circle-sharp"
+              color="danger"
+            ></ion-icon>
+            <strong> {{getError('phoneField','1')}}</strong>
           </div>
           <ion-item lines="none" class="correo" color="none">
-            <ion-input type="text" placeholder="Correo Electrónico" class="inputcor" formControlName="correo">
+            <ion-input
+              type="text"
+              placeholder="Correo Electrónico"
+              class="inputcor"
+              formControlName="emailField"
+            >
             </ion-input>
           </ion-item>
-          <div class="alert-danger" *ngIf="correo.invalid && (correo.dirty || correo.touched)">
-            <div class="container-error-message" *ngIf="correo.errors.required">
-              <ion-icon slot="start" name="information-circle-sharp" color="danger"></ion-icon>
-              Debe ingresar un correo electrónico
-            </div>
-            <div class="container-error-message" *ngIf="correo.errors.pattern">
-              <ion-icon slot="start" name="information-circle-sharp" color="danger"></ion-icon>
-              El correo debe ser válido
-            </div>
+          <div
+            class="container-error-message alert-danger"
+            *ngIf="getError('emailField','1') != ''"
+          >
+            <ion-icon
+              slot="start"
+              name="information-circle-sharp"
+              color="danger"
+            ></ion-icon>
+            <strong>{{getError('emailField','1')}}</strong>
           </div>
           <ion-item lines="none" class="contrasena" color="none">
-            <ion-input type="password" placeholder="Contraseña" class="inputcor" formControlName="contrasena">
+            <ion-input
+              type="password"
+              placeholder="Contraseña"
+              class="inputcor"
+              formControlName="passwordField"
+            >
             </ion-input>
           </ion-item>
-          <div class="alert-danger" *ngIf="contrasena.invalid && (contrasena.dirty || contrasena.touched)">
-            <div class="container-error-message" *ngIf="contrasena.errors.required">
-              <ion-icon slot="start" name="information-circle-sharp" color="danger"></ion-icon>
-              Debe ingresar una contraseña
-            </div>
-            <div class="container-error-message" *ngIf="contrasena.errors.minlength">
-              <ion-icon slot="start" name="information-circle-sharp" color="danger"></ion-icon>
-              La contraseña debe tener mínimo 8 caracteres
-            </div>
+          <div
+            class="container-error-message alert-danger"
+            *ngIf="getError('passwordField','1') != ''"
+          >
+            <ion-icon
+              slot="start"
+              name="information-circle-sharp"
+              color="danger"
+            ></ion-icon>
+            <strong> {{getError('passwordField','1')}}</strong>
           </div>
           <ion-item lines="none" class="contrasenac" color="none">
-            <ion-input type="password" placeholder="Confirmar Contraseña" class="inputcor"
-              formControlName="contrasenac">
+            <ion-input
+              type="password"
+              placeholder="Confirmar Contraseña"
+              class="inputcor"
+              formControlName="passwordCopyField"
+            >
             </ion-input>
           </ion-item>
-          <div class="alert-danger" *ngIf="contrasenac.invalid && (contrasenac.dirty || contrasenac.touched)">
-            <div class="container-error-message" *ngIf="contrasenac.errors.required">
-              <ion-icon slot="start" name="information-circle-sharp" color="danger"></ion-icon>
-              Debe confirmar la contraseña
-            </div>
-            <div class="container-error-message" *ngIf="contrasenac.errors.validarContrasena">
-              <ion-icon slot="start" name="information-circle-sharp" color="danger"></ion-icon>
-              Las contraseñas no coinciden
-            </div>
+          <div
+            class="container-error-message alert-danger"
+            *ngIf="getError('passwordCopyField','1') != ''"
+          >
+            <ion-icon
+              slot="start"
+              name="information-circle-sharp"
+              color="danger"
+            ></ion-icon>
+            <strong>{{getError('passwordCopyField','1')}}</strong>
           </div>
           <div class="contenedorboton ion-padding-horizontal">
-            <ion-button [disabled]="form.invalid" type="submit" expand="block" fill="clear"
-              class="siguiente ion-margin-vertical">
+            <ion-button
+              (click)="save()"
+              expand="block"
+              fill="clear"
+              class="siguiente ion-margin-vertical"
+              [disabled]="form.invalid"
+            >
               Siguiente
             </ion-button>
-            <!--[disabled]="!form.valid"-->
-          </div>
+          </div>-->
         </form>
       </div>
       <div *ngSwitchCase="2">
-        <form [formGroup]="form2" (ngSubmit)="save2()" class="formulario">
+        <form [formGroup]="form2" class="formulario">
           <ion-item lines="none" class="cedula" color="none">
-            <ion-input type="text" placeholder="Dirección de domicilio" class="inputdom" formControlName="domicilio"
-              value={{address}}></ion-input>
+            <ion-input
+              type="text"
+              placeholder="Dirección de domicilio"
+              class="inputdom"
+              formControlName="addressField"
+              
+            ></ion-input>
             <button type="button" slot="end" (click)="openModal()">
               <ion-icon name="map-sharp" slot="start"></ion-icon>
             </button>
           </ion-item>
-          <div class="alert-danger" *ngIf="domicilio.invalid && (domicilio.dirty || domicilio.touched)">
-            <div class="container-error-message" *ngIf="domicilio.errors.required">
-              <ion-icon slot="start" name="information-circle-sharp" color="danger"></ion-icon>
-              Debe ingresar su domicilio
+          <div
+            class="container-error-message alert-danger"
+            *ngIf="getError('addressField','2') != ''"
+            >
+              <ion-icon
+                slot="start"
+                name="information-circle-sharp"
+                color="danger"
+              ></ion-icon>
+              <strong> {{getError('addressField','2')}}</strong>
             </div>
-          </div>
           <ion-item color="none" lines="none" *ngIf="imagen">
-            <img width="100%"
+            <img
+              width="100%"
               src="https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/pin-s-marker+ffa500({{url_completa}}"
-              alt="Mapbox Map of -79.5419038,-1.8017518" class="imagen mapaimagen">
-
+              alt="Mapbox Map of -79.5419038,-1.8017518"
+              class="imagen mapaimagen"
+            />
           </ion-item>
-          <ion-item lines="none" class="referencias" color="none" class="referenciasdom">
-            <ion-textarea id="referencias" type="text" placeholder="Puede indicar alguna referencia de su domicilio"
-              class="inputref" formControlName="referencias">
+          <ion-item
+            lines="none"
+            class="referencias"
+            color="none"
+            class="referenciasdom"
+          >
+            <ion-textarea
+              id="referencias"
+              type="text"
+              placeholder="Puede indicar alguna referencia de su domicilio"
+              class="inputref"
+              formControlName="referencesField"
+            >
             </ion-textarea>
           </ion-item>
+          <div
+            class="container-error-message alert-danger"
+            *ngIf="getError('referencesField','2') != ''"
+          >
+            <ion-icon
+              slot="start"
+              name="information-circle-sharp"
+              color="danger"
+            ></ion-icon>
+            <strong> {{getError('referencesField','2')}}</strong>
+          </div>
           <div class="padre">
-            <!-- <div class="hijo">
-              <ion-button type="button" expand="block" fill="clear" class="regresar ion-margin-vertical"
-                (click)="regresar()">
-                Regresar
-              </ion-button>
-            </div> -->
             <div class="hijo">
-              <ion-button type="submit" expand="block" fill="clear" class="registrar ion-margin-vertical"
-                [disabled]="!form.valid || !form2.valid">
+              <ion-button
+                (click)="save2()"
+                expand="block"
+                fill="clear"
+                class="registrar ion-margin-vertical"
+                [disabled]="!form.valid || !form2.valid"
+              >
                 Registrarse
               </ion-button>
             </div>
