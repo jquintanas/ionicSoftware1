@@ -6,7 +6,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 import { AngularFireAuth } from '@angular/fire/auth';
-import * as firebase from 'firebase';;
+import * as firebase from 'firebase';
+import {environment} from "src/environments/environment"
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 import {usuarioInterface} from 'src/app/interface/usuarioRegistro';
 
@@ -16,15 +17,17 @@ import {usuarioInterface} from 'src/app/interface/usuarioRegistro';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  picture;
   name: string;
   email: string;
   isSubmitted = false;
   currentPopover = null;
-  formulario_login: FormGroup;
-  private phonepattern: any = /^(09){1}[0-9]{8}$/;
+  loginForm: FormGroup;
   phoneNumber: string;
   password: string;
+  user: any = {};
+  showPassword = false;
+  passwordToogleIcon = 'eye-sharp';
+
   constructor(
     private formBuilder: FormBuilder,
     private navController: NavController,
@@ -42,56 +45,76 @@ export class LoginPage implements OnInit {
   }
 
   buildForm() {
-    this.formulario_login = this.formBuilder.group({
-      telefono: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10), Validators.pattern(this.phonepattern)]],
-      contrasena: ['', [Validators.required, Validators.minLength(8)]],
+    this.loginForm = this.formBuilder.group({
+      phoneField:    ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10),Validators.pattern(environment.phonePatter)]],
+      passwordField: ['', [Validators.required, Validators.min(8)]],
     });
   }
 
-  user: any = {};
+  toogglePassword(): void{
+    this.showPassword = !this.showPassword;
+    if (this.passwordToogleIcon == 'eye-sharp' ) {
+      this.passwordToogleIcon = 'eye-off-sharp';
+    } else {
+      this.passwordToogleIcon = 'eye-sharp';
+    }
+  }
 
   save() {
-    if (this.formulario_login.valid) {
-      const value = this.formulario_login.value;
-      console.log(value);
-      console.log(this.formulario_login);
+    if (this.loginForm.valid) {
+      const value = this.loginForm.value;
       this.alertsService.presentLoading("Bienvenido" + " Danny");
       this.navController.navigateRoot("/home");
     } else {
-      console.log('formulario inválido', this.formulario_login);
+      console.log('formulario inválido', this.loginForm);
       this.onResetForm();
 
     }
   }
 
 
-  get telefono() {
-    return this.formulario_login.get('telefono');
-  }
-  get contrasena() {
-    return this.formulario_login.get('contrasena');
-  }
-
   onResetForm() {
-    this.formulario_login.reset();
+    this.loginForm.reset();
   }
 
-  abrirRegistro() {
+  openRegister() {
     this.router.navigateByUrl('registro');
 
   }
 
-  abrirRecuperarContra() {
+  openRecoveryPassword() {
     this.router.navigateByUrl('recuperar-contrasena');
   }
 
-  async abrirContrasena() {
+  async openPassword() {
     const modal = await this.modalController.create({
       component: RecuperarContrasenaPage
     });
     return await modal.present();
 
   }
+
+
+  public getError(controlName: string ) : string{
+    let control = this.loginForm.get(controlName);
+    let field;
+    if ((control.touched || control.dirty) && control.errors != null) {
+      if (control.errors.required != null) { 
+        field = controlName;
+        if (controlName == "phoneField") {
+          field = "Teléfono";
+        } else if (controlName == "passwordField") {
+          field = "Contraseña";
+        }
+        return 'El campo '+field+' es requerido.';
+      }if (controlName == "phoneField" && control.errors.pattern != null) {
+        return 'Ingrese un teléfono válido';
+      }
+    } 
+    return '';
+  }
+
+
 
   onSubmitLogin() {
     this.auth.login(this.phoneNumber, this.password);

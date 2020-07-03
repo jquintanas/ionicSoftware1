@@ -5,53 +5,34 @@
         <img src="/assets/logos/logo.png" class="imagenlogo">
     </div>
  
-    <form class="ion-margin" [formGroup]="formulario_login" (ngSubmit)="save()">
+    <form class="ion-margin" [formGroup]="loginForm" >
         <ion-item  lines="none" class="telefono" color="none" >
           <ion-icon slot="start" name="call-sharp" ></ion-icon>
-          <ion-input type="text" [(ngModel)]="phoneNumber" placeholder="Teléfono" class="inputel" formControlName="telefono" autofocus="true" ></ion-input>
+          <ion-input type="text"  maxlength = 10 placeholder="Teléfono" class="inputel" formControlName="phoneField" ></ion-input>
         </ion-item>
-        <div class="alert-danger" *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)">          
-          <div class="container-error-message " *ngIf="telefono.errors.required &&  telefono.touched">
-            <ion-icon slot="start" name="information-circle-sharp" color="danger" ></ion-icon>
-            Debe ingresar su número de teléfono
-          </div>
-          <!--<div class="container-error-message " *ngIf="telefono.errors.minlength">
-            <ion-icon slot="start" name="information-circle-sharp" color="danger" ></ion-icon>
-            El teléfono debe tener 10 dígitos
-          </div>
-          <div class="container-error-message " *ngIf="telefono.errors.maxlength">
-            <ion-icon slot="start" name="information-circle-sharp" color="danger" ></ion-icon>
-            El teléfono debe tener 10 dígitos
-          </div>-->
-          <div class="container-error-message " *ngIf="telefono.errors.pattern">
-            <ion-icon slot="start" name="information-circle-sharp" color="danger" ></ion-icon>
-            El número debe ser válido
-          </div>
+        <div class="container-error-message alert-danger" *ngIf="getError('phoneField') != ''">
+          <ion-icon slot="start" name="information-circle-sharp" color="danger"></ion-icon>
+          {{getError('phoneField')}}
         </div>
         <ion-item  lines="none" class="contrasena" color="none">
           <ion-icon slot="start" name="lock-closed-sharp" class="iconocontra"></ion-icon>
-          <ion-input type="password" [(ngModel)]="password" placeholder="Contraseña" class="inputcontra" formControlName="contrasena" ></ion-input>
+          <ion-input [type]="showPassword ? 'text' : 'password' "  placeholder="Contraseña" class="inputcontra" formControlName="passwordField" ></ion-input>
+          <ion-icon slot="end" [name]="passwordToogleIcon" (click)="toogglePassword()"></ion-icon>
         </ion-item>
-        <div class="alert-danger" *ngIf="contrasena.invalid && (contrasena.dirty || contrasena.touched)">
-          <div class="container-error-message " *ngIf="contrasena.errors.required">
-            <ion-icon slot="start" name="information-circle-sharp" color="danger" ></ion-icon>
-            Debe ingresar su contraseña
-          </div>
-          <div class="container-error-message " *ngIf="contrasena.errors.minlength">
-            <ion-icon slot="start" name="information-circle-sharp" color="danger" ></ion-icon>
-            La contraseña debe tener mínimo 8 caracteres 
-          </div>
+        <div class="container-error-message alert-danger" *ngIf="getError('passwordField') != ''">
+          <ion-icon slot="start" name="information-circle-sharp" color="danger"></ion-icon>
+          {{getError('passwordField')}}     
         </div>
-        <div class="recuperarcontra" (click)="abrirRecuperarContra()" >
+        <div class="recuperarcontra" (click)="openRecoveryPassword()" >
           <span slot="end"><a   class="linkcontra" > ¿Olvidó su contraseña?</a></span>       
         </div>        
         <div class="contenedorboton">
           <!--[disabled]="!formulario_login.valid"-->
-          <ion-button (click)="onSubmitLogin()"  type="submit" expand="block" fill="clear"  class="login" [disabled]="!formulario_login.valid" >
+          <ion-button (click)="save()" expand="block" fill="clear"  class="login" [disabled]="!loginForm.valid" >
             Ingresar
           </ion-button>
         </div>
-        <div class="registrar" (click)="abrirRegistro()" >
+        <div class="registrar" (click)="openRegister()" >
           <span slot="end" class="cuenta">¿No tienes una cuenta?&nbsp;<a  class="registro">Registrate</a></span>   
         </div>  
     </form>

@@ -42,7 +42,7 @@
     "cordova-support-google-services": "^1.4.1",
     "core-js": "^2.5.4",
     "crypto-js": "^4.0.0",
-    "firebase": "^7.15.3",
+    "firebase": "^7.15.5",
     "ionic4-hidenav": "^1.0.0",
     "mapbox-gl": "^1.10.1",
     "rxjs": "~6.5.1",
