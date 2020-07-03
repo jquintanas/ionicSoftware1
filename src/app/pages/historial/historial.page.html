@@ -17,7 +17,6 @@
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content>
   <div *ngIf="segment == 'active'">
     <section>
@@ -39,11 +38,8 @@
             <li class="noactive">PEDIDO ENTREGADO</li>
             <br>
           </ul>
-
         </div>
       </section>
-
-      <!--PEDIDO EN TRANSITO-->
 
       <section>
         <ion-card class="delivery">
@@ -59,7 +55,6 @@
             </ion-row>
           </ion-item>
 
-
           <ion-card-content>
             <ion-row>
               <ion-col>
@@ -68,13 +63,9 @@
             </ion-row>
           </ion-card-content>
         </ion-card>
-
       </section>
 
       <ion-card>
-
-
-
         <ion-item>
           <ion-avatar item-start>
             <img src="assets/icon/checkverde.png">
@@ -82,7 +73,6 @@
           <ion-card-header>PEDIDO #1234</ion-card-header>
           <ion-card-subtitle slot="end">Total $5.50</ion-card-subtitle>
         </ion-item>
-
 
         <ion-card-content>
           <ion-row>
@@ -96,22 +86,18 @@
             </ion-col>
           </ion-row>
 
-
           <ion-label>2 MOJADA DE CHOCOLATE</ion-label><br>
           <ion-label>2 MOJADA DE CHOCOLATE</ion-label><br>
           <ion-label>3 MOJADA DE CHOCOLATE</ion-label>
 
         </ion-card-content>
-
       </ion-card>
-
     </section>
   </div>
-  <div *ngIf="segment == 'past'">
 
+  <div *ngIf="segment == 'past'">
     <section>
       <ion-card>
-
         <ion-item>
           <ion-avatar item-start>
             <img src="assets/icon/check.png">
@@ -119,7 +105,6 @@
           <ion-card-header>PEDIDO</ion-card-header>
           <ion-card-subtitle>Mes 5, 2020</ion-card-subtitle>
         </ion-item>
-
 
         <ion-card-content>
           <ion-row>
@@ -136,6 +121,5 @@
       </ion-card>
 
     </section>
-
   </div>
 </ion-content>
