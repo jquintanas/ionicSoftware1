@@ -100,7 +100,9 @@
       </ion-row>
       <ion-row *ngIf="referencias" class="mensajtiempo">
         <ion-col >
-            <ion-textarea rows="1" value={{address}} class="textareadir ion-no-padding"> </ion-textarea>
+          <ion-textarea rows="1" class="textareadir ion-no-padding" required [(ngModel)] = "newAddressString" #ctrl="ngModel"> </ion-textarea> 
+          <span *ngIf="ctrl.touched && ctrl.errors?.required" ><ion-icon slot="start" name="information-circle" color="danger"></ion-icon> <ion-text color="danger">
+            Debe ingresar el domicilio</ion-text></span>    
         </ion-col>
       </ion-row>
       <ion-row *ngIf="referencias" class="mensajtiempo">
@@ -117,7 +119,9 @@
       </ion-row>
       <ion-row *ngIf="referencias" class="mensajtiempo">
         <ion-col >
-            <ion-textarea rows="2" class="textareadir ion-no-padding"> </ion-textarea>
+            <ion-textarea rows="2"  required class="textareadir ion-no-padding" [(ngModel)] = "referencesString" #ctrl2="ngModel"> </ion-textarea>
+            <span *ngIf="ctrl2.touched && ctrl2.errors?.required" ><ion-icon slot="start" name="information-circle" color="danger"></ion-icon> <ion-text color="danger">
+              Debe ingresar una referencia del domicilio</ion-text></span> 
         </ion-col>
       </ion-row>
       <ion-row *ngIf="domicilio" class="mensajtiempo">     
@@ -262,7 +266,7 @@
         <ion-col size="2">
         </ion-col>
         <ion-col size="8">
-          <ion-button expand="block" fill="clear"class="realizarcomp" (click)="comprar()">Realizar compra</ion-button>
+          <ion-button expand="block" fill="clear"class="realizarcomp" (click)="purchase()">Realizar compra</ion-button>
         </ion-col>
         <ion-col size="2">
         </ion-col>
