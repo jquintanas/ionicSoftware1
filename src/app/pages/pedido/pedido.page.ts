@@ -6,6 +6,7 @@ import { Component, OnInit } from "@angular/core";
 import { MapaMapboxPage } from "./../mapa-mapbox/mapa-mapbox.page";
 import { HttpClient } from "@angular/common/http";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
+import { AlertsService } from 'src/app/services/alerts/alerts.service';
 
 @Component({
   selector: "app-pedido",
@@ -36,7 +37,8 @@ export class PedidoPage implements OnInit {
     public modalController: ModalController,
     public alertController: AlertController,
     public router: Router,
-    public mapaService: MapaDatosService
+    public mapaService: MapaDatosService,
+    public alertService : AlertsService
   ) {}
 
   ngOnInit() {}
@@ -105,7 +107,15 @@ export class PedidoPage implements OnInit {
   }
 
   async purchase() {
-    this.verifyData();
+    if((this.domicilio == false && this.local == false) && (this.efectivo == false && this.depotran == false)){
+      this.alertService.alert("Debe escoger el tipo de entrega y método de pago");
+    }else if(this.efectivo == false && this.depotran == false){
+      this.alertService.alert("Debe escoger el método de pago");
+    }else if(this.domicilio == false && this.local == false){
+      this.alertService.alert("Debe escoger el tipo de entrega");
+    }else{
+      this.verifyData();
+    }
     
   }
 
@@ -122,7 +132,7 @@ export class PedidoPage implements OnInit {
         const alert = await this.alertController.create({
           header: "Error - Datos Incompletos ",
           message:
-            "Debe llenar los campos solicitados para generar la compra",
+            "Debe llenar los camposde ubicación solicitados",
           buttons: [
             {
               text: "Aceptar",

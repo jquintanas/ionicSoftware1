@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ToastController } from '@ionic/angular';
+import { ToastController, AlertController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
 
 @Injectable({
@@ -7,7 +7,7 @@ import { LoadingController } from '@ionic/angular';
 })
 export class AlertsService {
 
-  constructor(public loadingController: LoadingController,private toastCtrl: ToastController) { 
+  constructor(public loadingController: LoadingController,private toastCtrl: ToastController, private alterCrtl: AlertController) { 
 
   }
 
@@ -31,5 +31,17 @@ export class AlertsService {
     });
   
     toast.present();
+  }
+  async alert(mensaje:string){
+    const alert = await this.alterCrtl.create({
+      header: "Error de Compra",
+      message:
+        mensaje,
+      buttons: [
+        {
+          text: "Aceptar"}
+      ],
+    });
+    await alert.present();
   }
 }
