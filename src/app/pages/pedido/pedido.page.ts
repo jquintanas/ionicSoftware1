@@ -5,7 +5,7 @@ import { ModalController, AlertController } from "@ionic/angular";
 import { Component, OnInit } from "@angular/core";
 import { MapaMapboxPage } from "./../mapa-mapbox/mapa-mapbox.page";
 import { HttpClient } from "@angular/common/http";
-import { FormBuilder, Validators, FormGroup } from "@angular/forms";
+import { FormBuilder, Validators, FormGroup, NgModel } from "@angular/forms";
 import { AlertsService } from 'src/app/services/alerts/alerts.service';
 
 @Component({
@@ -81,6 +81,33 @@ export class PedidoPage implements OnInit {
     }
   }
 
+  public validation(crtl: NgModel, name: string):string{
+    let mensaje:string;
+    if(name == "newAddressString"){
+      if((crtl.touched || crtl.dirty) && (crtl.errors != null)){
+        if (crtl.errors.required != null) {
+          mensaje = "Debe ingresar el domicilio";
+          return mensaje;  
+        }
+        if((crtl.touched && crtl.dirty) && (!crtl.hasError('minglength'))){
+          mensaje =  "La dirección debe tener más de 10 caracteres";
+          return mensaje;  
+        }        
+      }
+    }else if(name == "referencesString"){
+      if((crtl.touched || crtl.dirty) && (crtl.errors != null)){
+        if (crtl.errors.required != null) {
+          mensaje = "Debe ingresar la referencia del domicilio";
+          return mensaje;  
+        }
+        if((crtl.touched && crtl.dirty) && (!crtl.hasError('minglength'))){
+          mensaje =  "La referencia debe tener más de 10 caracteres";
+          return mensaje;  
+        }        
+      }
+    }  
+    return '';
+  }
   async openModal() {
     this.referencias = false;
     const modal = await this.modalController.create({
@@ -99,7 +126,7 @@ export class PedidoPage implements OnInit {
         if (this.url_completa != "") {
           this.imagen = true;
         }
-        console.log(this.address);
+        
       }
     });
 
@@ -119,20 +146,22 @@ export class PedidoPage implements OnInit {
     
   }
 
-  async verifyData(){
+  async verifyData(){   
     if(this.isNewAddress){
       if (
         this.newAddressString == undefined ||
         this.newAddressString == " " ||
         this.newAddressString == "" ||
+        this.newAddressString.length <10|| 
         this.referencesString == undefined ||
         this.referencesString == " " ||
-        this.referencesString == ""
+        this.referencesString == "" ||
+        this.referencesString.length <10
       ) {
         const alert = await this.alertController.create({
           header: "Error - Datos Incompletos ",
           message:
-            "Debe llenar los camposde ubicación solicitados",
+            "Debe llenar los campos de ubicación solicitados",
           buttons: [
             {
               text: "Aceptar",

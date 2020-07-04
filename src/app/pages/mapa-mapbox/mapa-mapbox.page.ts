@@ -138,7 +138,6 @@ export class MapaMapboxPage implements OnInit {
     this.mapaDatosService.marcador_guardado = true;
     this.posicion = this.latitud.toString() + "|" + this.longitud.toString();
     if(this.botonGuardarnuevo == true){
-      console.log("es true");
       this.alertsService.presentToast("Posición guardada");
     }
     await this.modalController.dismiss(this.posicion);

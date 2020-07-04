@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="omipalidarkd">
     <ion-buttons slot="start">
-      <ion-back-button ></ion-back-button>
+      <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>Pedido</ion-title>
   </ion-toolbar>
@@ -10,9 +10,9 @@
 <ion-content fullscreen class="content">
   <div class="item">
     <ion-grid fixed class="griduser">
-      <ion-row >
+      <ion-row>
         <ion-col>
-          <ion-item class = "ion-no-padding confirmacion" lines="none">
+          <ion-item class="ion-no-padding confirmacion" lines="none">
             <ion-label>Confirmación del pedido</ion-label>
           </ion-item>
         </ion-col>
@@ -52,7 +52,6 @@
       </ion-row>
     </ion-grid>
   </div>
-    
 
   <div class="item">
     <ion-grid fixed class="direccionEntrega">
@@ -61,82 +60,141 @@
           <ion-label>Dirección de Entrega</ion-label>
         </ion-col>
       </ion-row>
-      <ion-row >
+      <ion-row>
         <ion-col size="12">
-          <ion-item class = "ion-no-padding tipoEntrega" lines="none">
-            <ion-label >Elija el tipo de entrega</ion-label>
-            <ion-select interface="popover" class="item_seleccion" #mySelect (ionChange)='onOptionsSelected(mySelect.value)'>
-              <ion-select-option value="Domicilio" >Domicilio</ion-select-option>
-              <ion-select-option value="Local">Retiro en Local</ion-select-option>
+          <ion-item class="ion-no-padding tipoEntrega" lines="none">
+            <ion-label>Elija el tipo de entrega</ion-label>
+            <ion-select
+              interface="popover"
+              class="item_seleccion"
+              #mySelect
+              (ionChange)="onOptionsSelected(mySelect.value)"
+            >
+              <ion-select-option value="Domicilio">Domicilio</ion-select-option>
+              <ion-select-option value="Local"
+                >Retiro en Local</ion-select-option
+              >
             </ion-select>
           </ion-item>
         </ion-col>
       </ion-row>
-      <ion-row  *ngIf="domicilio">
+      <ion-row *ngIf="domicilio">
         <ion-col size="12">
-          <ion-item class = "ion-no-padding tipoEntrega" lines="none">
-            <ion-label >Elija la dirección</ion-label>
-            <ion-select interface="popover" class="item_seleccion" #mySelect2 (ionChange)='onOptionsSelected2(mySelect2.value)'>
-              <ion-select-option value="Registrada" >Alborada6ta etapa</ion-select-option>
-              <ion-select-option value="Nueva">Nueva dirección</ion-select-option>
+          <ion-item class="ion-no-padding tipoEntrega" lines="none">
+            <ion-label>Elija la dirección</ion-label>
+            <ion-select
+              interface="popover"
+              class="item_seleccion"
+              #mySelect2
+              (ionChange)="onOptionsSelected2(mySelect2.value)"
+            >
+              <ion-select-option value="Registrada"
+                >Alborada6ta etapa</ion-select-option
+              >
+              <ion-select-option value="Nueva"
+                >Nueva dirección</ion-select-option
+              >
             </ion-select>
           </ion-item>
         </ion-col>
       </ion-row>
       <ion-row *ngIf="mapa" class="mensajtiempo">
-        <ion-col >
-          <ion-item class = "ion-no-padding tipoEntrega" lines="none">
+        <ion-col>
+          <ion-item class="ion-no-padding tipoEntrega" lines="none">
             <ion-label>Indique la ubicación</ion-label>
-            <ion-button  slot="end" color="omipalidarkd" (click)="openModal()" >
-              <ion-icon  name="map-outline" color="omipali"></ion-icon>
+            <ion-button slot="end" color="omipalidarkd" (click)="openModal()">
+              <ion-icon name="map-outline" color="omipali"></ion-icon>
             </ion-button>
-          </ion-item>             
-        </ion-col>  
-      </ion-row>
-      <ion-row *ngIf="referencias" class="mensajtiempo">
-        <ion-col >
-            <ion-label class="labeldir">Nueva Dirección</ion-label>
-        </ion-col>
-      </ion-row>
-      <ion-row *ngIf="referencias" class="mensajtiempo">
-        <ion-col >
-          <ion-textarea rows="1" class="textareadir ion-no-padding" required [(ngModel)] = "newAddressString" #ctrl="ngModel"> </ion-textarea> 
-          <span *ngIf="ctrl.touched && ctrl.errors?.required" ><ion-icon slot="start" name="information-circle" color="danger"></ion-icon> <ion-text color="danger">
-            Debe ingresar el domicilio</ion-text></span>    
-        </ion-col>
-      </ion-row>
-      <ion-row *ngIf="referencias" class="mensajtiempo">
-        <ion-col >
-          <ion-item  color="none" lines="none" *ngIf="imagen" >
-            <img width="100%" src="https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/pin-s-marker+ffa500({{url_completa}}" alt="UBICACION" class="imagen mapaimagen">
           </ion-item>
         </ion-col>
       </ion-row>
-      <ion-row *ngIf="referencias" class="mensajtiempo filareferenia" >
-        <ion-col >
-            <ion-label class="labeldir">Referencia de la dirección añadida</ion-label>
+      <ion-row *ngIf="referencias" class="mensajtiempo">
+        <ion-col>
+          <ion-label class="labeldir">Nueva Dirección</ion-label>
         </ion-col>
       </ion-row>
       <ion-row *ngIf="referencias" class="mensajtiempo">
-        <ion-col >
-            <ion-textarea rows="2"  required class="textareadir ion-no-padding" [(ngModel)] = "referencesString" #ctrl2="ngModel"> </ion-textarea>
-            <span *ngIf="ctrl2.touched && ctrl2.errors?.required" ><ion-icon slot="start" name="information-circle" color="danger"></ion-icon> <ion-text color="danger">
-              Debe ingresar una referencia del domicilio</ion-text></span> 
+        <ion-col>
+          <ion-textarea
+            rows="2"
+            class="textareadir ion-no-padding"
+            minlength="10"
+            required
+            [(ngModel)]="newAddressString"
+            #ctrl="ngModel"
+          >
+          </ion-textarea>
+          <span *ngIf="validation(ctrl,'newAddressString') != ''"
+            ><ion-icon
+              slot="start"
+              name="information-circle"
+              color="danger"
+            ></ion-icon>
+            <ion-text color="danger">
+              {{validation(ctrl,'newAddressString')}}</ion-text
+            ></span
+          >
         </ion-col>
       </ion-row>
-      <ion-row *ngIf="domicilio" class="mensajtiempo">     
-        <ion-col >      
-          <ion-label>Tiempo estimado de espera 10 - 20 minutos </ion-label>      
+      <ion-row *ngIf="referencias" class="mensajtiempo">
+        <ion-col>
+          <ion-item color="none" lines="none" *ngIf="imagen">
+            <img
+              width="100%"
+              src="https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/pin-s-marker+ffa500({{url_completa}}"
+              alt="UBICACION"
+              class="imagen mapaimagen"
+            />
+          </ion-item>
         </ion-col>
-        
       </ion-row>
-      <ion-row *ngIf="local" >
-        <ion-col >
+      <ion-row *ngIf="referencias" class="mensajtiempo filareferenia">
+        <ion-col>
+          <ion-label class="labeldir"
+            >Referencia de la dirección añadida</ion-label
+          >
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="referencias" class="mensajtiempo">
+        <ion-col>
+          <ion-textarea
+            rows="2"
+            required
+            class="textareadir ion-no-padding"
+            minlength="10"
+            [(ngModel)]="referencesString"
+            #ctrl2="ngModel"
+          >
+          </ion-textarea>
+          <span *ngIf="validation(ctrl2,'referencesString') != ''"
+            ><ion-icon
+              slot="start"
+              name="information-circle"
+              color="danger"
+            ></ion-icon>
+            <ion-text color="danger">
+              {{validation(ctrl2,'referencesString')}}</ion-text
+            ></span
+          >
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="domicilio" class="mensajtiempo">
+        <ion-col>
+          <ion-label>Tiempo estimado de espera 10 - 20 minutos </ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="local">
+        <ion-col>
           <ion-item class="ion-no-border direccionlocal" lines="none">
             <ion-label position="floating">Dirección Local</ion-label>
-            <ion-textarea readonly rows="1" value="Jaime Roldós Avenue 220, Babahoyo"> </ion-textarea>
-            <ion-button  slot="end" color="omipalidarkd" (click)="openModal()" >
-              <ion-icon  name="map-outline" color="omipali"></ion-icon>
+            <ion-textarea
+              readonly
+              rows="1"
+              value="Jaime Roldós Avenue 220, Babahoyo"
+            >
+            </ion-textarea>
+            <ion-button slot="end" color="omipalidarkd" (click)="openModal()">
+              <ion-icon name="map-outline" color="omipali"></ion-icon>
             </ion-button>
           </ion-item>
         </ion-col>
@@ -145,18 +203,21 @@
         <ion-col size="8">
           <ion-item class="ion-no-border hora" lines="none">
             <ion-label>Elija la hora a retirar el pedido</ion-label>
-          </ion-item>         
+          </ion-item>
         </ion-col>
-        <ion-col size="4" >
+        <ion-col size="4">
           <ion-item class="ion-no-border reloj" lines="none">
-            <ion-datetime display-format="h:mm A" picker-format="h:mm A" value="1990-02-19T07:43Z"></ion-datetime>
+            <ion-datetime
+              display-format="h:mm A"
+              picker-format="h:mm A"
+              value="1990-02-19T07:43Z"
+            ></ion-datetime>
           </ion-item>
         </ion-col>
       </ion-row>
     </ion-grid>
-
   </div>
-    
+
   <div class="item">
     <ion-grid fixed class="gridcarrito">
       <ion-row class="rowdatos">
@@ -207,22 +268,28 @@
           <ion-label>Pago</ion-label>
         </ion-col>
       </ion-row>
-      <ion-row >
+      <ion-row>
         <ion-col size="12">
-          <ion-item class = "ion-no-padding tipoPago" lines="none">
-            <ion-label >Elija el método de pago</ion-label>
-            <ion-select interface="popover" class="item_seleccion" #mySelect3 (ionChange)='onOptionsSelected3(mySelect3.value)'>
-              <ion-select-option value="Efectivo" >Efectivo</ion-select-option>
-              <ion-select-option value="Deposito" >Depósito</ion-select-option>
-              <ion-select-option value="Transferencia">Transferencia</ion-select-option>
+          <ion-item class="ion-no-padding tipoPago" lines="none">
+            <ion-label>Elija el método de pago</ion-label>
+            <ion-select
+              interface="popover"
+              class="item_seleccion"
+              #mySelect3
+              (ionChange)="onOptionsSelected3(mySelect3.value)"
+            >
+              <ion-select-option value="Efectivo">Efectivo</ion-select-option>
+              <ion-select-option value="Deposito">Depósito</ion-select-option>
+              <ion-select-option value="Transferencia"
+                >Transferencia</ion-select-option
+              >
             </ion-select>
           </ion-item>
         </ion-col>
       </ion-row>
     </ion-grid>
-
   </div>
-    
+
   <div class="item">
     <ion-grid fixed class="gridresumen">
       <ion-row class="rowdatos">
@@ -230,7 +297,7 @@
           <ion-label>Resumen</ion-label>
         </ion-col>
       </ion-row>
-      <ion-row  class="rowdatosresumen">
+      <ion-row class="rowdatosresumen">
         <ion-col size="9">
           <ion-label>Subtotal</ion-label>
         </ion-col>
@@ -245,17 +312,17 @@
         <ion-col size="3">
           <ion-label>$1.50</ion-label>
         </ion-col>
-      </ion-row>      
+      </ion-row>
     </ion-grid>
   </div>
-  <div class="item ">
+  <div class="item">
     <ion-grid fixed class="gridtot">
-      <ion-row >
+      <ion-row>
         <ion-col size="9">
           <ion-label>Total</ion-label>
         </ion-col>
         <ion-col size="3">
-          <ion-label >$17.00</ion-label>
+          <ion-label>$17.00</ion-label>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -263,18 +330,18 @@
   <div>
     <ion-grid fixed class="gridbutton">
       <ion-row>
-        <ion-col size="2">
-        </ion-col>
+        <ion-col size="2"> </ion-col>
         <ion-col size="8">
-          <ion-button expand="block" fill="clear"class="realizarcomp" (click)="purchase()">Realizar compra</ion-button>
+          <ion-button
+            expand="block"
+            fill="clear"
+            class="realizarcomp"
+            (click)="purchase()"
+            >Realizar compra</ion-button
+          >
         </ion-col>
-        <ion-col size="2">
-        </ion-col>
-      </ion-row>  
+        <ion-col size="2"> </ion-col>
+      </ion-row>
     </ion-grid>
   </div>
-
-    
-
-
 </ion-content>
