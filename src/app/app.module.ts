@@ -16,7 +16,7 @@ import { AngularFireModule } from "@angular/fire"
 import { AngularFireAuthModule } from "@angular/fire/auth"
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
-import { Facebook} from '@ionic-native/facebook/ngx';
+import { Facebook } from '@ionic-native/facebook/ngx';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 
 @NgModule({
@@ -41,7 +41,11 @@ import { GooglePlus } from '@ionic-native/google-plus/ngx';
     Facebook,
     SplashScreen,
 
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    {
+      provide:
+        RouteReuseStrategy,
+      useClass: IonicRouteStrategy
+    },
     Geolocation
   ],
   bootstrap: [AppComponent]

@@ -9,7 +9,7 @@ import { AngularFireAuth } from "@angular/fire/auth";
 import * as firebase from "firebase";
 import { environment } from "src/environments/environment";
 import { Facebook, FacebookLoginResponse } from "@ionic-native/facebook/ngx";
-import { usuarioInterface } from "src/app/interface/usuarioRegistro";
+//import { usuarioInterface } from "src/app/interface/usuarioRegistro";
 import { getLocaleMonthNames } from '@angular/common';
 
 @Component({
@@ -131,15 +131,13 @@ export class LoginPage implements OnInit {
     },
     error => console.log(error)
     );
+
+  
   }
+  onLogout(){
+    this.auth.logout();
+  }*/
 
-
-    Fecha de Creación: 22/06/2020
-    Fecha de Modificación: 22/06/2020
-    Usuario de creación: Fman
-    Usuario de Modificación: Fman
-    Iniciar sesion con google
-  */
   async loginGoogle() {
     this.afAuth.signInWithRedirect(new firebase.auth.GoogleAuthProvider())
     .then(function(result){
@@ -150,15 +148,8 @@ export class LoginPage implements OnInit {
     }).catch(function(err){
       console.log(err)
     })}    
-    /*this.auth.loginWithGoogle()
+    //this.auth.loginWithGoogle()
 
-  /*
-    Fecha de Creación: 22/06/2020
-    Fecha de Modificación: 22/06/2020
-    Usuario de creación: Fman
-    Usuario de Modificación: Fman
-    Iniciar sesion con Facebook
-  */
   loginFacebook() {
     this.fb
       .login(["public_profile", "email"])

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from "@angular/fire/auth"
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { auth } from 'firebase';
-import {Router} from "@Angular/router";
+//import {Router} from "@Angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,8 @@ export class AuthService {
   constructor(
     private AFauth: AngularFireAuth, 
     private google: GooglePlus,
-    private router: Router) {}
+//    private router: Router
+) {}
 
   login (phoneNumber: string, password: string){}
 
@@ -23,9 +24,10 @@ export class AuthService {
     })
   }
 
+  /*
   logout(){
     this.AFauth.signOut().then(auth =>{
       this.router.navigateByUrl("login")
     });
-  }
+  }*/
 }
