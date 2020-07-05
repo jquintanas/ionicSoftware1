@@ -10,15 +10,6 @@ export class AuthService {
 
   constructor(private AFauth: AngularFireAuth, private google: GooglePlus) { }
 
-  login(phoneNumber: string, password: string) {
-
-
-    this.AFauth.signInWithEmailAndPassword(phoneNumber, password).then(res => {
-      console.log('Estas logeado : ' + res)
-    }).catch(err => console.log('error : ' + err))
-
-    //this.AFauth.signInWithPhoneNumber(number, APPVERIFIER);
-  }
 
   loginWithGoogle() {
     return this.google.login({}).then(result => {

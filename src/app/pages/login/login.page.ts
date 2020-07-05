@@ -10,6 +10,7 @@ import * as firebase from "firebase";
 import { environment } from "src/environments/environment";
 import { Facebook, FacebookLoginResponse } from "@ionic-native/facebook/ngx";
 import { usuarioInterface } from "src/app/interface/usuarioRegistro";
+import { getLocaleMonthNames } from '@angular/common';
 
 @Component({
   selector: "app-login",
@@ -36,8 +37,8 @@ export class LoginPage implements OnInit {
     public alertsService: AlertsService,
     private auth: AuthService,
     private fb: Facebook,
-    private afAuth: AngularFireAuth
-  ) {
+    private afAuth: AngularFireAuth,
+  ){
     this.buildForm();
   }
 
@@ -116,12 +117,23 @@ export class LoginPage implements OnInit {
     }
     return "";
   }
+  /*
+  
+  private userData: usuarioInterface = {
+    telefono: "",
+    contrasenia: ""
+  };
 
   onSubmitLogin() {
-    this.auth.login(this.phoneNumber, this.password);
+    this.auth.login(this.userData.telefono, this.userData.contrasenia)
+    .subscribe(data => {
+      console.log(data);
+    },
+    error => console.log(error)
+    );
   }
 
-  /*
+
     Fecha de Creación: 22/06/2020
     Fecha de Modificación: 22/06/2020
     Usuario de creación: Fman
@@ -129,23 +141,16 @@ export class LoginPage implements OnInit {
     Iniciar sesion con google
   */
   async loginGoogle() {
-    /* const res = await this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-    const user = res.user;
-    console.log(user);
-    this.picture = user.photoURL;
-    this.name = user.displayName;
-    this.email = user.email;*/
-
-    this.auth
-      .loginWithGoogle()
-      .then(() => {
-        this.navController.navigateRoot("/home");
-        this.alertsService.presentLoading("Bienvenido a Omi y Pali");
-      })
-      .catch((err) => {
-        alert("Ocurrio un error, contactar soporte");
-      });
-  }
+    this.afAuth.signInWithRedirect(new firebase.auth.GoogleAuthProvider())
+    .then(function(result){
+      this.navController.navigateRoot("/home");
+      this.alertsService.presentLoading("Bienvenido a Omi y Pali");    
+      console.log(result)
+      console.log("Sucess Google")
+    }).catch(function(err){
+      console.log(err)
+    })}    
+    /*this.auth.loginWithGoogle()
 
   /*
     Fecha de Creación: 22/06/2020
