@@ -7,9 +7,6 @@ import { PopinfoComponent } from './popinfo/popinfo.component';
 import { CardCarritoComponent } from "./card-carrito/card-carrito.component";
 import { FavoriteProductoComponent } from "./favorite-producto/favorite-producto.component"
 import { SliderRecomendadosComponent } from "./slider-recomendados/slider-recomendados.component";
-import { AccordionComponent } from './accordion/accordion.component';
-
-
 
 @NgModule({
   declarations: [
@@ -18,8 +15,7 @@ import { AccordionComponent } from './accordion/accordion.component';
     PopinfoComponent,
     CardCarritoComponent,
     FavoriteProductoComponent,
-    SliderRecomendadosComponent,
-    AccordionComponent
+    SliderRecomendadosComponent
   ],
   imports: [
     CommonModule,
@@ -30,8 +26,7 @@ import { AccordionComponent } from './accordion/accordion.component';
     PopinfoComponent,
     CardCarritoComponent,
     FavoriteProductoComponent,
-    SliderRecomendadosComponent,
-    AccordionComponent
+    SliderRecomendadosComponent
   ],
   entryComponents: [
     DetallesProductosPage
