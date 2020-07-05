@@ -32,9 +32,9 @@ export class AlertsService {
   
     toast.present();
   }
-  async alert(mensaje:string){
+  async alert(titulo: string, mensaje:string){
     const alert = await this.alterCrtl.create({
-      header: "Error de Compra",
+      header: titulo,
       message:
         mensaje,
       buttons: [

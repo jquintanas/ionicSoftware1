@@ -17,6 +17,8 @@ export class PedidoPage implements OnInit {
   imagen = false;
   domicilio = false;
   local = false;
+  ubicacionRegistrada = false;
+  nuevaUbicacion = false;
   mapa = false;
   mapaicono = false;
   horapedido = false;
@@ -26,7 +28,7 @@ export class PedidoPage implements OnInit {
   posicionmarcador: String[] = [];
   latlng: string;
   address: string = "";
-  referencias = false;
+  nuevaDireccionEnvio = false;
   url_completa: string;
   isNewAddress: boolean;
   newAddressString: string;
@@ -55,19 +57,23 @@ export class PedidoPage implements OnInit {
       this.horapedido = true;
       this.envio = false;
       this.mapa = false;
-      this.referencias = false;
+      this.nuevaDireccionEnvio = false;
       this.mapaService.NuevaUbicacion = false;
     }
   }
   public onOptionsSelected2(value: string) {
     if (value == "Nueva") {
+      this.nuevaUbicacion = true;
       this.mapaService.NuevaUbicacion = true;
       this.mapa = true;
       this.isNewAddress = true;
+      this.ubicacionRegistrada = false;
     } else if (value == "Registrada") {
+      this.ubicacionRegistrada = true
+      this.nuevaUbicacion = false;
       this.mapaService.NuevaUbicacion = false;
       this.mapa = false;
-      this.referencias = false;
+      this.nuevaDireccionEnvio = false;
       this.isNewAddress = false;
     }
   }
@@ -75,6 +81,7 @@ export class PedidoPage implements OnInit {
   public onOptionsSelected3(value: string) {
     if (value == "Efectivo") {
       this.efectivo = true;
+      this.depotran = false;
     } else if (value == "Transferencia" || value == "Deposito") {
       this.efectivo = false;
       this.depotran = true;
@@ -109,13 +116,13 @@ export class PedidoPage implements OnInit {
     return '';
   }
   async openModal() {
-    this.referencias = false;
+    this.nuevaDireccionEnvio = false;
     const modal = await this.modalController.create({
       component: MapaMapboxPage,
     });
     modal.onDidDismiss().then((data) => {
       if (this.mapa == true) {
-        this.referencias = true;
+        this.nuevaDireccionEnvio = true;
         this.posicionmarcador = data.data.split("|");
         this.latlng = this.posicionmarcador[1] + "," + this.posicionmarcador[0];
         this.url_completa =
@@ -135,11 +142,13 @@ export class PedidoPage implements OnInit {
 
   async purchase() {
     if((this.domicilio == false && this.local == false) && (this.efectivo == false && this.depotran == false)){
-      this.alertService.alert("Debe escoger el tipo de entrega y método de pago");
-    }else if(this.efectivo == false && this.depotran == false){
-      this.alertService.alert("Debe escoger el método de pago");
+      this.alertService.alert("Error - Datos incompletos","Debe escoger el tipo de entrega y método de pago");
     }else if(this.domicilio == false && this.local == false){
-      this.alertService.alert("Debe escoger el tipo de entrega");
+      this.alertService.alert("Error - Datos incompletos","Debe escoger el tipo de entrega");
+    }else if(this.domicilio == true && (this.nuevaUbicacion == false && this.ubicacionRegistrada == false)){
+      this.alertService.alert("Error - Datos incompletos","Debe escoger la dirección de envío");
+    }else if(this.efectivo == false && this.depotran == false){
+      this.alertService.alert("Error - Datos incompletos","Debe escoger el método de pago");
     }else{
       this.verifyData();
     }
@@ -148,31 +157,25 @@ export class PedidoPage implements OnInit {
 
   async verifyData(){   
     if(this.isNewAddress){
-      if (
-        this.newAddressString == undefined ||
-        this.newAddressString == " " ||
-        this.newAddressString == "" ||
-        this.newAddressString.length <10|| 
-        this.referencesString == undefined ||
-        this.referencesString == " " ||
-        this.referencesString == "" ||
-        this.referencesString.length <10
-      ) {
-        const alert = await this.alertController.create({
-          header: "Error - Datos Incompletos ",
-          message:
-            "Debe llenar los campos de ubicación solicitados",
-          buttons: [
-            {
-              text: "Aceptar",
-    
-            },
-          ],
-        });
-        await alert.present();
-        
+      if(this.nuevaDireccionEnvio == false){
+        this.alertService.alert( "Error - Datos incompletos","Debe indicar la ubicación presionando el ícono del mapa ");
       }else{
-        this.detectPayment();
+        if (
+          this.newAddressString == undefined ||
+          this.newAddressString == " " ||
+          this.newAddressString == "" ||
+          this.referencesString == undefined ||
+          this.referencesString == " " ||
+          this.referencesString == ""       
+        ) {
+          this.alertService.alert( "Error - Datos incompletos","Debe llenar los campos solicitados de la nueva dirección ");       
+        }else if(this.newAddressString.length < 10 ){
+          this.alertService.alert( "Error - Datos incompletos","La nueva dirección debe tener mas de 10 caracteres");
+        }else if(this.referencesString.length <10){
+          this.alertService.alert( "Error - Datos incompletos","La referencia de la nueva dirección debe tener mas de 10 caracteres");
+        }else{
+          this.detectPayment();
+        } 
       }
     }else{
       this.detectPayment();
@@ -216,17 +219,7 @@ export class PedidoPage implements OnInit {
       });
       await alert.present();
     }else{
-      const alert = await this.alertController.create({
-        header: "Error - Selección de pago",
-        message:
-          "Debe escoger el método de pago a efectuar",
-        buttons: [
-          {
-            text: "Aceptar",
-          },
-        ],
-      });
-      await alert.present();
+      this.alertService.alert( "Error - Selección de pago","Debe escoger el método de pago a efectuar");
     }
   }
 }
