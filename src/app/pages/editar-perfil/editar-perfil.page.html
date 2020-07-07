@@ -33,95 +33,82 @@
   </ion-row>
 
   <ion-content class="content">
-    <form [formGroup]="userDataForm" (ngSubmit)="submit()">
-      <ion-list>
-        <div class="item">
+    <div class="ion-margin contendorf">
+      <form [formGroup]="userDataForm">
+        <ion-list>
           <ion-item>
-            <ion-label position="floating">Usuario</ion-label>
-            <ion-textarea
-              class="input-from"
-              autocapitalize
-              inputmode="text"
-              formControlName="name"
-              rows="1"
-            ></ion-textarea>
+            <ion-input
+              type="text"
+              placeholder="Usuario"
+              class="inputform"
+              formControlName="namesField"
+            ></ion-input>
           </ion-item>
-          <div>
-            <ng-container *ngIf="!name.valid && (name.dirty || name.touched)">
-              <div class="error-message">
-                <ion-icon
-                  slot="start"
-                  name="information-circle-sharp"
-                  color="danger"
-                ></ion-icon>
-                {{MessageValidator(name.hasError("required"))}}
-              </div>
-            </ng-container>
+          <div
+            class="container-error-message alert-danger"
+            *ngIf="getError('namesField') != ''"
+          >
+            <ion-icon
+              slot="start"
+              name="information-circle-sharp"
+              color="danger"
+            ></ion-icon>
+            <strong> {{getError('namesField')}} </strong>
           </div>
-        </div>
-        <div class="item">
           <ion-item>
-            <ion-label position="floating">Celular</ion-label>
-            <ion-textarea
-              class="input-from"
-              inputmode="tel"
-              formControlName="phone"
-              rows="1"
-            ></ion-textarea>
+            <ion-input
+              type="tel"
+              maxlength="10"
+              placeholder="Teléfono"
+              class="inputform"
+              formControlName="phoneField"
+            ></ion-input>
           </ion-item>
-          <div>
-            <ng-container
-              *ngIf="!phone.valid && (phone.dirty || phone.touched)"
+          <div
+            class="container-error-message alert-danger"
+            *ngIf="getError('phoneField') != ''"
+          >
+            <ion-icon
+              slot="start"
+              name="information-circle-sharp"
+              color="danger"
+            ></ion-icon>
+            <strong> {{getError('phoneField')}}</strong>
+          </div>
+          <ion-item>
+            <ion-input
+              type="text"
+              placeholder="Correo Electrónico"
+              class="inputform"
+              formControlName="emailField"
             >
-              <div class="error-message">
-                <ion-icon
-                  slot="start"
-                  name="information-circle-sharp"
-                  color="danger"
-                ></ion-icon>
-                {{MessageValidator(phone.hasError("required"))}}
-              </div>
-            </ng-container>
-          </div>
-        </div>
-
-        <div class="item">
-          <ion-item>
-            <ion-label position="floating">Email</ion-label>
-            <ion-textarea
-              class="input-from"
-              inputmode="email"
-              formControlName="email"
-              rows="1"
-            ></ion-textarea>
+            </ion-input>
           </ion-item>
-          <div>
-            <ng-container
-              *ngIf="!email.valid && (email.dirty || email.touched)"
-            >
-              <div class="error-message">
-                <ion-icon
-                  slot="start"
-                  name="information-circle-sharp"
-                  color="danger"
-                ></ion-icon>
-                {{MessageValidator(email.hasError("required"))}}
-              </div>
-            </ng-container>
+          <div
+            class="container-error-message alert-danger"
+            *ngIf="getError('emailField') != ''"
+          >
+            <ion-icon
+              slot="start"
+              name="information-circle-sharp"
+              color="danger"
+            ></ion-icon>
+            <strong>{{getError('emailField')}}</strong>
           </div>
-        </div>
-
+        </ion-list>
         <ion-item-divider class="centrado">
           <ion-label class="centrado divider">
             UBICACIÓN
           </ion-label>
         </ion-item-divider>
-
         <div>
           <ion-item>
-            <ion-label position="floating" class="direccion item-direcc"
-              >Dirección</ion-label
-            >
+            <ion-input
+              type="text"
+              placeholder="Dirección"
+              class="inputform"
+              formControlName="directionField"
+            ></ion-input>
             <ion-button
               type="button"
               class="ion-map-button"
@@ -131,39 +118,33 @@
             >
               <ion-icon color="omipali" name="map-outline"></ion-icon>
             </ion-button>
-            <ion-textarea
-              class="input-from"
-              autocapitalize
-              inputmode="text"
-              rows="1"
-            ></ion-textarea>
           </ion-item>
+          <div
+            class="container-error-message alert-danger"
+            *ngIf="getError('directionField') != ''"
+          >
+            <ion-icon
+              slot="start"
+              name="information-circle-sharp"
+              color="danger"
+            ></ion-icon>
+            <strong>{{getError('directionField')}}</strong>
+          </div>
         </div>
+        <ion-item>
+          <ion-input type="text" placeholder="Referencia" class="inputform">
+          </ion-input>
+        </ion-item>
+      </form>
 
-        <div>
-          <ion-item>
-            <ion-label position="floating" class="direccion item-direcc"
-              >Referencias</ion-label
-            >
-
-            <ion-textarea
-              class="input-from"
-              autocapitalize
-              inputmode="text"
-            ></ion-textarea>
-          </ion-item>
-        </div>
-      </ion-list>
-    </form>
-
-    <ion-button
-      [disabled]="!userDataForm.valid"
-      class="ion-margin-start ion-margin-end ion-butt-save"
-      color="omipalidarkd"
-      type="submit"
-      expand="block"
-    >
-      Guardar Cambios
-    </ion-button>
+      <ion-button
+        class="ion-margin-start ion-margin-end ion-butt-save"
+        color="omipalidarkd"
+        type="submit"
+        expand="block"
+      >
+        Guardar Cambios
+      </ion-button>
+    </div>
   </ion-content>
 </ion-content>

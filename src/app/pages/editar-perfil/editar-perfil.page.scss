@@ -63,7 +63,7 @@ ion-list {
 }
 
 form {
-  background-color: yellow;
+  background-color: white;
 }
 
 .divider {
@@ -78,3 +78,24 @@ form {
   margin-top: 0px;
   margin-left: 5rem;
 }
+
+.inputform{
+  text-align: left;
+  font-size: 0.9rem;
+  border: 0;
+  outline: 0;
+  border-bottom: 2px solid white;
+}
+
+.container-error-message{
+  padding: 3px;
+  font-size: 0.8rem;
+}
+
+
+.alert-danger{
+  color: red;
+  text-align: left;
+  margin-left: 1rem;
+}
+
