@@ -51,7 +51,9 @@ segment: string = "active";
     this.dataMostrar = this.dataHistorial;
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.startTimer(20);
+  }
 
     async cancelAlert(){
       const alert = await this.alertController.create({
@@ -117,6 +119,10 @@ segment: string = "active";
       setInterval( () => {
         this.updateTimeValue();
       }, 1000);
+    }
+
+    ionViewDidEnter(){
+      this.startTimer(20);
     }
 
     updateTimeValue(){
