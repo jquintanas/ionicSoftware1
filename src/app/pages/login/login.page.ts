@@ -10,7 +10,7 @@ import * as firebase from "firebase";
 import { environment } from "src/environments/environment";
 import { Facebook, FacebookLoginResponse } from "@ionic-native/facebook/ngx";
 //import { usuarioInterface } from "src/app/interface/usuarioRegistro";
-import { getLocaleMonthNames } from '@angular/common';
+import { HttpService } from 'src/app/services/http/http.service'
 
 @Component({
   selector: "app-login",
@@ -18,8 +18,6 @@ import { getLocaleMonthNames } from '@angular/common';
   styleUrls: ["./login.page.scss"],
 })
 export class LoginPage implements OnInit {
-  name: string;
-  email: string;
   isSubmitted = false;
   currentPopover = null;
   loginForm: FormGroup;
@@ -38,6 +36,7 @@ export class LoginPage implements OnInit {
     private auth: AuthService,
     private fb: Facebook,
     private afAuth: AngularFireAuth,
+    private http: HttpService
   ){
     this.buildForm();
   }
@@ -71,8 +70,19 @@ export class LoginPage implements OnInit {
   save() {
     if (this.loginForm.valid) {
       const value = this.loginForm.value;
-      this.alertsService.presentLoading("Bienvenido" + " Danny");
+      this.phoneNumber = value.phoneField;
+      this.password = value.passwordField;
+      this.alertsService.presentLoading("Bienvenido a" + " Omi & Pali");
       this.navController.navigateRoot("/home");
+
+      var data = JSON.stringify({id: this.phoneNumber, clave: this.password})
+     
+      console.log(data)
+      this.http.getUser(data)
+      .subscribe(data => {
+        console.log(data);
+      });
+      
     } else {
       console.log("formulario inválido", this.loginForm);
       this.onResetForm();
@@ -148,9 +158,9 @@ export class LoginPage implements OnInit {
     }).catch(function(err){
       console.log(err)
     })}    
-    //this.auth.loginWithGoogle()
 
   loginFacebook() {
+    this.afAuth.signInWithRedirect(new firebase.auth.FacebookAuthProvider())
     this.fb
       .login(["public_profile", "email"])
       .then((res: FacebookLoginResponse) => {
