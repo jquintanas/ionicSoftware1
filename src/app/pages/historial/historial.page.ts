@@ -51,7 +51,9 @@ export class HistorialPage implements OnInit {
     this.dataMostrar = this.dataHistorial;
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.startTimer(20);
+  }
 
   async cancelAlert() {
     const alert = await this.alertController.create({
@@ -118,6 +120,10 @@ export class HistorialPage implements OnInit {
     setInterval(() => {
       this.updateTimeValue();
     }, 1000);
+  }
+
+  ionViewDidEnter() {
+    this.startTimer(20);
   }
 
   updateTimeValue() {

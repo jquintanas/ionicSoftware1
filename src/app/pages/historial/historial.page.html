@@ -24,17 +24,16 @@
 
       <section>
         <div class="center">
-          <ion-label>TIEMPO RESTANTE: {{time | async}}</ion-label> <BR>
-          <ion-button color="primary" (click)="startTimer(20)">START</ion-button>
+          <ion-label >TIEMPO RESTANTE: {{time | async}}</ion-label> <BR>
         </div>
 
         <div class="container">
           <br> <br>
-          <ion-progress-bar value="0.5"></ion-progress-bar>
+          <ion-progress-bar value="0.25"></ion-progress-bar>
 
           <ul class="progressbar">
-            <li class="noactive">ELABORANDO PEDIDO</li>
-            <li class="active">ENVIANDO PEDIDO</li>
+            <li class="active">ALISTANDO PEDIDO</li>
+            <li class="noactive">ENVIANDO PEDIDO</li>
             <li class="noactive">PEDIDO ENTREGADO</li>
             <br>
           </ul>
@@ -103,7 +102,8 @@
             <img src="assets/icon/check.png">
           </ion-avatar>
           <ion-card-header>PEDIDO</ion-card-header>
-          <ion-card-subtitle>Mes 5, 2020</ion-card-subtitle>
+          <ion-card-subtitle>Mayo 5, 2020</ion-card-subtitle>
+
         </ion-item>
 
         <ion-card-content>
@@ -117,6 +117,12 @@
               </button>
             </ion-col>
           </ion-row>
+
+
+          <ion-label>2 MOJADA DE CHOCOLATE</ion-label><br>
+          <ion-label>2 MOJADA DE CHOCOLATE</ion-label><br>
+          <ion-label>3 MOJADA DE CHOCOLATE</ion-label>
+          
         </ion-card-content>
       </ion-card>
 

@@ -9,6 +9,7 @@ import { AngularFireAuth } from "@angular/fire/auth";
 import * as firebase from "firebase";
 import { environment } from "src/environments/environment";
 import { Facebook, FacebookLoginResponse } from "@ionic-native/facebook/ngx";
+import { HttpService } from 'src/app/services/http/http.service';
 
 @Component({
   selector: "app-login",
@@ -16,8 +17,6 @@ import { Facebook, FacebookLoginResponse } from "@ionic-native/facebook/ngx";
   styleUrls: ["./login.page.scss"],
 })
 export class LoginPage implements OnInit {
-  name: string;
-  email: string;
   isSubmitted = false;
   currentPopover = null;
   loginForm: FormGroup;
@@ -33,9 +32,9 @@ export class LoginPage implements OnInit {
     private router: Router,
     public modalController: ModalController,
     public alertsService: AlertsService,
-    private auth: AuthService,
     private fb: Facebook,
     private afAuth: AngularFireAuth,
+    private http: HttpService
   ) {
     this.buildForm();
   }
@@ -69,8 +68,20 @@ export class LoginPage implements OnInit {
   save() {
     if (this.loginForm.valid) {
       const value = this.loginForm.value;
-      this.alertsService.presentLoading("Bienvenido" + " Danny");
+      this.phoneNumber = value.phoneField;
+      this.password = value.passwordField;
+      this.alertsService.presentLoading("Bienvenido a" + " Omi & Pali");
       this.navController.navigateRoot("/home");
+
+      const data = JSON.stringify({ id: this.phoneNumber, clave: this.password });
+
+      console.log(data);
+      this.http.getUser(data)
+        // tslint:disable-next-line: no-shadowed-variable
+        .subscribe(data => {
+          console.log(data);
+        });
+
     } else {
       console.log("formulario inválido", this.loginForm);
       this.onResetForm();
@@ -129,6 +140,7 @@ export class LoginPage implements OnInit {
   }
 
   loginFacebook() {
+    this.afAuth.signInWithRedirect(new firebase.auth.FacebookAuthProvider());
     this.fb
       .login(["public_profile", "email"])
       .then((res: FacebookLoginResponse) => {
