@@ -9,7 +9,7 @@
     <form [formGroup]="phoneForm" class="phoneArea">
       <ion-item>
         <ion-label position="floating">Teléfono</ion-label>
-        <ion-input formControlName="phone"  autocapitalize inputmode="text"></ion-input>
+        <ion-input formControlName="phone" autocapitalize inputmode="text"></ion-input>
       </ion-item>
 
       <div *ngFor="let error of errorMessages.phone">
@@ -18,10 +18,10 @@
         </ng-container>
       </div>
 
-      <ion-button (click)="validateAlert()" class="askCodeButton"  expand="block" >
+      <ion-button (click)="validateAlert()" class="askCodeButton" expand="block">
         SOLICITAR CÓDIGO
       </ion-button>
-     
+
 
     </form>
 

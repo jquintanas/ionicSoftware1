@@ -64,16 +64,10 @@
         <ion-col size="12">
           <ion-item class="ion-no-padding tipoEntrega" lines="none">
             <ion-label>Elija el tipo de entrega</ion-label>
-            <ion-select
-              interface="popover"
-              class="item_seleccion"
-              #mySelect
-              (ionChange)="onOptionsSelected(mySelect.value)"
-            >
+            <ion-select interface="popover" class="item_seleccion" #mySelect
+              (ionChange)="onOptionsSelected(mySelect.value)">
               <ion-select-option value="Domicilio">Domicilio</ion-select-option>
-              <ion-select-option value="Local"
-                >Retiro en Local</ion-select-option
-              >
+              <ion-select-option value="Local">Retiro en Local</ion-select-option>
             </ion-select>
           </ion-item>
         </ion-col>
@@ -82,18 +76,10 @@
         <ion-col size="12">
           <ion-item class="ion-no-padding tipoEntrega" lines="none">
             <ion-label>Elija la dirección</ion-label>
-            <ion-select
-              interface="popover"
-              class="item_seleccion"
-              #mySelect2
-              (ionChange)="onOptionsSelected2(mySelect2.value)"
-            >
-              <ion-select-option value="Registrada"
-                >Alborada6ta etapa</ion-select-option
-              >
-              <ion-select-option value="Nueva"
-                >Nueva dirección</ion-select-option
-              >
+            <ion-select interface="popover" class="item_seleccion" #mySelect2
+              (ionChange)="onOptionsSelected2(mySelect2.value)">
+              <ion-select-option value="Registrada">Alborada6ta etapa</ion-select-option>
+              <ion-select-option value="Nueva">Nueva dirección</ion-select-option>
             </ion-select>
           </ion-item>
         </ion-col>
@@ -115,67 +101,40 @@
       </ion-row>
       <ion-row *ngIf="nuevaDireccionEnvio" class="mensajtiempo">
         <ion-col>
-          <ion-textarea
-            rows="2"
-            class="textareadir ion-no-padding"
-            minlength="10"
-            required
-            [(ngModel)]="newAddressString"
-            #ctrl="ngModel"
-          >
+          <ion-textarea rows="2" class="textareadir ion-no-padding" minlength="10" required
+            [(ngModel)]="newAddressString" #ctrl="ngModel">
           </ion-textarea>
-          <span *ngIf="validation(ctrl,'newAddressString') != ''"
-            ><ion-icon
-              slot="start"
-              name="information-circle"
-              color="danger"
-            ></ion-icon>
+          <span *ngIf="validation(ctrl,'newAddressString') != ''">
+            <ion-icon slot="start" name="information-circle" color="danger"></ion-icon>
             <ion-text color="danger">
-              {{validation(ctrl,'newAddressString')}}</ion-text
-            ></span
-          >
+              {{validation(ctrl,'newAddressString')}}</ion-text>
+          </span>
         </ion-col>
       </ion-row>
       <ion-row *ngIf="nuevaDireccionEnvio" class="mensajtiempo">
         <ion-col>
           <ion-item color="none" lines="none" *ngIf="imagen">
-            <img
-              width="100%"
-              src="https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/pin-s-marker+ffa500({{url_completa}}"
-              alt="UBICACION"
-              class="imagen mapaimagen"
-            />
+            <img width="100%"
+              src="https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/pin-s-marker+ffa500({{urlCompleta}}"
+              alt="UBICACION" class="imagen mapaimagen" />
           </ion-item>
         </ion-col>
       </ion-row>
       <ion-row *ngIf="nuevaDireccionEnvio" class="mensajtiempo filareferenia">
         <ion-col>
-          <ion-label class="labeldir"
-            >Referencia de la dirección añadida</ion-label
-          >
+          <ion-label class="labeldir">Referencia de la dirección añadida</ion-label>
         </ion-col>
       </ion-row>
       <ion-row *ngIf="nuevaDireccionEnvio" class="mensajtiempo">
         <ion-col>
-          <ion-textarea
-            rows="2"
-            required
-            class="textareadir ion-no-padding"
-            minlength="10"
-            [(ngModel)]="referencesString"
-            #ctrl2="ngModel"
-          >
+          <ion-textarea rows="2" required class="textareadir ion-no-padding" minlength="10"
+            [(ngModel)]="referencesString" #ctrl2="ngModel">
           </ion-textarea>
-          <span *ngIf="validation(ctrl2,'referencesString') != ''"
-            ><ion-icon
-              slot="start"
-              name="information-circle"
-              color="danger"
-            ></ion-icon>
+          <span *ngIf="validation(ctrl2,'referencesString') != ''">
+            <ion-icon slot="start" name="information-circle" color="danger"></ion-icon>
             <ion-text color="danger">
-              {{validation(ctrl2,'referencesString')}}</ion-text
-            ></span
-          >
+              {{validation(ctrl2,'referencesString')}}</ion-text>
+          </span>
         </ion-col>
       </ion-row>
       <ion-row *ngIf="domicilio" class="mensajtiempo">
@@ -187,11 +146,7 @@
         <ion-col>
           <ion-item class="ion-no-border direccionlocal" lines="none">
             <ion-label position="floating">Dirección Local</ion-label>
-            <ion-textarea
-              readonly
-              rows="1"
-              value="Jaime Roldós Avenue 220, Babahoyo"
-            >
+            <ion-textarea readonly rows="1" value="Jaime Roldós Avenue 220, Babahoyo">
             </ion-textarea>
             <ion-button slot="end" color="omipalidarkd" (click)="openModal()">
               <ion-icon name="map-outline" color="omipali"></ion-icon>
@@ -207,11 +162,7 @@
         </ion-col>
         <ion-col size="4">
           <ion-item class="ion-no-border reloj" lines="none">
-            <ion-datetime
-              display-format="h:mm A"
-              picker-format="h:mm A"
-              value="1990-02-19T07:43Z"
-            ></ion-datetime>
+            <ion-datetime display-format="h:mm A" picker-format="h:mm A" value="1990-02-19T07:43Z"></ion-datetime>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -272,17 +223,11 @@
         <ion-col size="12">
           <ion-item class="ion-no-padding tipoPago" lines="none">
             <ion-label>Elija el método de pago</ion-label>
-            <ion-select
-              interface="popover"
-              class="item_seleccion"
-              #mySelect3
-              (ionChange)="onOptionsSelected3(mySelect3.value)"
-            >
+            <ion-select interface="popover" class="item_seleccion" #mySelect3
+              (ionChange)="onOptionsSelected3(mySelect3.value)">
               <ion-select-option value="Efectivo">Efectivo</ion-select-option>
               <ion-select-option value="Deposito">Depósito</ion-select-option>
-              <ion-select-option value="Transferencia"
-                >Transferencia</ion-select-option
-              >
+              <ion-select-option value="Transferencia">Transferencia</ion-select-option>
             </ion-select>
           </ion-item>
         </ion-col>
@@ -332,13 +277,7 @@
       <ion-row>
         <ion-col size="2"> </ion-col>
         <ion-col size="8">
-          <ion-button
-            expand="block"
-            fill="clear"
-            class="realizarcomp"
-            (click)="purchase()"
-            >Realizar compra</ion-button
-          >
+          <ion-button expand="block" fill="clear" class="realizarcomp" (click)="purchase()">Realizar compra</ion-button>
         </ion-col>
         <ion-col size="2"> </ion-col>
       </ion-row>

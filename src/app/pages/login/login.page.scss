@@ -1,151 +1,167 @@
-.contenedor{
+.contenedor {
     --background: url(/assets/fondos/fondo_capaomipali.jpg) 50% 50%/ 100% 100% no-repeat;
 }
 
-.login{
+.login {
     //--background:white;
     //--background: #98DBD9;
     //color: #98DBD9;
     //color: black;
-    color: white;
-    border: 2px solid #98DBD9;
+    color        : white;
+    border       : 2px solid #98DBD9;
     border-radius: 5px;
     //margin-top: 5%;
- 
+
 }
-.contenedorlogin{
-    margin-top: 10% ;
+
+.contenedorlogin {
+    margin-top   : 10%;
     //background: rgba(152, 219, 217, 0.301);
-    background: rgba(0, 0, 0, 0.664);
+    background   : rgba(0, 0, 0, 0.664);
     border-radius: 5px;
-    
+
 }
 
-img.imagenlogo{
-    
+img.imagenlogo {
+
     height: 125px;
-};
-.contenedorlogo{
-    text-align: center;
-    padding-top: 5%;
+}
+
+;
+
+.contenedorlogo {
+    text-align    : center;
+    padding-top   : 5%;
     padding-bottom: 5%;
-    
+
 }
 
-.telefono{
-    text-align: left;
-    color:white;
+.telefono {
+    text-align     : left;
+    color          : white;
     //color:#98DBD9;
     //color:var(--ion-color-omipalidark);
     //color: black;
-    font-size: 0.9rem;
-    border: 0;
-    outline: 0;
-    border-bottom: 2px solid white;
+    font-size      : 0.9rem;
+    border         : 0;
+    outline        : 0;
+    border-bottom  : 2px solid white;
     //border-bottom: 2px solid black;
 }
 
-.contrasena{
-    text-align: left;
-    color:white;
+.contrasena {
+    text-align     : left;
+    color          : white;
     //color:#98DBD9;
     //color:var(--ion-color-omipalidark);
     //color: black;
-    font-size: 0.9rem;
-    border: 0;
-    outline: 0;
-    border-bottom: 2px solid white;
+    font-size      : 0.9rem;
+    border         : 0;
+    outline        : 0;
+    border-bottom  : 2px solid white;
     //border-bottom: 2px solid black;
 }
 
-.linea{
-    border-bottom: 1px solid  white;
+.linea {
+    border-bottom: 1px solid white;
 }
-.recuperarcontra{
-    text-align: right;
-    font-size: 0.8rem;
-    margin-top: 4.5%;
+
+.recuperarcontra {
+    text-align   : right;
+    font-size    : 0.8rem;
+    margin-top   : 4.5%;
     margin-bottom: 4.5%;
-    color:white;
-    //color: #98DBD9;
-    //color: black;
-}
-.linkcontra{
-   
-    color:white;
-    //color: #98DBD9;
-    //color: black;
-   
-}
-.cuenta,.registro{
-    color:white;
+    color        : white;
     //color: #98DBD9;
     //color: black;
 }
 
-.error-div{
-    text-align: center;
+.linkcontra {
+
+    color  : white;
+    //color: #98DBD9;
+    //color: black;
+
+}
+
+.cuenta,
+.registro {
+    color  : white;
+    //color: #98DBD9;
+    //color: black;
+}
+
+.error-div {
+    text-align     : center;
     justify-content: start;
 }
-.span{
+
+.span {
     text-decoration: none;
-    
+
 }
-.error,.error-div{
-    color: red;
+
+.error,
+.error-div {
+    color    : red;
     font-size: 0.8rem;
 }
-.contenedor_division{
+
+.contenedor_division {
     text-align: center;
-    color: white;
+    color     : white;
     //color: #98DBD9;
     //color: black;
     margin-top: 15%;
 }
 
-.google{
+.google {
     font-size: 2rem;
-    color: white;
+    color    : white;
     //color: #98DBD9;
     //color: black;
 }
-.facebook{
+
+.facebook {
     font-size: 2rem;
-    color: white;
+    color    : white;
     //color: #98DBD9;
     //color: black;
 }
 
 .padre {
-    display: flex;
+    display        : flex;
     justify-content: center;
 }
+
 .hijo {
     padding: 10px;
-    margin: 10px;
-    
+    margin : 10px;
+
 }
 
-.opcion{
+.opcion {
     font-size: .9rem;
 }
 
-.registrar{
+.registrar {
     text-align: center;
-    font-size: 0.8rem;
+    font-size : 0.8rem;
     margin-top: 0.8rem;
 }
 
-.alert-danger{
-    color: red;
-    text-align: left;
+.alert-danger {
+    color      : red;
+    text-align : left;
     margin-left: 3rem;
 
 }
-.container-error-message{
-    padding: 3px;
+
+.container-error-message {
+    padding  : 3px;
     font-size: 0.8rem;
 }
+
 /*
 .contenedorform{
     //background: rgb(63, 63, 63);
@@ -156,32 +172,56 @@ img.imagenlogo{
 }*/
 
 .parpadea {
-  
-    animation-name: parpadeo;
-    animation-duration: 2.5s;
+
+    animation-name           : parpadeo;
+    animation-duration       : 2.5s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
-  
-    -webkit-animation-name:parpadeo;
-    -webkit-animation-duration: 2.5s;
+
+    -webkit-animation-name           : parpadeo;
+    -webkit-animation-duration       : 2.5s;
     -webkit-animation-timing-function: linear;
     -webkit-animation-iteration-count: infinite;
-  }
-  
-  @-moz-keyframes parpadeo{  
-    0% { opacity: 1.0; }
-    50% { opacity: 0.0; }
-    100% { opacity: 1.0; }
-  }
-  
-  @-webkit-keyframes parpadeo {  
-    0% { opacity: 1.0; }
-    50% { opacity: 0.0; }
-     100% { opacity: 1.0; }
-  }
-  
-  @keyframes parpadeo {  
-    0% { opacity: 1.0; }
-     50% { opacity: 0.0; }
-    100% { opacity: 1.0; }
-  }
+}
+
+@-moz-keyframes parpadeo {
+    0% {
+        opacity: 1.0;
+    }
+
+    50% {
+        opacity: 0.0;
+    }
+
+    100% {
+        opacity: 1.0;
+    }
+}
+
+@-webkit-keyframes parpadeo {
+    0% {
+        opacity: 1.0;
+    }
+
+    50% {
+        opacity: 0.0;
+    }
+
+    100% {
+        opacity: 1.0;
+    }
+}
+
+@keyframes parpadeo {
+    0% {
+        opacity: 1.0;
+    }
+
+    50% {
+        opacity: 0.0;
+    }
+
+    100% {
+        opacity: 1.0;
+    }
+}

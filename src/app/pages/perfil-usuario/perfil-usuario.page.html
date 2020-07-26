@@ -12,18 +12,10 @@
 <ion-header hidenav-header="page1" header-height="50">
   <div class="bg-image"></div>
   <div class="bg-text">
-    <img
-      class="profile-photo"
-      src="/assets/img/user.png"
-      (click)="zoomImage()"
-    />
+    <img class="profile-photo" src="/assets/img/user.png" (click)="zoomImage()" />
 
     <ion-fab class="edit-perfil">
-      <ion-button
-        class="ion-margin-start ion-margin-end fab-button"
-        color="omipalidarkd"
-        (click)="abrirEdicion()"
-      >
+      <ion-button class="ion-margin-start ion-margin-end fab-button" color="omipalidarkd" (click)="abrirEdicion()">
         <ion-text>Editar Perfil</ion-text>
       </ion-button>
     </ion-fab>
@@ -46,11 +38,7 @@
       </ion-button>
     </ion-col>
     <ion-col>
-      <ion-button
-        color="omipalidarkd"
-        class="menu-button"
-        (click)="abrirHistorial()"
-      >
+      <ion-button color="omipalidarkd" class="menu-button" (click)="abrirHistorial()">
         <ion-icon color="omipali" name="receipt"></ion-icon>
       </ion-button>
     </ion-col>
@@ -84,18 +72,9 @@
 
   <div>
     <ion-row>
-      <ion-col
-        size="4"
-        *ngFor="let data of dataBebidas"
-        style="height: 100px;"
-        class="ion-margin-top col-favo"
-      >
-        <app-favorite-producto
-          [Imagen]="data.url"
-          [id]="data.idProducto"
-          [categoria]="data.categoria"
-          (notificar)="actualizarPantalla($event)"
-        >
+      <ion-col size="4" *ngFor="let data of dataBebidas" style="height: 100px;" class="ion-margin-top col-favo">
+        <app-favorite-producto [Imagen]="data.url" [id]="data.idProducto" [categoria]="data.categoria"
+          (notificar)="actualizarPantalla($event)">
         </app-favorite-producto>
       </ion-col>
     </ion-row>

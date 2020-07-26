@@ -1,5 +1,5 @@
-import { AlertsService } from "src/app/services/alerts/alerts.service";
-import { MapaDatosService } from "./../../services/mapa-datos/mapa-datos.service";
+import { AlertsService } from "src/app/core/services/alerts/alerts.service";
+import { MapaDatosService } from "./../../core/services/mapa-datos/mapa-datos.service";
 import { Component, OnInit } from "@angular/core";
 import * as Mapboxgl from "mapbox-gl";
 import * as MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
@@ -35,20 +35,20 @@ export class MapaMapboxPage implements OnInit {
     public alertsService: AlertsService,
     public navCtrl: NavController
   ) {
-    if (this.mapaDatosService.NuevaUbicacion == false) {
+    if (this.mapaDatosService.NuevaUbicacion === false) {
       this.omipaliubi = true;
       this.botonGuardarnuevo = false;
       this.direccionDom = false;
     }
   }
 
-  ionViewWillEnter() {}
+  ionViewWillEnter() { }
 
   ngOnInit() {
     this.geolocation
       .getCurrentPosition()
       .then((resp) => {
-        if (this.mapaDatosService.NuevaUbicacion == false) {
+        if (this.mapaDatosService.NuevaUbicacion === false) {
           this.latitudCentro = -1.8025916;
           this.longitudCentro = -79.539615;
         } else {
@@ -57,17 +57,17 @@ export class MapaMapboxPage implements OnInit {
         }
         (Mapboxgl as any).accessToken = environment.mapboxkey;
         this.mapa = new Mapboxgl.Map({
-          container: "mapa", 
+          container: "mapa",
           style: "mapbox://styles/mapbox/streets-v11",
-          center: [this.longitudCentro, this.latitudCentro], 
-          zoom: 13, 
+          center: [this.longitudCentro, this.latitudCentro],
+          zoom: 13,
         });
 
         this.mapa.on("load", () => {
           this.mapa.resize();
         });
 
-        const marker_omipali = new Mapboxgl.Marker({
+        const markerOmipali = new Mapboxgl.Marker({
           draggable: false,
           color: "red",
         })
@@ -76,15 +76,15 @@ export class MapaMapboxPage implements OnInit {
             new Mapboxgl.Popup({ offset: 30 })
               .setHTML(
                 "<h1> <STRONG>Omi&Pali</STRONG> </h1>" +
-                  '<hr color="black">' +
-                  "<p>" +
-                  "<STRONG>Pastelería </STRONG>" +
-                  "<style> h1 { color: #FF0000; font-size: 1rem}</style>"
+                '<hr color="black">' +
+                "<p>" +
+                "<STRONG>Pastelería </STRONG>" +
+                "<style> h1 { color: #FF0000; font-size: 1rem}</style>"
               )
           )
           .addTo(this.mapa);
-        //marcador en ubicacion de usuario
-        const marker_user = new Mapboxgl.Marker({
+        // marcador en ubicacion de usuario
+        const markerUser = new Mapboxgl.Marker({
           draggable: true,
           color: "orange",
         })
@@ -93,23 +93,23 @@ export class MapaMapboxPage implements OnInit {
             new Mapboxgl.Popup({ offset: 30 })
               .setHTML(
                 "<body>" +
-                  '<div class="title">' +
-                  "<h3> Información </h3>" +
-                  '<hr color="black">' +
-                  "<p> Este marcador indica su ubicación </p>" +
-                  "</div>" +
-                  "</body>" +
-                  "<style> h3 { color: orange; font-size: 1rem}</style>"
+                '<div class="title">' +
+                "<h3> Información </h3>" +
+                '<hr color="black">' +
+                "<p> Este marcador indica su ubicación </p>" +
+                "</div>" +
+                "</body>" +
+                "<style> h3 { color: orange; font-size: 1rem}</style>"
               )
           )
           .addTo(this.mapa);
-        marker_user.on("dragend", () => {
-          var lngLat = marker_user.getLngLat();
+        markerUser.on("dragend", () => {
+          const lngLat = markerUser.getLngLat();
           this.latitud = lngLat.lat;
           this.longitud = lngLat.lng;
         });
-        this.latitud = marker_user.getLngLat().lat;
-        this.longitud = marker_user.getLngLat().lng;
+        this.latitud = markerUser.getLngLat().lat;
+        this.longitud = markerUser.getLngLat().lng;
 
         const geocoder = new MapboxGeocoder({
           accessToken: Mapboxgl.accessToken,
@@ -137,7 +137,7 @@ export class MapaMapboxPage implements OnInit {
     this.mapaDatosService.longitud = this.longitud;
     this.mapaDatosService.marcador_guardado = true;
     this.posicion = this.latitud.toString() + "|" + this.longitud.toString();
-    if(this.botonGuardarnuevo == true){
+    if (this.botonGuardarnuevo === true) {
       this.alertsService.presentToast("Posición guardada");
     }
     await this.modalController.dismiss(this.posicion);

@@ -19,6 +19,6 @@ import { MapaMapboxPageModule } from "src/app/pages/mapa-mapbox/mapa-mapbox.modu
   ],
   declarations: [EditarPerfilPage],
   entryComponents: []
- 
+
 })
-export class EditarPerfilPageModule {}
+export class EditarPerfilPageModule { }

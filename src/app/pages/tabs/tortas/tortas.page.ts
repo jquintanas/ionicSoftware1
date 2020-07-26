@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { BusquedaService } from 'src/app/services/comunicacion/busqueda.service';
-import { detalleProducto } from "src/app/interface/productoDetalle";
+import { BusquedaService } from 'src/app/core/services/comunicacion/busqueda.service';
+import { DetalleProducto } from "src/app/core/interface/productoDetalle";
 import { environment } from "src/environments/environment";
 @Component({
   selector: 'app-tortas',
@@ -10,7 +10,7 @@ import { environment } from "src/environments/environment";
 export class TortasPage implements OnInit, OnDestroy {
   private subsDatos: any;
   private categoria = environment.codigoCategoriaTortas;
-  dataTorta: detalleProducto[] = [
+  dataTorta: DetalleProducto[] = [
     {
       ImagenP: "",
       Titulo: "",

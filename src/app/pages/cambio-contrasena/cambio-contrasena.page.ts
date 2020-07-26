@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup,Validators,ValidatorFn,AbstractControl } from '@angular/forms';
-import { ModalController, NavController } from '@ionic/angular';
+import { FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
+import { ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-cambio-contrasena',
@@ -8,44 +8,44 @@ import { Router } from '@angular/router';
   styleUrls: ['./cambio-contrasena.page.scss'],
 })
 export class CambioContrasenaPage implements OnInit {
-  formulario_r : FormGroup;
-  constructor(private formBuilder: FormBuilder, private router: Router,private modalController: ModalController) {
+  formularioR: FormGroup;
+  constructor(private formBuilder: FormBuilder, private router: Router, private modalController: ModalController) {
     this.buildForm();
-   }
+  }
 
   ngOnInit() {
   }
-  buildForm(){
-    this.formulario_r =this.formBuilder.group({
-      contrasena: ['',[Validators.required,Validators.minLength(8)]],
-      contrasenac: ['',[Validators.required,this.validarContrasena('contrasena')]],
+
+  buildForm() {
+    this.formularioR = this.formBuilder.group({
+      contrasena: ['', [Validators.required, Validators.minLength(8)]],
+      contrasenac: ['', [Validators.required, this.validarContrasena('contrasena')]],
     });
   }
 
   save() {
-    if (this.formulario_r.valid) {
-      console.log(this.formulario_r);
+    if (this.formularioR.valid) {
+      console.log(this.formularioR);
       this.router.navigateByUrl('login');
-    }else{
-      
-      console.log('formulario inválido',this.formulario_r);     
+    } else {
+
+      console.log('formulario inválido', this.formularioR);
     }
 
   }
-  get contrasena(){
-    return this.formulario_r.get('contrasena');
+  get contrasena() {
+    return this.formularioR.get('contrasena');
   }
-  get contrasenac(){
-    return this.formulario_r.get('contrasenac');
+  get contrasenac() {
+    return this.formularioR.get('contrasenac');
   }
-  validarContrasena(field_name): ValidatorFn{
-    return (control: AbstractControl): {[key: string]: any} => {   
-      let input = control.value;     
-      let isValid = control.root.value[field_name]==input
-      if(!isValid){
-        return { 'validarContrasena': {isValid} }
-      }
-      else{
+  validarContrasena(fieldName): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } => {
+      const input = control.value;
+      const isValid = control.root.value[fieldName] === input;
+      if (!isValid) {
+        return { validarContrasena: { isValid } };
+      } else {
         return null;
       }
     };

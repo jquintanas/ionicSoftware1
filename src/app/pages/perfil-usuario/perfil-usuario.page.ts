@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
-import { Favoritos } from "src/app/interface/favoritosStorage";
-import { FavoritosService } from "src/app/services/cart/favoritos.service";
+import { Favoritos } from "src/app/core/interface/favoritosStorage";
+import { FavoritosService } from "src/app/core/services/cart/favoritos.service";
 import { LoadingController } from "@ionic/angular";
 import { IonContent } from "@ionic/angular";
 
@@ -20,7 +20,7 @@ export class PerfilUsuarioPage implements OnInit {
     private router: Router,
     private favoritos: FavoritosService,
     private loadingController: LoadingController
-  ) {}
+  ) { }
 
   abrirHistorial() {
     this.router.navigateByUrl("historial");
@@ -39,7 +39,7 @@ export class PerfilUsuarioPage implements OnInit {
   }
 
   zoomImage() {
-    console.log("ZoomImage")
+    console.log("ZoomImage");
   }
 
   private async cargarDatos() {
@@ -55,7 +55,7 @@ export class PerfilUsuarioPage implements OnInit {
   }
 
   async actualizarPantalla(event: any) {
-    let loading = await this.loadingController.create({
+    const loading = await this.loadingController.create({
       message: "Actualizando...",
     });
     await loading.present();

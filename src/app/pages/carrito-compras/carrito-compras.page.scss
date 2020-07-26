@@ -1,26 +1,26 @@
 .spinnerIzq {
-    text-align: center;
-    font-weight: bold;
-    font-size: 0.8rem;
-    border-top: solid 1px var(--ion-color-omipali);
-    border-left: solid 1px var(--ion-color-omipali);
+    text-align   : center;
+    font-weight  : bold;
+    font-size    : 0.8rem;
+    border-top   : solid 1px var(--ion-color-omipali);
+    border-left  : solid 1px var(--ion-color-omipali);
     border-bottom: solid 1px var(--ion-color-omipali);
 }
 
 .spinnerCentrar {
-    text-align: center;
-    font-weight: bold;
-    font-size: large;
-    border-top: solid 1px var(--ion-color-omipali);
+    text-align   : center;
+    font-weight  : bold;
+    font-size    : large;
+    border-top   : solid 1px var(--ion-color-omipali);
     border-bottom: solid 1px var(--ion-color-omipali);
 }
 
 .spinnerDer {
-    text-align: center;
-    font-weight: bold;
-    font-size: 0.8rem;
-    border-top: solid 1px var(--ion-color-omipali);
-    border-right: solid 1px var(--ion-color-omipali);
+    text-align   : center;
+    font-weight  : bold;
+    font-size    : 0.8rem;
+    border-top   : solid 1px var(--ion-color-omipali);
+    border-right : solid 1px var(--ion-color-omipali);
     border-bottom: solid 1px var(--ion-color-omipali);
 }
 
@@ -29,29 +29,29 @@
 }
 
 .flechaItem {
-    position: absolute !important;
-    right: -8px !important;
-    top: 40% !important;
+    position : absolute !important;
+    right    : -8px !important;
+    top      : 40% !important;
     font-size: xx-large;
 }
 
 ion-thumbnail {
-    width: 25%;
+    width : 25%;
     height: 75%;
 }
 
 .toolbar {
-    padding-top: 5px !important;
+    padding-top   : 5px !important;
     padding-bottom: 5px !important;
 }
+
 h5 {
-    font-size: x-large;
-    margin-top: 0px;
+    font-size    : x-large;
+    margin-top   : 0px;
     margin-bottom: 0px;
-    color: var(--ion-color-omipalidarkd);
+    color        : var(--ion-color-omipalidarkd);
 }
 
 ion-item {
     border-bottom: solid 2px var(--ion-color-omipalidarkd);
 }
-

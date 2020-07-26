@@ -19,4 +19,4 @@ import { CommonsComponentsModule } from "src/app/components/commons-components.m
   ],
   declarations: [HomePage]
 })
-export class HomePageModule {}
+export class HomePageModule { }

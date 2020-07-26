@@ -1,4 +1,4 @@
-import { MapaDatosService } from "./../../services/mapa-datos/mapa-datos.service";
+import { MapaDatosService } from "./../../core/services/mapa-datos/mapa-datos.service";
 import { ModalController, Platform, LoadingController } from "@ionic/angular";
 import {
   Component,
@@ -16,12 +16,12 @@ import {
   AbstractControl,
 } from "@angular/forms";
 import { MapaMapboxPage } from "./../mapa-mapbox/mapa-mapbox.page";
-import { AlertsService } from "src/app/services/alerts/alerts.service";
+import { AlertsService } from "src/app/core/services/alerts/alerts.service";
 import { HttpClient } from "@angular/common/http";
-import { usuarioInterface } from "src/app/interface/usuarioRegistro";
+import { UsuarioInterface } from "src/app/core/interface/usuarioRegistro";
 import { environment } from "src/environments/environment";
-import { RegistroService } from "src/app/services/registro.service";
-import { SeguridadService } from "src/app/services/seguridad.service";
+import { RegistroService } from "src/app/core/services/registro.service";
+import { SeguridadService } from "src/app/core/services/seguridad.service";
 
 @Component({
   selector: "app-registro",
@@ -34,15 +34,15 @@ export class RegistroPage implements OnInit {
   form: FormGroup;
   form2: FormGroup;
   goToForm: number;
-  
-  
-  url_completa: string;
+
+
+  urlCompleta: string;
   latlng: string;
-  posicionmarcador: String[] = [];
+  posicionmarcador: string[] = [];
   address: string = "";
 
-  //variables para peticiones
-  private datosUsuario: usuarioInterface;
+  // variables para peticiones
+  private datosUsuario: UsuarioInterface;
   constructor(
     public alertsService: AlertsService,
     private formBuilder: FormBuilder,
@@ -51,7 +51,6 @@ export class RegistroPage implements OnInit {
     public mapaDatosService: MapaDatosService,
     public renderer: Renderer2,
     public el: ElementRef,
-    private htttp: HttpClient,
     private platform: Platform,
     private registroService: RegistroService,
     private loadingController: LoadingController,
@@ -71,7 +70,7 @@ export class RegistroPage implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   buildForm() {
     this.form = this.formBuilder.group({
@@ -82,7 +81,7 @@ export class RegistroPage implements OnInit {
           Validators.minLength(10)
         ],
       ],
-      namesField: ["", [Validators.required,Validators.minLength(4)]],
+      namesField: ["", [Validators.required, Validators.minLength(4)]],
       lastNamesField: ["", [Validators.required, Validators.minLength(4)]],
       phoneField: [
         "",
@@ -106,46 +105,46 @@ export class RegistroPage implements OnInit {
 
   buildForm2() {
     this.form2 = this.formBuilder.group({
-      addressField: ["",[ Validators.required,Validators.minLength(15)]],
-      referencesField: ["", [Validators.required,Validators.minLength(15)]],
+      addressField: ["", [Validators.required, Validators.minLength(15)]],
+      referencesField: ["", [Validators.required, Validators.minLength(15)]],
     });
   }
 
   public getError(controlName: string, form: string): string {
     let field: string;
-    if(form == "1"){
-      //console.log(this.form.controls);
-      let control = this.form.get(controlName);    
+    if (form == "1") {
+      // console.log(this.form.controls);
+      const control = this.form.get(controlName);
       if ((control.touched || control.dirty) && control.errors != null) {
         if (control.errors.required != null) {
           field = controlName;
           if (controlName == "idField") {
             field = "Cédula";
-          }else if (controlName == "namesField") {
+          } else if (controlName == "namesField") {
             field = "Nombres";
-            //console.log(control.errors.minlenght != null,control.errors.maxLength != null, control.errors);
-          }else if (controlName == "lastNamesField") {
+            // console.log(control.errors.minlenght != null,control.errors.maxLength != null, control.errors);
+          } else if (controlName == "lastNamesField") {
             field = "Apellidos";
-          }else if (controlName == "phoneField") {
+          } else if (controlName == "phoneField") {
             field = "Teléfono";
-          }else if (controlName == "emailField") {
+          } else if (controlName == "emailField") {
             field = "Correo Electrónico";
-          }else if (controlName == "passwordField") {
+          } else if (controlName == "passwordField") {
             field = "Contraseña";
-          }else if (controlName == "passwordCopyField") {
+          } else if (controlName == "passwordCopyField") {
             field = "Confirmar Contraseña";
           }
           return "El campo " + field + " es requerido.";
         }
-        if(control.errors.pattern != null){
+        if (control.errors.pattern != null) {
           if (controlName == "phoneField") {
             field = "Teléfono";
-          }else if (controlName == "emailField") {
+          } else if (controlName == "emailField") {
             field = "Correo Electrónico";
           }
           return "Ingrese un " + field + " válido";
         }
-        if(control.errors.passwordValid != null){
+        if (control.errors.passwordValid != null) {
           if (controlName == "passwordCopyField") {
             return "La contraseña no coincide";
           }
@@ -154,25 +153,25 @@ export class RegistroPage implements OnInit {
           console.log("entre aqui min length");
         }*/
       }
-    }else if (form == "2"){
-      let control = this.form2.get(controlName);  
+    } else if (form == "2") {
+      const control = this.form2.get(controlName);
       if ((control.touched || control.dirty) && control.errors != null) {
         if (control.errors.required != null) {
           if (controlName == "addressField") {
             field = "Domicilio";
-          }else if (controlName == "referencesField") {
+          } else if (controlName == "referencesField") {
             field = "Referencias";
           }
           return "El campo " + field + " es requerido.";
         }
       }
-    }      
+    }
     return "";
   }
 
 
   save() {
-    let clave = this.seguridad.generarHashClave(
+    const clave = this.seguridad.generarHashClave(
       this.form.get("passwordField").value
     );
     this.datosUsuario = {
@@ -187,10 +186,10 @@ export class RegistroPage implements OnInit {
     this.goToForm = 2;
   }
 
-  passwordValid(field_name): ValidatorFn {
+  passwordValid(fieldName): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } => {
-      let input = control.value;
-      let isValid = control.root.value[field_name] == input;
+      const input = control.value;
+      const isValid = control.root.value[fieldName] == input;
       if (!isValid) {
         return { passwordValid: { isValid } };
       } else {
@@ -203,11 +202,11 @@ export class RegistroPage implements OnInit {
   }
 
   async save2() {
-    let loading = await this.loadingController.create({
+    const loading = await this.loadingController.create({
       message: "Guardando...",
     });
     await loading.present();
-    let direcciones = {
+    const direcciones = {
       direccion: this.form2.get("addressField").value,
       referencia: this.form2.get("referencesField").value,
       coordenadas: this.latlng,
@@ -220,9 +219,10 @@ export class RegistroPage implements OnInit {
       .then(async (data: any) => {
         console.log(data);
         if (data.log == "Ingresado") {
-          let numero = this.datosUsuario.telefono.substring(1, 9);
+          const numero = this.datosUsuario.telefono.substring(1, 9);
           await this.registroService
             .registrarTelefonoFireBase("+593" + numero)
+            // tslint:disable-next-line: no-shadowed-variable
             .then((data: any) => {
               console.log(data);
               alert(data);
@@ -262,12 +262,12 @@ export class RegistroPage implements OnInit {
     modal.onDidDismiss().then((data) => {
       this.posicionmarcador = data.data.split("|");
       this.latlng = this.posicionmarcador[1] + "," + this.posicionmarcador[0];
-      this.url_completa =
+      this.urlCompleta =
         this.latlng + environment.imgsecondpart + this.latlng + environment.img_markers;
-      if (this.url_completa != "") {
+      if (this.urlCompleta != "") {
         this.imagen = true;
       }
-      
+
     });
     return await modal.present();
   }

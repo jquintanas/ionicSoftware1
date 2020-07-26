@@ -5,10 +5,9 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { PerfilUsuarioPageRoutingModule } from './perfil-usuario-routing.module';
-//import {HidenavModule} from 'ionic4-hidenav';
 import { PerfilUsuarioPage } from './perfil-usuario.page';
 import { CommonsComponentsModule } from "src/app/components/commons-components.module";
-import {SharedModule} from '../../shared/shared.module'
+import {SharedModule} from '../../core/shared/shared.module';
 
 @NgModule({
   imports: [
@@ -20,7 +19,7 @@ import {SharedModule} from '../../shared/shared.module'
     SharedModule
   ],
   declarations: [PerfilUsuarioPage],
- // exports: [HidenavModule]
+ 
 })
 export class PerfilUsuarioPageModule {}
 

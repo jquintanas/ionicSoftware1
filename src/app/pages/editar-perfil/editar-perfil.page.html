@@ -12,21 +12,13 @@
 <ion-content class="contenedor content">
   <ion-row class="centrado image-perfil">
     <ion-col class="centrado">
-      <img
-        class="profile-photo"
-        src="/assets/img/user.png"
-        (click)="zoomImage()"
-      />
+      <img class="profile-photo" src="/assets/img/user.png" (click)="zoomImage()" />
     </ion-col>
   </ion-row>
 
   <ion-row class="centrado">
     <ion-col>
-      <ion-button
-        class="ion-margin-start ion-margin-end"
-        color="omipalidarkd"
-        (click)="abrirEdicion()"
-      >
+      <ion-button class="ion-margin-start ion-margin-end" color="omipalidarkd" (click)="abrirEdicion()">
         Cargar imagen
       </ion-button>
     </ion-col>
@@ -37,62 +29,26 @@
       <form [formGroup]="userDataForm">
         <ion-list>
           <ion-item>
-            <ion-input
-              type="text"
-              placeholder="Usuario"
-              class="inputform"
-              formControlName="namesField"
-            ></ion-input>
+            <ion-input type="text" placeholder="Usuario" class="inputform" formControlName="namesField"></ion-input>
           </ion-item>
-          <div
-            class="container-error-message alert-danger"
-            *ngIf="getError('namesField') != ''"
-          >
-            <ion-icon
-              slot="start"
-              name="information-circle-sharp"
-              color="danger"
-            ></ion-icon>
+          <div class="container-error-message alert-danger" *ngIf="getError('namesField') != ''">
+            <ion-icon slot="start" name="information-circle-sharp" color="danger"></ion-icon>
             <strong> {{getError('namesField')}} </strong>
           </div>
           <ion-item>
-            <ion-input
-              type="tel"
-              maxlength="10"
-              placeholder="Teléfono"
-              class="inputform"
-              formControlName="phoneField"
-            ></ion-input>
+            <ion-input type="tel" maxlength="10" placeholder="Teléfono" class="inputform" formControlName="phoneField">
+            </ion-input>
           </ion-item>
-          <div
-            class="container-error-message alert-danger"
-            *ngIf="getError('phoneField') != ''"
-          >
-            <ion-icon
-              slot="start"
-              name="information-circle-sharp"
-              color="danger"
-            ></ion-icon>
+          <div class="container-error-message alert-danger" *ngIf="getError('phoneField') != ''">
+            <ion-icon slot="start" name="information-circle-sharp" color="danger"></ion-icon>
             <strong> {{getError('phoneField')}}</strong>
           </div>
           <ion-item>
-            <ion-input
-              type="text"
-              placeholder="Correo Electrónico"
-              class="inputform"
-              formControlName="emailField"
-            >
+            <ion-input type="text" placeholder="Correo Electrónico" class="inputform" formControlName="emailField">
             </ion-input>
           </ion-item>
-          <div
-            class="container-error-message alert-danger"
-            *ngIf="getError('emailField') != ''"
-          >
-            <ion-icon
-              slot="start"
-              name="information-circle-sharp"
-              color="danger"
-            ></ion-icon>
+          <div class="container-error-message alert-danger" *ngIf="getError('emailField') != ''">
+            <ion-icon slot="start" name="information-circle-sharp" color="danger"></ion-icon>
             <strong>{{getError('emailField')}}</strong>
           </div>
         </ion-list>
@@ -103,31 +59,14 @@
         </ion-item-divider>
         <div>
           <ion-item>
-            <ion-input
-              type="text"
-              placeholder="Dirección"
-              class="inputform"
-              formControlName="directionField"
-            ></ion-input>
-            <ion-button
-              type="button"
-              class="ion-map-button"
-              color="omipalidarkd"
-              expand="block"
-              (click)="openModal()"
-            >
+            <ion-input type="text" placeholder="Dirección" class="inputform" formControlName="directionField">
+            </ion-input>
+            <ion-button type="button" class="ion-map-button" color="omipalidarkd" expand="block" (click)="openModal()">
               <ion-icon color="omipali" name="map-outline"></ion-icon>
             </ion-button>
           </ion-item>
-          <div
-            class="container-error-message alert-danger"
-            *ngIf="getError('directionField') != ''"
-          >
-            <ion-icon
-              slot="start"
-              name="information-circle-sharp"
-              color="danger"
-            ></ion-icon>
+          <div class="container-error-message alert-danger" *ngIf="getError('directionField') != ''">
+            <ion-icon slot="start" name="information-circle-sharp" color="danger"></ion-icon>
             <strong>{{getError('directionField')}}</strong>
           </div>
         </div>
@@ -137,12 +76,8 @@
         </ion-item>
       </form>
 
-      <ion-button
-        class="ion-margin-start ion-margin-end ion-butt-save"
-        color="omipalidarkd"
-        type="submit"
-        expand="block"
-      >
+      <ion-button class="ion-margin-start ion-margin-end ion-butt-save" color="omipalidarkd" type="submit"
+        expand="block">
         Guardar Cambios
       </ion-button>
     </div>

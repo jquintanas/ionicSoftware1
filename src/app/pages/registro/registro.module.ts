@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
-//import { MapaMapboxPage } from './../mapa-mapbox/mapa-mapbox.page';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { HttpClientModule } from '@angular/common/http';
 import { RegistroPageRoutingModule } from './registro-routing.module';
@@ -21,4 +20,4 @@ import { MapaMapboxPageModule } from "src/app/pages/mapa-mapbox/mapa-mapbox.modu
   declarations: [RegistroPage],
   entryComponents: []
 })
-export class RegistroPageModule {}
+export class RegistroPageModule { }

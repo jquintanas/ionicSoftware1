@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
-import { FavoritosService } from 'src/app/services/cart/favoritos.service';
+import { FavoritosService } from 'src/app/core/services/cart/favoritos.service';
 
 @Component({
   selector: "app-favorite-producto",
@@ -11,14 +11,13 @@ export class FavoriteProductoComponent implements OnInit {
   @Input("Favorito") banderaCorazon: boolean;
   @Input("id") id: string;
   @Input("categoria") categoria: number;
-
   @Output("notificar") propagar = new EventEmitter<boolean>();
   banderaLoading: boolean = true;
 
   constructor(private favoritoService: FavoritosService) { }
 
   ngOnInit() {
-    //console.log(this.url);
+    // console.log(this.url);
     this.banderaCorazon = true;
     // this.favorito.publica
   }

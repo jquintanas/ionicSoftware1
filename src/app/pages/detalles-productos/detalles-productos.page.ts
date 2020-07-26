@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
-import { CarritoService } from "src/app/services/cart/carrito.service";
-import { detalleProducto } from "src/app/interface/productoDetalle";
-import { productoCarrito } from "src/app/interface/productoCarrito";
+import { CarritoService } from "src/app/core/services/cart/carrito.service";
+import { DetalleProducto } from "src/app/core/interface/productoDetalle";
+import { ProductoCarrito } from "src/app/core/interface/productoCarrito";
 import { trigger, state, style, animate, transition } from '@angular/animations';
-import { FavoritosService } from "src/app/services/cart/favoritos.service";
-import { Favoritos } from "src/app/interface/favoritosStorage";
+import { FavoritosService } from "src/app/core/services/cart/favoritos.service";
+import { Favoritos } from "src/app/core/interface/favoritosStorage";
 import { ToastController } from '@ionic/angular';
 @Component({
   selector: 'app-detalles-productos',
@@ -44,16 +44,16 @@ export class DetallesProductosPage implements OnInit {
     setWrapperSize: true,
     slidesPerView: 1
   };
-  detalleProducto: detalleProducto;
+  detalleProducto: DetalleProducto;
   listaImagenes: string[];
   banderaCorazon: boolean;
   cantidad: number;
   nombreProducto: string;
   precioProducto: number;
   descripcionProducto: string;
-  //banderas animations
+  // banderas animations
   show = true;
-  //banderas contenido
+  // banderas contenido
   contenidoFooter: boolean = true;
   banderaPrecio: boolean = true;
   ocultarSheetInferior: boolean = false;
@@ -81,14 +81,14 @@ export class DetallesProductosPage implements OnInit {
     this.banderaCorazon = !this.banderaCorazon;
     this.detalleProducto.Favorito = this.banderaCorazon;
     this.carrito.setProductoDetalle(this.detalleProducto);
-    if(this.banderaCorazon){
-      let tmp: Favoritos = {
+    if (this.banderaCorazon) {
+      const tmp: Favoritos = {
         categoria: this.detalleProducto.categoria,
         idProducto: this.detalleProducto.id,
         url: this.detalleProducto.ImagenP
-      }
-      if(!await this.favoritos.agregarFavorito(this.detalleProducto.categoria+"", tmp)){
-        let toast = await this.toastController.create({
+      };
+      if (!await this.favoritos.agregarFavorito(this.detalleProducto.categoria + "", tmp)) {
+        const toast = await this.toastController.create({
           message: "No se pudo agregar a favoritos",
           duration: 2000,
           position: "top"
@@ -96,14 +96,12 @@ export class DetallesProductosPage implements OnInit {
         toast.present();
         this.banderaCorazon = false;
       }
-    }
-    else {
-      if(await this.favoritos.borrarDeFavoritos(this.detalleProducto.categoria+"", this.detalleProducto.id)){
+    } else {
+      if (await this.favoritos.borrarDeFavoritos(this.detalleProducto.categoria + "", this.detalleProducto.id)) {
         this.banderaCorazon = false;
-      }
-      else {
-        this.banderaCorazon= true;
-        let toast = await this.toastController.create({
+      } else {
+        this.banderaCorazon = true;
+        const toast = await this.toastController.create({
           message: "No se pudo eliminar de favoritos",
           duration: 2000,
           position: "top"
@@ -120,7 +118,7 @@ export class DetallesProductosPage implements OnInit {
       this.incrementarProducto(-1);
       return;
     }
-    let alert = await this.alertController.create({
+    const alert = await this.alertController.create({
       header: 'Seguro que desea continuar!',
       message: 'Desea <strong>eliminar</strong> el producto!!!',
       buttons: [
@@ -146,7 +144,7 @@ export class DetallesProductosPage implements OnInit {
     this.cantidad += incremento;
     this.detalleProducto.cantidad = this.cantidad;
     this.carrito.setProductoDetalle(this.detalleProducto);
-    let producto: productoCarrito = {
+    const producto: ProductoCarrito = {
       id: this.detalleProducto.id,
       cantidad: incremento,
       producto: this.detalleProducto
@@ -171,11 +169,10 @@ export class DetallesProductosPage implements OnInit {
     this.show = !this.show;
     if (this.show) {
       this.contenidoFooter = true;
-    }
-    else {
+    } else {
       setTimeout(() => {
         this.contenidoFooter = false;
-      }, 600)
+      }, 600);
     }
   }
 
@@ -184,13 +181,12 @@ export class DetallesProductosPage implements OnInit {
     if (!this.banderaPrecio) {
       setTimeout(() => {
         this.ocultarSheetInferior = true;
-      }, 600)
-    }
-    else {
+      }, 600);
+    } else {
       this.ocultarSheetInferior = false;
       setTimeout(() => {
         this.bajarSheetFooter();
-      }, 50)
+      }, 50);
       return;
     }
     this.bajarSheetFooter();

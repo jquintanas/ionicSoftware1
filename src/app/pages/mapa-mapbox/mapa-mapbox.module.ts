@@ -13,10 +13,10 @@ import { MapaMapboxPage } from './mapa-mapbox.page';
     FormsModule,
     IonicModule,
     MapaMapboxPageRoutingModule,
-    
+
   ],
   declarations: [MapaMapboxPage],
   entryComponents: [MapaMapboxPage],
   exports: [MapaMapboxPage]
 })
-export class MapaMapboxPageModule {}
+export class MapaMapboxPageModule { }

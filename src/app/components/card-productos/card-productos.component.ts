@@ -1,11 +1,11 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { ModalController, AlertController, ToastController } from '@ionic/angular';
 import { DetallesProductosPage } from "src/app/pages/detalles-productos/detalles-productos.page";
-import { detalleProducto } from "src/app/interface/productoDetalle";
-import { CarritoService } from "src/app/services/cart/carrito.service";
-import { productoCarrito } from "src/app/interface/productoCarrito";
-import { Favoritos } from "src/app/interface/favoritosStorage";
-import { FavoritosService } from 'src/app/services/cart/favoritos.service';
+import { DetalleProducto } from "src/app/core/interface/productoDetalle";
+import { CarritoService } from "src/app/core/services/cart/carrito.service";
+import { ProductoCarrito } from "src/app/core/interface/productoCarrito";
+import { Favoritos } from "src/app/core/interface/favoritosStorage";
+import { FavoritosService } from 'src/app/core/services/cart/favoritos.service';
 @Component({
   selector: 'app-card-productos',
   templateUrl: './card-productos.component.html',
@@ -13,7 +13,7 @@ import { FavoritosService } from 'src/app/services/cart/favoritos.service';
 })
 export class CardProductosComponent implements OnInit, OnDestroy {
 
-  //variables de entrada
+  // variables de entrada
   @Input("Imagen") urlImagen: string;
   @Input("carrusel") carrusel: string[];
   @Input("Titulo") titulo: string;
@@ -23,9 +23,9 @@ export class CardProductosComponent implements OnInit, OnDestroy {
   @Input("id") id: string;
   @Input("categoria") categoria: number;
 
-  //variables internas
+  // variables internas
   private banderaLoading: boolean = true;
-  private detalle: detalleProducto;
+  private detalle: DetalleProducto;
   private cantidad: number = 0;
   abstract: string = "";
   private observadorCarrito: any;
@@ -43,10 +43,10 @@ export class CardProductosComponent implements OnInit, OnDestroy {
   }
 
   async ngOnInit() {
-    if (this.titulo == null || this.titulo == "") {
+    if (this.titulo == null || this.titulo === "") {
       this.titulo = "Cargando...";
     }
-    if (this.descripcion == null || this.descripcion == "") {
+    if (this.descripcion == null || this.descripcion === "") {
       this.descripcion = "Cargando...";
     }
     if (this.precio == null) {
@@ -63,7 +63,7 @@ export class CardProductosComponent implements OnInit, OnDestroy {
       Titulo: this.titulo,
       categoria: this.categoria
     };
-    this.observadorCarrito = this.carrito.observarCarrito().subscribe((data: Map<any, Map<string, productoCarrito>>) => {
+    this.observadorCarrito = this.carrito.observarCarrito().subscribe((data: Map<any, Map<string, ProductoCarrito>>) => {
       if (data != null) {
         if (data.get(this.detalle.categoria) != null) {
           if (data.get(this.detalle.categoria).get(this.detalle.id) != null) {
@@ -73,61 +73,59 @@ export class CardProductosComponent implements OnInit, OnDestroy {
       }
 
     });
-    this.observadorFavoritos = this.favoritos.observadorFavoritos().subscribe(async (data:boolean) => {
-      if(data){
+    this.observadorFavoritos = this.favoritos.observadorFavoritos().subscribe(async (data: boolean) => {
+      if (data) {
         await this.verificarFavorito();
       }
-    })
+    });
     await this.verificarFavorito();
   }
 
   async marcarFavorito() {
     if (!this.banderaCorazon) {
-      let favorito: Favoritos = {
+      const favorito: Favoritos = {
         categoria: this.categoria,
         idProducto: this.id,
         url: this.urlImagen
       };
       if (await this.favoritos.agregarFavorito(this.categoria + "", favorito)) {
         this.banderaCorazon = !this.banderaCorazon;
-      }
-      else {
-        let toast = await this.toastController.create({
+      } else {
+        const toast = await this.toastController.create({
           message: "No se pudo agregar a favoritos",
           duration: 2000,
           position: "bottom"
         });
         toast.present();
       }
-    }
-    else {
+    } else {
       await this.eliminarDeFavoritos();
     }
     this.detalle.Favorito = this.banderaCorazon;
   }
 
   async agregarAlCarrito() {
-    //let cantida = await this.presentAlertPrompt();
-    let cantida = 1;
+    // let cantida = await this.presentAlertPrompt();
+    const cantida = 1;
     if (cantida > 0) {
       this.cantidad += cantida;
       this.detalle.cantidad = this.cantidad;
-      let tmp: productoCarrito = {
+      const tmp: ProductoCarrito = {
         cantidad: cantida,
         id: this.detalle.id,
         producto: this.detalle
-      }
+      };
       this.carrito.agregarAlCarrito(this.detalle.categoria, tmp);
     }
   }
 
   private crearAbstract() {
-    let tmp = this.descripcion.split(" ");
+    const tmp = this.descripcion.split(" ");
     if (tmp.length > 7) {
       for (let i = 0; i < 7; i++) {
         this.abstract += tmp[i] + " ";
       }
-      this.abstract += "..."
+      this.abstract += "...";
       return;
     }
     this.abstract = this.descripcion;
@@ -146,7 +144,7 @@ export class CardProductosComponent implements OnInit, OnDestroy {
   }
 
   private async presentAlertPrompt() {
-    let alert = await this.alertController.create({
+    const alert = await this.alertController.create({
       header: 'Ingrese la cantidad a comprar',
       inputs: [
         {
@@ -167,9 +165,9 @@ export class CardProductosComponent implements OnInit, OnDestroy {
       ]
     });
     await alert.present();
-    let { data } = await alert.onDidDismiss();
+    const { data } = await alert.onDidDismiss();
     if (data) {
-      if (data.values.cantidad == "") {
+      if (data.values.cantidad === "") {
         return 0;
       }
       return Number(data.values.cantidad);
@@ -181,9 +179,8 @@ export class CardProductosComponent implements OnInit, OnDestroy {
     if (await this.favoritos.comprobarFavorito(this.categoria + "", this.id)) {
       if (await this.favoritos.borrarDeFavoritos(this.categoria + "", this.id)) {
         this.banderaCorazon = false;
-      }
-      else {
-        let toast = await this.toastController.create({
+      } else {
+        const toast = await this.toastController.create({
           message: "No se pudo eliminar de favoritos",
           duration: 2000,
           position: "bottom"

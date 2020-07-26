@@ -9,7 +9,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { IonicStorageModule } from '@ionic/storage';
-import { FavoritosService } from './services/cart/favoritos.service';
+import { FavoritosService } from './core/services/cart/favoritos.service';
 import { HttpClientModule } from '@angular/common/http';
 import { firebaseConfig } from '../environments/environment.prod'
 import { AngularFireModule } from "@angular/fire"

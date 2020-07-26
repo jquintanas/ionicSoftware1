@@ -1,21 +1,21 @@
 .toolbar {
-  padding-top: 5px !important;
+  padding-top   : 5px !important;
   padding-bottom: 5px !important;
 }
 
 div {
   text-align: center;
-  width: 100%;
+  width     : 100%;
 }
 
 .profile-photo {
   border-radius: 100% !important;
-  width: 9rem;
-  height: 9rem;
+  width        : 9rem;
+  height       : 9rem;
 }
 
 .item {
-  margin-top: 0px;
+  margin-top      : 0px;
   background-color: white;
 }
 
@@ -24,11 +24,11 @@ ion-list {
 }
 
 .centrado {
-  margin-right: auto;
-  margin-left: auto;
+  margin-right : auto;
+  margin-left  : auto;
   align-content: center;
-  align-items: center;
-  text-align: center;
+  align-items  : center;
+  text-align   : center;
 }
 
 .image-perfil {
@@ -40,14 +40,14 @@ ion-list {
 }
 
 .error-message {
-  color: var(--ion-color-danger);
+  color    : var(--ion-color-danger);
   font-size: 0.8rem;
-  left: 0;
+  left     : 0;
 }
 
 .text-area {
   font-size: 1rem;
-  padding: 2px;
+  padding  : 2px;
 }
 
 .ion-butt-save {
@@ -75,27 +75,26 @@ form {
 }
 
 .ion-map-button {
-  margin-top: 0px;
+  margin-top : 0px;
   margin-left: 5rem;
 }
 
-.inputform{
-  text-align: left;
-  font-size: 0.9rem;
-  border: 0;
-  outline: 0;
+.inputform {
+  text-align   : left;
+  font-size    : 0.9rem;
+  border       : 0;
+  outline      : 0;
   border-bottom: 2px solid white;
 }
 
-.container-error-message{
-  padding: 3px;
+.container-error-message {
+  padding  : 3px;
   font-size: 0.8rem;
 }
 
 
-.alert-danger{
-  color: red;
-  text-align: left;
+.alert-danger {
+  color      : red;
+  text-align : left;
   margin-left: 1rem;
 }
-

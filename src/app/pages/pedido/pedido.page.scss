@@ -1,128 +1,155 @@
-.tipoEntrega{
+.tipoEntrega {
     /*--padding-start:0%;
     --padding-end:0%;
     --padding-bottom:0%;/*/
     font-size: 0.8rem;
 }
-.tipoPago{
-    --padding-start:0%;
-    --padding-end:0%;
-    font-size: 0.8rem;
-}
-.confirmacion{
-    --padding-start:0%;
-    font-size: 1rem;
-    font-weight: bold;
-}
-.local{
-    --padding-start:0%;
-    --padding-end:0%;
-    font-size: 0.8rem;
-}
-.total{
-    --padding-start:0%;
-    --padding-end:0%;
-}
-.realizarcomp{
-    color:   rgb(255, 255, 255);
-    --border-radius: 5px;   
-    --background: var(--ion-color-omipalidarkd);
+
+.tipoPago {
+    --padding-start: 0%;
+    --padding-end  : 0%;
+    font-size      : 0.8rem;
 }
 
-.griduser,.direccionEntrega,.gridcarrito,.gridresumen,.pago{
+.confirmacion {
+    --padding-start: 0%;
+    font-size      : 1rem;
+    font-weight    : bold;
+}
+
+.local {
+    --padding-start: 0%;
+    --padding-end  : 0%;
+    font-size      : 0.8rem;
+}
+
+.total {
+    --padding-start: 0%;
+    --padding-end  : 0%;
+}
+
+.realizarcomp {
+    color          : rgb(255, 255, 255);
+    --border-radius: 5px;
+    --background   : var(--ion-color-omipalidarkd);
+}
+
+.griduser,
+.direccionEntrega,
+.gridcarrito,
+.gridresumen,
+.pago {
     //font-size: 0.9rem;
-    background: white ;
+    background: white;
 }
-.rowdatos,.rowdatospago{
-    font-size: 0.9rem;
+
+.rowdatos,
+.rowdatospago {
+    font-size  : 0.9rem;
     font-weight: bold;
-    
+
 }
-.checkbox{
-    width: 15px;
+
+.checkbox {
+    width : 15px;
     height: 15px;
 }
-.titlechek{
+
+.titlechek {
     font-size: 0.8rem;
 }
 
-.rowvaloresuser{
+.rowvaloresuser {
     font-size: 0.8rem;
 }
-.rowdatoscarrito{
+
+.rowdatoscarrito {
     font-size: 0.8rem;
 }
-.rowdatoscarritotitle{
+
+.rowdatoscarritotitle {
     font-weight: bold;
-    font-size: 0.8rem;
+    font-size  : 0.8rem;
 }
-.rowdatosresumen{
+
+.rowdatosresumen {
     font-size: 0.8rem;
 }
 
-.item{
+.item {
     margin-bottom: 2%;
 }
 
-.content{
+.content {
     --background: rgb(231, 231, 231);
 }
 
-.totalpago{
+.totalpago {
     background: rgb(231, 231, 231);
 }
 
-.gridtot{
-    background:  var(--ion-color-omipali);
+.gridtot {
+    background: var(--ion-color-omipali);
 }
-.rowdatostot{
+
+.rowdatostot {
     font-size: 1rem;
 }
 
-.valor,.cantidad{
+.valor,
+.cantidad {
     text-align: center;
 }
-.badge{
-    background:  var(--ion-color-omipali);
-    color: white;
+
+.badge {
+    background: var(--ion-color-omipali);
+    color     : white;
 }
-.mapallega{
+
+.mapallega {
     font-size: 0.5rem;
 }
-.hora{
-    font-size: 0.8rem;
-    left: 0;
-    --padding-start:0%;
+
+.hora {
+    font-size      : 0.8rem;
+    left           : 0;
+    --padding-start: 0%;
 }
-.reloj{
-    font-size: 0.8rem;
-}
-.mensajtiempo{
-    font-size: 0.8rem;
-}
-.direccionlocal{
-    --padding-start:0%;
-    --padding-end:0%;
+
+.reloj {
     font-size: 0.8rem;
 }
-.mapaimagen{
+
+.mensajtiempo {
+    font-size: 0.8rem;
+}
+
+.direccionlocal {
+    --padding-start: 0%;
+    --padding-end  : 0%;
+    font-size      : 0.8rem;
+}
+
+.mapaimagen {
 
     //width: 100%;
     height: 100%;
 
 }
-.imagen{
-    margin-top: 2%;
+
+.imagen {
+    margin-top   : 2%;
     border-radius: 5px;
 }
 
-.labeldir{
+.labeldir {
     font-weight: bold;
 }
-.textareadir{
+
+.textareadir {
     border-bottom: 1px solid black;
 }
 
-ion-text{
+ion-text {
     font-size: 0.8rem;
 }

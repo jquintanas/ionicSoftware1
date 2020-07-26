@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
-import { AlertController } from '@ionic/angular'
-
+import { AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-telefono',
   templateUrl: './telefono.page.html',
@@ -34,7 +33,7 @@ export class TelefonoPage implements OnInit {
       { type: 'required', message: 'Código de verificación requerido' },
       { type: 'maxLenght', message: 'Código de verificación no válido' }
     ]
-  }
+  };
 
   constructor(
     private formBuilder: FormBuilder,
@@ -46,7 +45,7 @@ export class TelefonoPage implements OnInit {
   askCode() {
     this.firebaseAuthentication.verifyPhoneNumber('+593' + this.phoneNumber, 30000).then(verificationId => {
       alert(verificationId);
-    })
+    });
   }
 
   async validateAlert() {

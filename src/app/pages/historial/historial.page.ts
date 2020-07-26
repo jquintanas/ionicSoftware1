@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {AlertController, IonSegment} from '@ionic/angular';
-import { detalleHistorial} from "src/app/interface/historial-pedido";
+import { AlertController, IonSegment } from '@ionic/angular';
+import { DetalleHistorial } from "src/app/core/interface/historial-pedido";
 import { Router } from '@angular/router';
-import {BehaviorSubject} from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-historial',
@@ -11,10 +11,10 @@ import {BehaviorSubject} from 'rxjs';
 })
 
 export class HistorialPage implements OnInit {
-  time: BehaviorSubject<string>= new BehaviorSubject ('00');
+  time: BehaviorSubject<string> = new BehaviorSubject('00');
   timer: number;
 
-dataHistorial: detalleHistorial[]=[
+  dataHistorial: DetalleHistorial[] = [
     {
       idpedido: "1406",
       producto: "Mojada de chocolate",
@@ -40,95 +40,96 @@ dataHistorial: detalleHistorial[]=[
       fecha: "2019-07-12"
     }
 
-]
-  
-dataMostrar: any[];
-segment: string = "active";
+  ];
+
+  dataMostrar: any[];
+  segment: string = "active";
 
   constructor(
-    private alertController: AlertController, 
-    private router: Router) { 
+    private alertController: AlertController,
+    private router: Router) {
     this.dataMostrar = this.dataHistorial;
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
-    async cancelAlert(){
-      const alert = await this.alertController.create({
-        cssClass: 'alertCancel',
-        header: 'Cancelar Pedido',
-        inputs : [
-          {
-            type: 'radio',
-            name: 'motivo',
-            label: 'Pedido equivocado',
-            value: 'pedidoEquivocad'
-          },
-          {
-            type: 'radio',
-            name: 'motivo',
-            label: 'Repartidor demorado',
-            value: 'repDemorado'
+  async cancelAlert() {
+    const alert = await this.alertController.create({
+      cssClass: 'alertCancel',
+      header: 'Cancelar Pedido',
+      inputs: [
+        {
+          type: 'radio',
+          name: 'motivo',
+          label: 'Pedido equivocado',
+          value: 'pedidoEquivocad'
+        },
+        {
+          type: 'radio',
+          name: 'motivo',
+          label: 'Repartidor demorado',
+          value: 'repDemorado'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Volver',
+          role: 'regresar',
+          handler: (blah) => { }
+        }, {
+          text: 'Enviar',
+          role: 'cancelar',
+          handler: () => {
+            this.motiveAlert();
           }
-          ],
-        buttons: [
-          {
-            text: 'Volver',
-            role: 'regresar',
-            handler: (blah) => {}
-          }, {
-            text: 'Enviar',
-            role: 'cancelar',
-            handler: () => {
-              this.motiveAlert();
-            }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  async motiveAlert() {
+    const alert = await this.alertController.create({
+      header: 'Motivo',
+      inputs: [
+        {
+          name: 'name1',
+          type: 'text',
+          placeholder: 'Cuentanos que paso con tu pedido'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Enviar',
+          role: 'cancelar',
+          handler: () => {
           }
-        ]
-      });
-      await alert.present();
-    }
-  
-    async motiveAlert(){
-      const alert = await this.alertController.create({
-        header: 'Motivo',
-        inputs: [
-          {
-            name: 'name1',
-            type: 'text',
-            placeholder: 'Cuentanos que paso con tu pedido'
-          }
-          ],
-        buttons: [
-          {
-            text: 'Enviar',
-            role: 'cancelar',
-            handler: () => {
-            }}]
-      });
-      await alert.present();
-    }
+        }]
+    });
+    await alert.present();
+  }
 
-    goCarrito(){
-      this.router.navigateByUrl('carrito-compras');
-    }
+  goCarrito() {
+    this.router.navigateByUrl('carrito-compras');
+  }
 
-    startTimer(duration: number){
-      this.timer = duration * 60;
-      setInterval( () => {
-        this.updateTimeValue();
-      }, 1000);
-    }
+  startTimer(duration: number) {
+    this.timer = duration * 60;
+    setInterval(() => {
+      this.updateTimeValue();
+    }, 1000);
+  }
 
-    updateTimeValue(){
-      let minutes: any = this.timer /60;
-      let seconds: any = this.timer %60;
-  
-      minutes = String('0' + Math.floor(minutes)).slice(-2);
-      seconds = String('0' + Math.floor(seconds)).slice(-2);
-    
-      const text = minutes + ' MINUTOS';
-      this.time.next(text);
-  
-      --this.timer;
-    }
+  updateTimeValue() {
+    let minutes: any = this.timer / 60;
+    let seconds: any = this.timer % 60;
+
+    minutes = String('0' + Math.floor(minutes)).slice(-2);
+    seconds = String('0' + Math.floor(seconds)).slice(-2);
+
+    const text = minutes + ' MINUTOS';
+    this.time.next(text);
+
+    --this.timer;
+  }
 }

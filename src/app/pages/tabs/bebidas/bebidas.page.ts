@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { BusquedaService } from "src/app/services/comunicacion/busqueda.service";
-import { detalleProducto } from "src/app/interface/productoDetalle";
+import { BusquedaService } from "src/app/core/services/comunicacion/busqueda.service";
+import { DetalleProducto } from "src/app/core/interface/productoDetalle";
 import { environment } from "src/environments/environment";
 @Component({
   selector: 'app-bebidas',
@@ -10,7 +10,7 @@ import { environment } from "src/environments/environment";
 export class BebidasPage implements OnInit, OnDestroy {
   private subsDatos: any;
   private categoria: number = environment.codigoCategoriaBebida;
-  dataBebidas: detalleProducto[] = [
+  dataBebidas: DetalleProducto[] = [
     {
       ImagenP: "https://cdn.aarp.net/content/dam/aarp/food/recipes/2018/10/1140-limofresa-gas-drink-esp.jpg",
       Titulo: "jugo de fresa",

@@ -1,12 +1,11 @@
 import { environment } from "src/environments/environment";
-import { MapaDatosService } from "./../../services/mapa-datos/mapa-datos.service";
+import { MapaDatosService } from "./../../core/services/mapa-datos/mapa-datos.service";
 import { Router } from "@angular/router";
 import { ModalController, AlertController } from "@ionic/angular";
 import { Component, OnInit } from "@angular/core";
 import { MapaMapboxPage } from "./../mapa-mapbox/mapa-mapbox.page";
-import { HttpClient } from "@angular/common/http";
-import { FormBuilder, Validators, FormGroup, NgModel } from "@angular/forms";
-import { AlertsService } from 'src/app/services/alerts/alerts.service';
+import { NgModel } from "@angular/forms";
+import { AlertsService } from 'src/app/core/services/alerts/alerts.service';
 
 @Component({
   selector: "app-pedido",
@@ -25,33 +24,32 @@ export class PedidoPage implements OnInit {
   efectivo = false;
   depotran = false;
   envio = false;
-  posicionmarcador: String[] = [];
+  posicionmarcador: string[] = [];
   latlng: string;
   address: string = "";
   nuevaDireccionEnvio = false;
-  url_completa: string;
+  urlCompleta: string;
   isNewAddress: boolean;
   newAddressString: string;
   referencesString: string;
 
   constructor(
-    private htttp: HttpClient,
     public modalController: ModalController,
     public alertController: AlertController,
     public router: Router,
     public mapaService: MapaDatosService,
-    public alertService : AlertsService
-  ) {}
+    public alertService: AlertsService
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   public onOptionsSelected(value: string) {
-    if (value == "Domicilio") {
+    if (value === "Domicilio") {
       this.domicilio = true;
       this.local = false;
       this.horapedido = false;
       this.envio = true;
-    } else if (value == "Local") {
+    } else if (value === "Local") {
       this.local = true;
       this.domicilio = false;
       this.horapedido = true;
@@ -62,14 +60,14 @@ export class PedidoPage implements OnInit {
     }
   }
   public onOptionsSelected2(value: string) {
-    if (value == "Nueva") {
+    if (value === "Nueva") {
       this.nuevaUbicacion = true;
       this.mapaService.NuevaUbicacion = true;
       this.mapa = true;
       this.isNewAddress = true;
       this.ubicacionRegistrada = false;
-    } else if (value == "Registrada") {
-      this.ubicacionRegistrada = true
+    } else if (value === "Registrada") {
+      this.ubicacionRegistrada = true;
       this.nuevaUbicacion = false;
       this.mapaService.NuevaUbicacion = false;
       this.mapa = false;
@@ -79,40 +77,40 @@ export class PedidoPage implements OnInit {
   }
 
   public onOptionsSelected3(value: string) {
-    if (value == "Efectivo") {
+    if (value === "Efectivo") {
       this.efectivo = true;
       this.depotran = false;
-    } else if (value == "Transferencia" || value == "Deposito") {
+    } else if (value === "Transferencia" || value === "Deposito") {
       this.efectivo = false;
       this.depotran = true;
     }
   }
 
-  public validation(crtl: NgModel, name: string):string{
-    let mensaje:string;
-    if(name == "newAddressString"){
-      if((crtl.touched || crtl.dirty) && (crtl.errors != null)){
+  public validation(crtl: NgModel, name: string): string {
+    let mensaje: string;
+    if (name === "newAddressString") {
+      if ((crtl.touched || crtl.dirty) && (crtl.errors != null)) {
         if (crtl.errors.required != null) {
           mensaje = "Debe ingresar el domicilio";
-          return mensaje;  
+          return mensaje;
         }
-        if((crtl.touched && crtl.dirty) && (!crtl.hasError('minglength'))){
-          mensaje =  "La dirección debe tener más de 10 caracteres";
-          return mensaje;  
-        }        
+        if ((crtl.touched && crtl.dirty) && (!crtl.hasError('minglength'))) {
+          mensaje = "La dirección debe tener más de 10 caracteres";
+          return mensaje;
+        }
       }
-    }else if(name == "referencesString"){
-      if((crtl.touched || crtl.dirty) && (crtl.errors != null)){
+    } else if (name === "referencesString") {
+      if ((crtl.touched || crtl.dirty) && (crtl.errors != null)) {
         if (crtl.errors.required != null) {
           mensaje = "Debe ingresar la referencia del domicilio";
-          return mensaje;  
+          return mensaje;
         }
-        if((crtl.touched && crtl.dirty) && (!crtl.hasError('minglength'))){
-          mensaje =  "La referencia debe tener más de 10 caracteres";
-          return mensaje;  
-        }        
+        if ((crtl.touched && crtl.dirty) && (!crtl.hasError('minglength'))) {
+          mensaje = "La referencia debe tener más de 10 caracteres";
+          return mensaje;
+        }
       }
-    }  
+    }
     return '';
   }
   async openModal() {
@@ -121,19 +119,19 @@ export class PedidoPage implements OnInit {
       component: MapaMapboxPage,
     });
     modal.onDidDismiss().then((data) => {
-      if (this.mapa == true) {
+      if (this.mapa === true) {
         this.nuevaDireccionEnvio = true;
         this.posicionmarcador = data.data.split("|");
         this.latlng = this.posicionmarcador[1] + "," + this.posicionmarcador[0];
-        this.url_completa =
+        this.urlCompleta =
           this.latlng +
           environment.imgsecondpart +
           this.latlng +
           environment.img_markers;
-        if (this.url_completa != "") {
+        if (this.urlCompleta !== "") {
           this.imagen = true;
         }
-        
+
       }
     });
 
@@ -141,49 +139,49 @@ export class PedidoPage implements OnInit {
   }
 
   async purchase() {
-    if((this.domicilio == false && this.local == false) && (this.efectivo == false && this.depotran == false)){
-      this.alertService.alert("Error - Datos incompletos","Debe escoger el tipo de entrega y método de pago");
-    }else if(this.domicilio == false && this.local == false){
-      this.alertService.alert("Error - Datos incompletos","Debe escoger el tipo de entrega");
-    }else if(this.domicilio == true && (this.nuevaUbicacion == false && this.ubicacionRegistrada == false)){
-      this.alertService.alert("Error - Datos incompletos","Debe escoger la dirección de envío");
-    }else if(this.efectivo == false && this.depotran == false){
-      this.alertService.alert("Error - Datos incompletos","Debe escoger el método de pago");
-    }else{
+    if ((this.domicilio === false && this.local === false) && (this.efectivo === false && this.depotran === false)) {
+      this.alertService.alert("Error - Datos incompletos", "Debe escoger el tipo de entrega y método de pago");
+    } else if (this.domicilio === false && this.local === false) {
+      this.alertService.alert("Error - Datos incompletos", "Debe escoger el tipo de entrega");
+    } else if (this.domicilio === true && (this.nuevaUbicacion === false && this.ubicacionRegistrada === false)) {
+      this.alertService.alert("Error - Datos incompletos", "Debe escoger la dirección de envío");
+    } else if (this.efectivo === false && this.depotran === false) {
+      this.alertService.alert("Error - Datos incompletos", "Debe escoger el método de pago");
+    } else {
       this.verifyData();
     }
-    
+
   }
 
-  async verifyData(){   
-    if(this.isNewAddress){
-      if(this.nuevaDireccionEnvio == false){
-        this.alertService.alert( "Error - Datos incompletos","Debe indicar la ubicación presionando el ícono del mapa ");
-      }else{
+  async verifyData() {
+    if (this.isNewAddress) {
+      if (this.nuevaDireccionEnvio == false) {
+        this.alertService.alert("Error - Datos incompletos", "Debe indicar la ubicación presionando el ícono del mapa ");
+      } else {
         if (
           this.newAddressString == undefined ||
           this.newAddressString == " " ||
           this.newAddressString == "" ||
           this.referencesString == undefined ||
           this.referencesString == " " ||
-          this.referencesString == ""       
+          this.referencesString == ""
         ) {
-          this.alertService.alert( "Error - Datos incompletos","Debe llenar los campos solicitados de la nueva dirección ");       
-        }else if(this.newAddressString.length < 10 ){
-          this.alertService.alert( "Error - Datos incompletos","La nueva dirección debe tener mas de 10 caracteres");
-        }else if(this.referencesString.length <10){
-          this.alertService.alert( "Error - Datos incompletos","La referencia de la nueva dirección debe tener mas de 10 caracteres");
-        }else{
+          this.alertService.alert("Error - Datos incompletos", "Debe llenar los campos solicitados de la nueva dirección ");
+        } else if (this.newAddressString.length < 10) {
+          this.alertService.alert("Error - Datos incompletos", "La nueva dirección debe tener mas de 10 caracteres");
+        } else if (this.referencesString.length < 10) {
+          this.alertService.alert("Error - Datos incompletos", "La referencia de la nueva dirección debe tener mas de 10 caracteres");
+        } else {
           this.detectPayment();
-        } 
+        }
       }
-    }else{
+    } else {
       this.detectPayment();
-    }  
-    
+    }
+
   }
 
-  async detectPayment(){
+  async detectPayment() {
     if (this.depotran) {
       const alert = await this.alertController.create({
         header: "Cuentas Bancarias",
@@ -192,7 +190,8 @@ export class PedidoPage implements OnInit {
           '<p class="p">Cuenta de Ahorros #45789657479  FARID ALVARADO CI:1207684521 Omiypali@gmail.com <br></p>' +
           '<p class="title"><strong>Banco Guayaquil</strong></p>' +
           '<p class="p">Cuenta de Ahorros #45789657479  FARID ALVARADO CI:1207684521 Omiypali@gmail.com <br></p>' +
-          '<p class="comentario">Envíanos una foto del comprobante del depósito/transferencia para confirmar tu pedido al 0955744347<br> </p>',
+          '<p class="comentario">Envíanos una foto del comprobante del depósito/transferencia para confirmar tu ' +
+          'pedido al 0955744347<br> </p>',
         buttons: [
           {
             text: "Aceptar",
@@ -218,8 +217,8 @@ export class PedidoPage implements OnInit {
         ],
       });
       await alert.present();
-    }else{
-      this.alertService.alert( "Error - Selección de pago","Debe escoger el método de pago a efectuar");
+    } else {
+      this.alertService.alert("Error - Selección de pago", "Debe escoger el método de pago a efectuar");
     }
   }
 }

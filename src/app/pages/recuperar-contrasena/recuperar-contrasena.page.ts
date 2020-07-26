@@ -1,10 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
-import { ModalController, NavController } from "@ionic/angular";
-import { AlertsService } from "src/app/services/alerts/alerts.service";
+import { ModalController } from "@ionic/angular";
+import { AlertsService } from "src/app/core/services/alerts/alerts.service";
 import { environment } from "./../../../environments/environment";
-AlertsService;
+
 @Component({
   selector: "app-recuperar-contrasena",
   templateUrl: "./recuperar-contrasena.page.html",
@@ -14,14 +13,13 @@ export class RecuperarContrasenaPage implements OnInit {
   recoveryForm: FormGroup;
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router,
     private modalController: ModalController,
     public alertsService: AlertsService
   ) {
     this.buildForm();
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   buildForm() {
     this.recoveryForm = this.formBuilder.group({
@@ -52,7 +50,7 @@ export class RecuperarContrasenaPage implements OnInit {
   }
 
   public getError(controlName: string): string {
-    let control = this.recoveryForm.get(controlName);
+    const control = this.recoveryForm.get(controlName);
     let field;
     if ((control.touched || control.dirty) && control.errors != null) {
       if (control.errors.required != null) {

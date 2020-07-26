@@ -4,42 +4,42 @@ ion-label {
 
 ion-input {
     border-bottom: solid 2px #512828 !important;
-    margin-left: 2% !important;
+    margin-left  : 2% !important;
 }
 
 .toolbar {
-    padding-top: 5px !important;
+    padding-top   : 5px !important;
     padding-bottom: 5px !important;
 }
 
 .searchBar {
-    --background: transparent;
-    --border-radius: 0px;
-    border-bottom: solid 2px var(--ion-color-omipali) !important;
-    --box-shadow: transparent;
+    --background        : transparent;
+    --border-radius     : 0px;
+    border-bottom       : solid 2px var(--ion-color-omipali) !important;
+    --box-shadow        : transparent;
     --clear-button-color: var(--ion-color-omipali);
-    --icon-color: var(--ion-color-omipali);
-    --color: var(--ion-color-omipali);
-    --placeholder-color: var(--ion-color-omipali-shade);
-    font-size: small !important;
+    --icon-color        : var(--ion-color-omipali);
+    --color             : var(--ion-color-omipali);
+    --placeholder-color : var(--ion-color-omipali-shade);
+    font-size           : small !important;
 }
 
 .botonesTabN {
     color: white !important;
-    
+
 }
 
 .botonesTabS {
     color: var(--ion-color-omipali) !important;
-    
+
 }
 
-#totalP{
-    position: absolute;
-    top: 0;
-    right: 0;
+#totalP {
+    position : absolute;
+    top      : 0;
+    right    : 0;
     font-size: x-small;
-    color: var(--ion-color-omipalidarkd);
+    color    : var(--ion-color-omipalidarkd);
 }
 
 .logo {

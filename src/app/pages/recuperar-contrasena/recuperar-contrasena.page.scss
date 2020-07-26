@@ -1,95 +1,112 @@
-.contenedor{
-    --background: url(/assets/fondos/fondo_capaomipali.jpg) 50% 50%/ 100% 100% no-repeat;
+.contenedor {
+    --background  : url(/assets/fondos/fondo_capaomipali.jpg) 50% 50%/ 100% 100% no-repeat;
     //--background:#252424;
 }
+
 ion-toolbar {
-    --background: transparent;
+    --background    : transparent;
     --ion-color-base: transparent !important;
 }
 
-.enviarc{
+.enviarc {
 
-    color:white;
-    border: 2px solid #98DBD9;
+    color        : white;
+    border       : 2px solid #98DBD9;
     border-radius: 5px;
-    margin-top: 10%;
+    margin-top   : 10%;
 }
-.texto{
-    color: white;  
+
+.texto {
+    color          : white;
     //color: #98DBD9;
     //border: 2px solid white;
     //border-radius: 5px;
-    font-size: 0.9rem;
+    font-size      : 0.9rem;
 }
-.labelcorreo{
-    color: white;  
+
+.labelcorreo {
+    color      : white;
     //color: #98DBD9;
-    text-align: center;
-    font-size: 1.25rem;
+    text-align : center;
+    font-size  : 1.25rem;
     font-weight: bold;
 }
-.itemmensaje{
+
+.itemmensaje {
     padding-left: 10px;
 }
-.contendorf{
-    background: rgba(0, 0, 0, 0.664);
+
+.contendorf {
+    background   : rgba(0, 0, 0, 0.664);
     border-radius: 5px;
     //height: 300px;
 }
+
 ion-toolbar {
-    --background: transparent;
+    --background    : transparent;
     --ion-color-base: transparent !important;
 }
-img.imagenlogo{
-    
+
+img.imagenlogo {
+
     height: 125px;
-};
-.contenedorlogo{
-    text-align: center;
-    padding-top: 10%;
+}
+
+;
+
+.contenedorlogo {
+    text-align    : center;
+    padding-top   : 10%;
     padding-bottom: 1%;
 }
-.formulario{
+
+.formulario {
     padding-bottom: 10px;
 }
-.p{
+
+.p {
     color: white;
 }
-.correo{
-    text-align: left;
-    color: white;  
-    font-size: 0.8rem;
-    border: 0;
-    outline: 0;
+
+.correo {
+    text-align   : left;
+    color        : white;
+    font-size    : 0.8rem;
+    border       : 0;
+    outline      : 0;
     border-bottom: 2px solid white;
 }
 
-.itemmensaje{
+.itemmensaje {
     text-align: left;
 }
 
 
-.error-div{
-    text-align: left;
+.error-div {
+    text-align     : left;
     justify-content: left;
 }
-.span{
+
+.span {
     text-decoration: none;
-    
+
 }
-.error,.error-div{
-    color: red;
+
+.error,
+.error-div {
+    color    : red;
     font-size: 0.8rem;
 }
 
 
-.alert-danger{
-    color: red;
-    text-align: left;
+.alert-danger {
+    color      : red;
+    text-align : left;
     margin-left: 3rem;
 
 }
-.container-error-message{
+
+.container-error-message {
     padding-top: 2px;
-    font-size: 0.8rem;
+    font-size  : 0.8rem;
 }

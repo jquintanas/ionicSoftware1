@@ -1,206 +1,216 @@
-
-.contenedor{
+.contenedor {
     --background: url(/assets/fondos/fondo_capaomipali.jpg) 50% 50%/ 100% 100% no-repeat;
 }
-.nuevac{
-    color:white;
 
-    font-size: 1.25rem;
+.nuevac {
+    color: white;
+
+    font-size  : 1.25rem;
     font-weight: bold;
 }
 
 ion-toolbar {
-    --background: transparent;
+    --background    : transparent;
     --ion-color-base: transparent !important;
 }
-.contendorf{
-    background: rgba(0, 0, 0, 0.664);
+
+.contendorf {
+    background   : rgba(0, 0, 0, 0.664);
     border-radius: 5px;
 }
-.datos{
-    padding-top: 10px;
+
+.datos {
+    padding-top : 10px;
     padding-left: 10px;
-    color: white;
+    color       : white;
     //color: #98DBD9;
-    font-weight: bold;
+    font-weight : bold;
 }
-.lbldom{
-    color:white;
+
+.lbldom {
+    color    : white;
     //color: #98DBD9;
     font-size: 0.9rem;
 }
-.lineahr{
-    border-bottom: 2px solid white;
+
+.lineahr {
+    border-bottom  : 2px solid white;
     //border-bottom: 2px solid #98DBD9;
 }
-.inputced{
-    text-align: left;
-    color:white;
+
+.inputced {
+    text-align     : left;
+    color          : white;
     //color: #98DBD9;
-    font-size: 0.9rem;
-    border: 0;
-    outline: 0;
-    border-bottom: 2px solid white;
+    font-size      : 0.9rem;
+    border         : 0;
+    outline        : 0;
+    border-bottom  : 2px solid white;
     //border-bottom: 2px solid #98DBD9;
 }
-.inputnom{
-    text-align: left;
-    color:white;
+
+.inputnom {
+    text-align     : left;
+    color          : white;
     //color: #98DBD9;
-    font-size: 0.9rem;
-    border: 0;
-    outline: 0;
-    border-bottom: 2px solid white;
+    font-size      : 0.9rem;
+    border         : 0;
+    outline        : 0;
+    border-bottom  : 2px solid white;
     //border-bottom: 2px solid #98DBD9;
 }
-.inputape{
-    text-align: left;
-    color:white;
+
+.inputape {
+    text-align     : left;
+    color          : white;
     //color: #98DBD9;
-    font-size: 0.9rem;
-    border: 0;
-    outline: 0;
-    border-bottom: 2px solid white;
+    font-size      : 0.9rem;
+    border         : 0;
+    outline        : 0;
+    border-bottom  : 2px solid white;
     //border-bottom: 2px solid #98DBD9;
 }
-.inputel{
-    text-align: left;
-    color:white;
+
+.inputel {
+    text-align     : left;
+    color          : white;
     //color: #98DBD9;
-    font-size: 0.9rem;
-    border: 0;
-    outline: 0;
-    border-bottom: 2px solid white;
+    font-size      : 0.9rem;
+    border         : 0;
+    outline        : 0;
+    border-bottom  : 2px solid white;
     //border-bottom: 2px solid #98DBD9;
 }
-.inputcor{
-    text-align: left;
-    color:white;
+
+.inputcor {
+    text-align     : left;
+    color          : white;
     //color: #98DBD9;
-    font-size: 0.9rem;
-    border: 0;
-    outline: 0;
-    border-bottom: 2px solid white;
+    font-size      : 0.9rem;
+    border         : 0;
+    outline        : 0;
+    border-bottom  : 2px solid white;
     //border-bottom: 2px solid #98DBD9;
 }
 
 
-.siguiente{
-    color: white;
+.siguiente {
+    color        : white;
     //color:#98DBD9;
     //border: 2px solid white;
-    border: 2px solid #98DBD9;
+    border       : 2px solid #98DBD9;
     border-radius: 5px;
-    font-size: 0.9rem;
+    font-size    : 0.9rem;
 }
 
-.registrar{
-    color: white;
+.registrar {
+    color        : white;
     //color:#98DBD9;
     //border: 2px solid white;
-    border: 2px solid #98DBD9;
+    border       : 2px solid #98DBD9;
     border-radius: 5px;
-    font-size: 0.9rem;
-    width: 100%;
-}
-.regresar{
-    color: white;
-    //color:#98DBD9;
-    //border: 2px solid white;
-    border: 2px solid #98DBD9;
-    border-radius: 5px;
-    font-size: 0.9rem;
-}
-.verubi{
-    color: white;
-    //color:#98DBD9;
-    //border: 2px solid white;
-    border: 2px solid #98DBD9;
-    border-radius: 5px;
-    font-size: 0.9rem;
+    font-size    : 0.9rem;
+    width        : 100%;
 }
 
-.formulario{
+.regresar {
+    color        : white;
+    //color:#98DBD9;
+    //border: 2px solid white;
+    border       : 2px solid #98DBD9;
+    border-radius: 5px;
+    font-size    : 0.9rem;
+}
+
+.verubi {
+    color        : white;
+    //color:#98DBD9;
+    //border: 2px solid white;
+    border       : 2px solid #98DBD9;
+    border-radius: 5px;
+    font-size    : 0.9rem;
+}
+
+.formulario {
     padding-bottom: 10px;
 }
 
 
-.inputref{
-    height: 80px;
-    text-align: left;
-    color:white;
+.inputref {
+    height      : 80px;
+    text-align  : left;
+    color       : white;
     //color: #98DBD9;
-    font-size: 0.9rem;
-    border: 2px solid white;
+    font-size   : 0.9rem;
+    border      : 2px solid white;
     //border: 2px solid #98DBD9;
     padding-left: 10px;
 }
-.inputdom{
-    text-align: left;
-    color:white;
+
+.inputdom {
+    text-align     : left;
+    color          : white;
     //color: #98DBD9;
-    font-size: 0.9rem;
-    border: 0;
-    outline: 0;
-    border-bottom: 2px solid white;
+    font-size      : 0.9rem;
+    border         : 0;
+    outline        : 0;
+    border-bottom  : 2px solid white;
     //border-bottom: 2px solid #98DBD9;
 }
 
-.icono_mapa{
-    color: white;
+.icono_mapa {
+    color          : white;
     //color: #98DBD9;
-    border-bottom: 2px solid white;
+    border-bottom  : 2px solid white;
     //border-bottom: 2px solid #98DBD9;
 }
-.title{
-    color: white;
+
+.title {
+    color    : white;
     font-size: x-large;
 }
+
 .padre {
-    display: flex;
+    display        : flex;
     justify-content: center;
 }
+
 .hijo {
     padding: 5px;
-    margin: 10px;
-    width: 100%;
-    
+    margin : 10px;
+    width  : 100%;
+
 }
-.imagen{
-    margin-top: 2%;
+
+.imagen {
+    margin-top   : 2%;
     border-radius: 5px;
 }
 
-.alert-danger{
-    color: red;
-    text-align: left;
+.alert-danger {
+    color      : red;
+    text-align : left;
     margin-left: 1rem;
 
 }
-.container-error-message{
-    padding: 3px;
+
+.container-error-message {
+    padding  : 3px;
     font-size: 0.8rem;
 }
 
 
-.mapa{
-    width: 300px;
+.mapa {
+    width : 300px;
     height: 900px;
 }
 
-.referenciasdom{
+.referenciasdom {
     margin-top: 5%;
 }
 
-.mapaimagen{
-    
+.mapaimagen {
+
     //width: 100%;
     height: 100%;
 }
-
-
-
-
-
-
-

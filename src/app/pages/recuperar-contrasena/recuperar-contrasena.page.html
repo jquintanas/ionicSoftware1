@@ -11,11 +11,7 @@
     <div class="contenedorlogo">
       <img src="assets/logos/logo.png" class="imagenlogo" />
     </div>
-    <form
-      class="ion-margin formulario"
-      [formGroup]="recoveryForm"
-      
-    >
+    <form class="ion-margin formulario" [formGroup]="recoveryForm">
       <div class="itemmensaje">
         <ion-item color="none" lines="none" class="itemmensaje ion-no-padding">
           <h1 class="labelcorreo">Recuperar contraseña</h1>
@@ -30,33 +26,15 @@
 
       <ion-item lines="none" class="correo" color="none">
         <ion-icon slot="start" name="mail"></ion-icon>
-        <ion-input
-          type="text"
-          placeholder="Ingrese su correo electrónico"
-          class="inputel"
-          formControlName="emailField"
-          autofocus="true"
-        ></ion-input>
+        <ion-input type="text" placeholder="Ingrese su correo electrónico" class="inputel" formControlName="emailField"
+          autofocus="true"></ion-input>
       </ion-item>
-      <div
-        class="container-error-message alert-danger"
-        *ngIf="getError('emailField') != ''"
-      >
-        <ion-icon
-          slot="start"
-          name="information-circle-sharp"
-          color="danger"
-        ></ion-icon>
+      <div class="container-error-message alert-danger" *ngIf="getError('emailField') != ''">
+        <ion-icon slot="start" name="information-circle-sharp" color="danger"></ion-icon>
         <strong>{{getError('emailField')}}</strong>
       </div>
       <div class="contenedorboton">
-        <ion-button
-          (click)="save()"
-          expand="block"
-          fill="clear"
-          class="enviarc"
-          [disabled]="recoveryForm.invalid"
-        >
+        <ion-button (click)="save()" expand="block" fill="clear" class="enviarc" [disabled]="recoveryForm.invalid">
           Enviar
         </ion-button>
       </div>

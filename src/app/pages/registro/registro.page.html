@@ -20,153 +20,64 @@
       <div *ngSwitchCase="1">
         <form [formGroup]="form" class="formulario">
           <ion-item lines="none" class="cedula" color="none">
-            <ion-input
-              type="tel"
-              placeholder="Cédula"
-              maxlength="10"
-              class="inputced"
-              formControlName="idField"
-            >
+            <ion-input type="tel" placeholder="Cédula" maxlength="10" class="inputced" formControlName="idField">
             </ion-input>
           </ion-item>
-          <div
-            class="container-error-message alert-danger"
-            *ngIf="getError('idField','1') != ''"
-          >
-            <ion-icon
-              slot="start"
-              name="information-circle-sharp"
-              color="danger"
-            ></ion-icon>
+          <div class="container-error-message alert-danger" *ngIf="getError('idField','1') != ''">
+            <ion-icon slot="start" name="information-circle-sharp" color="danger"></ion-icon>
             <strong> {{getError('idField','1')}}</strong>
           </div>
           <ion-item lines="none" class="nombres" color="none">
-            <ion-input
-              type="text"
-              placeholder="Nombres"
-              class="inputnom"
-              formControlName="namesField"
-            ></ion-input>
+            <ion-input type="text" placeholder="Nombres" class="inputnom" formControlName="namesField"></ion-input>
           </ion-item>
-          <div
-            class="container-error-message alert-danger"
-            *ngIf="getError('namesField','1') != ''"
-          >
-            <ion-icon
-              slot="start"
-              name="information-circle-sharp"
-              color="danger"
-            ></ion-icon>
+          <div class="container-error-message alert-danger" *ngIf="getError('namesField','1') != ''">
+            <ion-icon slot="start" name="information-circle-sharp" color="danger"></ion-icon>
             <strong> {{getError('namesField','1')}} </strong>
           </div>
           <ion-item lines="none" class="apellidos" color="none">
-            <ion-input
-              type="text"
-              placeholder="Apellidos"
-              class="inputape"
-              formControlName="lastNamesField"
-            ></ion-input>
+            <ion-input type="text" placeholder="Apellidos" class="inputape" formControlName="lastNamesField">
+            </ion-input>
           </ion-item>
-          <div
-            class="container-error-message alert-danger"
-            *ngIf="getError('lastNamesField','1') != ''"
-          >
-            <ion-icon
-              slot="start"
-              name="information-circle-sharp"
-              color="danger"
-            ></ion-icon>
+          <div class="container-error-message alert-danger" *ngIf="getError('lastNamesField','1') != ''">
+            <ion-icon slot="start" name="information-circle-sharp" color="danger"></ion-icon>
             <strong> {{getError('lastNamesField','1')}}</strong>
           </div>
           <ion-item lines="none" class="telefono" color="none">
-            <ion-input
-              type="tel"
-              maxlength="10"
-              placeholder="Teléfono"
-              class="inputel"
-              formControlName="phoneField"
-            >
+            <ion-input type="tel" maxlength="10" placeholder="Teléfono" class="inputel" formControlName="phoneField">
             </ion-input>
           </ion-item>
-          <div
-            class="container-error-message alert-danger"
-            *ngIf="getError('phoneField','1') != ''"
-          >
-            <ion-icon
-              slot="start"
-              name="information-circle-sharp"
-              color="danger"
-            ></ion-icon>
+          <div class="container-error-message alert-danger" *ngIf="getError('phoneField','1') != ''">
+            <ion-icon slot="start" name="information-circle-sharp" color="danger"></ion-icon>
             <strong> {{getError('phoneField','1')}}</strong>
           </div>
           <ion-item lines="none" class="correo" color="none">
-            <ion-input
-              type="text"
-              placeholder="Correo Electrónico"
-              class="inputcor"
-              formControlName="emailField"
-            >
+            <ion-input type="text" placeholder="Correo Electrónico" class="inputcor" formControlName="emailField">
             </ion-input>
           </ion-item>
-          <div
-            class="container-error-message alert-danger"
-            *ngIf="getError('emailField','1') != ''"
-          >
-            <ion-icon
-              slot="start"
-              name="information-circle-sharp"
-              color="danger"
-            ></ion-icon>
+          <div class="container-error-message alert-danger" *ngIf="getError('emailField','1') != ''">
+            <ion-icon slot="start" name="information-circle-sharp" color="danger"></ion-icon>
             <strong>{{getError('emailField','1')}}</strong>
           </div>
           <ion-item lines="none" class="contrasena" color="none">
-            <ion-input
-              type="password"
-              placeholder="Contraseña"
-              class="inputcor"
-              formControlName="passwordField"
-            >
+            <ion-input type="password" placeholder="Contraseña" class="inputcor" formControlName="passwordField">
             </ion-input>
           </ion-item>
-          <div
-            class="container-error-message alert-danger"
-            *ngIf="getError('passwordField','1') != ''"
-          >
-            <ion-icon
-              slot="start"
-              name="information-circle-sharp"
-              color="danger"
-            ></ion-icon>
+          <div class="container-error-message alert-danger" *ngIf="getError('passwordField','1') != ''">
+            <ion-icon slot="start" name="information-circle-sharp" color="danger"></ion-icon>
             <strong> {{getError('passwordField','1')}}</strong>
           </div>
           <ion-item lines="none" class="contrasenac" color="none">
-            <ion-input
-              type="password"
-              placeholder="Confirmar Contraseña"
-              class="inputcor"
-              formControlName="passwordCopyField"
-            >
+            <ion-input type="password" placeholder="Confirmar Contraseña" class="inputcor"
+              formControlName="passwordCopyField">
             </ion-input>
           </ion-item>
-          <div
-            class="container-error-message alert-danger"
-            *ngIf="getError('passwordCopyField','1') != ''"
-          >
-            <ion-icon
-              slot="start"
-              name="information-circle-sharp"
-              color="danger"
-            ></ion-icon>
+          <div class="container-error-message alert-danger" *ngIf="getError('passwordCopyField','1') != ''">
+            <ion-icon slot="start" name="information-circle-sharp" color="danger"></ion-icon>
             <strong>{{getError('passwordCopyField','1')}}</strong>
           </div>
           <div class="contenedorboton ion-padding-horizontal">
-            <ion-button
-              (click)="save()"
-              expand="block"
-              fill="clear"
-              class="siguiente ion-margin-vertical"
-              [disabled]="form.invalid"
-            >
+            <ion-button (click)="save()" expand="block" fill="clear" class="siguiente ion-margin-vertical"
+              [disabled]="form.invalid">
               Siguiente
             </ion-button>
           </div>-->
@@ -175,71 +86,34 @@
       <div *ngSwitchCase="2">
         <form [formGroup]="form2" class="formulario">
           <ion-item lines="none" class="cedula" color="none">
-            <ion-input
-              type="text"
-              placeholder="Dirección de domicilio"
-              class="inputdom"
-              formControlName="addressField"
-              
-            ></ion-input>
+            <ion-input type="text" placeholder="Dirección de domicilio" class="inputdom" formControlName="addressField">
+            </ion-input>
             <button type="button" slot="end" (click)="openModal()">
               <ion-icon name="map-sharp" slot="start"></ion-icon>
             </button>
           </ion-item>
-          <div
-            class="container-error-message alert-danger"
-            *ngIf="getError('addressField','2') != ''"
-            >
-              <ion-icon
-                slot="start"
-                name="information-circle-sharp"
-                color="danger"
-              ></ion-icon>
-              <strong> {{getError('addressField','2')}}</strong>
-            </div>
+          <div class="container-error-message alert-danger" *ngIf="getError('addressField','2') != ''">
+            <ion-icon slot="start" name="information-circle-sharp" color="danger"></ion-icon>
+            <strong> {{getError('addressField','2')}}</strong>
+          </div>
           <ion-item color="none" lines="none" *ngIf="imagen">
-            <img
-              width="100%"
-              src="https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/pin-s-marker+ffa500({{url_completa}}"
-              alt="Mapbox Map of -79.5419038,-1.8017518"
-              class="imagen mapaimagen"
-            />
+            <img width="100%"
+              src="https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/pin-s-marker+ffa500({{urlCompleta}}"
+              alt="Mapbox Map of -79.5419038,-1.8017518" class="imagen mapaimagen" />
           </ion-item>
-          <ion-item
-            lines="none"
-            class="referencias"
-            color="none"
-            class="referenciasdom"
-          >
-            <ion-textarea
-              id="referencias"
-              type="text"
-              placeholder="Puede indicar alguna referencia de su domicilio"
-              class="inputref"
-              formControlName="referencesField"
-            >
+          <ion-item lines="none" class="referencias" color="none" class="referenciasdom">
+            <ion-textarea id="referencias" type="text" placeholder="Puede indicar alguna referencia de su domicilio"
+              class="inputref" formControlName="referencesField">
             </ion-textarea>
           </ion-item>
-          <div
-            class="container-error-message alert-danger"
-            *ngIf="getError('referencesField','2') != ''"
-          >
-            <ion-icon
-              slot="start"
-              name="information-circle-sharp"
-              color="danger"
-            ></ion-icon>
+          <div class="container-error-message alert-danger" *ngIf="getError('referencesField','2') != ''">
+            <ion-icon slot="start" name="information-circle-sharp" color="danger"></ion-icon>
             <strong> {{getError('referencesField','2')}}</strong>
           </div>
           <div class="padre">
             <div class="hijo">
-              <ion-button
-                (click)="save2()"
-                expand="block"
-                fill="clear"
-                class="registrar ion-margin-vertical"
-                [disabled]="!form.valid || !form2.valid"
-              >
+              <ion-button (click)="save2()" expand="block" fill="clear" class="registrar ion-margin-vertical"
+                [disabled]="!form.valid || !form2.valid">
                 Registrarse
               </ion-button>
             </div>

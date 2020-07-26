@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { CarritoService } from 'src/app/services/cart/carrito.service';
+import { CarritoService } from 'src/app/core/services/cart/carrito.service';
 
 @Component({
   selector: 'app-carrito-compras',
@@ -23,9 +23,11 @@ export class CarritoComprasPage implements OnInit {
       if (data) {
         this.total = 0;
         this.productos = data;
+        // tslint:disable-next-line: prefer-const
         for (let valor of this.productos.values()) {
-          for (let data of valor.values()) {
-            let tmp = data.cantidad * data.producto.Precio;
+          // tslint:disable-next-line: prefer-const
+          for (let dat of valor.values()) {
+            const tmp = dat.cantidad * dat.producto.Precio;
             this.total += tmp;
           }
         }
@@ -38,11 +40,11 @@ export class CarritoComprasPage implements OnInit {
       this.cantidad = data;
     }, (err: any) => {
       console.log(err);
-    })
+    });
   }
 
   async eliminarTodo() {
-    let alert = await this.alertController.create({
+    const alert = await this.alertController.create({
       header: 'Seguro que desea continuar!',
       message: 'Desea <strong>eliminar</strong> el pedido!!!',
       buttons: [

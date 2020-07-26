@@ -1,43 +1,46 @@
-.container{
+.container {
     --background: url(/assets/fondos/fondo_capaomipali.jpg) 50% 50%/ 100% 100% no-repeat;
 }
 
-.containerlogin{
-    margin-top: 10% ;
-    background: rgba(0, 0, 0, 0.664);
+.containerlogin {
+    margin-top   : 10%;
+    background   : rgba(0, 0, 0, 0.664);
     border-radius: 5px;
-    
+
 }
 
-img.imglogo{
-    
+img.imglogo {
+
     height: 125px;
-};
-.containerlogo{
-    text-align: center;
-    padding-top: 5%;
+}
+
+;
+
+.containerlogo {
+    text-align    : center;
+    padding-top   : 5%;
     padding-bottom: 5%;
 }
 
-.phoneArea{
-    text-align: left;
-    color:red;
-    font-size: 0.9rem;
-    border: 0;
-    outline: 0;
+.phoneArea {
+    text-align   : left;
+    color        : red;
+    font-size    : 0.9rem;
+    border       : 0;
+    outline      : 0;
     border-bottom: 2px solid white;
     margin-bottom: 10%;
-    margin-top: 10%;
+    margin-top   : 10%;
 }
 
-.askCodeButton{
+.askCodeButton {
     background-color: #98DBD9;
-    margin-left: 25%;
-    margin-right: 25%;
-    margin-top: 10%;
-    margin-bottom: 70%;
+    margin-left     : 25%;
+    margin-right    : 25%;
+    margin-top      : 10%;
+    margin-bottom   : 70%;
 }
 
-.error-message{
+.error-message {
     color: var (--ion-color-danger);
 }

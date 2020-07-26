@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { productoCarrito } from "src/app/interface/productoCarrito";
-import { CarritoService } from 'src/app/services/cart/carrito.service';
+import { ProductoCarrito } from "src/app/core/interface/productoCarrito";
+import { CarritoService } from 'src/app/core/services/cart/carrito.service';
 import { AlertController } from '@ionic/angular';
 
 @Component({
@@ -9,7 +9,7 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./card-carrito.component.scss'],
 })
 export class CardCarritoComponent implements OnInit {
-  //private banderas
+  // private banderas
   private banderaLoading: boolean = true;
   @Input("precio") precioString: string;
   @Input("Titulo") titulo: string;
@@ -37,7 +37,7 @@ export class CardCarritoComponent implements OnInit {
   }
 
   async decrementarProducto(cantidad: number, clave1: any, clave2: any) {
-    let tmp: productoCarrito = this.productos.get(clave1).get(clave2);
+    const tmp: ProductoCarrito = this.productos.get(clave1).get(clave2);
     if (tmp.cantidad > 1) {
       this.incrementarProducto(-cantidad, clave1, clave2);
       return;
@@ -45,8 +45,8 @@ export class CardCarritoComponent implements OnInit {
   }
 
   incrementarProducto(incremento: number, clave: any, clave2: any) {
-    let tmp: productoCarrito = this.productos.get(clave).get(clave2);
-    let te: productoCarrito = {
+    const tmp: ProductoCarrito = this.productos.get(clave).get(clave2);
+    const te: ProductoCarrito = {
       id: tmp.id,
       cantidad: incremento,
       producto: tmp.producto
@@ -55,7 +55,7 @@ export class CardCarritoComponent implements OnInit {
   }
 
   async eliminarProducto(clave: any, clave2: any) {
-    let alert = await this.alertController.create({
+    const alert = await this.alertController.create({
       header: 'Seguro que desea continuar!',
       message: 'Desea <strong>eliminar</strong> el producto!!!',
       buttons: [
@@ -70,7 +70,7 @@ export class CardCarritoComponent implements OnInit {
           text: 'Ok',
           handler: () => {
             this.incrementarProducto(-1, clave, clave2);
-            let tmp: productoCarrito = this.productos.get(clave).get(clave2);
+            const tmp: ProductoCarrito = this.productos.get(clave).get(clave2);
             this.carrito.eliminarProducto(tmp.producto.categoria, tmp);
           }
         }
