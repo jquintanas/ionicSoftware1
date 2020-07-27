@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { BusquedaService } from "src/app/core/services/comunicacion/busqueda.service";
 import { CarritoService } from 'src/app/core/services/cart/carrito.service';
+import { ProductosService } from 'src/app/core/services/cart/productos.service';
+import { ToastController } from '@ionic/angular';
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
@@ -16,19 +18,32 @@ export class HomePage implements OnInit, OnDestroy {
   tabActual = 0;
   cantidadProductos: number = 0;
   private subscripcion: any;
+  private subCategorias: any;
   constructor(
     private router: Router,
     private busqueda: BusquedaService,
-    private carrito: CarritoService
+    private carrito: CarritoService,
+    private productosServices: ProductosService,
+    private toastController: ToastController
   ) { }
   ngOnDestroy(): void {
     this.subscripcion.unsubscribe();
+    this.subCategorias.unsubscribe();
   }
 
   ngOnInit() {
     this.subscripcion = this.carrito.observarCantidad().subscribe((data: number) => {
       this.cantidadProductos = data;
     });
+    this.subCategorias = this.productosServices.obtenerCategorias().subscribe(
+      (data) => {
+        console.log(data);
+      },
+      (err) => {
+        console.log(err);
+        this.generarToast("Algo salio mal al cargas los datos de las categorías.");
+      }
+    );
   }
 
   habilitarBusqueda() {
@@ -66,5 +81,9 @@ export class HomePage implements OnInit, OnDestroy {
     this.busqueda.generarBusqueda("all");
   }
 
+  private async generarToast(mensaje: string) {
+    const toast = await this.toastController.create({message: mensaje, duration: 2000});
+    await toast.present();
+  }
 
 }
