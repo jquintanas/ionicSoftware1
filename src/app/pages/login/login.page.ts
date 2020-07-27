@@ -20,7 +20,7 @@ export class LoginPage implements OnInit {
   isSubmitted = false;
   currentPopover = null;
   loginForm: FormGroup;
-  phoneNumber: string;
+  emailUser: string;
   password: string;
   user: any = {};
   showPassword = false;
@@ -47,9 +47,9 @@ export class LoginPage implements OnInit {
         "",
         [
           Validators.required,
-          Validators.maxLength(10),
+          Validators.maxLength(50),
           Validators.minLength(10),
-          Validators.pattern(environment.phonePatter),
+          Validators.pattern(environment.emailPatter),
         ],
       ],
       passwordField: ["", [Validators.required, Validators.min(8)]],
@@ -68,24 +68,30 @@ export class LoginPage implements OnInit {
   save() {
     if (this.loginForm.valid) {
       const value = this.loginForm.value;
-      this.phoneNumber = value.phoneField;
+      this.emailUser = value.phoneField;
       this.password = value.passwordField;
-      this.alertsService.presentLoading("Bienvenido a" + " Omi & Pali");
-      this.navController.navigateRoot("/home");
-
-      const data = JSON.stringify({ id: this.phoneNumber, clave: this.password });
-
-      console.log(data);
-      this.http.getUser(data)
-        // tslint:disable-next-line: no-shadowed-variable
-        .subscribe(data => {
-          console.log(data);
+      var JSON = { "email": this.emailUser, "clave": this.password }
+      this.http.getUser(JSON).subscribe(data => {
+      if (data != null) {
+        console.log(data)
+        
+        this.afAuth.signInWithEmailAndPassword(this.emailUser, this.password).catch(function(error) {
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          console.log(errorCode, errorMessage)
         });
-
-    } else {
+        this.login()
+      } else {
+        console.log("Datos invalidos");
+      }})
       console.log("formulario inválido", this.loginForm);
       this.onResetForm();
     }
+}
+
+  login(){
+    this.alertsService.presentLoading("Bienvenido a" + " Omi & Pali");
+    this.navController.navigateRoot("/home");
   }
 
   onResetForm() {
