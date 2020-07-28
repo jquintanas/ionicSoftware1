@@ -14,7 +14,7 @@ const routes: Routes = [
     loadChildren: () =>
       import("./pages/home/home.module")
       .then((m) => m.HomePageModule),
-      //canActivate: [AuthGuard],
+      canActivate: [AuthGuard],
   },
   {
     path: "detalles-productos",
@@ -34,7 +34,7 @@ const routes: Routes = [
     path: "login",
     loadChildren: () =>
       import("./pages/login/login.module").then((m) => m.LoginPageModule),
-      //canActivate: [NologinGuard],
+      canActivate: [NologinGuard],
     },
   {
     path: "registro",
