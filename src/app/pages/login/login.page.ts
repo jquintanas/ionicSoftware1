@@ -68,7 +68,15 @@ export class LoginPage implements OnInit {
       console.log("formulario inválido", this.loginForm);
       this.onResetForm();
     }
-}
+  }
+
+  loginGoogle() {
+    this.authService.loginGoogle();
+  }
+
+  loginFacebook() {
+    this.authService.loginFacebook();
+  }
 
   onResetForm() {
     this.loginForm.reset();

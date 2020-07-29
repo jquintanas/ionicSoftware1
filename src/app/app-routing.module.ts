@@ -93,6 +93,14 @@ const routes: Routes = [
     path: 'telefono',
     loadChildren: () => import('./pages/telefono/telefono.module').then( m => m.TelefonoPageModule)
   },
+  {
+    path: 'preguntas-frecuentes',
+    loadChildren: () => import('./pages/preguntas-frecuentes/preguntas-frecuentes.module').then( m => m.PreguntasFrecuentesPageModule)
+  },
+  {
+    path: 'novedad',
+    loadChildren: () => import('./pages/novedad/novedad.module').then( m => m.NovedadPageModule)
+  },
 
 ];
 

@@ -42,7 +42,8 @@ export class AuthService {
   }
 
   async loginGoogle() {
-    this.AFauth.signInWithRedirect(new firebase.auth.GoogleAuthProvider())
+    const provider = new firebase.auth.GoogleAuthProvider();
+    this.AFauth.signInWithPopup(provider)
       .then((result) => {
         this.router.navigateByUrl("home");
         this.alertsService.presentLoading("Bienvenido a Omi y Pali");

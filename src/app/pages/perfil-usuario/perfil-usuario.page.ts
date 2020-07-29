@@ -31,6 +31,14 @@ export class PerfilUsuarioPage implements OnInit {
     this.router.navigateByUrl("historial");
   }
 
+  abrirPreguntasFrecuentes() {
+    this.router.navigateByUrl("preguntas-frecuentes");
+  }
+
+  abrirNovedad() {
+    this.router.navigateByUrl("novedad");
+  }
+
   async ngOnInit() {
     await this.cargarDatos();
   }
