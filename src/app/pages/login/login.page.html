@@ -7,7 +7,7 @@
     <form class="ion-margin" [formGroup]="loginForm">
       <ion-item lines="none" class="telefono" color="none">
         <ion-icon slot="start" name="call-sharp"></ion-icon>
-        <ion-input type="text" maxlength="50" placeholder="Teléfono" class="inputel" formControlName="phoneField">
+        <ion-input type="text" maxlength="50" placeholder="Correo electrónico" class="inputel" formControlName="phoneField">
         </ion-input>
       </ion-item>
       <div class="container-error-message alert-danger" *ngIf="getError('phoneField') != ''">

@@ -9,7 +9,7 @@ import { AngularFireAuth } from "@angular/fire/auth";
 import * as firebase from "firebase";
 import { environment } from "src/environments/environment";
 import { Facebook, FacebookLoginResponse } from "@ionic-native/facebook/ngx";
-import { HttpService } from 'src/app/services/http/http.service';
+import { HttpService } from 'src/app/core/services/http/http.service';
 
 @Component({
   selector: "app-login",
