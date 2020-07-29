@@ -120,14 +120,14 @@ export class LoginPage implements OnInit {
       if (control.errors.required != null) {
         field = controlName;
         if (controlName === "phoneField") {
-          field = "Teléfono";
+          field = "correo electrónico";
         } else if (controlName === "passwordField") {
-          field = "Contraseña";
+          field = "contraseña";
         }
         return "El campo " + field + " es requerido.";
       }
       if (controlName === "phoneField" && control.errors.pattern != null) {
-        return "Ingrese un teléfono válido";
+        return "Ingrese un correo electrónico válido";
       }
     }
     return "";
