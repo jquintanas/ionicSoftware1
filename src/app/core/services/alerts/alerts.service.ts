@@ -30,6 +30,7 @@ export class AlertsService {
 
     toast.present();
   }
+
   async alert(titulo: string, mensaje: string) {
     const alert = await this.alterCrtl.create({
       header: titulo,
@@ -42,5 +43,10 @@ export class AlertsService {
       ],
     });
     await alert.present();
+  }
+
+  async mostrarToastError() {
+    const toast = await this.toastCtrl.create({message: "Algo salio mal, por favor inténtenlo de nuevo.", duration: 2000});
+    await toast.present();
   }
 }

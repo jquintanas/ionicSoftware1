@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { BusquedaService } from "src/app/core/services/comunicacion/busqueda.service";
 import { CarritoService } from 'src/app/core/services/cart/carrito.service';
 import { ProductosService } from 'src/app/core/services/cart/productos.service';
-import { ToastController } from '@ionic/angular';
+import { ToastController, LoadingController } from '@ionic/angular';
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
@@ -24,26 +24,43 @@ export class HomePage implements OnInit, OnDestroy {
     private busqueda: BusquedaService,
     private carrito: CarritoService,
     private productosServices: ProductosService,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private loadingController: LoadingController
   ) { }
   ngOnDestroy(): void {
     this.subscripcion.unsubscribe();
-    this.subCategorias.unsubscribe();
+    if (this.subCategorias) {
+      this.subCategorias.unsubscribe();
+    }
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    const loading = await this.loadingController.create({ message: "Cargando..." });
+    await loading.present();
     this.subscripcion = this.carrito.observarCantidad().subscribe((data: number) => {
       this.cantidadProductos = data;
     });
-    this.subCategorias = this.productosServices.obtenerCategorias().subscribe(
-      (data) => {
-        console.log(data);
-      },
-      (err) => {
-        console.log(err);
-        this.generarToast("Algo salio mal al cargas los datos de las categorías.");
-      }
-    );
+    console.log(this.productosServices.mapaCategorias.size);
+    if (this.productosServices.mapaCategorias.size == 0) {
+      this.subCategorias = this.productosServices.obtenerCategorias().subscribe(
+        (data) => {
+          console.log(data);
+          for (const dt of data) {
+            this.productosServices.mapaCategorias.set(dt.nombre, dt);
+          }
+          this.productosServices.notificarCambio();
+          loading.dismiss();
+        },
+        (err) => {
+          console.log(err);
+          loading.dismiss();
+          this.generarToast("Algo salio mal al cargas los datos de las categorías.");
+        }
+      );
+    } else {
+      loading.dismiss();
+      this.productosServices.notificarCambio();
+    }
   }
 
   habilitarBusqueda() {
@@ -82,7 +99,7 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   private async generarToast(mensaje: string) {
-    const toast = await this.toastController.create({message: mensaje, duration: 2000});
+    const toast = await this.toastController.create({ message: mensaje, duration: 2000 });
     await toast.present();
   }
 

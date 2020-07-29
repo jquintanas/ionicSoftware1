@@ -11,7 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { IonicStorageModule } from '@ionic/storage';
 import { FavoritosService } from './core/services/cart/favoritos.service';
 import { HttpClientModule } from '@angular/common/http';
-import { firebaseConfig } from '../environments/environment.prod';
+import { firebaseConfig } from '../environments/environment';
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
