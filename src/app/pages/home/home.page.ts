@@ -29,28 +29,38 @@ export class HomePage implements OnInit, OnDestroy {
   ) { }
   ngOnDestroy(): void {
     this.subscripcion.unsubscribe();
-    this.subCategorias.unsubscribe();
+    if (this.subCategorias) {
+      this.subCategorias.unsubscribe();
+    }
   }
 
   async ngOnInit() {
-    const loading = await this.loadingController.create({message: "Cargando..."});
+    const loading = await this.loadingController.create({ message: "Cargando..." });
     await loading.present();
     this.subscripcion = this.carrito.observarCantidad().subscribe((data: number) => {
       this.cantidadProductos = data;
     });
-    this.subCategorias = this.productosServices.obtenerCategorias().subscribe(
-      (data) => {
-        for (const dt of data) {
-          this.productosServices.mapaCategorias.set(dt.nombre, dt);
+    console.log(this.productosServices.mapaCategorias.size);
+    if (this.productosServices.mapaCategorias.size == 0) {
+      this.subCategorias = this.productosServices.obtenerCategorias().subscribe(
+        (data) => {
+          console.log(data);
+          for (const dt of data) {
+            this.productosServices.mapaCategorias.set(dt.nombre, dt);
+          }
+          this.productosServices.notificarCambio();
+          loading.dismiss();
+        },
+        (err) => {
+          console.log(err);
+          loading.dismiss();
+          this.generarToast("Algo salio mal al cargas los datos de las categorías.");
         }
-        loading.dismiss();
-      },
-      (err) => {
-        console.log(err);
-        loading.dismiss();
-        this.generarToast("Algo salio mal al cargas los datos de las categorías.");
-      }
-    );
+      );
+    } else {
+      loading.dismiss();
+      this.productosServices.notificarCambio();
+    }
   }
 
   habilitarBusqueda() {
