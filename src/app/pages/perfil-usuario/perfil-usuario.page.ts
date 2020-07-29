@@ -4,6 +4,7 @@ import { Favoritos } from "src/app/core/interface/favoritosStorage";
 import { FavoritosService } from "src/app/core/services/cart/favoritos.service";
 import { LoadingController } from "@ionic/angular";
 import { IonContent } from "@ionic/angular";
+import { AuthService } from 'src/app/core/services/auth/auth.service';
 
 @Component({
   selector: "app-perfil-usuario",
@@ -19,7 +20,8 @@ export class PerfilUsuarioPage implements OnInit {
   constructor(
     private router: Router,
     private favoritos: FavoritosService,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+    private authService: AuthService
   ) { }
 
   abrirHistorial() {
@@ -63,5 +65,9 @@ export class PerfilUsuarioPage implements OnInit {
       await this.cargarDatos();
     }
     loading.dismiss();
+  }
+
+  logout(){
+    
   }
 }

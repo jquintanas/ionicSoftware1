@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from "@angular/fire/auth";
-import * as firebase from "firebase";
+import * as firebase from 'firebase/app';
 import { AlertsService } from '../alerts/alerts.service';
 import { NavController } from '@ionic/angular';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
@@ -64,5 +64,13 @@ export class AuthService {
         console.log("Logged into Facebook!", res);
       })
       .catch((e) => console.log("Error logging into Facebook", e));
+  }
+
+  logout(){
+    firebase.auth().signOut().then(function() {
+      this.navController.navigateRoot("/login");
+    }).catch(function(error) {
+      console.log(error)
+    });
   }
 }

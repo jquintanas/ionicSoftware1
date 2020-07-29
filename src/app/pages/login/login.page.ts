@@ -4,9 +4,7 @@ import { RecuperarContrasenaPage } from "./../recuperar-contrasena/recuperar-con
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import { AngularFireAuth } from "@angular/fire/auth";
 import { environment } from "src/environments/environment";
-import { HttpService } from 'src/app/core/services/http/http.service';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 
 @Component({
@@ -29,7 +27,6 @@ export class LoginPage implements OnInit {
     private router: Router,
     public modalController: ModalController,
     public alertsService: AlertsService,
-    private afAuth: AngularFireAuth,
     private authService: AuthService
   ) {
     this.buildForm();
