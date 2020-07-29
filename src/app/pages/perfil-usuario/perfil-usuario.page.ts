@@ -68,6 +68,6 @@ export class PerfilUsuarioPage implements OnInit {
   }
 
   logout(){
-    
+    this.authService.logout()
   }
 }

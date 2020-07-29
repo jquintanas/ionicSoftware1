@@ -67,9 +67,9 @@ const routes: Routes = [
   {
     path: "perfil-usuario",
     loadChildren: () =>
-      import("./pages/perfil-usuario/perfil-usuario.module").then(
-        (m) => m.PerfilUsuarioPageModule
-      ),
+      import("./pages/perfil-usuario/perfil-usuario.module") 
+      .then((m) => m.PerfilUsuarioPageModule),
+        //canActivate: [AuthGuard],
   },
   {
     path: "editar-perfil",
