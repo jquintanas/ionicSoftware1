@@ -4,12 +4,10 @@ import { RecuperarContrasenaPage } from "./../recuperar-contrasena/recuperar-con
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import { AuthService } from "../../core/services/auth/auth.service";
 import { AngularFireAuth } from "@angular/fire/auth";
-import * as firebase from "firebase";
 import { environment } from "src/environments/environment";
-import { Facebook, FacebookLoginResponse } from "@ionic-native/facebook/ngx";
 import { HttpService } from 'src/app/core/services/http/http.service';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
 
 @Component({
   selector: "app-login",
@@ -28,13 +26,11 @@ export class LoginPage implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private navController: NavController,
     private router: Router,
     public modalController: ModalController,
     public alertsService: AlertsService,
-    private fb: Facebook,
     private afAuth: AngularFireAuth,
-    private http: HttpService
+    private authService: AuthService
   ) {
     this.buildForm();
   }
@@ -70,29 +66,12 @@ export class LoginPage implements OnInit {
       const value = this.loginForm.value;
       this.emailUser = value.phoneField;
       this.password = value.passwordField;
-      var JSON = { "email": this.emailUser, "clave": this.password }
-      this.http.getUser(JSON).subscribe(data => {
-      if (data != null) {
-        console.log(data)
-        
-        this.afAuth.signInWithEmailAndPassword(this.emailUser, this.password).catch(function(error) {
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          console.log(errorCode, errorMessage)
-        });
-        this.login()
-      } else {
-        console.log("Datos invalidos");
-      }})
+      this.authService.login(this.emailUser, this.password)
+    } else {
       console.log("formulario inválido", this.loginForm);
       this.onResetForm();
     }
 }
-
-  login(){
-    this.alertsService.presentLoading("Bienvenido a" + " Omi & Pali");
-    this.navController.navigateRoot("/home");
-  }
 
   onResetForm() {
     this.loginForm.reset();
@@ -131,35 +110,5 @@ export class LoginPage implements OnInit {
       }
     }
     return "";
-  }
-
-  async loginGoogle() {
-    this.afAuth.signInWithRedirect(new firebase.auth.GoogleAuthProvider())
-      .then((result) => {
-        this.navController.navigateRoot("/home");
-        this.alertsService.presentLoading("Bienvenido a Omi y Pali");
-        console.log(result);
-        console.log("Sucess Google");
-      }).catch((err) => {
-        console.log(err);
-      });
-  }
-
-  loginFacebook() {
-    this.afAuth.signInWithRedirect(new firebase.auth.FacebookAuthProvider());
-    this.fb
-      .login(["public_profile", "email"])
-      .then((res: FacebookLoginResponse) => {
-        if (res.status === "connected") {
-          this.user.img =
-            "https://graph.facebook.com/" +
-            res.authResponse.userID +
-            "/picture?type=square";
-        } else {
-          alert("Login Failed");
-        }
-        console.log("Logged into Facebook!", res);
-      })
-      .catch((e) => console.log("Error logging into Facebook", e));
   }
 }
