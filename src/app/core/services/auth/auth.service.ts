@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from "@angular/fire/auth";
-import * as firebase from "firebase";
+import * as firebase from 'firebase/app';
 import { AlertsService } from '../alerts/alerts.service';
 import { NavController } from '@ionic/angular';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 import { HttpService } from '../http/http.service';
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -16,33 +17,35 @@ export class AuthService {
     public alertsService: AlertsService,
     private navController: NavController,
     private fb: Facebook,
-    private http: HttpService
+    private http: HttpService,
+    private router: Router
   ) { }
 
   login(email, password){
-    var JSON = { "email": email, "clave": password }
+    // tslint:disable-next-line: object-literal-key-quotes
+    const JSON = { "email": email, "clave": password }
     this.http.getUser(JSON).subscribe(data => {
       if (data != null) {
-        console.log(data)
-        
+        console.log(data);
+
         this.AFauth.signInWithEmailAndPassword(email, password).catch(function(error) {
           var errorCode = error.code;
           var errorMessage = error.message;
-          console.log(errorCode, errorMessage)
+          console.log(errorCode, errorMessage);
         });
         this.alertsService.presentLoading("Bienvenido a" + " Omi & Pali");
-        this.navController.navigateRoot("/home");
+        this.router.navigateByUrl("home");
       } else {
-        console.log("Datos invalidos")
+        console.log("Datos invalidos");
       }
-    })
+    });
   }
 
-
   async loginGoogle() {
-    this.AFauth.signInWithRedirect(new firebase.auth.GoogleAuthProvider())
+    const provider = new firebase.auth.GoogleAuthProvider();
+    this.AFauth.signInWithPopup(provider)
       .then((result) => {
-        this.navController.navigateRoot("/home");
+        this.router.navigateByUrl("home");
         this.alertsService.presentLoading("Bienvenido a Omi y Pali");
         console.log(result);
         console.log("Sucess Google");
@@ -57,12 +60,20 @@ export class AuthService {
       .login(["public_profile", "email"])
       .then((res: FacebookLoginResponse) => {
         if (res.status === "connected") {
-          console.log(res)
+          console.log(res);
         } else {
           alert("Login Failed");
         }
         console.log("Logged into Facebook!", res);
       })
       .catch((e) => console.log("Error logging into Facebook", e));
+  }
+
+  logout() {
+    firebase.auth().signOut().then(function() {
+    }).catch(function(error) {
+      console.log(error);
+    });
+    this.router.navigateByUrl("login");
   }
 }

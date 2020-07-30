@@ -6,6 +6,9 @@
     <ion-title>
       Omi Pali
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-icon (click)="logout()" name="log-out"></ion-icon>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -28,12 +31,12 @@
 <ion-content class="contenedor" padding hidenav-content="page1">
   <ion-row class="option-menu centrado ion-no-margin">
     <ion-col>
-      <ion-button color="omipalidarkd" class="menu-button">
+      <ion-button color="omipalidarkd" class="menu-button" (click)="abrirNovedad()">
         <ion-icon color="omipali" name="chatbox-ellipses"></ion-icon>
       </ion-button>
     </ion-col>
     <ion-col>
-      <ion-button color="omipalidarkd" class="menu-button">
+      <ion-button color="omipalidarkd" class="menu-button" (click)="mostrarCuentasBancarias()">
         <ion-icon color="omipali" name="cash"></ion-icon>
       </ion-button>
     </ion-col>
@@ -43,7 +46,7 @@
       </ion-button>
     </ion-col>
     <ion-col>
-      <ion-button color="omipalidarkd" class="menu-button">
+      <ion-button color="omipalidarkd" class="menu-button" (click)="abrirPreguntasFrecuentes()">
         <ion-icon color="omipali" name="help"></ion-icon>
       </ion-button>
     </ion-col>

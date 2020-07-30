@@ -67,9 +67,9 @@ const routes: Routes = [
   {
     path: "perfil-usuario",
     loadChildren: () =>
-      import("./pages/perfil-usuario/perfil-usuario.module").then(
-        (m) => m.PerfilUsuarioPageModule
-      ),
+      import("./pages/perfil-usuario/perfil-usuario.module") 
+      .then((m) => m.PerfilUsuarioPageModule),
+        //canActivate: [AuthGuard],
   },
   {
     path: "editar-perfil",
@@ -92,6 +92,14 @@ const routes: Routes = [
   {
     path: 'telefono',
     loadChildren: () => import('./pages/telefono/telefono.module').then( m => m.TelefonoPageModule)
+  },
+  {
+    path: 'preguntas-frecuentes',
+    loadChildren: () => import('./pages/preguntas-frecuentes/preguntas-frecuentes.module').then( m => m.PreguntasFrecuentesPageModule)
+  },
+  {
+    path: 'novedad',
+    loadChildren: () => import('./pages/novedad/novedad.module').then( m => m.NovedadPageModule)
   },
 
 ];
