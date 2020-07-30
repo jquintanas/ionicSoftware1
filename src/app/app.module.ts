@@ -18,7 +18,6 @@ import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
 import { Facebook } from '@ionic-native/facebook/ngx';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
-import { HttpService } from 'src/app/core/services/http/http.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -41,7 +40,6 @@ import { HttpService } from 'src/app/core/services/http/http.service';
     StatusBar,
     Facebook,
     SplashScreen,
-    HttpService,
 
     {
       provide:

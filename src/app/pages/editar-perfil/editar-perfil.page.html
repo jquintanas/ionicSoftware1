@@ -37,7 +37,7 @@
           </div>
           <ion-item>
             <ion-input type="tel" maxlength="10" placeholder="Teléfono" class="inputform" formControlName="phoneField">
-            </ion-input>
+           </ion-input>
           </ion-item>
           <div class="container-error-message alert-danger" *ngIf="getError('phoneField') != ''">
             <ion-icon slot="start" name="information-circle-sharp" color="danger"></ion-icon>
@@ -77,7 +77,7 @@
       </form>
 
       <ion-button class="ion-margin-start ion-margin-end ion-butt-save" color="omipalidarkd" type="submit"
-        expand="block">
+        expand="block" (click)="guardarCambios()">
         Guardar Cambios
       </ion-button>
     </div>

@@ -2,35 +2,40 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from "@angular/fire/auth";
 import * as firebase from 'firebase/app';
 import { AlertsService } from '../alerts/alerts.service';
-import { NavController } from '@ionic/angular';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
-import { HttpService } from '../http/http.service';
 import { Router } from "@angular/router";
+import { Storage } from '@ionic/storage';
+import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+  private readonly JWT_TOKEN = 'JWT_TOKEN';
+  private readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
+
   constructor(
     private AFauth: AngularFireAuth,
     public alertsService: AlertsService,
-    private navController: NavController,
     private fb: Facebook,
-    private http: HttpService,
-    private router: Router
+    private httpClient: HttpClient,
+    private router: Router,
+    private storage: Storage
   ) { }
 
-  login(email, password){
+  login(email, password) {
     // tslint:disable-next-line: object-literal-key-quotes
-    const JSON = { "email": email, "clave": password }
-    this.http.getUser(JSON).subscribe(data => {
+    const usuario = { "email": email, "clave": password };
+    this.httpClient.post(environment.urlLogin, usuario)
+    .subscribe(data => {
       if (data != null) {
-        console.log(data);
-
+        this.doLoginUser(data);
+        // tslint:disable-next-line: only-arrow-functions
         this.AFauth.signInWithEmailAndPassword(email, password).catch(function(error) {
-          var errorCode = error.code;
-          var errorMessage = error.message;
+          const errorCode = error.code;
+          const errorMessage = error.message;
           console.log(errorCode, errorMessage);
         });
         this.alertsService.presentLoading("Bienvenido a" + " Omi & Pali");
@@ -39,6 +44,17 @@ export class AuthService {
         console.log("Datos invalidos");
       }
     });
+  }
+
+  private doLoginUser(data) {
+    const emailUser = data.data.email;
+    const user = data.data.nombre.concat(" ", data.data.apellido);
+    const phone = data.data.telefono;
+    const address = data.data.direccion;
+    this.storage.set("email", emailUser);
+    this.storage.set("user", user);
+    this.storage.set("phone", phone);
+    this.storage.set("address", address);
   }
 
   async loginGoogle() {
@@ -70,10 +86,24 @@ export class AuthService {
   }
 
   logout() {
+    // tslint:disable-next-line: only-arrow-functions
     firebase.auth().signOut().then(function() {
+    // tslint:disable-next-line: only-arrow-functions
     }).catch(function(error) {
       console.log(error);
     });
     this.router.navigateByUrl("login");
+  }
+
+  private storeToken(jwt: string) {
+    this.storage.set(this.JWT_TOKEN, jwt);
+  }
+
+  getToken() {
+    return this.storage.get(this.JWT_TOKEN);
+  }
+
+  private getRefreshToken() {
+    return this.storage.get(this.REFRESH_TOKEN);
   }
 }

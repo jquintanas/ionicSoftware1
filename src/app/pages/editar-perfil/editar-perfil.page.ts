@@ -3,6 +3,7 @@ import { ModalController } from "@ionic/angular";
 import { MapaMapboxPage } from "../mapa-mapbox/mapa-mapbox.page";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 import { environment } from "src/environments/environment";
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: "app-editar-perfil",
@@ -16,6 +17,7 @@ export class EditarPerfilPage implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     public modalController: ModalController,
+    private storage: Storage,
     public renderer: Renderer2,
     public el: ElementRef,
   ) {
@@ -23,7 +25,7 @@ export class EditarPerfilPage implements OnInit {
   }
 
 
-  ngOnInit() { }
+  ngOnInit() {}
 
 
   public submit() {
@@ -90,5 +92,5 @@ export class EditarPerfilPage implements OnInit {
     return "";
   }
 
-
+  guardarCambios() {}
 }

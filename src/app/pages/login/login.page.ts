@@ -63,7 +63,7 @@ export class LoginPage implements OnInit {
       const value = this.loginForm.value;
       this.emailUser = value.phoneField;
       this.password = value.passwordField;
-      this.authService.login(this.emailUser, this.password)
+      this.authService.login(this.emailUser, this.password);
     } else {
       console.log("formulario inválido", this.loginForm);
       this.onResetForm();
