@@ -23,15 +23,26 @@ export class BebidasPage implements OnInit, OnDestroy {
     private productosServices: ProductosService,
     private alertService: AlertsService,
     private loadinController: LoadingController) {
-    this.dataMostrar = this.dataBebidas;
   }
   ngOnDestroy(): void {
-    this.subsDatos.unsubscribe();
-    this.subProductos.unsubscribe();
-    this.subCategorias.unsubscribe();
+    if (this.subsDatos) {
+      this.subsDatos.unsubscribe();
+    }
+    if (this.subProductos) {
+      this.subProductos.unsubscribe();
+    }
+    if (this.subCategorias) {
+      this.subCategorias.unsubscribe();
+    }
   }
 
   async ngOnInit() {
+    this.observadorBusqueda();
+    await this.observadorProductos();
+    this.busqueda.cambioTab(0);
+  }
+
+  private observadorBusqueda() {
     this.subsDatos = this.busqueda.busqueda().subscribe((data: string) => {
       if (data != null && data != "" && data != "all") {
         this.dataMostrar = [];
@@ -48,6 +59,9 @@ export class BebidasPage implements OnInit, OnDestroy {
     }, (err: any) => {
       console.log(err);
     });
+  }
+
+  private async observadorProductos() {
     const loading = await this.loadinController.create({ message: "Cargando..." });
     await loading.dismiss();
     this.subCategorias = this.productosServices.onservarCategorias().subscribe(

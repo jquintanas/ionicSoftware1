@@ -1,7 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BusquedaService } from "src/app/core/services/comunicacion/busqueda.service";
-import { DetalleProducto } from "src/app/core/interface/productoDetalle";
 import { environment } from "src/environments/environment";
+import { Productos } from "src/app/core/interface/modelNOSQL/productos";
+import { LoadingController } from '@ionic/angular';
+import { ProductosService } from 'src/app/core/services/cart/productos.service';
+import { AlertsService } from 'src/app/core/services/alerts/alerts.service';
 @Component({
   selector: 'app-dulces',
   templateUrl: './dulces.page.html',
@@ -9,56 +12,46 @@ import { environment } from "src/environments/environment";
 })
 export class DulcesPage implements OnInit, OnDestroy {
   private subsDatos: any;
-  private categoria: number = environment.codigoCategoriaDulces;
-  dataDulces: DetalleProducto[] = [
-    {
-      ImagenP: "https://i.ytimg.com/vi/AKC-mXZ2ZRQ/maxresdefault.jpg",
-      Titulo: "nutella",
-      Descripcion: "Nutella con M&M",
-      Precio: 5,
-      Favorito: false,
-      id: "1",
-      carrusel: ["https://recetasfacil.online/wp-content/uploads/2018/06/postres-sin-horno-1.jpg", "https://cdn.aarp.net/content/dam/aarp/food/recipes/2018/10/1140-limofresa-gas-drink-esp.jpg", "https://i2.wp.com/www.diegocoquillat.com/wp-content/uploads/2018/06/tapa_bebidas.png?fit=700%2C336&ssl=1&resize=1280%2C720"],
-      categoria: this.categoria
-    },
-    {
-      ImagenP: "https://www.65ymas.com/uploads/s1/12/15/48/europapress-1269237-dulce-dulces-pastel-pasteles-pastelitos-pastelito-comida-comidas-postre-postres-donut-donuts.jpeg",
-      Titulo: "donas",
-      Descripcion: "Donas surtidas",
-      Precio: 1.25,
-      Favorito: true,
-      id: "2",
-      carrusel: ["https://recetasfacil.online/wp-content/uploads/2018/06/postres-sin-horno-1.jpg", "https://cdn.aarp.net/content/dam/aarp/food/recipes/2018/10/1140-limofresa-gas-drink-esp.jpg", "https://i2.wp.com/www.diegocoquillat.com/wp-content/uploads/2018/06/tapa_bebidas.png?fit=700%2C336&ssl=1&resize=1280%2C720"],
-      categoria: this.categoria
-    },
-    {
-      ImagenP: "https://eldiariony.com/wp-content/uploads/sites/2/2017/05/gomitas.jpg?quality=60&strip=all&w=940",
-      Titulo: "gomitas",
-      Descripcion: "Gomitas de sabores por libra",
-      Precio: 2.5,
-      Favorito: false,
-      id: "3",
-      carrusel: ["https://recetasfacil.online/wp-content/uploads/2018/06/postres-sin-horno-1.jpg", "https://cdn.aarp.net/content/dam/aarp/food/recipes/2018/10/1140-limofresa-gas-drink-esp.jpg", "https://i2.wp.com/www.diegocoquillat.com/wp-content/uploads/2018/06/tapa_bebidas.png?fit=700%2C336&ssl=1&resize=1280%2C720"],
-      categoria: this.categoria
-    }
-  ]
+  private subProductos: any;
+  private subCategorias: any;
+  private categoria: string;
+  dataDulces: Productos[];
   dataMostrar: any[];
-  constructor(private busqueda: BusquedaService) {
-    this.dataMostrar = this.dataDulces;
+  constructor(
+    private busqueda: BusquedaService,
+    private loadinController: LoadingController,
+    private productosServices: ProductosService,
+    private alertService: AlertsService) {
   }
 
   ngOnDestroy(): void {
-    this.subsDatos.unsubscribe();
+    if (this.subsDatos) {
+      this.subsDatos.unsubscribe();
+    }
+    if (this.subProductos) {
+      this.subProductos.unsubscribe();
+    }
+    if (this.subCategorias) {
+      this.subCategorias.unsubscribe();
+    }
   }
 
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.observadorBusqueda();
+    await this.observadorProductos();
+    this.busqueda.cambioTab(1);
+
+  }
+
+  private observadorBusqueda() {
     this.subsDatos = this.busqueda.busqueda().subscribe((data: string) => {
       if (data != null && data != "" && data != "all") {
         this.dataMostrar = [];
         data = data.toLowerCase();
+        // tslint:disable-next-line: prefer-for-of
         for (let i = 0; i < this.dataDulces.length; i++) {
-          if (this.dataDulces[i].Titulo.includes(data)) {
+          if (this.dataDulces[i].nombre.includes(data)) {
             this.dataMostrar.push(this.dataDulces[i]);
           }
         }
@@ -67,7 +60,37 @@ export class DulcesPage implements OnInit, OnDestroy {
       this.dataMostrar = this.dataDulces;
     }, (err: any) => {
       console.log(err);
-    })
+    });
+  }
+
+  private async observadorProductos() {
+    const loading = await this.loadinController.create({ message: "Cargando..." });
+    await loading.dismiss();
+    this.subCategorias = this.productosServices.onservarCategorias().subscribe(
+      data => {
+        if (data) {
+          this.categoria = this.productosServices.mapaCategorias.get(environment.nombresCategorias.dulces).idCategoria;
+          this.subProductos = this.productosServices.obtenerProductosPorCategoria(this.categoria).subscribe(
+            dt => {
+              console.log(dt);
+              this.dataDulces = dt;
+              this.dataMostrar = dt;
+              loading.dismiss();
+            },
+            async err => {
+              console.log(err);
+              loading.dismiss();
+              await this.alertService.mostrarToastError();
+            }
+          );
+        }
+      },
+      async err => {
+        console.log(err);
+        loading.dismiss();
+        await this.alertService.mostrarToastError();
+      }
+    );
   }
 
 }

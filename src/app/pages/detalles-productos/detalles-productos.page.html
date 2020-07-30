@@ -23,9 +23,10 @@
 
 <ion-content>
   <ion-slides pager="false" [options]="slideOpts">
-    <ion-slide *ngFor="let data of listaImagenes">
+    <ion-slide *ngFor="let data of listaImagenes;let i = index">
       <div class="slide">
-        <img [src]="data" onerror="this.src='/assets/img/404.jpg';" />
+        <img [src]="data" onerror="this.src='/assets/img/404.jpg';" [ngClass]="{'ion-hide': banderasLoading[i]}" (load)="desactivarLoading(i)"/>
+        <img src="/assets/svg/spinner.svg" alt="spinner" *ngIf="banderasLoading[i]">
       </div>
     </ion-slide>
   </ion-slides>

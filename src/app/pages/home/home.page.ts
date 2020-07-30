@@ -19,6 +19,7 @@ export class HomePage implements OnInit, OnDestroy {
   cantidadProductos: number = 0;
   private subscripcion: any;
   private subCategorias: any;
+  private subTabs: any;
   constructor(
     private router: Router,
     private busqueda: BusquedaService,
@@ -28,9 +29,14 @@ export class HomePage implements OnInit, OnDestroy {
     private loadingController: LoadingController
   ) { }
   ngOnDestroy(): void {
-    this.subscripcion.unsubscribe();
+    if (this.subscripcion) {
+      this.subscripcion.unsubscribe();
+    }
     if (this.subCategorias) {
       this.subCategorias.unsubscribe();
+    }
+    if (this.subTabs) {
+      this.subTabs.unsubscribe();
     }
   }
 
@@ -61,6 +67,7 @@ export class HomePage implements OnInit, OnDestroy {
       loading.dismiss();
       this.productosServices.notificarCambio();
     }
+    this.observadorCambioTab();
   }
 
   habilitarBusqueda() {
@@ -103,4 +110,16 @@ export class HomePage implements OnInit, OnDestroy {
     await toast.present();
   }
 
+  private observadorCambioTab() {
+    this.subTabs = this.busqueda.cambioTabObservador().subscribe(
+      indice => {
+        if (indice >= 0) {
+          this.cambiarBanderaTabs(indice);
+        }
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
 }

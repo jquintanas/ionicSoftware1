@@ -3,8 +3,8 @@
     <ion-grid>
       <ion-row>
         <ion-col size="12" *ngFor="let torta of dataMostrar">
-          <app-card-productos [Imagen]="torta.ImagenP" [Titulo]="torta.Titulo" [Descripcion]="torta.Descripcion"
-            [Precio]="torta.Precio" [id]="torta.id" [carrusel]="torta.carrusel" [categoria]="torta.categoria">
+          <app-card-productos [Imagen]="torta.foto" [Titulo]="torta.nombre" [Descripcion]="torta.descripcion"
+            [Precio]="torta.precio" [id]="torta.idProducto" [carrusel]="torta.slide" [categoria]="torta.idCategoria">
           </app-card-productos>
         </ion-col>
       </ion-row>

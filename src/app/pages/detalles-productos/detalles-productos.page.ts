@@ -57,6 +57,7 @@ export class DetallesProductosPage implements OnInit {
   contenidoFooter: boolean = true;
   banderaPrecio: boolean = true;
   ocultarSheetInferior: boolean = false;
+  banderasLoading: boolean[] = [];
   constructor(
     private alertController: AlertController,
     private carrito: CarritoService,
@@ -75,6 +76,7 @@ export class DetallesProductosPage implements OnInit {
     this.nombreProducto = this.detalleProducto.Titulo;
     this.precioProducto = this.detalleProducto.Precio;
     this.descripcionProducto = this.detalleProducto.Descripcion;
+    this.llenarBanderasLoading();
   }
 
   async marcarFavorito() {
@@ -191,5 +193,15 @@ export class DetallesProductosPage implements OnInit {
     }
     this.bajarSheetFooter();
 
+  }
+
+  llenarBanderasLoading() {
+    for (let i = 0; i < this.listaImagenes.length; i++) {
+      this.banderasLoading.push(true);
+    }
+  }
+
+  desactivarLoading(indice: number) {
+    this.banderasLoading[indice] = false;
   }
 }

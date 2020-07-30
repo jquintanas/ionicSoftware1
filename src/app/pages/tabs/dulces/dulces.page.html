@@ -2,8 +2,8 @@
   <ion-grid>
     <ion-row>
       <ion-col size="12" *ngFor="let dulce of dataMostrar">
-        <app-card-productos [Imagen]="dulce.ImagenP" [Titulo]="dulce.Titulo" [Descripcion]="dulce.Descripcion"
-          [Precio]="dulce.Precio"  [id]="dulce.id" [carrusel]="dulce.carrusel" [categoria]="dulce.categoria">
+        <app-card-productos [Imagen]="dulce.foto" [Titulo]="dulce.nombre" [Descripcion]="dulce.descripcion"
+          [Precio]="dulce.precio" [id]="dulce.idProducto" [carrusel]="dulce.slide" [categoria]="dulce.idCategoria">
         </app-card-productos>
       </ion-col>
     </ion-row>

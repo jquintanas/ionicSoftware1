@@ -8,6 +8,7 @@ export class BusquedaService {
   private indiceTab: number = 0;
   private productosBuscarArray: string[] = ["", "", "", "", ""];
   private productoSubject = new BehaviorSubject(this.productosBuscarArray[0]);
+  private tabSubject = new BehaviorSubject(-1);
   constructor() { }
 
   generarBusqueda(producto: string) {
@@ -28,4 +29,11 @@ export class BusquedaService {
     return this.productosBuscarArray[this.indiceTab];
   }
 
+  cambioTabObservador() {
+    return this.tabSubject.asObservable();
+  }
+
+  cambioTab(indice: number) {
+    this.tabSubject.next(indice);
+  }
 }
