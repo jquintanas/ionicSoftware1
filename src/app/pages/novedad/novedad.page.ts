@@ -16,10 +16,5 @@ export class NovedadPage implements OnInit {
     private storage: Storage
   ) { }
 
-  ngOnInit() {
-  }
-
-  getMail() {
-    this.storage.get("email");
-  }
+  ngOnInit() {}
 }

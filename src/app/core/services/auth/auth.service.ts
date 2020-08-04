@@ -32,7 +32,7 @@ export class AuthService {
   ) { }
 
    async login(email, password) {
-    const loading = await this.loadingController.create({ message: "Cargando..." });
+    const loading = await this.loadingController.create({ message: "Bienvenido a Omi & Pali" });
     await loading.present();
     // tslint:disable-next-line: object-literal-key-quotes
     const usuario = { "email": email, "clave": password };
@@ -47,7 +47,6 @@ export class AuthService {
           this.alertsService.alert("ERROR", "Correo electrónico y/o contraseña incorrectos");
           console.log(errorCode, errorMessage);
         });
-        this.alertsService.presentLoading("Bienvenido a" + " Omi & Pali");
         this.router.navigateByUrl("home");
         loading.dismiss();
       } else {
