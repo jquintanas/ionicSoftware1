@@ -4,6 +4,7 @@ import { MapaMapboxPage } from "../mapa-mapbox/mapa-mapbox.page";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 import { environment } from "src/environments/environment";
 import { Storage } from '@ionic/storage';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: "app-editar-perfil",
@@ -11,8 +12,13 @@ import { Storage } from '@ionic/storage';
   styleUrls: ["./editar-perfil.page.scss"],
 })
 export class EditarPerfilPage implements OnInit {
-
   userDataForm: FormGroup;
+  id: string;
+  userName: string = "JOSE";
+  phoneNumber: string = "0918812751";
+  emailUser: string = "mimail@prueba.com";
+  addressUser: string = "mi direccion  de prueba";
+  reference: string = "referencia lugar";
 
   constructor(
     private formBuilder: FormBuilder,
@@ -20,12 +26,16 @@ export class EditarPerfilPage implements OnInit {
     private storage: Storage,
     public renderer: Renderer2,
     public el: ElementRef,
+    private httpClient: HttpClient
   ) {
     this.buildForm();
   }
 
+  public user: string;
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.setInfo();
+  }
 
 
   public submit() {
@@ -91,6 +101,32 @@ export class EditarPerfilPage implements OnInit {
     }
     return "";
   }
+
+  setInfo() {
+    this.storage.get('user').then((data) => {
+      this.userName = data;
+    });
+    this.storage.get('phone').then((data) => {
+      this.phoneNumber = data;
+    });
+    this.storage.get('email').then((data) => {
+      this.emailUser = data;
+    });
+    this.storage.get('address').then((data) => {
+      this.addressUser = data;
+    });
+  }
+
+
+getName() {
+  this.storage.get("user");
+}
+/*
+getUserInfo() {
+  let cedula = this.storage.get("id");
+  this.id = String(cedula);
+  this.httpClient.get(environment.urlGetUser.id);
+}*/
 
   guardarCambios() {}
 }

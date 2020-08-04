@@ -29,14 +29,14 @@
       <form [formGroup]="userDataForm">
         <ion-list>
           <ion-item>
-            <ion-input type="text" placeholder="Usuario" class="inputform" formControlName="namesField"></ion-input>
+            <ion-input type="text" [(ngModel)]="userName" placeholder="Usuario" class="inputform" formControlName="namesField"></ion-input>
           </ion-item>
           <div class="container-error-message alert-danger" *ngIf="getError('namesField') != ''">
             <ion-icon slot="start" name="information-circle-sharp" color="danger"></ion-icon>
             <strong> {{getError('namesField')}} </strong>
           </div>
           <ion-item>
-            <ion-input type="tel" maxlength="10" placeholder="Teléfono" class="inputform" formControlName="phoneField">
+            <ion-input type="tel" [(ngModel)]="phoneNumber" maxlength="10" placeholder="Teléfono" class="inputform" formControlName="phoneField">
            </ion-input>
           </ion-item>
           <div class="container-error-message alert-danger" *ngIf="getError('phoneField') != ''">
@@ -44,7 +44,7 @@
             <strong> {{getError('phoneField')}}</strong>
           </div>
           <ion-item>
-            <ion-input type="text" placeholder="Correo Electrónico" class="inputform" formControlName="emailField">
+            <ion-input type="text" [(ngModel)]="emailUser" placeholder="Correo Electrónico" class="inputform" formControlName="emailField">
             </ion-input>
           </ion-item>
           <div class="container-error-message alert-danger" *ngIf="getError('emailField') != ''">
@@ -59,7 +59,7 @@
         </ion-item-divider>
         <div>
           <ion-item>
-            <ion-input type="text" placeholder="Dirección" class="inputform" formControlName="directionField">
+            <ion-input type="text" [(ngModel)]="addressUser" placeholder="Dirección" class="inputform" formControlName="directionField">
             </ion-input>
             <ion-button type="button" class="ion-map-button" color="omipalidarkd" expand="block" (click)="openModal()">
               <ion-icon color="omipali" name="map-outline"></ion-icon>

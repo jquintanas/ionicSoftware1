@@ -18,9 +18,14 @@ export const environment = {
   // tslint:disable-next-line: max-line-length
   img_markers: ",14,0/300x300@2x?access_token=pk.eyJ1IjoiZGFubnBhcjk2IiwiYSI6ImNrYWJiaW44MjFlc2kydG96YXVxc2JiMHYifQ.iWfA_z-InyvNliI_EysoBw&attribution=false&logo=false",
   imgsecondpart: "),pin-s-cafe+e00000(-79.5419038,-1.8017518)/",
-  urlLogin: 'https://omipalisf2.herokuapp.com/api/login/usuario',
-  urlNovelty: 'https://omipalisf2.herokuapp.com/api/noveltys',
-  urlHistorial: 'https://omipalisf2.herokuapp.com/api/orders',
+  rutas: {
+    urlLogin: 'https://omipalisf2.herokuapp.com/api/login/usuario',
+    urlNovelty: 'https://omipalisf2.herokuapp.com/api/noveltys',
+    urlHistorial: 'https://omipalisf2.herokuapp.com/api/orders',
+    urlGetUser: 'https://omipalisf2.herokuapp.com/api/usersS/',
+    urlToken :  "https://omipalisf2.herokuapp.com/api/login/token",
+    urlLogout : "https://omipalisf2.herokuapp.com/api/login/reject",
+  },
   nombresCategorias: {
     dulces: "dulces",
     bebidas: "bebidas",

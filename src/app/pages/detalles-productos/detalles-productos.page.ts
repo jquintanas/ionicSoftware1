@@ -7,6 +7,8 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 import { FavoritosService } from "src/app/core/services/cart/favoritos.service";
 import { Favoritos } from "src/app/core/interface/favoritosStorage";
 import { ToastController } from '@ionic/angular';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
+
 @Component({
   selector: 'app-detalles-productos',
   templateUrl: './detalles-productos.page.html',
@@ -63,9 +65,13 @@ export class DetallesProductosPage implements OnInit {
     private carrito: CarritoService,
     private modalController: ModalController,
     private toastController: ToastController,
-    private favoritos: FavoritosService) { }
+    private favoritos: FavoritosService,
+    private authService: AuthService) { }
 
   ngOnInit() {
+    //const token: any = await this.authService.getToken();
+    const token: any = this.authService.getToken2();
+    console.log("token obtenido", token);
     this.detalleProducto = this.carrito.getProductoDetalle();
     if (this.detalleProducto.cantidad == null) {
       this.detalleProducto.cantidad = 0;

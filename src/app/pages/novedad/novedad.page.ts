@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 //import { Novedad } from 'src/app/core/interface/modelsDB/novedad';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-novedad',
@@ -8,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NovedadPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private storage: Storage
+  ) { }
 
   ngOnInit() {
   }
 
+  getMail() {
+    this.storage.get("email");
+  }
 }

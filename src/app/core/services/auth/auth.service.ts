@@ -7,6 +7,8 @@ import { Router } from "@angular/router";
 import { Storage } from '@ionic/storage';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { Token } from 'src/app/core/interface/token';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +17,8 @@ export class AuthService {
 
   private readonly JWT_TOKEN = 'JWT_TOKEN';
   private readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
+  private loggedUser: string;
+  token: string;
 
   constructor(
     private AFauth: AngularFireAuth,
@@ -28,7 +32,7 @@ export class AuthService {
   login(email, password) {
     // tslint:disable-next-line: object-literal-key-quotes
     const usuario = { "email": email, "clave": password };
-    this.httpClient.post(environment.urlLogin, usuario)
+    this.httpClient.post(environment.rutas.urlLogin, usuario)
     .subscribe(data => {
       if (data != null) {
         this.doLoginUser(data);
@@ -36,25 +40,46 @@ export class AuthService {
         this.AFauth.signInWithEmailAndPassword(email, password).catch(function(error) {
           const errorCode = error.code;
           const errorMessage = error.message;
+          this.alertsService.alert("ERROR", "Correo electrónico y/o contraseña incorrectos");
           console.log(errorCode, errorMessage);
         });
         this.alertsService.presentLoading("Bienvenido a" + " Omi & Pali");
         this.router.navigateByUrl("home");
       } else {
         console.log("Datos invalidos");
+        this.alertsService.alert("ERROR", "Correo electrónico y/o contraseña incorrectos");
       }
     });
   }
 
+  refreshToken() {
+    return this.httpClient.post<any>(environment.rutas.urlToken,
+      {
+        // tslint:disable-next-line: object-literal-key-quotes
+        'email': this.loggedUser,
+        // tslint:disable-next-line: object-literal-key-quotes
+        'refreshToken': this.getRefreshToken()
+      })
+    .pipe(
+      tap(data => {
+      this.storeJwtToken(data.token);
+    }));
+  }
+
   private doLoginUser(data) {
-    const emailUser = data.data.email;
+    this.loggedUser = data.data.email;
     const user = data.data.nombre.concat(" ", data.data.apellido);
     const phone = data.data.telefono;
     const address = data.data.direccion;
-    this.storage.set("email", emailUser);
+    const id = data.data.cedula;
+    this.storage.set("email", this.loggedUser);
     this.storage.set("user", user);
     this.storage.set("phone", phone);
     this.storage.set("address", address);
+    this.storage.set("id", id);
+    const tokens: Token =  {token : data.token, refreshToken: data.refreshToken};
+    this.storeTokens(tokens);
+    this.getJWTToken();
   }
 
   async loginGoogle() {
@@ -92,18 +117,51 @@ export class AuthService {
     }).catch(function(error) {
       console.log(error);
     });
+    this.doLogoutUser();
     this.router.navigateByUrl("login");
   }
 
-  private storeToken(jwt: string) {
+  private storeTokens(tokens: Token) {
+    this.storage.set(this.JWT_TOKEN, tokens.token);
+    this.storage.set(this.REFRESH_TOKEN, tokens.refreshToken);
+  }
+
+  isLoggedIn() {
+    return !!this.getToken();
+  }
+
+   getToken() {
+    return  this.storage.get(this.JWT_TOKEN);
+  }
+
+  async getToken2(): Promise<any> {
+    return  await this.storage.get(this.JWT_TOKEN).then(data =>{
+      return data;
+    });
+  }
+  getJWTToken() {
+    this.storage.get('JWT_TOKEN').then((result) => {
+      console.log (result);
+      console.log(typeof(result));
+      return result;
+    });
+  }
+
+   getRefreshToken() {
+    return this.storage.get(this.REFRESH_TOKEN);
+  }
+
+  private removeTokens() {
+    this.storage.remove(this.JWT_TOKEN);
+    this.storage.remove(this.REFRESH_TOKEN);
+  }
+
+  private storeJwtToken(jwt: string) {
     this.storage.set(this.JWT_TOKEN, jwt);
   }
 
-  getToken() {
-    return this.storage.get(this.JWT_TOKEN);
-  }
-
-  private getRefreshToken() {
-    return this.storage.get(this.REFRESH_TOKEN);
+  private doLogoutUser() {
+    this.loggedUser = null;
+    this.removeTokens();
   }
 }
