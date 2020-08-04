@@ -33,6 +33,7 @@ export class AlertsService {
 
   async alert(titulo: string, mensaje: string) {
     const alert = await this.alterCrtl.create({
+      cssClass: "alertCustom",
       header: titulo,
       message:
         mensaje,

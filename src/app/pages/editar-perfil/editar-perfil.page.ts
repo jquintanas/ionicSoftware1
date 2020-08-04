@@ -5,6 +5,7 @@ import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 import { environment } from "src/environments/environment";
 import { Storage } from '@ionic/storage';
 import { HttpClient } from '@angular/common/http';
+import { AlertsService } from 'src/app/core/services/alerts/alerts.service';
 
 @Component({
   selector: "app-editar-perfil",
@@ -26,7 +27,8 @@ export class EditarPerfilPage implements OnInit {
     private storage: Storage,
     public renderer: Renderer2,
     public el: ElementRef,
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private alertService: AlertsService,
   ) {
     this.buildForm();
   }
@@ -128,5 +130,11 @@ getUserInfo() {
   this.httpClient.get(environment.urlGetUser.id);
 }*/
 
-  guardarCambios() {}
+  guardarCambios() {
+    this.storage.set("user", this.userName);
+    this.storage.set("phone", this.phoneNumber);
+    this.storage.set("email", this.emailUser);
+    this.storage.set("address", this.addressUser);
+    this.alertService.alert("ACTUALIZACION", "Datos actualizados correctamente");
+  }
 }
