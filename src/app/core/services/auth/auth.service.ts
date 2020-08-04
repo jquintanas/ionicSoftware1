@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Token } from 'src/app/core/interface/token';
 import { tap } from 'rxjs/operators';
+import { LoadingController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -26,10 +27,13 @@ export class AuthService {
     private fb: Facebook,
     private httpClient: HttpClient,
     private router: Router,
-    private storage: Storage
+    private storage: Storage,
+    public loadingController: LoadingController
   ) { }
 
-  login(email, password) {
+   async login(email, password) {
+    const loading = await this.loadingController.create({ message: "Cargando..." });
+    await loading.present();
     // tslint:disable-next-line: object-literal-key-quotes
     const usuario = { "email": email, "clave": password };
     this.httpClient.post(environment.rutas.urlLogin, usuario)
@@ -45,6 +49,7 @@ export class AuthService {
         });
         this.alertsService.presentLoading("Bienvenido a" + " Omi & Pali");
         this.router.navigateByUrl("home");
+        loading.dismiss();
       } else {
         console.log("Datos invalidos");
         this.alertsService.alert("ERROR", "Correo electrónico y/o contraseña incorrectos");
@@ -66,7 +71,7 @@ export class AuthService {
     }));
   }
 
-  private doLoginUser(data) {
+  async doLoginUser(data) {
     this.loggedUser = data.data.email;
     const user = data.data.nombre.concat(" ", data.data.apellido);
     const phone = data.data.telefono;
