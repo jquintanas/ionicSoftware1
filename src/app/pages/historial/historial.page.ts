@@ -13,43 +13,19 @@ import { BehaviorSubject } from 'rxjs';
 export class HistorialPage implements OnInit {
   time: BehaviorSubject<string> = new BehaviorSubject('00');
   timer: number;
-
-  dataHistorial: DetalleHistorial[] = [
-    {
-      idpedido: "1406",
-      producto: "Mojada de chocolate",
-      cantidad: 2,
-      valor: 2,
-      metodoEnvio: true,
-      fecha: "2019-05-12"
-    },
-    {
-      idpedido: "1230",
-      producto: "Mojada de chocolate",
-      cantidad: 3,
-      valor: 2,
-      metodoEnvio: true,
-      fecha: "2019-05-10"
-    },
-    {
-      idpedido: "1500",
-      producto: "Mojada de chocolate",
-      cantidad: 2,
-      valor: 2,
-      metodoEnvio: true,
-      fecha: "2019-07-12"
-    }
-
-  ];
-
-  dataMostrar: any[];
   segment: string = "active";
+  private deliveryName: string = "Pedro Riascos";
+  private deliveryNumber: string = "+593 123 456 789";
+  private idPedido: string = "1234";
+  private valorTotal: string = "15.50";
+  private metodoEnvio: string = "Envio a domicilio";
+  private amount: string = "2";
+  private productName: string = "Mojada de chocolate";
+  private fechaPedido: string = "Mayo 5, 2020";
 
   constructor(
     private alertController: AlertController,
-    private router: Router) {
-    this.dataMostrar = this.dataHistorial;
-  }
+    private router: Router) {}
 
   ngOnInit() {
     this.startTimer(20);

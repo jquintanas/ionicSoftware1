@@ -47,7 +47,7 @@
               <img src="assets/img/zac.png">
             </ion-avatar>
             <ion-row>
-              <ion-card-header>Pedro Riascos</ion-card-header>
+              <ion-card-header>{{deliveryName}}</ion-card-header>
             </ion-row>
             <ion-row>
               <ion-card-subtitle>REPARTIDOR</ion-card-subtitle>
@@ -57,7 +57,7 @@
           <ion-card-content>
             <ion-row>
               <ion-col>
-                <ion-label>+593 123 456 678</ion-label><br>
+                <ion-label>{{deliveryNumber}}</ion-label><br>
               </ion-col>
             </ion-row>
           </ion-card-content>
@@ -69,14 +69,14 @@
           <ion-avatar item-start>
             <img src="assets/icon/checkverde.png">
           </ion-avatar>
-          <ion-card-header>PEDIDO #1234</ion-card-header>
-          <ion-card-subtitle slot="end">Total $5.50</ion-card-subtitle>
+          <ion-card-header>PEDIDO #{{idPedido}}</ion-card-header>
+          <ion-card-subtitle slot="end">Total ${{valorTotal}}</ion-card-subtitle>
         </ion-item>
 
         <ion-card-content>
           <ion-row>
             <ion-col>
-              <ion-label>ENVIO A DOMICILIO</ion-label><br>
+              <ion-label>{{metodoEnvio}}</ion-label><br>
             </ion-col>
             <ion-col>
               <button class="boton" (click)="cancelAlert()" ion-button icon-start clear small>
@@ -85,9 +85,9 @@
             </ion-col>
           </ion-row>
 
-          <ion-label>2 MOJADA DE CHOCOLATE</ion-label><br>
-          <ion-label>2 MOJADA DE CHOCOLATE</ion-label><br>
-          <ion-label>3 MOJADA DE CHOCOLATE</ion-label>
+          <ion-label>{{amount}} {{productName}}</ion-label><br>
+          <ion-label>{{amount}} {{productName}}</ion-label><br>
+          <ion-label>{{amount}} {{productName}}</ion-label>
 
         </ion-card-content>
       </ion-card>
@@ -101,15 +101,15 @@
           <ion-avatar item-start>
             <img src="assets/icon/check.png">
           </ion-avatar>
-          <ion-card-header>PEDIDO</ion-card-header>
-          <ion-card-subtitle>Mayo 5, 2020</ion-card-subtitle>
+          <ion-card-header>PEDIDO {{idPedido}}</ion-card-header>
+          <ion-card-subtitle>{{fechaPedido}}</ion-card-subtitle>
 
         </ion-item>
 
         <ion-card-content>
           <ion-row>
             <ion-col>
-              <ion-label>ENVIO A DOMICILIO</ion-label><br>
+              <ion-label>{{metodoEnvio}}</ion-label><br>
             </ion-col>
             <ion-col>
               <button class="boton" ion-button icon-start clear small (click)="goCarrito()">
@@ -119,9 +119,9 @@
           </ion-row>
 
 
-          <ion-label>2 MOJADA DE CHOCOLATE</ion-label><br>
-          <ion-label>2 MOJADA DE CHOCOLATE</ion-label><br>
-          <ion-label>3 MOJADA DE CHOCOLATE</ion-label>
+          <ion-label>{{amount}} {{productName}}</ion-label><br>
+          <ion-label>{{amount}} {{productName}}</ion-label><br>
+          <ion-label>{{amount}} {{productName}}</ion-label>
           
         </ion-card-content>
       </ion-card>

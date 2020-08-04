@@ -8,6 +8,9 @@ import { Storage } from '@ionic/storage';
   styleUrls: ['./novedad.page.scss'],
 })
 export class NovedadPage implements OnInit {
+  private idNovedad: string = "123";
+  private reportUser: string = "Pedro Riascos";
+  private description: string = "El pedido se demoro mas del tiempo estimado";
 
   constructor(
     private storage: Storage

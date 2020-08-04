@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="omipalidarkd" class="toolbar">
+  <ion-toolbar color="omipalidarkd" class="toolbar" class="ion-text-center">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -11,14 +11,18 @@
 
 <ion-content>
     <ion-card>
-        <ion-card-header>
-          <ion-card-title>
-            NOVEDAD #123
-          </ion-card-title>
-        </ion-card-header>
+        <ion-item>
+        <ion-avatar item-start>
+            <ion-icon name="bookmark-outline" class="novedadIcon"></ion-icon>
+        </ion-avatar>
+        <ion-card-header class="novedadHeader">NOVEDAD #{{idNovedad}}<br></ion-card-header>
+      </ion-item>
+       
         <ion-card-content>
-            <ion-textarea clearOnEdit="true">kmcwlkdcmel</ion-textarea>
-          Tenemos tres métodos de pago: efectivo, transferencia y depósito bancario. 
+          USUARIO REPORTADO: <br>
+          {{reportUser}}<br>
+          DESCRIPCIÓN: <br>
+          {{description}}<br>
         </ion-card-content>
       </ion-card>
 </ion-content>
