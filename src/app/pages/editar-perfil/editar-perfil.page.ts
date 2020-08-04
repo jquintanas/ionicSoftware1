@@ -15,11 +15,11 @@ import { AlertsService } from 'src/app/core/services/alerts/alerts.service';
 export class EditarPerfilPage implements OnInit {
   userDataForm: FormGroup;
   id: string;
-  userName: string = "JOSE";
-  phoneNumber: string = "0918812751";
-  emailUser: string = "mimail@prueba.com";
-  addressUser: string = "mi direccion  de prueba";
-  reference: string = "referencia lugar";
+  userName: string = "";
+  phoneNumber: string = "";
+  emailUser: string = "";
+  addressUser: string = "";
+  reference: string = "r";
 
   constructor(
     private formBuilder: FormBuilder,

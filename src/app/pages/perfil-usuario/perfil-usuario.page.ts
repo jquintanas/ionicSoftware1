@@ -7,6 +7,7 @@ import { IonContent } from "@ionic/angular";
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { AlertsService } from 'src/app/core/services/alerts/alerts.service';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: "app-perfil-usuario",
@@ -18,10 +19,12 @@ export class PerfilUsuarioPage implements OnInit {
 
   @ViewChild(IonContent, { static: true }) content: IonContent;
   dataBebidas: any[];
+  userName: string = "";
 
   constructor(
     private router: Router,
     private favoritos: FavoritosService,
+    private storage: Storage,
     private loadingController: LoadingController,
     private authService: AuthService,
     public alertService: AlertsService,
@@ -41,6 +44,9 @@ export class PerfilUsuarioPage implements OnInit {
 
   async ngOnInit() {
     await this.cargarDatos();
+    this.storage.get('user').then((data) => {
+      this.userName = data;
+    });
   }
 
   ionViewWillEnter() {

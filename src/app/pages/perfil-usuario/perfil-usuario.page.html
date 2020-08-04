@@ -1,10 +1,10 @@
 <ion-header>
-  <ion-toolbar color="omipalidarkd" class="toolbar">
+  <ion-toolbar color="omipalidarkd" class="toolbar" class="ion-text-center">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>
-      Omi Pali
+      Omi & Pali
     </ion-title>
     <ion-buttons slot="end">
       <ion-icon (click)="logout()" name="log-out"></ion-icon>
@@ -23,9 +23,7 @@
       </ion-button>
     </ion-fab>
   </div>
-  <label class="bg-text-name">
-    Karla Burgos Gayrey
-  </label>
+  <ion-label class="bg-text-name">{{userName}}</ion-label>
 </ion-header>
 
 <ion-content class="contenedor" padding hidenav-content="page1">
