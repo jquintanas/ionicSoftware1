@@ -9,11 +9,11 @@ import {
 } from "@angular/core";
 import { Router } from "@angular/router";
 import {
-  FormBuilder,
   FormGroup,
   Validators,
   ValidatorFn,
   AbstractControl,
+  FormControl,
 } from "@angular/forms";
 import { MapaMapboxPage } from "./../mapa-mapbox/mapa-mapbox.page";
 import { AlertsService } from "src/app/core/services/alerts/alerts.service";
@@ -45,7 +45,6 @@ export class RegistroPage implements OnInit {
   private datosUsuario: UsuarioInterface;
   constructor(
     public alertsService: AlertsService,
-    private formBuilder: FormBuilder,
     private router: Router,
     public modalController: ModalController,
     public mapaDatosService: MapaDatosService,
@@ -56,8 +55,6 @@ export class RegistroPage implements OnInit {
     private loadingController: LoadingController,
     private seguridad: SeguridadService
   ) {
-    this.buildForm();
-    this.buildForm2();
     this.goToForm = 1;
     this.mapaDatosService.NuevaUbicacion = true;
     this.platform.backButton.subscribeWithPriority(5, () => {
@@ -65,110 +62,128 @@ export class RegistroPage implements OnInit {
     });
     this.platform.backButton.subscribeWithPriority(10, (processNextHandler) => {
       console.log("Handler was called!");
-
       processNextHandler();
     });
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.buildForm();
+    this.buildForm2();
+  }
 
   buildForm() {
-    this.form = this.formBuilder.group({
-      idField: [
-        "",
-        [
-          Validators.required,
-          Validators.minLength(10)
-        ],
-      ],
-      namesField: ["", [Validators.required, Validators.minLength(4)]],
-      lastNamesField: ["", [Validators.required, Validators.minLength(4)]],
-      phoneField: [
-        "",
-        [
-          Validators.required,
-          Validators.minLength(10),
-          Validators.pattern(environment.phonePatter),
-        ],
-      ],
-      emailField: [
-        "",
-        [Validators.required, Validators.pattern(environment.emailPatter)],
-      ],
-      passwordField: ["", [Validators.required, Validators.minLength(8)]],
-      passwordCopyField: [
-        "",
-        [Validators.required, this.passwordValid("passwordField")],
-      ],
-    });
+    this.form = new FormGroup(
+      {
+        idField: new FormControl("", [Validators.required, Validators.pattern("[0-9]{10}")]),
+        namesField: new FormControl("", [Validators.required, Validators.minLength(4)]),
+        lastNamesField: new FormControl("", [Validators.required, Validators.minLength(4)]),
+        phoneField: new FormControl("", [Validators.required, Validators.pattern(environment.phonePatter)]),
+        emailField: new FormControl("", [Validators.required, Validators.pattern(environment.emailPatter)]),
+        passwordField: new FormControl("", [Validators.required, Validators.minLength(8)]),
+        passwordCopyField: new FormControl("", [Validators.required, this.passwordValid("passwordField")])
+      }
+    );
   }
 
   buildForm2() {
-    this.form2 = this.formBuilder.group({
-      addressField: ["", [Validators.required, Validators.minLength(15)]],
-      referencesField: ["", [Validators.required, Validators.minLength(15)]],
-    });
+    this.form2 = new FormGroup(
+      {
+        addressField: new FormControl("", [Validators.required, Validators.minLength(15)]),
+        referencesField: new FormControl("", [Validators.required, Validators.minLength(15)])
+      }
+    );
   }
 
   public getError(controlName: string, form: string): string {
-    let field: string;
     if (form == "1") {
-      // console.log(this.form.controls);
-      const control = this.form.get(controlName);
-      if ((control.touched || control.dirty) && control.errors != null) {
-        if (control.errors.required != null) {
-          field = controlName;
-          if (controlName == "idField") {
-            field = "Cédula";
-          } else if (controlName == "namesField") {
-            field = "Nombres";
-            // console.log(control.errors.minlenght != null,control.errors.maxLength != null, control.errors);
-          } else if (controlName == "lastNamesField") {
-            field = "Apellidos";
-          } else if (controlName == "phoneField") {
-            field = "Teléfono";
-          } else if (controlName == "emailField") {
-            field = "Correo Electrónico";
-          } else if (controlName == "passwordField") {
-            field = "Contraseña";
-          } else if (controlName == "passwordCopyField") {
-            field = "Confirmar Contraseña";
-          }
-          return "El campo " + field + " es requerido.";
-        }
-        if (control.errors.pattern != null) {
-          if (controlName == "phoneField") {
-            field = "Teléfono";
-          } else if (controlName == "emailField") {
-            field = "Correo Electrónico";
-          }
-          return "Ingrese un " + field + " válido";
-        }
-        if (control.errors.passwordValid != null) {
-          if (controlName == "passwordCopyField") {
-            return "La contraseña no coincide";
-          }
-        }
-        /*if(controlName == "idField" && control.errors.minLength != null){
-          console.log("entre aqui min length");
-        }*/
+      const resp = this.erroresForm1(controlName);
+      if (resp) {
+        return resp;
       }
     } else if (form == "2") {
-      const control = this.form2.get(controlName);
-      if ((control.touched || control.dirty) && control.errors != null) {
-        if (control.errors.required != null) {
-          if (controlName == "addressField") {
-            field = "Domicilio";
-          } else if (controlName == "referencesField") {
-            field = "Referencias";
-          }
-          return "El campo " + field + " es requerido.";
-        }
+      const resp = this.erroresForm2(controlName);
+      if (resp) {
+        return resp;
       }
     }
     return "";
   }
 
+  private erroresForm1(controlName: string) {
+    const control = this.form.get(controlName);
+    let field: string;
+    if ((control.touched || control.dirty) && control.errors != null) {
+      if (control.errors.required != null) {
+        switch (controlName) {
+          case "idField":
+            field = "Cédula";
+            break;
+          case "namesField":
+            field = "Nombres";
+            break;
+          case "lastNamesField":
+            field = "Apellidos";
+            break;
+          case "phoneField":
+            field = "Teléfono";
+            break;
+          case "emailField":
+            field = "Correo Electrónico";
+            break;
+          case "passwordField":
+            field = "Contraseña";
+            break;
+          case "passwordCopyField":
+            field = "Confirmar Contraseña";
+            break;
+          default:
+            field = controlName;
+            break;
+        }
+        return "El campo " + field + " es requerido.";
+      }
+      if (control.errors.pattern != null) {
+        switch (controlName) {
+          case "phoneField":
+            field = "Teléfono";
+            break;
+          case "emailField":
+            field = "Correo Electrónico";
+            break;
+          case "idField":
+            field = "Cédula";
+            break;
+        }
+        return "Ingrese un " + field + " válido";
+      }
+      if (control.errors.passwordValid != null) {
+        if (controlName == "passwordCopyField") {
+          return "La contraseña no coincide";
+        }
+      }
+      if (control.errors.minLength != null) {
+        return "Se requieren " + control.errors.minLength.requiredLength + " caracteres";
+      }
+    }
+  }
+
+  private erroresForm2(controlName: string) {
+    let field: string;
+    const control = this.form2.get(controlName);
+    if ((control.touched || control.dirty) && control.errors != null) {
+      if (control.errors.required != null) {
+        if (controlName == "addressField") {
+          field = "Domicilio";
+        } else if (controlName == "referencesField") {
+          field = "Referencias";
+        }
+        return "El campo " + field + " es requerido.";
+      }
+      if (control.errors.minLength != null) {
+        return "Se requieren " + control.errors.minLength.requiredLength + " caracteres";
+      }
+    }
+  }
 
   save() {
     const clave = this.seguridad.generarHashClave(
@@ -197,6 +212,7 @@ export class RegistroPage implements OnInit {
       }
     };
   }
+
   salirRegistro() {
     this.router.navigateByUrl("login");
   }
@@ -220,18 +236,19 @@ export class RegistroPage implements OnInit {
         console.log(data);
         if (data.log == "Ingresado") {
           const numero = this.datosUsuario.telefono.substring(1, 9);
-          await this.registroService
-            .registrarTelefonoFireBase("+593" + numero)
-            // tslint:disable-next-line: no-shadowed-variable
-            .then((data: any) => {
+          const datos = {
+            email: this.form.get("emailField").value,
+            pass: this.form.get("passwordField").value
+          };
+          await this.registroService.registrar(datos).then(
+            (dt: any) => {
               console.log(data);
-              alert(data);
-            })
-            .catch((err: any) => {
-              console.log(err);
-            });
+            }
+          ).catch(
+            err => { console.log(err); }
+          );
           loading.dismiss();
-          this.router.navigateByUrl("login");
+          //this.router.navigateByUrl("login");
         }
       })
       .catch((err: any) => {
@@ -252,7 +269,6 @@ export class RegistroPage implements OnInit {
     }
     this.goToForm = 1;
   }
-
 
   async openModal() {
     this.imagen = false;
