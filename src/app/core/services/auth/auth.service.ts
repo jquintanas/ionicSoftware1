@@ -53,7 +53,7 @@ export class AuthService {
         console.log("Datos invalidos");
         this.alertsService.alert("ERROR", "Correo electrónico y/o contraseña incorrectos");
       }
-    });
+    }, (err => console.log("Error logging", err)));
   }
 
   refreshToken() {
