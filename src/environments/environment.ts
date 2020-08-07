@@ -20,7 +20,7 @@ export const environment = {
   imgsecondpart: "),pin-s-cafe+e00000(-79.5419038,-1.8017518)/",
   rutas: {
     urlLogin: 'https://omipalisf2.herokuapp.com/api/login/usuario',
-    urlNovelty: 'https://omipalisf2.herokuapp.com/api/noveltys',
+    urlNovelty: 'https://omipalisf2.herokuapp.com/api/noveltys/1',
     urlHistorial: 'https://omipalisf2.herokuapp.com/api/orders',
     urlGetUser: 'https://omipalisf2.herokuapp.com/api/usersS/',
     urlToken :  "https://omipalisf2.herokuapp.com/api/login/token",

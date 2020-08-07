@@ -116,11 +116,16 @@ export class AuthService {
 
   logout() {
     // tslint:disable-next-line: only-arrow-functions
-    firebase.auth().signOut().then(function() {
-    // tslint:disable-next-line: only-arrow-functions
-    }).catch(function(error) {
-      console.log(error);
-    });
+    this.AFauth.signOut().then(
+      data => {console.log(data); }
+    ).catch(
+      err => {console.log(err); }
+    );
+    // firebase.auth().signOut().then(function() {
+    // // tslint:disable-next-line: only-arrow-functions
+    // }).catch(function(error) {
+    //   console.log(error);
+    // });
     this.doLogoutUser();
     this.router.navigateByUrl("login");
   }

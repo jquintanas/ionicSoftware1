@@ -3,6 +3,7 @@ import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError, filter, take, switchMap } from 'rxjs/operators';
+import { Storage } from '@ionic/storage';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
@@ -11,10 +12,15 @@ export class TokenInterceptor implements HttpInterceptor {
     private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
     token: string;
 
-    constructor(public authService: AuthService) { }
+    constructor(
+        public authService: AuthService,
+        private storage: Storage) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const token: any = this.authService.getToken();
+        if (this.authService.getToken()) {
+            request = this.addToken(request, this.getToken());
+        }
+
         return next.handle(request).pipe(catchError(error => {
             if (error instanceof HttpErrorResponse && error.status === 401) {
                 return this.handle401Error(request, next);
@@ -24,12 +30,12 @@ export class TokenInterceptor implements HttpInterceptor {
         }));
     }
 
-    /*async stringToken(): any {
-        let getToken = await this.authService.getToken();
-        return getToken;
-        /*this.token = await this.authService.getJWTToken();
+    getToken() {
+        this.storage.get('token').then((data) => {
+            this.token = data;
+        });
         return this.token;
-    }*/
+    }
 
     private addToken(request: HttpRequest<any>, token: string) {
         return request.clone({
