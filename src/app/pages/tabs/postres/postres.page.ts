@@ -64,7 +64,7 @@ export class PostresPage implements OnInit, OnDestroy {
 
   private async observadorProductos() {
     const loading = await this.loadinController.create({ message: "Cargando..." });
-    await loading.dismiss();
+    await loading.present();
     this.subCategorias = this.productosServices.onservarCategorias().subscribe(
       data => {
         if (data) {

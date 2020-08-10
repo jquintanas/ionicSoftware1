@@ -2,10 +2,12 @@ import { Injectable } from '@angular/core';
 import { DetalleProducto } from "src/app/core/interface/productoDetalle";
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ProductoCarrito } from "src/app/core/interface/productoCarrito";
+import { IPedido } from "src/app/core/interface/modelNOSQL/pedido.interface";
 @Injectable({
   providedIn: 'root'
 })
 export class CarritoService {
+  datosPedido: IPedido;
   private productoDetalle: DetalleProducto;
   private mapaProductos: Map<any, any>;
   private cantidad: number = 0;

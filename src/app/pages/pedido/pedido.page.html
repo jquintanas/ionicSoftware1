@@ -31,7 +31,7 @@
           <ion-label>Nombres</ion-label>
         </ion-col>
         <ion-col size="6">
-          <ion-label>Danny Rios</ion-label>
+          <ion-label>{{authService.dataUser.nombre}} {{authService.dataUser.apellido}}</ion-label>
         </ion-col>
       </ion-row>
       <ion-row class="rowvaloresuser">
@@ -39,7 +39,7 @@
           <ion-label>Cédula</ion-label>
         </ion-col>
         <ion-col size="6">
-          <ion-label>0955744347</ion-label>
+          <ion-label>{{authService.dataUser.cedula}}</ion-label>
         </ion-col>
       </ion-row>
       <ion-row class="rowvaloresuser">
@@ -47,7 +47,7 @@
           <ion-label>Teléfono</ion-label>
         </ion-col>
         <ion-col size="6">
-          <ion-label>0968918012</ion-label>
+          <ion-label>{{authService.dataUser.telefono}}</ion-label>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -78,7 +78,7 @@
             <ion-label>Elija la dirección</ion-label>
             <ion-select interface="popover" class="item_seleccion" #mySelect2
               (ionChange)="onOptionsSelected2(mySelect2.value)">
-              <ion-select-option value="Registrada">Alborada6ta etapa</ion-select-option>
+              <ion-select-option value="Registrada">{{authService.dataUser.direccion}}</ion-select-option>
               <ion-select-option value="Nueva">Nueva dirección</ion-select-option>
             </ion-select>
           </ion-item>
@@ -162,7 +162,7 @@
         </ion-col>
         <ion-col size="4">
           <ion-item class="ion-no-border reloj" lines="none">
-            <ion-datetime display-format="h:mm A" picker-format="h:mm A" value="1990-02-19T07:43Z"></ion-datetime>
+            <ion-datetime display-format="h:mm A" picker-format="h:mm A" value="{{horaRetiro}}" (ionChange)="cambioDeHora($event);"></ion-datetime>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -187,28 +187,19 @@
           <ion-label>Precio</ion-label>
         </ion-col>
       </ion-row>
-      <ion-row class="rowdatoscarrito">
-        <ion-col size="6">
-          <ion-label>Chickcake</ion-label>
-        </ion-col>
-        <ion-col size="3">
-          <ion-badge class="badge">5</ion-badge>
-        </ion-col>
-        <ion-col size="3">
-          <ion-label>$10.00</ion-label>
-        </ion-col>
-      </ion-row>
-      <ion-row class="rowdatoscarrito">
-        <ion-col size="6">
-          <ion-label>Brwoniede chocolate</ion-label>
-        </ion-col>
-        <ion-col size="3">
-          <ion-badge class="badge">3</ion-badge>
-        </ion-col>
-        <ion-col size="3">
-          <ion-label>$5.50</ion-label>
-        </ion-col>
-      </ion-row>
+      <div *ngFor="let clave of productos | keyvalue">
+        <ion-row class="rowdatoscarrito" *ngFor="let producto of clave.value | keyvalue">
+          <ion-col size="6">
+            <ion-label>{{producto.value.producto.Titulo}}</ion-label>
+          </ion-col>
+          <ion-col size="3">
+            <ion-badge class="badge">{{producto.value.cantidad}}</ion-badge>
+          </ion-col>
+          <ion-col size="3">
+            <ion-label>${{producto.value.producto.Precio | number: ".2"}}</ion-label>
+          </ion-col>
+        </ion-row>
+      </div>
     </ion-grid>
   </div>
 
@@ -247,7 +238,7 @@
           <ion-label>Subtotal</ion-label>
         </ion-col>
         <ion-col size="3">
-          <ion-label>$15.50</ion-label>
+          <ion-label>${{total | number: ".2"}}</ion-label>
         </ion-col>
       </ion-row>
       <ion-row *ngIf="envio" class="rowdatosresumen">
@@ -267,7 +258,7 @@
           <ion-label>Total</ion-label>
         </ion-col>
         <ion-col size="3">
-          <ion-label>$17.00</ion-label>
+          <ion-label>${{total + costoEnvio | number: ".2"}}</ion-label>
         </ion-col>
       </ion-row>
     </ion-grid>

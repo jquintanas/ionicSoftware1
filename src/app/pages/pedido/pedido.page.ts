@@ -6,7 +6,9 @@ import { Component, OnInit } from "@angular/core";
 import { MapaMapboxPage } from "./../mapa-mapbox/mapa-mapbox.page";
 import { NgModel } from "@angular/forms";
 import { AlertsService } from 'src/app/core/services/alerts/alerts.service';
-
+import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { CarritoService } from 'src/app/core/services/cart/carrito.service';
+import { IPedido } from "src/app/core/interface/modelNOSQL/pedido.interface";
 @Component({
   selector: "app-pedido",
   templateUrl: "./pedido.page.html",
@@ -32,16 +34,39 @@ export class PedidoPage implements OnInit {
   isNewAddress: boolean;
   newAddressString: string;
   referencesString: string;
-
+  productos: Map<any, any>;
+  total: number = 0;
+  costoEnvio: number = 0;
+  private datosPedido: IPedido;
+  private listaProductos: string[];
+  private listaCantidades: number[];
+  private totalProductos: number = 0;
+  private actual = new Date();
+  horaRetiro: any = new Date().setMinutes(this.actual.getMinutes() + 30);
   constructor(
     public modalController: ModalController,
     public alertController: AlertController,
     public router: Router,
     public mapaService: MapaDatosService,
-    public alertService: AlertsService
+    public alertService: AlertsService,
+    public authService: AuthService,
+    private cartService: CarritoService
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.horaRetiro = new Date(this.horaRetiro);
+    this.listaProductos = [];
+    this.listaCantidades = [];
+    this.productos = this.cartService.getMapaProductos();
+    for (const clave of this.productos.values()) {
+      for (const value of clave.values()) {
+        this.total += value.cantidad * value.producto.Precio;
+        this.listaProductos.push(value.producto.id);
+        this.listaCantidades.push(value.cantidad);
+        this.totalProductos += value.cantidad;
+      }
+    }
+  }
 
   public onOptionsSelected(value: string) {
     if (value === "Domicilio") {
@@ -49,6 +74,7 @@ export class PedidoPage implements OnInit {
       this.local = false;
       this.horapedido = false;
       this.envio = true;
+      this.costoEnvio = 1.5;
     } else if (value === "Local") {
       this.local = true;
       this.domicilio = false;
@@ -57,6 +83,7 @@ export class PedidoPage implements OnInit {
       this.mapa = false;
       this.nuevaDireccionEnvio = false;
       this.mapaService.NuevaUbicacion = false;
+      this.costoEnvio = 0;
     }
   }
   public onOptionsSelected2(value: string) {
@@ -181,7 +208,32 @@ export class PedidoPage implements OnInit {
 
   }
 
+  cambioDeHora(event: any) {
+    this.horaRetiro = new Date(event.detail.value);
+  }
   async detectPayment() {
+    this.datosPedido = {
+      cantidades: this.listaCantidades,
+      productos: this.listaProductos,
+      idUsuario: this.authService.dataUser.cedula,
+      totalProductos: this.totalProductos,
+      isDomicilio: this.domicilio,
+      isEfectivo: this.efectivo,
+      total: this.total + this.costoEnvio,
+    };
+    !this.nuevaUbicacion ? this.datosPedido.direccionDefault = "S" : this.datosPedido.direccionDefault = "N";
+    if (this.nuevaUbicacion) {
+      const direc = {
+        direccion: this.newAddressString,
+        referencia: this.referencesString,
+        ubicacion: this.latlng
+      };
+      this.datosPedido.direccionEntrega = JSON.stringify(direc);
+    }
+    if (this.local) {
+      this.datosPedido.horaDeRetiro = this.horaRetiro;
+    }
+    this.cartService.datosPedido = this.datosPedido;
     if (this.depotran) {
       const alert = await this.alertController.create({
         header: "Cuentas Bancarias",

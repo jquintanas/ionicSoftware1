@@ -19,7 +19,7 @@ export class RegistroService {
   public guardarPerfil(datos: UsuarioInterface) {
     const hash = this.seguridad.hashJSON(datos);
     datos.hash = hash;
-    const url = environment.urlBaseApi + environment.urlPerfil;
+    const url = environment.rutas.urlGetUser;
     return this.http.post(url, datos);
   }
 

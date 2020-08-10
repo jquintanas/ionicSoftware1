@@ -20,6 +20,7 @@ export class CarritoComprasPage implements OnInit {
   ngOnInit() {
 
     this.carrito.observarCarrito().subscribe((data: any) => {
+      console.log(data);
       if (data) {
         this.total = 0;
         this.productos = data;
