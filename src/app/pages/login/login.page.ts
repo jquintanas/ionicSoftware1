@@ -6,7 +6,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { environment } from "src/environments/environment";
 import { AuthService } from 'src/app/core/services/auth/auth.service';
-import { Control } from 'mapbox-gl';
+import { UserInfoService } from 'src/app/core/services/userInfo/user-info.service';
 
 @Component({
   selector: "app-login",
@@ -30,7 +30,8 @@ export class LoginPage implements OnInit {
     public alertsService: AlertsService,
     private authService: AuthService,
     private loadingController: LoadingController,
-    private navController: NavController
+    private navController: NavController,
+    private userInfo: UserInfoService
   ) {
     this.buildForm();
   }
@@ -79,6 +80,11 @@ export class LoginPage implements OnInit {
                 token: dt.token
               };
               this.authService.isAuth = true;
+              this.userInfo.email = dt.data.email;
+              this.userInfo.cedula = dt.data.cedula;
+              this.userInfo.usuario = dt.data.nombre + ' ' + dt.data.apellido;
+              this.userInfo.telefono = dt.data.telefono;
+              this.userInfo.direccion = dt.data.direccion;
               loading.dismiss();
               this.navController.navigateRoot("home");
             }

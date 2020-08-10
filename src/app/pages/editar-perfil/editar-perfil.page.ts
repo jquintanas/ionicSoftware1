@@ -6,6 +6,7 @@ import { environment } from "src/environments/environment";
 import { Storage } from '@ionic/storage';
 import { HttpClient } from '@angular/common/http';
 import { AlertsService } from 'src/app/core/services/alerts/alerts.service';
+import { UserInfoService } from 'src/app/core/services/userInfo/user-info.service';
 
 @Component({
   selector: "app-editar-perfil",
@@ -27,8 +28,8 @@ export class EditarPerfilPage implements OnInit {
     private storage: Storage,
     public renderer: Renderer2,
     public el: ElementRef,
-    private httpClient: HttpClient,
     private alertService: AlertsService,
+    private userinfo: UserInfoService
   ) {
     this.buildForm();
   }
@@ -105,36 +106,18 @@ export class EditarPerfilPage implements OnInit {
   }
 
   setInfo() {
-    this.storage.get('user').then((data) => {
-      this.userName = data;
-    });
-    this.storage.get('phone').then((data) => {
-      this.phoneNumber = data;
-    });
-    this.storage.get('email').then((data) => {
-      this.emailUser = data;
-    });
-    this.storage.get('address').then((data) => {
-      this.addressUser = data;
-    });
+      this.userName = this.userinfo.usuario;
+      this.phoneNumber = this.userinfo.telefono;
+      this.emailUser = this.userinfo.email;
+      this.addressUser = this.userinfo.direccion;
   }
 
-
-getName() {
-  this.storage.get("user");
-}
-/*
-getUserInfo() {
-  let cedula = this.storage.get("id");
-  this.id = String(cedula);
-  this.httpClient.get(environment.urlGetUser.id);
-}*/
-
   guardarCambios() {
-    this.storage.set("user", this.userName);
-    this.storage.set("phone", this.phoneNumber);
-    this.storage.set("email", this.emailUser);
-    this.storage.set("address", this.addressUser);
+    this.userinfo.usuario = this.userName;
+    this.userinfo.telefono = this.phoneNumber;
+    this.userinfo.email = this.emailUser;
+    this.userinfo.direccion = this.addressUser;
+    // Falta subir cambios al api
     this.alertService.alert("ACTUALIZACION", "Datos actualizados correctamente");
   }
 }

@@ -19,6 +19,8 @@ import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ng
 import { Facebook } from '@ionic-native/facebook/ngx';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { TokenInterceptorService } from "src/app/core/services/interceptor/token-interceptor.service";
+import { UserInfoService } from 'src/app/core/services/userInfo/user-info.service';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -40,6 +42,7 @@ import { TokenInterceptorService } from "src/app/core/services/interceptor/token
     StatusBar,
     Facebook,
     SplashScreen,
+    UserInfoService,
     {
       provide: RouteReuseStrategy,
       useClass: IonicRouteStrategy,

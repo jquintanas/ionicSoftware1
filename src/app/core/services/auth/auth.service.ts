@@ -8,9 +8,10 @@ import { Storage } from '@ionic/storage';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Token } from 'src/app/core/interface/token';
-import { tap } from 'rxjs/operators';
 import { LoadingController } from '@ionic/angular';
 import { IDataUser } from "src/app/core/interface/dataUser.interface";
+import { UserInfoService } from 'src/app/core/services/userInfo/user-info.service';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -30,7 +31,8 @@ export class AuthService {
     private httpClient: HttpClient,
     private router: Router,
     private storage: Storage,
-    public loadingController: LoadingController
+    public loadingController: LoadingController,
+    private userInfo: UserInfoService
   ) { }
 
   public loginToFirebase(email: string, password: string) {
@@ -66,22 +68,6 @@ export class AuthService {
         id: this.dataUser.cedula,
         refreshToken: this.token.refreshToken
       });
-  }
-
-  async doLoginUser(data) {
-    this.loggedUser = data.data.email;
-    const user = data.data.nombre.concat(" ", data.data.apellido);
-    const phone = data.data.telefono;
-    const address = data.data.direccion;
-    const id = data.data.cedula;
-    this.storage.set("email", this.loggedUser);
-    this.storage.set("user", user);
-    this.storage.set("phone", phone);
-    this.storage.set("address", address);
-    this.storage.set("id", id);
-    const tokens: Token = { token: data.token, refreshToken: data.refreshToken };
-    this.storeTokens(tokens);
-    this.getJWTToken();
   }
 
   async loginGoogle() {

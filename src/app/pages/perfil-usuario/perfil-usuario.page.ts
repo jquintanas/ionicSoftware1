@@ -8,6 +8,7 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { AlertsService } from 'src/app/core/services/alerts/alerts.service';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { Storage } from '@ionic/storage';
+import { UserInfoService } from 'src/app/core/services/userInfo/user-info.service';
 
 @Component({
   selector: "app-perfil-usuario",
@@ -28,6 +29,7 @@ export class PerfilUsuarioPage implements OnInit {
     private loadingController: LoadingController,
     private authService: AuthService,
     public alertService: AlertsService,
+    private userInfo: UserInfoService
   ) { }
 
   abrirHistorial() {
@@ -44,9 +46,7 @@ export class PerfilUsuarioPage implements OnInit {
 
   async ngOnInit() {
     await this.cargarDatos();
-    this.storage.get('user').then((data) => {
-      this.userName = data;
-    });
+    this.userName = this.userInfo.usuario;
   }
 
   ionViewWillEnter() {
