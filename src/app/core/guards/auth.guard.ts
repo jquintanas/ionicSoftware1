@@ -1,34 +1,27 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AngularFireAuth } from "@angular/fire/auth";
 import { map } from "rxjs/operators";
 import { isNullOrUndefined } from 'util';
-import { Router } from "@angular/router";
+import { AuthService } from '../services/auth/auth.service';
+import { NavController } from '@ionic/angular';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private AFauth: AngularFireAuth,
-              private router: Router) { }
+  constructor(
+    private authService: AuthService,
+    private navController: NavController
+  ) { }
 
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-
-    return this.AFauth.authState.pipe(map(auth => {
-
-      if (isNullOrUndefined(auth)) {
-        this.router.navigateByUrl("login");
-        return false;
-      } else {
-        return true;
-      }
-
-    }));
-
-
+  canActivate(): boolean {
+    if (this.authService.isAuth) {
+      return true;
+    }
+    this.navController.navigateRoot("/login");
+    return false;
   }
 }

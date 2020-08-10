@@ -1,11 +1,12 @@
 import { AlertsService } from "./../../core/services/alerts/alerts.service";
-import { ModalController, NavController } from "@ionic/angular";
+import { ModalController, NavController, LoadingController } from "@ionic/angular";
 import { RecuperarContrasenaPage } from "./../recuperar-contrasena/recuperar-contrasena.page";
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { environment } from "src/environments/environment";
 import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { Control } from 'mapbox-gl';
 
 @Component({
   selector: "app-login",
@@ -27,7 +28,9 @@ export class LoginPage implements OnInit {
     private router: Router,
     public modalController: ModalController,
     public alertsService: AlertsService,
-    private authService: AuthService
+    private authService: AuthService,
+    private loadingController: LoadingController,
+    private navController: NavController
   ) {
     this.buildForm();
   }
@@ -45,7 +48,7 @@ export class LoginPage implements OnInit {
           Validators.pattern(environment.emailPatter),
         ],
       ],
-      passwordField: ["", [Validators.required, Validators.min(8)]],
+      passwordField: ["", [Validators.required, Validators.minLength(8)]],
     });
   }
 
@@ -58,16 +61,42 @@ export class LoginPage implements OnInit {
     }
   }
 
-  save() {
-    if (this.loginForm.valid) {
-      const value = this.loginForm.value;
-      this.emailUser = value.phoneField;
-      this.password = value.passwordField;
-      this.authService.login(this.emailUser, this.password);
-    } else {
-      console.log("formulario inválido", this.loginForm);
-      this.onResetForm();
-    }
+  async save() {
+    const loading = await this.loadingController.create({ message: "Cargando..." });
+    await loading.present();
+    const value = this.loginForm.value;
+    this.emailUser = value.phoneField;
+    this.password = value.passwordField;
+    await this.authService.loginToFirebase(this.emailUser, this.password).then(
+      async (data: any) => {
+        this.authService.idUserFirebase = data.id;
+        if (data) {
+          await this.authService.loginToApi(this.emailUser, this.password).toPromise().then(
+            (dt: any) => {
+              this.authService.dataUser = dt.data;
+              this.authService.token = {
+                refreshToken: dt.refreshToken,
+                token: dt.token
+              };
+              this.authService.isAuth = true;
+              loading.dismiss();
+              this.navController.navigateRoot("home");
+            }
+          ).catch(
+            err => {
+              console.log(err);
+              this.authService.logout();
+              loading.dismiss();
+            }
+          );
+        }
+      }
+    ).catch(
+      err => {
+        console.log(err);
+        loading.dismiss();
+      }
+    );
   }
 
   loginGoogle() {
@@ -112,6 +141,9 @@ export class LoginPage implements OnInit {
       }
       if (controlName === "phoneField" && control.errors.pattern != null) {
         return "Ingrese un correo electrónico válido";
+      }
+      if (controlName == "passwordField" && control.errors.minlength != null) {
+        return "Clave invalida";
       }
     }
     return "";

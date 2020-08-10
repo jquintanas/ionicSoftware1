@@ -3,6 +3,7 @@ import { AlertController, IonSegment } from '@ionic/angular';
 import { DetalleHistorial } from "src/app/core/interface/historial-pedido";
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { HistorialService } from 'src/app/core/services/user/historial.service';
 
 @Component({
   selector: 'app-historial',
@@ -24,8 +25,9 @@ export class HistorialPage implements OnInit {
   private fechaPedido: string = "Mayo 5, 2020";
 
   constructor(
+    private historialService: HistorialService,
     private alertController: AlertController,
-    private router: Router) {}
+    private router: Router) { }
 
   ngOnInit() {
     this.startTimer(20);
@@ -113,5 +115,20 @@ export class HistorialPage implements OnInit {
     this.time.next(text);
 
     --this.timer;
+  }
+
+  cambioSegment(event: any) {
+    console.log(event.detail.value);
+    if (event.detail.value == "past") {
+      this.historialService.obtenerHistorial().toPromise().then(
+        data => {
+          console.log(data);
+        }
+      ).catch(
+        err => {
+          console.log(err);
+        }
+      );
+    }
   }
 }

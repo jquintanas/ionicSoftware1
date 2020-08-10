@@ -5,6 +5,8 @@ import { AngularFireAuth } from "@angular/fire/auth";
 import { map } from "rxjs/operators";
 import { isNullOrUndefined } from 'util';
 import { Router } from "@angular/router";
+import { AuthService } from '../services/auth/auth.service';
+import { NavController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -14,22 +16,16 @@ import { Router } from "@angular/router";
 export class NologinGuard implements CanActivate {
 
   constructor(
-    private AFauth: AngularFireAuth,
-    private router: Router) { }
+    private authService: AuthService,
+    private navController: NavController) { }
 
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-
-    return this.AFauth.authState.pipe(map(auth => {
-
-      if (isNullOrUndefined(auth)) {
-        return true;
-      } else {
-        this.router.navigateByUrl("login");
-        return false;
-      }
-    }));
+  canActivate(): boolean {
+    if (this.authService.isAuth) {
+      this.navController.navigateRoot("/home");
+      return false;
+    }
+    return true;
   }
-
 }
+
+

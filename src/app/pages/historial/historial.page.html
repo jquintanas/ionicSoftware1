@@ -6,7 +6,7 @@
     <ion-title>Historial de Pedidos</ion-title>
   </ion-toolbar>
   <ion-toolbar color="omipalidarkd">
-    <ion-segment [(ngModel)]="segment"> 
+    <ion-segment [(ngModel)]="segment" (ionChange)="cambioSegment($event);"> 
       <ion-segment-button value="active">
         <ion-label>ACTIVO</ion-label>
       </ion-segment-button>

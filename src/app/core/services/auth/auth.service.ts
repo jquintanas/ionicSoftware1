@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 import { Token } from 'src/app/core/interface/token';
 import { tap } from 'rxjs/operators';
 import { LoadingController } from '@ionic/angular';
-
+import { IDataUser } from "src/app/core/interface/dataUser.interface";
 @Injectable({
   providedIn: 'root'
 })
@@ -19,8 +19,10 @@ export class AuthService {
   private readonly JWT_TOKEN = 'JWT_TOKEN';
   private readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
   private loggedUser: string;
-  token: string;
-
+  token: Token;
+  isAuth: boolean = false;
+  dataUser: IDataUser;
+  idUserFirebase: string;
   constructor(
     private AFauth: AngularFireAuth,
     public alertsService: AlertsService,
@@ -31,43 +33,39 @@ export class AuthService {
     public loadingController: LoadingController
   ) { }
 
-   async login(email, password) {
-    const loading = await this.loadingController.create({ message: "Bienvenido a Omi & Pali" });
-    await loading.present();
-    // tslint:disable-next-line: object-literal-key-quotes
-    const usuario = { "email": email, "clave": password };
-    this.httpClient.post(environment.rutas.urlLogin, usuario)
-    .subscribe(data => {
-      if (data != null) {
-        this.doLoginUser(data);
-        // tslint:disable-next-line: only-arrow-functions
-        this.AFauth.signInWithEmailAndPassword(email, password).catch(function(error) {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          this.alertsService.alert("ERROR", "Correo electrónico y/o contraseña incorrectos");
-          console.log(errorCode, errorMessage);
-        });
-        this.router.navigateByUrl("home");
-        loading.dismiss();
-      } else {
-        console.log("Datos invalidos");
-        this.alertsService.alert("ERROR", "Correo electrónico y/o contraseña incorrectos");
-      }
-    }, (err => console.log("Error logging", err)));
+  public loginToFirebase(email: string, password: string) {
+    return new Promise((resolve, reject) => {
+      this.AFauth.signInWithEmailAndPassword(email, password).then(
+        res => {
+          const dataAuth = {
+            email: res.user.email,
+            id: res.user.uid
+          };
+          resolve(dataAuth);
+        }
+      ).catch(err => {
+        reject(err);
+      });
+    });
+  }
+
+  public loginToApi(email: string, clave: string) {
+    const body = {
+      email, clave
+    };
+    return this.httpClient.post(environment.rutas.urlLogin, body);
   }
 
   refreshToken() {
+    console.log( {
+      id: this.dataUser.cedula,
+      refreshToken: this.token.refreshToken
+    });
     return this.httpClient.post<any>(environment.rutas.urlToken,
       {
-        // tslint:disable-next-line: object-literal-key-quotes
-        'email': this.loggedUser,
-        // tslint:disable-next-line: object-literal-key-quotes
-        'refreshToken': this.getRefreshToken()
-      })
-    .pipe(
-      tap(data => {
-      this.storeJwtToken(data.token);
-    }));
+        id: this.dataUser.cedula,
+        refreshToken: this.token.refreshToken
+      });
   }
 
   async doLoginUser(data) {
@@ -81,7 +79,7 @@ export class AuthService {
     this.storage.set("phone", phone);
     this.storage.set("address", address);
     this.storage.set("id", id);
-    const tokens: Token =  {token : data.token, refreshToken: data.refreshToken};
+    const tokens: Token = { token: data.token, refreshToken: data.refreshToken };
     this.storeTokens(tokens);
     this.getJWTToken();
   }
@@ -115,17 +113,11 @@ export class AuthService {
   }
 
   logout() {
-    // tslint:disable-next-line: only-arrow-functions
     this.AFauth.signOut().then(
-      data => {console.log(data); }
+      data => { console.log(data); }
     ).catch(
-      err => {console.log(err); }
+      err => { console.log(err); }
     );
-    // firebase.auth().signOut().then(function() {
-    // // tslint:disable-next-line: only-arrow-functions
-    // }).catch(function(error) {
-    //   console.log(error);
-    // });
     this.doLogoutUser();
     this.router.navigateByUrl("login");
   }
@@ -139,24 +131,24 @@ export class AuthService {
     return !!this.getToken();
   }
 
-   getToken() {
-    return  this.storage.get(this.JWT_TOKEN);
+  getToken() {
+    return this.storage.get(this.JWT_TOKEN);
   }
 
   async getToken2(): Promise<any> {
-    return  await this.storage.get(this.JWT_TOKEN).then(data =>{
+    return await this.storage.get(this.JWT_TOKEN).then(data => {
       return data;
     });
   }
   getJWTToken() {
     this.storage.get('JWT_TOKEN').then((result) => {
-      console.log (result);
-      console.log(typeof(result));
+      console.log(result);
+      console.log(typeof (result));
       return result;
     });
   }
 
-   getRefreshToken() {
+  getRefreshToken() {
     return this.storage.get(this.REFRESH_TOKEN);
   }
 

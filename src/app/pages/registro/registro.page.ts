@@ -161,8 +161,8 @@ export class RegistroPage implements OnInit {
           return "La contraseña no coincide";
         }
       }
-      if (control.errors.minLength != null) {
-        return "Se requieren " + control.errors.minLength.requiredLength + " caracteres";
+      if (control.errors.minlength != null) {
+        return "Se requieren " + control.errors.minlength.requiredLength + " caracteres";
       }
     }
   }
@@ -179,8 +179,8 @@ export class RegistroPage implements OnInit {
         }
         return "El campo " + field + " es requerido.";
       }
-      if (control.errors.minLength != null) {
-        return "Se requieren " + control.errors.minLength.requiredLength + " caracteres";
+      if (control.errors.minlength != null) {
+        return "Se requieren " + control.errors.minlength.requiredLength + " caracteres";
       }
     }
   }

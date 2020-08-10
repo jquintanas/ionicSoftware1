@@ -13,8 +13,8 @@ const routes: Routes = [
     path: "home",
     loadChildren: () =>
       import("./pages/home/home.module")
-      .then((m) => m.HomePageModule),
-      //canActivate: [AuthGuard],
+        .then((m) => m.HomePageModule),
+    canActivate: [AuthGuard],
   },
   {
     path: "detalles-productos",
@@ -22,6 +22,7 @@ const routes: Routes = [
       import("./pages/detalles-productos/detalles-productos.module").then(
         (m) => m.DetallesProductosPageModule
       ),
+    canActivate: [AuthGuard],
   },
   {
     path: "carrito-compras",
@@ -29,19 +30,21 @@ const routes: Routes = [
       import("./pages/carrito-compras/carrito-compras.module").then(
         (m) => m.CarritoComprasPageModule
       ),
+    canActivate: [AuthGuard],
   },
   {
     path: "login",
     loadChildren: () =>
       import("./pages/login/login.module").then((m) => m.LoginPageModule),
-      //canActivate: [NologinGuard],
-    },
+    canActivate: [NologinGuard],
+  },
   {
     path: "registro",
     loadChildren: () =>
       import("./pages/registro/registro.module").then(
         (m) => m.RegistroPageModule
       ),
+    canActivate: [AuthGuard],
   },
   {
     path: "recuperar-contrasena",
@@ -56,6 +59,7 @@ const routes: Routes = [
       import("./pages/mapa-mapbox/mapa-mapbox.module").then(
         (m) => m.MapaMapboxPageModule
       ),
+    canActivate: [AuthGuard],
   },
   {
     path: "historial",
@@ -63,13 +67,14 @@ const routes: Routes = [
       import("./pages/historial/historial.module").then(
         (m) => m.HistorialPageModule
       ),
+      canActivate: [AuthGuard],
   },
   {
     path: "perfil-usuario",
     loadChildren: () =>
-      import("./pages/perfil-usuario/perfil-usuario.module") 
-      .then((m) => m.PerfilUsuarioPageModule),
-        //canActivate: [AuthGuard],
+      import("./pages/perfil-usuario/perfil-usuario.module")
+        .then((m) => m.PerfilUsuarioPageModule),
+    canActivate: [AuthGuard],
   },
   {
     path: "editar-perfil",
@@ -77,6 +82,7 @@ const routes: Routes = [
       import("./pages/editar-perfil/editar-perfil.module").then(
         (m) => m.EditarPerfilPageModule
       ),
+    canActivate: [AuthGuard],
   },
   {
     path: "cambio-contrasena",
@@ -87,19 +93,23 @@ const routes: Routes = [
   },
   {
     path: 'pedido',
-    loadChildren: () => import('./pages/pedido/pedido.module').then( m => m.PedidoPageModule)
+    loadChildren: () => import('./pages/pedido/pedido.module').then(m => m.PedidoPageModule),
+    canActivate: [AuthGuard],
   },
   {
     path: 'telefono',
-    loadChildren: () => import('./pages/telefono/telefono.module').then( m => m.TelefonoPageModule)
+    loadChildren: () => import('./pages/telefono/telefono.module').then(m => m.TelefonoPageModule),
+    canActivate: [AuthGuard],
   },
   {
     path: 'preguntas-frecuentes',
-    loadChildren: () => import('./pages/preguntas-frecuentes/preguntas-frecuentes.module').then( m => m.PreguntasFrecuentesPageModule)
+    loadChildren: () => import('./pages/preguntas-frecuentes/preguntas-frecuentes.module').then(m => m.PreguntasFrecuentesPageModule),
+    canActivate: [AuthGuard],
   },
   {
     path: 'novedad',
-    loadChildren: () => import('./pages/novedad/novedad.module').then( m => m.NovedadPageModule)
+    loadChildren: () => import('./pages/novedad/novedad.module').then(m => m.NovedadPageModule),
+    canActivate: [AuthGuard],
   },
 
 ];
@@ -110,4 +120,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
