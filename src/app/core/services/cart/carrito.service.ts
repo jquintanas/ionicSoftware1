@@ -3,6 +3,8 @@ import { DetalleProducto } from "src/app/core/interface/productoDetalle";
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ProductoCarrito } from "src/app/core/interface/productoCarrito";
 import { IPedido } from "src/app/core/interface/modelNOSQL/pedido.interface";
+import { AngularFirestore } from "@angular/fire/firestore";
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,7 +15,7 @@ export class CarritoService {
   private cantidad: number = 0;
   private cantidadSubject = new BehaviorSubject(this.cantidad);
   private mapaSubject = new BehaviorSubject(this.mapaProductos);
-  constructor() {
+  constructor(private db: AngularFirestore) {
     if (this.mapaProductos == null) {
       this.mapaProductos = new Map();
     }
@@ -82,6 +84,12 @@ export class CarritoService {
 
   getMapaProductos() {
     return this.mapaProductos;
+  }
+
+  agregarPedido(data: IPedido) {
+    const id = this.db.createId();
+    data.idPedido = id;
+    return this.db.collection(environment.nombresTablasFirebase.pedidos).doc(id).set(data);
   }
 
 }

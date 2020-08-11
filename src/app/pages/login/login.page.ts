@@ -43,9 +43,7 @@ export class LoginPage implements OnInit {
         "",
         [
           Validators.required,
-          Validators.maxLength(50),
-          Validators.minLength(10),
-          Validators.pattern(environment.emailPatter),
+          Validators.pattern(environment.emailPatter)
         ],
       ],
       passwordField: ["", [Validators.required, Validators.minLength(8)]],

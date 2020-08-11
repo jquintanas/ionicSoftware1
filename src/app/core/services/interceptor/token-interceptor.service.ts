@@ -17,7 +17,6 @@ export class TokenInterceptorService implements HttpInterceptor {
     console.log(req.url);
     const urls: string = "https://omipalisf2.herokuapp.com/api/login/token";
     if (req.url.search(urls) === -1) {
-      console.log("entre al interceptor");
       if (this.authService.token) {
         req = this.addToken(req, this.authService.token.token);
       }
@@ -41,14 +40,13 @@ export class TokenInterceptorService implements HttpInterceptor {
 
   private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
     if (!this.isRefreshing) {
-      console.log("entre al refresh")
       this.isRefreshing = true;
       this.refreshTokenSubject.next(null);
       return this.authService.refreshToken().pipe(
         switchMap((token: any) => {
-          // this.loginService.loginResponse = token;
           this.isRefreshing = false;
-          console.log(token);
+          this.authService.token.token = token.access_token;
+          this.authService.token.refreshToken = token.newRefreshToken;
           this.refreshTokenSubject.next(token.access_token);
           return next.handle(this.addToken(request, token.access_token));
         }));
