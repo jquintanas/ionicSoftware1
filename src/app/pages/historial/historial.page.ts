@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, IonSegment } from '@ionic/angular';
-import { DetalleHistorial } from "src/app/core/interface/historial-pedido";
+import { IonSegment } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { HistorialService } from 'src/app/core/services/user/historial.service';
+import { AlertsService } from 'src/app/core/services/alerts/alerts.service';
+import { RastreoService } from 'src/app/core/services/rastreo/rastreo.service';
+import { CarritoService } from 'src/app/core/services/cart/carrito.service';
 
 @Component({
   selector: 'app-historial',
@@ -18,75 +20,34 @@ export class HistorialPage implements OnInit {
   private deliveryName: string = "Pedro Riascos";
   private deliveryNumber: string = "+593 123 456 789";
   private idPedido: string = "1234";
-  private valorTotal: string = "15.50";
-  private metodoEnvio: string = "Envio a domicilio";
-  private amount: string = "2";
-  private productName: string = "Mojada de chocolate";
+  private valorTotal: number;
+  private metodoEnvio: string = "";
+  private amount: number[];
+  private productName: string[];
   private fechaPedido: string = "Mayo 5, 2020";
+  private metodoPago = "";
+  private direccionEnvio: string;
 
   constructor(
     private historialService: HistorialService,
-    private alertController: AlertController,
-    private router: Router) { }
+    private alertService: AlertsService,
+    private router: Router,
+    private rastreoService: RastreoService,
+    private carritoService: CarritoService
+    ) { }
 
   ngOnInit() {
     this.startTimer(20);
+    this.setOrderInfo();
+    this.valorTotal = this.carritoService.datosPedido.total;
+    this.direccionEnvio = this.rastreoService.direccionEnvio;
+    this.amount = this.rastreoService.cantProductos;
+    this.productName = this.rastreoService.listaProductos;
+    this.idPedido = this.carritoService.datosPedido.idPedido;
   }
 
-  async cancelAlert() {
-    const alert = await this.alertController.create({
-      cssClass: 'alertCancel',
-      header: 'Cancelar Pedido',
-      inputs: [
-        {
-          type: 'radio',
-          name: 'motivo',
-          label: 'Pedido equivocado',
-          value: 'pedidoEquivocad'
-        },
-        {
-          type: 'radio',
-          name: 'motivo',
-          label: 'Repartidor demorado',
-          value: 'repDemorado'
-        }
-      ],
-      buttons: [
-        {
-          text: 'Volver',
-          role: 'regresar',
-          handler: (blah) => { }
-        }, {
-          text: 'Enviar',
-          role: 'cancelar',
-          handler: () => {
-            this.motiveAlert();
-          }
-        }
-      ]
-    });
-    await alert.present();
-  }
-
-  async motiveAlert() {
-    const alert = await this.alertController.create({
-      header: 'Motivo',
-      inputs: [
-        {
-          name: 'name1',
-          type: 'text',
-          placeholder: 'Cuentanos que paso con tu pedido'
-        }
-      ],
-      buttons: [
-        {
-          text: 'Enviar',
-          role: 'cancelar',
-          handler: () => {
-          }
-        }]
-    });
-    await alert.present();
+  cancelAlert() {
+    this.alertService.cancelAlert();
   }
 
   goCarrito() {
@@ -102,6 +63,14 @@ export class HistorialPage implements OnInit {
 
   ionViewDidEnter() {
     this.startTimer(20);
+  }
+
+  controlProgressBar(estado: string) {
+    if (estado == "alistando") {
+      this.startTimer(15);
+    } else if (estado == "enviando") {
+      this.startTimer(10);
+    }
   }
 
   updateTimeValue() {
@@ -129,6 +98,20 @@ export class HistorialPage implements OnInit {
           console.log(err);
         }
       );
+    }
+  }
+
+  setOrderInfo() {
+    if (this.rastreoService.domicilio == true) {
+      this.metodoEnvio = "Envio a domiclio";
+     } else {
+      this.metodoEnvio = "Retiro Local";
+    }
+
+    if (this.rastreoService.efectivo == true) {
+      this.metodoPago = "Efectivo";
+    } else {
+      this.metodoPago = "Deposito/ Transferencia";
     }
   }
 }

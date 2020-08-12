@@ -7,6 +7,7 @@ import { Storage } from '@ionic/storage';
 import { HttpClient } from '@angular/common/http';
 import { AlertsService } from 'src/app/core/services/alerts/alerts.service';
 import { UserInfoService } from 'src/app/core/services/userInfo/user-info.service';
+import { UpdateInterface } from "src/app/core/interface/usuarioUpdate";
 
 @Component({
   selector: "app-editar-perfil",
@@ -21,11 +22,11 @@ export class EditarPerfilPage implements OnInit {
   emailUser: string = "";
   addressUser: string = "";
   reference: string = "r";
+  private datosUsuario: UpdateInterface;
 
   constructor(
     private formBuilder: FormBuilder,
     public modalController: ModalController,
-    private storage: Storage,
     public renderer: Renderer2,
     public el: ElementRef,
     private alertService: AlertsService,
@@ -117,7 +118,12 @@ export class EditarPerfilPage implements OnInit {
     this.userinfo.telefono = this.phoneNumber;
     this.userinfo.email = this.emailUser;
     this.userinfo.direccion = this.addressUser;
-    // Falta subir cambios al api
+    this.datosUsuario.nombre = this.userName;
+    this.datosUsuario.telefono = this.phoneNumber;
+    this.datosUsuario.email = this.emailUser;
+    this.datosUsuario.direccion = this.addressUser;
+
+    // this.userinfo.setUserInfo(this.datosUsuario);
     this.alertService.alert("ACTUALIZACION", "Datos actualizados correctamente");
   }
 }

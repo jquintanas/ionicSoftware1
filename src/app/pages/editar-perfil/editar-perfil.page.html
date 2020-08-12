@@ -29,7 +29,7 @@
       <form [formGroup]="userDataForm">
         <ion-list>
           <ion-item>
-            <ion-input type="text" [(ngModel)]="userName" placeholder="Usuario" class="inputform" formControlName="namesField"></ion-input>
+            <ion-input type="text" [(ngModel)]="userName" placeholder="Nombre" class="inputform" formControlName="namesField"></ion-input>
           </ion-item>
           <div class="container-error-message alert-danger" *ngIf="getError('namesField') != ''">
             <ion-icon slot="start" name="information-circle-sharp" color="danger"></ion-icon>
