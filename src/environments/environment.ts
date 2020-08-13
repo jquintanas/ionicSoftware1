@@ -25,7 +25,8 @@ export const environment = {
     urlGetUser: 'https://omipalisf2.herokuapp.com/api/usersS/',
     urlToken :  "https://omipalisf2.herokuapp.com/api/login/token",
     urlLogout : "https://omipalisf2.herokuapp.com/api/login/reject",
-    urlHistorialUsuario: "/user"
+    urlHistorialUsuario: "/user",
+    updateUser: 'https://omipalisf2.herokuapp.com/api/usersS/update/'
   },
   nombresCategorias: {
     dulces: "dulces",
