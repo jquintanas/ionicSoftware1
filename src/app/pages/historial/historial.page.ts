@@ -6,6 +6,7 @@ import { HistorialService } from 'src/app/core/services/user/historial.service';
 import { AlertsService } from 'src/app/core/services/alerts/alerts.service';
 import { CarritoService } from 'src/app/core/services/cart/carrito.service';
 import { ProductosService } from 'src/app/core/services/cart/productos.service';
+import { RepartidorService } from 'src/app/core/services/repartidor/repartidor.service';
 
 @Component({
   selector: 'app-historial',
@@ -23,7 +24,7 @@ export class HistorialPage implements OnInit {
   private valorTotal: number;
   private metodoEnvio: string = "";
   private amount: number[];
-  private productID: string [];
+  private productID: string[];
   private fechaPedido: string = "";
   private metodoPago = "";
   private direccionEnvio: string;
@@ -36,7 +37,8 @@ export class HistorialPage implements OnInit {
     private alertService: AlertsService,
     private router: Router,
     private carritoService: CarritoService,
-    private productoService: ProductosService
+    private productoService: ProductosService,
+    private repartidorService: RepartidorService,
   ) { }
 
   ngOnInit() {
@@ -107,11 +109,25 @@ export class HistorialPage implements OnInit {
   nombreProducto() {
     this.productID = this.carritoService.datosPedido.productos;
     for (let i = 0; i < this.productID.length; i++) {
-    const idProd = this.productID[i];
-    this.productoService.obtenerProductosPorID(idProd).subscribe(
+      const idProd = this.productID[i];
+      this.productoService.obtenerProductosPorID(idProd).subscribe(
+        dt => {
+          this.productName = dt[0].nombre;
+          console.log(this.productName);
+        },
+        async err => {
+          console.log(err);
+          await this.alertService.mostrarToastError();
+        }
+      );
+    }
+  }
+
+  setDeliveryMan() {
+    this.repartidorService.obtenerRepartidorPorIdPedido(this.idPedido).subscribe(
       dt => {
-        this.productName = dt[0].nombre;
-        console.log(this.productName);
+        this.deliveryName = dt[0].nombre + " " + dt[0].apellido;
+        this.deliveryNumber = dt[0].telefono;
       },
       async err => {
         console.log(err);
@@ -119,7 +135,6 @@ export class HistorialPage implements OnInit {
       }
     );
   }
-}
 
   setOrderInfo() {
     if (this.carritoService.datosPedido.isDomicilio == true) {

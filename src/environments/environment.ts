@@ -34,7 +34,8 @@ export const environment = {
   nombresTablasFirebase: {
     categorias: "categorias",
     productos: "producto",
-    pedidos: "pedido"
+    pedidos: "pedido",
+    repartidor: "repartidor"
   }
 };
 
