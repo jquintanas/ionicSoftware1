@@ -76,9 +76,13 @@
         <ion-card-content>
           <ion-row>
             <ion-col>
-              <ion-label>{{metodoEnvio}}</ion-label><br>
-              <ion-label>Dirección: {{direccionEnvio}}</ion-label><br>
-              <ion-label>Forma de Pago: {{metodoPago}}</ion-label><br><br>
+              <ion-label >{{metodoEnvio}} {{hora}}</ion-label><br>
+              <ion-label class="tituloPedido">Dirección:</ion-label>
+              <ion-label> {{direccionEnvio}}</ion-label><br>
+              <ion-label class="tituloPedido">Forma de Pago: </ion-label>
+              <ion-label>{{metodoPago}}</ion-label><br>
+              <ion-label class="tituloPedido">Cubiertos: </ion-label>
+              <ion-label>{{cubiertos}}</ion-label><br><br>
             </ion-col>
             <ion-col>
               <button class="boton" (click)="cancelAlert()" ion-button icon-start clear small>

@@ -3,7 +3,6 @@ import { ModalController } from "@ionic/angular";
 import { MapaMapboxPage } from "../mapa-mapbox/mapa-mapbox.page";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 import { environment } from "src/environments/environment";
-import { Storage } from '@ionic/storage';
 import { HttpClient } from '@angular/common/http';
 import { AlertsService } from 'src/app/core/services/alerts/alerts.service';
 import { UserInfoService } from 'src/app/core/services/userInfo/user-info.service';

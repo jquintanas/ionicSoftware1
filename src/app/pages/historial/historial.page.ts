@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { HistorialService } from 'src/app/core/services/user/historial.service';
 import { AlertsService } from 'src/app/core/services/alerts/alerts.service';
-import { RastreoService } from 'src/app/core/services/rastreo/rastreo.service';
 import { CarritoService } from 'src/app/core/services/cart/carrito.service';
 
 @Component({
@@ -27,12 +26,13 @@ export class HistorialPage implements OnInit {
   private fechaPedido: string = "Mayo 5, 2020";
   private metodoPago = "";
   private direccionEnvio: string;
+  private cubiertos: string;
+  private hora: Date;
 
   constructor(
     private historialService: HistorialService,
     private alertService: AlertsService,
     private router: Router,
-    private rastreoService: RastreoService,
     private carritoService: CarritoService
     ) { }
 
@@ -40,10 +40,10 @@ export class HistorialPage implements OnInit {
     this.startTimer(20);
     this.setOrderInfo();
     this.valorTotal = this.carritoService.datosPedido.total;
-    this.direccionEnvio = this.rastreoService.direccionEnvio;
-    this.amount = this.rastreoService.cantProductos;
-    this.productName = this.rastreoService.listaProductos;
+    this.amount = this.carritoService.datosPedido.cantidades;
+    this.productName = this.carritoService.datosPedido.productos;
     this.idPedido = this.carritoService.datosPedido.idPedido;
+    this.hora = this.carritoService.datosPedido.horaDeRetiro;
   }
 
   cancelAlert() {
@@ -102,16 +102,24 @@ export class HistorialPage implements OnInit {
   }
 
   setOrderInfo() {
-    if (this.rastreoService.domicilio == true) {
+    if (this.carritoService.datosPedido.isDomicilio == true) {
       this.metodoEnvio = "Envio a domiclio";
+      this.direccionEnvio = this.carritoService.datosPedido.direccionEntrega;
      } else {
       this.metodoEnvio = "Retiro Local";
+      this.direccionEnvio = "Jaime Roldós Avenue 220, Babahoyo";
     }
 
-    if (this.rastreoService.efectivo == true) {
+    if (this.carritoService.datosPedido.isEfectivo == true) {
       this.metodoPago = "Efectivo";
     } else {
       this.metodoPago = "Deposito/ Transferencia";
+    }
+
+    if (this.carritoService.datosPedido.cubiertos == true) {
+      this.cubiertos = "Si";
+    } else {
+      this.cubiertos = "No";
     }
   }
 }

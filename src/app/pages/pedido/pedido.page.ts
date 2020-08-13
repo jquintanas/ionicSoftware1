@@ -9,7 +9,6 @@ import { AlertsService } from 'src/app/core/services/alerts/alerts.service';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { CarritoService } from 'src/app/core/services/cart/carrito.service';
 import { IPedido } from "src/app/core/interface/modelNOSQL/pedido.interface";
-import { RastreoService } from 'src/app/core/services/rastreo/rastreo.service';
 import { UserInfoService } from 'src/app/core/services/userInfo/user-info.service';
 
 @Component({
@@ -54,8 +53,7 @@ export class PedidoPage implements OnInit {
     public mapaService: MapaDatosService,
     public alertService: AlertsService,
     public authService: AuthService,
-    private cartService: CarritoService,
-    private rastreoService: RastreoService,
+    private cartService: CarritoService,  
     private userInfo: UserInfoService,
     private loadingController: LoadingController
   ) { }
@@ -310,20 +308,6 @@ export class PedidoPage implements OnInit {
       await this.alertEfectivo();
     } else {
       this.alertService.alert("Error - Selección de pago", "Debe escoger el método de pago a efectuar");
-    }
-  }
-
-  setOrderInfo() {
-    this.rastreoService.domicilio = this.datosPedido.isDomicilio;
-    this.rastreoService.valorTotal = this.datosPedido.total;
-    this.rastreoService.efectivo = this.datosPedido.isEfectivo;
-    this.rastreoService.cantProductos = this.datosPedido.cantidades;
-    this.rastreoService.listaProductos = this.datosPedido.productos;
-
-    if (this.datosPedido.direccionEntrega != null) {
-      this.rastreoService.direccionEnvio = this.datosPedido.direccionEntrega;
-    } else {
-      this.rastreoService.direccionEnvio = this.userInfo.direccion;
     }
   }
 }
