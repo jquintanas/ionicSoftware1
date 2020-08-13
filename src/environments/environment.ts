@@ -1,9 +1,5 @@
 export const environment = {
   production: false,
-  codigoCategoriaBebida: 0,
-  codigoCategoriaDulces: 1,
-  codigoCategoriaPostres: 2,
-  codigoCategoriaTortas: 4,
   codigoCategoriaPromociones: 5,
   codigoFavoritos: "favoritos",
   mapboxkey: 'pk.eyJ1IjoiZGFubnBhcjk2IiwiYSI6ImNrYWJiaW44MjFlc2kydG96YXVxc2JiMHYifQ.iWfA_z-InyvNliI_EysoBw',
@@ -22,7 +18,7 @@ export const environment = {
     urlLogin: 'https://omipalisf2.herokuapp.com/api/login/usuario',
     urlNovelty: 'https://omipalisf2.herokuapp.com/api/noveltys/1',
     urlHistorial: 'https://omipalisf2.herokuapp.com/api/orders',
-    urlGetUser: 'https://omipalisf2.herokuapp.com/api/usersS/',
+    urlGetUser: 'https://omipalisf2.herokuapp.com/api/usersS/create',
     urlToken :  "https://omipalisf2.herokuapp.com/api/login/token",
     urlLogout : "https://omipalisf2.herokuapp.com/api/login/reject",
     urlHistorialUsuario: "/user",

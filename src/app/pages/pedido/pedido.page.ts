@@ -55,8 +55,11 @@ export class PedidoPage implements OnInit {
     public alertService: AlertsService,
     public authService: AuthService,
     private cartService: CarritoService,
+<<<<<<< HEAD
     private rastreoService: RastreoService,
     private userInfo: UserInfoService,
+=======
+>>>>>>> f56044a6cbddf82411dc817f5bf26c7b11bfd8b4
     private loadingController: LoadingController
   ) { }
 
@@ -313,6 +316,7 @@ export class PedidoPage implements OnInit {
     }
   }
 
+<<<<<<< HEAD
   setOrderInfo() {
     this.rastreoService.domicilio = this.datosPedido.isDomicilio;
     this.rastreoService.valorTotal = this.datosPedido.total;
@@ -326,4 +330,6 @@ export class PedidoPage implements OnInit {
       this.rastreoService.direccionEnvio = this.userInfo.direccion;
     }
   }
+=======
+>>>>>>> f56044a6cbddf82411dc817f5bf26c7b11bfd8b4
 }

@@ -1,23 +1,10 @@
 import { MapaDatosService } from "./../../core/services/mapa-datos/mapa-datos.service";
 import { ModalController, Platform, LoadingController } from "@ionic/angular";
-import {
-  Component,
-  OnInit,
-  Renderer2,
-  ElementRef,
-  AfterViewInit,
-} from "@angular/core";
+import { Component, OnInit, Renderer2, ElementRef } from "@angular/core";
 import { Router } from "@angular/router";
-import {
-  FormGroup,
-  Validators,
-  ValidatorFn,
-  AbstractControl,
-  FormControl,
-} from "@angular/forms";
+import { FormGroup, Validators, ValidatorFn, AbstractControl, FormControl } from "@angular/forms";
 import { MapaMapboxPage } from "./../mapa-mapbox/mapa-mapbox.page";
 import { AlertsService } from "src/app/core/services/alerts/alerts.service";
-import { HttpClient } from "@angular/common/http";
 import { UsuarioInterface } from "src/app/core/interface/usuarioRegistro";
 import { environment } from "src/environments/environment";
 import { RegistroService } from "src/app/core/services/registro.service";
@@ -186,16 +173,13 @@ export class RegistroPage implements OnInit {
   }
 
   save() {
-    const clave = this.seguridad.generarHashClave(
-      this.form.get("passwordField").value
-    );
     this.datosUsuario = {
       cedula: this.form.get("idField").value,
       nombre: this.form.get("namesField").value,
       apellido: this.form.get("lastNamesField").value,
       telefono: this.form.get("phoneField").value,
       email: this.form.get("emailField").value,
-      contrasenia: clave,
+      contrasenia: this.form.get("passwordField").value,
       rol: environment.idRol,
     };
     this.goToForm = 2;
@@ -228,27 +212,28 @@ export class RegistroPage implements OnInit {
       coordenadas: this.latlng,
     };
     this.datosUsuario.direccion = JSON.stringify(direcciones);
-    console.log(this.datosUsuario);
     await this.registroService
       .guardarPerfil(this.datosUsuario)
       .toPromise()
       .then(async (data: any) => {
-        console.log(data);
         if (data.log == "Ingresado") {
-          const numero = this.datosUsuario.telefono.substring(1, 9);
           const datos = {
             email: this.form.get("emailField").value,
             pass: this.form.get("passwordField").value
           };
           await this.registroService.registrar(datos).then(
             (dt: any) => {
-              console.log(data);
+              this.router.navigateByUrl("login");
+              this.alertsService.presentToast("Usuario agregado");
             }
           ).catch(
-            err => { console.log(err); }
+            err => {
+              console.log(err);
+              this.alertsService.presentToast("Algo salio mal, vuelve a intentarlo.");
+            }
           );
           loading.dismiss();
-          //this.router.navigateByUrl("login");
+          //
         }
       })
       .catch((err: any) => {
@@ -257,6 +242,8 @@ export class RegistroPage implements OnInit {
           if (err.error.error == "ER_DUP_ENTRY") {
             this.alertsService.presentToast("El usuario ya existe.");
           }
+        } else {
+          this.alertsService.presentToast("Algo salio mal, vuelve a intentarlo.");
         }
         loading.dismiss();
       });
@@ -287,4 +274,5 @@ export class RegistroPage implements OnInit {
     });
     return await modal.present();
   }
+
 }

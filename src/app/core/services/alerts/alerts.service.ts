@@ -26,8 +26,7 @@ export class AlertsService {
     const toast = await this.toastCtrl.create({
       message: mensaje,
       duration: 1000,
-      position: "middle",
-      color: 'dark',
+      position: "bottom"
 
     });
 
