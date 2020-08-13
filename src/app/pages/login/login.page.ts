@@ -92,6 +92,7 @@ export class LoginPage implements OnInit {
               console.log(err);
               this.authService.logout();
               loading.dismiss();
+              this.alertsService.alert("ERROR", "Correo y/o clave incorrecta");
             }
           );
         }
@@ -100,6 +101,7 @@ export class LoginPage implements OnInit {
       err => {
         console.log(err);
         loading.dismiss();
+        this.alertsService.alert("ERROR", "Correo y/o clave incorrecta");
       }
     );
   }
