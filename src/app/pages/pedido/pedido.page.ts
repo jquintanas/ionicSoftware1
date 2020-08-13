@@ -1,7 +1,7 @@
 import { environment } from "src/environments/environment";
 import { MapaDatosService } from "./../../core/services/mapa-datos/mapa-datos.service";
 import { Router } from "@angular/router";
-import { ModalController, AlertController } from "@ionic/angular";
+import { ModalController, AlertController, LoadingController } from "@ionic/angular";
 import { Component, OnInit } from "@angular/core";
 import { MapaMapboxPage } from "./../mapa-mapbox/mapa-mapbox.page";
 import { NgModel } from "@angular/forms";
@@ -9,6 +9,9 @@ import { AlertsService } from 'src/app/core/services/alerts/alerts.service';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { CarritoService } from 'src/app/core/services/cart/carrito.service';
 import { IPedido } from "src/app/core/interface/modelNOSQL/pedido.interface";
+import { RastreoService } from 'src/app/core/services/rastreo/rastreo.service';
+import { UserInfoService } from 'src/app/core/services/userInfo/user-info.service';
+
 @Component({
   selector: "app-pedido",
   templateUrl: "./pedido.page.html",
@@ -43,6 +46,7 @@ export class PedidoPage implements OnInit {
   private totalProductos: number = 0;
   private actual = new Date();
   horaRetiro: any = new Date().setMinutes(this.actual.getMinutes() + 30);
+  private cubiertos: string;
   constructor(
     public modalController: ModalController,
     public alertController: AlertController,
@@ -50,7 +54,10 @@ export class PedidoPage implements OnInit {
     public mapaService: MapaDatosService,
     public alertService: AlertsService,
     public authService: AuthService,
-    private cartService: CarritoService
+    private cartService: CarritoService,
+    private rastreoService: RastreoService,
+    private userInfo: UserInfoService,
+    private loadingController: LoadingController
   ) { }
 
   ngOnInit() {
@@ -208,10 +215,17 @@ export class PedidoPage implements OnInit {
 
   }
 
+  onOptionsSelected4(data: any) {
+    console.log(data);
+    this.cubiertos = data;
+  }
+
   cambioDeHora(event: any) {
     this.horaRetiro = new Date(event.detail.value);
   }
   async detectPayment() {
+    const loading = await this.loadingController.create({ message: "Cargando..." });
+    await loading.present();
     this.datosPedido = {
       cantidades: this.listaCantidades,
       productos: this.listaProductos,
@@ -219,9 +233,10 @@ export class PedidoPage implements OnInit {
       totalProductos: this.totalProductos,
       isDomicilio: this.domicilio,
       isEfectivo: this.efectivo,
-      total: this.total + this.costoEnvio,
+      total: this.total + this.costoEnvio
     };
     !this.nuevaUbicacion ? this.datosPedido.direccionDefault = "S" : this.datosPedido.direccionDefault = "N";
+    this.cubiertos ? this.datosPedido.cubiertos = true : this.datosPedido.cubiertos = false;
     if (this.nuevaUbicacion) {
       const direc = {
         direccion: this.newAddressString,
@@ -234,43 +249,81 @@ export class PedidoPage implements OnInit {
       this.datosPedido.horaDeRetiro = this.horaRetiro;
     }
     this.cartService.datosPedido = this.datosPedido;
+    console.log(this.datosPedido);
+    await this.cartService.agregarPedido(this.datosPedido).then(
+      async data => {
+        await loading.dismiss();
+
+        await this.llamarAlerts();
+      }
+    ).catch(
+      err => {
+        loading.dismiss();
+        console.log(err);
+      }
+    );
+  }
+
+  private async alertBancarias() {
+    const alert = await this.alertController.create({
+      header: "Cuentas Bancarias",
+      message:
+        '<p class="title"><strong>Banco Pichincha</strong></p>' +
+        '<p class="p">Cuenta de Ahorros #45789657479  FARID ALVARADO CI:1207684521 Omiypali@gmail.com <br></p>' +
+        '<p class="title"><strong>Banco Guayaquil</strong></p>' +
+        '<p class="p">Cuenta de Ahorros #45789657479  FARID ALVARADO CI:1207684521 Omiypali@gmail.com <br></p>' +
+        '<p class="comentario">Envíanos una foto del comprobante del depósito/transferencia para confirmar tu ' +
+        'pedido al 0955744347<br> </p>',
+      buttons: [
+        {
+          text: "Aceptar",
+          handler: () => {
+            this.router.navigateByUrl("/home");
+          },
+        },
+      ],
+    });
+    await alert.present();
+  }
+
+  private async alertEfectivo() {
+    const alert = await this.alertController.create({
+      header: "Compra realizada",
+      message:
+        "Tu compra se realizó con éxito, esperamos que sigas con nosotros",
+      buttons: [
+        {
+          text: "Aceptar",
+          handler: () => {
+            this.router.navigateByUrl("/historial");
+          },
+        },
+      ],
+    });
+    await alert.present();
+  }
+
+  private async llamarAlerts() {
     if (this.depotran) {
-      const alert = await this.alertController.create({
-        header: "Cuentas Bancarias",
-        message:
-          '<p class="title"><strong>Banco Pichincha</strong></p>' +
-          '<p class="p">Cuenta de Ahorros #45789657479  FARID ALVARADO CI:1207684521 Omiypali@gmail.com <br></p>' +
-          '<p class="title"><strong>Banco Guayaquil</strong></p>' +
-          '<p class="p">Cuenta de Ahorros #45789657479  FARID ALVARADO CI:1207684521 Omiypali@gmail.com <br></p>' +
-          '<p class="comentario">Envíanos una foto del comprobante del depósito/transferencia para confirmar tu ' +
-          'pedido al 0955744347<br> </p>',
-        buttons: [
-          {
-            text: "Aceptar",
-            handler: () => {
-              this.router.navigateByUrl("/home");
-            },
-          },
-        ],
-      });
-      await alert.present();
+      await this.alertBancarias();
     } else if (this.efectivo) {
-      const alert = await this.alertController.create({
-        header: "Compra realizada",
-        message:
-          "Tu compra se realizó con éxito, esperamos que sigas con nosotros",
-        buttons: [
-          {
-            text: "Aceptar",
-            handler: () => {
-              this.router.navigateByUrl("/historial");
-            },
-          },
-        ],
-      });
-      await alert.present();
+      await this.alertEfectivo();
     } else {
       this.alertService.alert("Error - Selección de pago", "Debe escoger el método de pago a efectuar");
+    }
+  }
+
+  setOrderInfo() {
+    this.rastreoService.domicilio = this.datosPedido.isDomicilio;
+    this.rastreoService.valorTotal = this.datosPedido.total;
+    this.rastreoService.efectivo = this.datosPedido.isEfectivo;
+    this.rastreoService.cantProductos = this.datosPedido.cantidades;
+    this.rastreoService.listaProductos = this.datosPedido.productos;
+
+    if (this.datosPedido.direccionEntrega != null) {
+      this.rastreoService.direccionEnvio = this.datosPedido.direccionEntrega;
+    } else {
+      this.rastreoService.direccionEnvio = this.userInfo.direccion;
     }
   }
 }

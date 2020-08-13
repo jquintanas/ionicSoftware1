@@ -44,9 +44,7 @@ export class LoginPage implements OnInit {
         "",
         [
           Validators.required,
-          Validators.maxLength(50),
-          Validators.minLength(10),
-          Validators.pattern(environment.emailPatter),
+          Validators.pattern(environment.emailPatter)
         ],
       ],
       passwordField: ["", [Validators.required, Validators.minLength(8)]],
@@ -82,7 +80,8 @@ export class LoginPage implements OnInit {
               this.authService.isAuth = true;
               this.userInfo.email = dt.data.email;
               this.userInfo.cedula = dt.data.cedula;
-              this.userInfo.usuario = dt.data.nombre + ' ' + dt.data.apellido;
+              this.userInfo.usuario = dt.data.nombre;
+              this.userInfo.apellido = dt.data.apellido;
               this.userInfo.telefono = dt.data.telefono;
               this.userInfo.direccion = dt.data.direccion;
               loading.dismiss();
