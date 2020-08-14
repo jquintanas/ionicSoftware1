@@ -16,13 +16,14 @@ export const environment = {
   imgsecondpart: "),pin-s-cafe+e00000(-79.5419038,-1.8017518)/",
   rutas: {
     urlLogin: 'https://omipalisf2.herokuapp.com/api/login/usuario',
-    urlNovelty: 'https://omipalisf2.herokuapp.com/api/noveltys/1',
+    urlNovelty: 'https://omipalisf2.herokuapp.com/api/noveltys/',
     urlHistorial: 'https://omipalisf2.herokuapp.com/api/orders',
     urlGetUser: 'https://omipalisf2.herokuapp.com/api/usersS/create',
     urlToken :  "https://omipalisf2.herokuapp.com/api/login/token",
     urlLogout : "https://omipalisf2.herokuapp.com/api/login/reject",
     urlHistorialUsuario: "/user",
-    updateUser: 'https://omipalisf2.herokuapp.com/api/usersS/update/'
+    updateUser: 'https://omipalisf2.herokuapp.com/api/usersS/update/',
+    reportaNovelty: 'https://omipalisf2.herokuapp.com/api/noveltys/reporta/'
   },
   nombresCategorias: {
     dulces: "dulces",

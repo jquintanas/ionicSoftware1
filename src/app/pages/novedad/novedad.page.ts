@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Storage } from '@ionic/storage';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { UserInfoService } from 'src/app/core/services/userInfo/user-info.service';
 
 @Component({
   selector: 'app-novedad',
@@ -13,11 +13,12 @@ export class NovedadPage implements OnInit {
   private idNovedad: string = "";
   private reportUser: string = "";
   private description: string = "";
+  private noveltyList: number [];
 
   constructor(
-    private storage: Storage,
     private httpClient: HttpClient,
     private authService: AuthService,
+    private userInfoService: UserInfoService
   ) { }
 
   async ngOnInit() {
@@ -27,8 +28,9 @@ export class NovedadPage implements OnInit {
       // tslint:disable-next-line: object-literal-key-quotes
       'Authorization': 'Bearer ' + token
     };
-    this.httpClient.get(environment.rutas.urlNovelty, { headers }).subscribe(novedad => {
+    this.httpClient.get(environment.rutas.urlNovelty + this.noveltyList, { headers }).subscribe(novedad => {
       if (novedad != null) {
+        this.getIDNoveltyById();
         this.publishNovelty(novedad);
         console.log(novedad);
       } else {
@@ -44,5 +46,22 @@ export class NovedadPage implements OnInit {
       this.idNovedad = data.idnovedad;
       this.description = data.descripcion;
       this.reportUser = data.idUsuarioreportado;
+  }
+
+  async getIDNoveltyById() {
+    await this.httpClient.get(environment.rutas.reportaNovelty + this.userInfoService.cedula)
+    .subscribe(data => {
+      if (data != null) {
+        console.log(data);
+        for (let i = 0 ; i < 5 ; i++) {
+        this.setIdNovelty(data[i]);
+        console.log(this.noveltyList);
+      }
+      }
+    });
+  }
+
+  setIdNovelty(data) {
+    this.noveltyList = data.idnovedad;
   }
 }
