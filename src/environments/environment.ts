@@ -36,7 +36,8 @@ export const environment = {
     categorias: "categorias",
     productos: "producto",
     pedidos: "pedido",
-    repartidor: "repartidor"
+    repartidor: "repartidor",
+    usuario: "usuario"
   }
 };
 

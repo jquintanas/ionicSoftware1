@@ -74,6 +74,7 @@ export class AuthService {
     const provider = new firebase.auth.GoogleAuthProvider();
     this.AFauth.signInWithPopup(provider)
       .then((result) => {
+        console.log(result);
         this.router.navigateByUrl("home");
         this.alertsService.presentLoading("Bienvenido a Omi y Pali");
         console.log(result);

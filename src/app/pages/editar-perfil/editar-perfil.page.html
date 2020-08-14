@@ -18,9 +18,10 @@
 
   <ion-row class="centrado">
     <ion-col>
-      <ion-button class="ion-margin-start ion-margin-end" color="omipalidarkd" (click)="abrirEdicion()">
-        Cargar imagen
-      </ion-button>
+      <ion-input type="file" (change)="onFileSelected($event)"  class="ion-margin-start ion-margin-end"></ion-input>
+      <ion-button type="file" (change)="onFileSelected($event)" class="ion-margin-start ion-margin-end" color="omipalidarkd" (click)="uploadPhoto()">
+          Cargar imagen
+        </ion-button>
     </ion-col>
   </ion-row>
 
