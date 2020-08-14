@@ -28,27 +28,6 @@ export class NovedadPage implements OnInit {
       // tslint:disable-next-line: object-literal-key-quotes
       'Authorization': 'Bearer ' + token
     };
-    this.httpClient.get(environment.rutas.urlNovelty + this.noveltyList, { headers }).subscribe(novedad => {
-      if (novedad != null) {
-        this.getIDNoveltyById();
-        this.publishNovelty(novedad);
-        console.log(novedad);
-      } else {
-        console.log("No hay novedad");
-      }
-    }, (err => {
-      console.log(err);
-      console.log ("idNovedad incorrecto");
-    }));
-  }
-
-  publishNovelty(data) {
-      this.idNovedad = data.idnovedad;
-      this.description = data.descripcion;
-      this.reportUser = data.idUsuarioreportado;
-  }
-
-  async getIDNoveltyById() {
     await this.httpClient.get(environment.rutas.reportaNovelty + this.userInfoService.cedula)
     .subscribe(data => {
       if (data != null) {
@@ -56,9 +35,26 @@ export class NovedadPage implements OnInit {
         for (let i = 0 ; i < 5 ; i++) {
         this.setIdNovelty(data[i]);
         console.log(this.noveltyList);
+        this.httpClient.get(environment.rutas.urlNovelty + this.noveltyList, { headers }).subscribe(novedad => {
+          if (novedad != null) {
+            this.publishNovelty(novedad);
+            console.log(novedad);
+          } else {
+            console.log("No hay novedad");
+          }
+        }, (err => {
+          console.log(err);
+          console.log ("idNovedad incorrecto");
+        }));
       }
       }
     });
+  }
+
+  publishNovelty(data) {
+      this.idNovedad = data.idnovedad;
+      this.description = data.descripcion;
+      this.reportUser = data.idUsuarioreportado;
   }
 
   setIdNovelty(data) {
