@@ -19,7 +19,7 @@ export class EditarPerfilPage implements OnInit {
   phoneNumber: string = "";
   emailUser: string = "";
   addressUser: string = "";
-  reference: string = "r";
+  reference: string = "";
   private datosUsuario: UpdateInterface;
 
   constructor(
@@ -116,10 +116,7 @@ export class EditarPerfilPage implements OnInit {
     this.userinfo.telefono = this.phoneNumber;
     this.userinfo.email = this.emailUser;
     this.userinfo.direccion = this.addressUser;
-    this.datosUsuario.nombre = this.userName;
-    this.datosUsuario.telefono = this.phoneNumber;
-    this.datosUsuario.email = this.emailUser;
-    this.datosUsuario.direccion = this.addressUser;
+    console.log(this.datosUsuario);
     await this.userinfo.setUserInfo(this.datosUsuario);
     this.alertService.alert("ACTUALIZACION", "Datos actualizados correctamente");
   }

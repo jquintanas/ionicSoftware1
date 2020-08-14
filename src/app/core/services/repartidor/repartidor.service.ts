@@ -22,4 +22,13 @@ export class RepartidorService {
     }));
   }
 
+  public obtenerRepartidorPorID(cedula: string) {
+    // tslint:disable-next-line: max-line-length
+    return this.db.collection(environment.nombresTablasFirebase.repartidor, ref => ref.where("cedula", "==", cedula)).snapshotChanges().pipe(map(producto => {
+      return producto.map(p => {
+        return p.payload.doc.data() as Repartidor;
+      });
+    }));
+  }
+
 }

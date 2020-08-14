@@ -8,22 +8,28 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class UserInfoService {
-  public cedula: string = "";
+  public cedula: string;
   public nombre: string = "";
   public apellido: string = "";
   public telefono: string = "";
   public email: string = "";
   public direccion: string = "";
   public usuario: string = "";
-
   constructor(
     private seguridad: SeguridadService,
     private http: HttpClient
   ) { }
 
+
   setUserInfo(datos: UpdateInterface) {
   const hash = this.seguridad.hashJSON(datos);
   datos.hash = hash;
+  datos.cedula = this.cedula;
+  datos.nombre = this.nombre;
+  datos.telefono = this.telefono;
+  datos.email = this.email;
+  datos.direccion = this.direccion;
+  datos.updatedAt = new Date();
   const url = environment.rutas.updateUser + datos.cedula;
   return this.http.put(url, datos);
   }
