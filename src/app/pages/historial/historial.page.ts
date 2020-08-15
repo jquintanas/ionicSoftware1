@@ -7,6 +7,7 @@ import { AlertsService } from 'src/app/core/services/alerts/alerts.service';
 import { CarritoService } from 'src/app/core/services/cart/carrito.service';
 import { ProductosService } from 'src/app/core/services/cart/productos.service';
 import { RepartidorService } from 'src/app/core/services/repartidor/repartidor.service';
+import { whitesmoke } from 'color-name';
 
 @Component({
   selector: 'app-historial',
@@ -31,6 +32,8 @@ export class HistorialPage implements OnInit {
   private cubiertos: string;
   private hora: Date;
   private productName: any;
+  private cancelButtonHidden: boolean = true;
+  private estadoPedido: number =  1;
 
   constructor(
     private historialService: HistorialService,
@@ -157,4 +160,38 @@ export class HistorialPage implements OnInit {
       this.cubiertos = "No";
     }
   }
+
+  getOrderState(estado: number) {
+    // ESTADOS: 0:Confirmado - 1: Preparando - 2: Enviando
+    if (estado == 0) {
+      this.estadoPedido = 0;
+      this.startTimer(17);
+      this.showCancelButton();
+      // valor= 0.25 - CONFIRMANDO PEDIDP
+    } else if (estado == 1) {
+      this.estadoPedido = 1;
+      this.startTimer(15);
+      this.showCancelButton();
+      // valor= 0.5 - ALISTANDO PEDIDO
+    } else if (estado == 2) {
+      this.estadoPedido = 2;
+      this.startTimer(10);
+      // valor= 0.75 - ENVIANDO PEDIDO
+    }
+  }
+
+  showCancelButton() {
+    if (this.cancelButtonHidden == true) {
+      this.cancelButtonHidden = false;
+      document.getElementById("tutorial").hidden = false;
+
+    } else if (this.cancelButtonHidden === false) {
+
+      this.cancelButtonHidden = true;
+      document.getElementById("tutorial").hidden = true;
+
+    }
+  }
+
+
 }

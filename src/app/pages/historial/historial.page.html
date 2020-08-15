@@ -27,10 +27,9 @@
           <ion-label>TIEMPO RESTANTE: {{time | async}}</ion-label> <BR>
         </div>
 
-        <div class="container">
+        <div class="container" *ngIf="estadoPedido == 0">
           <br> <br>
           <ion-progress-bar value="0.25"></ion-progress-bar>
-
           <ul class="progressbar">
             <li class="active">CONFIRMANDO PEDIDO</li>
             <li class="noactive">ALISTANDO PEDIDO</li>
@@ -38,6 +37,29 @@
             <br>
           </ul>
         </div>
+
+        <div class="container" *ngIf="estadoPedido == 1">
+            <br> <br>
+            <ion-progress-bar value="0.5"></ion-progress-bar>
+            <ul class="progressbar">
+              <li class="noactive">CONFIRMANDO PEDIDO</li>
+              <li class="active">ALISTANDO PEDIDO</li>
+              <li class="noactive">ENVIANDO ENTREGADO</li>
+              <br>
+            </ul>
+          </div>
+
+          <div class="container" *ngIf="estadoPedido == 2">
+              <br> <br>
+              <ion-progress-bar value="0.75"></ion-progress-bar>
+    
+              <ul class="progressbar">
+                <li class="noactive">CONFIRMANDO PEDIDO</li>
+                <li class="noactive">ALISTANDO PEDIDO</li>
+                <li class="active">ENVIANDO ENTREGADO</li>
+                <br>
+              </ul>
+            </div>
       </section>
 
       <section>
@@ -91,8 +113,8 @@
               <ion-label>{{cubiertos}}</ion-label><br><br>
             </ion-col>
             <ion-col>
-              <button class="boton" (click)="cancelAlert()" ion-button icon-start clear small>
-                <ion-label>CANCELAR</ion-label>
+              <button class="boton" (click)="cancelAlert()" ion-button icon-start clear small id="cancelButton" hidden="false">
+                <ion-label >CANCELAR</ion-label>
               </button>
             </ion-col>
           </ion-row>
