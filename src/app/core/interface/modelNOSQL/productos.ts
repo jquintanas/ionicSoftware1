@@ -7,4 +7,5 @@ export interface Productos {
     idCategoria: string;
     foto: string;
     slide: string[];
+    isActivo: boolean;
 }

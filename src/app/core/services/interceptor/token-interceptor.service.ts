@@ -14,7 +14,6 @@ export class TokenInterceptorService implements HttpInterceptor {
 
   constructor(private authService: AuthService) { }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log(req.url);
     const urls: string = "https://omipalisf2.herokuapp.com/api/login/token";
     if (req.url.search(urls) === -1) {
       if (this.authService.token) {
