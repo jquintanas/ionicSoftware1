@@ -19,7 +19,6 @@ export class AuthService {
 
   private readonly JWT_TOKEN = 'JWT_TOKEN';
   private readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
-  private loggedUser: string;
   token: Token;
   isAuth: boolean = false;
   dataUser: IDataUser;
@@ -109,15 +108,6 @@ export class AuthService {
     this.router.navigateByUrl("login");
   }
 
-  private storeTokens(tokens: Token) {
-    this.storage.set(this.JWT_TOKEN, tokens.token);
-    this.storage.set(this.REFRESH_TOKEN, tokens.refreshToken);
-  }
-
-  isLoggedIn() {
-    return !!this.getToken();
-  }
-
   getToken() {
     return this.storage.get(this.JWT_TOKEN);
   }
@@ -127,29 +117,18 @@ export class AuthService {
       return data;
     });
   }
-  getJWTToken() {
-    this.storage.get('JWT_TOKEN').then((result) => {
-      console.log(result);
-      console.log(typeof (result));
-      return result;
-    });
-  }
 
-  getRefreshToken() {
-    return this.storage.get(this.REFRESH_TOKEN);
-  }
 
   private removeTokens() {
     this.storage.remove(this.JWT_TOKEN);
     this.storage.remove(this.REFRESH_TOKEN);
   }
 
-  private storeJwtToken(jwt: string) {
-    this.storage.set(this.JWT_TOKEN, jwt);
-  }
-
   private doLogoutUser() {
-    this.loggedUser = null;
+    this.token = null;
+    this.isAuth = false;
+    this.dataUser = null;
+    this.idUserFirebase = "";
     this.removeTokens();
   }
 }
