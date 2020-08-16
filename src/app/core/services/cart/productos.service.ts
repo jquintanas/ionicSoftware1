@@ -28,7 +28,7 @@ export class ProductosService {
 
   public obtenerProductosPorCategoria(idCategoria: string) {
     // tslint:disable-next-line: max-line-length
-    return this.db.collection(environment.nombresTablasFirebase.productos, ref => ref.where("idCategoria", "==", idCategoria)).snapshotChanges().pipe(map(producto => {
+    return this.db.collection(environment.nombresTablasFirebase.productos, ref => ref.where("idCategoria", "==", idCategoria).where("isActivo", "==", true)).snapshotChanges().pipe(map(producto => {
       return producto.map(p => {
         return p.payload.doc.data() as Productos;
       });

@@ -1,7 +1,7 @@
 import { environment } from "src/environments/environment";
 import { MapaDatosService } from "./../../core/services/mapa-datos/mapa-datos.service";
 import { Router } from "@angular/router";
-import { ModalController, AlertController, LoadingController } from "@ionic/angular";
+import { ModalController, AlertController, LoadingController, NavController } from "@ionic/angular";
 import { Component, OnInit } from "@angular/core";
 import { MapaMapboxPage } from "./../mapa-mapbox/mapa-mapbox.page";
 import { NgModel } from "@angular/forms";
@@ -47,12 +47,12 @@ export class PedidoPage implements OnInit {
   constructor(
     public modalController: ModalController,
     public alertController: AlertController,
-    public router: Router,
     public mapaService: MapaDatosService,
     public alertService: AlertsService,
     public authService: AuthService,
     private cartService: CarritoService,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+    private navController: NavController
   ) { }
 
   ngOnInit() {
@@ -228,9 +228,9 @@ export class PedidoPage implements OnInit {
       totalProductos: this.totalProductos,
       isDomicilio: this.domicilio,
       isEfectivo: this.efectivo,
-      total: this.total + this.costoEnvio
+      total: this.total + this.costoEnvio,
+      estadoDelPedido: 0
     };
-    !this.nuevaUbicacion ? this.datosPedido.direccionDefault = "S" : this.datosPedido.direccionDefault = "N";
     this.cubiertos ? this.datosPedido.cubiertos = true : this.datosPedido.cubiertos = false;
     if (this.nuevaUbicacion) {
       const direc = {
@@ -239,6 +239,8 @@ export class PedidoPage implements OnInit {
         ubicacion: this.latlng
       };
       this.datosPedido.direccionEntrega = JSON.stringify(direc);
+    } else {
+      this.datosPedido.direccionEntrega = "S";
     }
     if (this.local) {
       this.datosPedido.horaDeRetiro = this.horaRetiro;
@@ -273,7 +275,7 @@ export class PedidoPage implements OnInit {
         {
           text: "Aceptar",
           handler: () => {
-            this.router.navigateByUrl("/home");
+            this.navController.navigateRoot("/home");
           },
         },
       ],
@@ -290,7 +292,7 @@ export class PedidoPage implements OnInit {
         {
           text: "Aceptar",
           handler: () => {
-            this.router.navigateByUrl("/historial");
+            this.navController.navigateRoot("/historial");
           },
         },
       ],

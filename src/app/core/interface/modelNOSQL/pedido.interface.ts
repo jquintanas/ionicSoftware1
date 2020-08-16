@@ -4,11 +4,11 @@ export interface IPedido {
     cantidades: number[];
     totalProductos: number;
     isDomicilio?: boolean;
-    direccionDefault?: "S" | "N";
     direccionEntrega?: string;
     idUsuario: string;
     horaDeRetiro?: Date;
     cubiertos?: boolean;
     isEfectivo?: boolean;
     total: number;
+    estadoDelPedido: 0;
 }
