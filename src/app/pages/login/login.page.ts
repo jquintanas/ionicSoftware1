@@ -80,7 +80,8 @@ export class LoginPage implements OnInit {
               this.authService.isAuth = true;
               this.userInfo.email = dt.data.email;
               this.userInfo.cedula = dt.data.cedula;
-              this.userInfo.usuario = dt.data.nombre + ' ' + dt.data.apellido;
+              this.userInfo.usuario = dt.data.nombre;
+              this.userInfo.apellido = dt.data.apellido;
               this.userInfo.telefono = dt.data.telefono;
               this.userInfo.direccion = dt.data.direccion;
               loading.dismiss();
@@ -91,6 +92,7 @@ export class LoginPage implements OnInit {
               console.log(err);
               this.authService.logout();
               loading.dismiss();
+              this.alertsService.alert("ERROR", "Correo y/o clave incorrecta");
             }
           );
         }
@@ -99,6 +101,7 @@ export class LoginPage implements OnInit {
       err => {
         console.log(err);
         loading.dismiss();
+        this.alertsService.alert("ERROR", "Correo y/o clave incorrecta");
       }
     );
   }

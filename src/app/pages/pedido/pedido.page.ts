@@ -9,6 +9,8 @@ import { AlertsService } from 'src/app/core/services/alerts/alerts.service';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { CarritoService } from 'src/app/core/services/cart/carrito.service';
 import { IPedido } from "src/app/core/interface/modelNOSQL/pedido.interface";
+import { UserInfoService } from 'src/app/core/services/userInfo/user-info.service';
+
 @Component({
   selector: "app-pedido",
   templateUrl: "./pedido.page.html",
@@ -309,5 +311,4 @@ export class PedidoPage implements OnInit {
       this.alertService.alert("Error - Selección de pago", "Debe escoger el método de pago a efectuar");
     }
   }
-
 }

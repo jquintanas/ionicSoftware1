@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, IonSegment } from '@ionic/angular';
-import { DetalleHistorial } from "src/app/core/interface/historial-pedido";
+import { IonSegment } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { HistorialService } from 'src/app/core/services/user/historial.service';
+import { AlertsService } from 'src/app/core/services/alerts/alerts.service';
+import { CarritoService } from 'src/app/core/services/cart/carrito.service';
+import { ProductosService } from 'src/app/core/services/cart/productos.service';
+import { RepartidorService } from 'src/app/core/services/repartidor/repartidor.service';
+import { whitesmoke } from 'color-name';
 
 @Component({
   selector: 'app-historial',
@@ -17,76 +21,41 @@ export class HistorialPage implements OnInit {
   segment: string = "active";
   private deliveryName: string = "Pedro Riascos";
   private deliveryNumber: string = "+593 123 456 789";
-  private idPedido: string = "1234";
-  private valorTotal: string = "15.50";
-  private metodoEnvio: string = "Envio a domicilio";
-  private amount: string = "2";
-  private productName: string = "Mojada de chocolate";
-  private fechaPedido: string = "Mayo 5, 2020";
+  private idPedido: string;
+  private valorTotal: number;
+  private metodoEnvio: string = "";
+  private amount: number[];
+  private productID: string[];
+  private fechaPedido: string = "";
+  private metodoPago = "";
+  private direccionEnvio: string;
+  private cubiertos: string;
+  private hora: Date;
+  private productName: any;
+  private cancelButtonHidden: boolean = true;
+  private estadoPedido: number =  1;
 
   constructor(
     private historialService: HistorialService,
-    private alertController: AlertController,
-    private router: Router) { }
+    private alertService: AlertsService,
+    private router: Router,
+    private carritoService: CarritoService,
+    private productoService: ProductosService,
+    private repartidorService: RepartidorService,
+  ) { }
 
   ngOnInit() {
     this.startTimer(20);
+    this.setOrderInfo();
+    this.nombreProducto();
+    this.valorTotal = this.carritoService.datosPedido.total;
+    this.amount = this.carritoService.datosPedido.cantidades;
+    this.idPedido = this.carritoService.datosPedido.idPedido;
+    this.hora = this.carritoService.datosPedido.horaDeRetiro;
   }
 
-  async cancelAlert() {
-    const alert = await this.alertController.create({
-      cssClass: 'alertCancel',
-      header: 'Cancelar Pedido',
-      inputs: [
-        {
-          type: 'radio',
-          name: 'motivo',
-          label: 'Pedido equivocado',
-          value: 'pedidoEquivocad'
-        },
-        {
-          type: 'radio',
-          name: 'motivo',
-          label: 'Repartidor demorado',
-          value: 'repDemorado'
-        }
-      ],
-      buttons: [
-        {
-          text: 'Volver',
-          role: 'regresar',
-          handler: (blah) => { }
-        }, {
-          text: 'Enviar',
-          role: 'cancelar',
-          handler: () => {
-            this.motiveAlert();
-          }
-        }
-      ]
-    });
-    await alert.present();
-  }
-
-  async motiveAlert() {
-    const alert = await this.alertController.create({
-      header: 'Motivo',
-      inputs: [
-        {
-          name: 'name1',
-          type: 'text',
-          placeholder: 'Cuentanos que paso con tu pedido'
-        }
-      ],
-      buttons: [
-        {
-          text: 'Enviar',
-          role: 'cancelar',
-          handler: () => {
-          }
-        }]
-    });
-    await alert.present();
+  cancelAlert() {
+    this.alertService.cancelAlert();
   }
 
   goCarrito() {
@@ -102,6 +71,14 @@ export class HistorialPage implements OnInit {
 
   ionViewDidEnter() {
     this.startTimer(20);
+  }
+
+  controlProgressBar(estado: string) {
+    if (estado == "alistando") {
+      this.startTimer(15);
+    } else if (estado == "enviando") {
+      this.startTimer(10);
+    }
   }
 
   updateTimeValue() {
@@ -131,4 +108,90 @@ export class HistorialPage implements OnInit {
       );
     }
   }
+
+  nombreProducto() {
+    this.productID = this.carritoService.datosPedido.productos;
+    for (let i = 0; i < this.productID.length; i++) {
+      const idProd = this.productID[i];
+      this.productoService.obtenerProductosPorID(idProd).subscribe(
+        dt => {
+          this.productName = dt[0].nombre;
+          console.log(this.productName);
+        },
+        async err => {
+          console.log(err);
+          await this.alertService.mostrarToastError();
+        }
+      );
+    }
+  }
+
+  setDeliveryMan() {
+    this.repartidorService.obtenerRepartidorPorIdPedido(this.idPedido).subscribe(
+      dt => {
+        this.deliveryName = dt[0].nombre + " " + dt[0].apellido;
+        this.deliveryNumber = dt[0].telefono;
+      },
+      async err => {
+        console.log(err);
+        await this.alertService.mostrarToastError();
+      }
+    );
+  }
+
+  setOrderInfo() {
+    if (this.carritoService.datosPedido.isDomicilio == true) {
+      this.metodoEnvio = "Envio a domiclio";
+      this.direccionEnvio = this.carritoService.datosPedido.direccionEntrega;
+    } else {
+      this.metodoEnvio = "Retiro Local";
+      this.direccionEnvio = "Jaime Roldós Avenue 220, Babahoyo";
+    }
+
+    if (this.carritoService.datosPedido.isEfectivo == true) {
+      this.metodoPago = "Efectivo";
+    } else {
+      this.metodoPago = "Deposito/ Transferencia";
+    }
+
+    if (this.carritoService.datosPedido.cubiertos == true) {
+      this.cubiertos = "Si";
+    } else {
+      this.cubiertos = "No";
+    }
+  }
+
+  getOrderState(estado: number) {
+    // ESTADOS: 0:Confirmado - 1: Preparando - 2: Enviando
+    if (estado == 0) {
+      this.estadoPedido = 0;
+      this.startTimer(17);
+      this.showCancelButton();
+      // valor= 0.25 - CONFIRMANDO PEDIDP
+    } else if (estado == 1) {
+      this.estadoPedido = 1;
+      this.startTimer(15);
+      this.showCancelButton();
+      // valor= 0.5 - ALISTANDO PEDIDO
+    } else if (estado == 2) {
+      this.estadoPedido = 2;
+      this.startTimer(10);
+      // valor= 0.75 - ENVIANDO PEDIDO
+    }
+  }
+
+  showCancelButton() {
+    if (this.cancelButtonHidden == true) {
+      this.cancelButtonHidden = false;
+      document.getElementById("tutorial").hidden = false;
+
+    } else if (this.cancelButtonHidden === false) {
+
+      this.cancelButtonHidden = true;
+      document.getElementById("tutorial").hidden = true;
+
+    }
+  }
+
+
 }

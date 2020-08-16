@@ -6,7 +6,6 @@ import { LoadingController, AlertController } from "@ionic/angular";
 import { IonContent } from "@ionic/angular";
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { AlertsService } from 'src/app/core/services/alerts/alerts.service';
-import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { Storage } from '@ionic/storage';
 import { UserInfoService } from 'src/app/core/services/userInfo/user-info.service';
 
@@ -25,7 +24,6 @@ export class PerfilUsuarioPage implements OnInit {
   constructor(
     private router: Router,
     private favoritos: FavoritosService,
-    private storage: Storage,
     private loadingController: LoadingController,
     private authService: AuthService,
     public alertService: AlertsService,
@@ -46,7 +44,7 @@ export class PerfilUsuarioPage implements OnInit {
 
   async ngOnInit() {
     await this.cargarDatos();
-    this.userName = this.userInfo.usuario;
+    this.userName = this.userInfo.usuario + " " + this.userInfo.apellido;
   }
 
   ionViewWillEnter() {

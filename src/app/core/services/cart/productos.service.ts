@@ -5,6 +5,7 @@ import { environment } from "src/environments/environment";
 import { map } from 'rxjs/operators';
 import { Productos } from "src/app/core/interface/modelNOSQL/productos";
 import { BehaviorSubject } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -41,6 +42,15 @@ export class ProductosService {
 
   public onservarCategorias() {
     return this.subjectCategorias.asObservable();
+  }
+
+  public obtenerProductosPorID(idProducto: string) {
+    // tslint:disable-next-line: max-line-length
+    return this.db.collection(environment.nombresTablasFirebase.productos, ref => ref.where("idProducto", "==", idProducto)).snapshotChanges().pipe(map(producto => {
+      return producto.map(p => {
+        return p.payload.doc.data() as Productos;
+      });
+    }));
   }
 
 }

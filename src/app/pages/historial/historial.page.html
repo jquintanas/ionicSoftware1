@@ -6,7 +6,7 @@
     <ion-title>Historial de Pedidos</ion-title>
   </ion-toolbar>
   <ion-toolbar color="omipalidarkd">
-    <ion-segment [(ngModel)]="segment" (ionChange)="cambioSegment($event);"> 
+    <ion-segment [(ngModel)]="segment" (ionChange)="cambioSegment($event);">
       <ion-segment-button value="active">
         <ion-label>ACTIVO</ion-label>
       </ion-segment-button>
@@ -24,20 +24,42 @@
 
       <section>
         <div class="center">
-          <ion-label >TIEMPO RESTANTE: {{time | async}}</ion-label> <BR>
+          <ion-label>TIEMPO RESTANTE: {{time | async}}</ion-label> <BR>
         </div>
 
-        <div class="container">
+        <div class="container" *ngIf="estadoPedido == 0">
           <br> <br>
           <ion-progress-bar value="0.25"></ion-progress-bar>
-
           <ul class="progressbar">
-            <li class="active">ALISTANDO PEDIDO</li>
-            <li class="noactive">ENVIANDO PEDIDO</li>
-            <li class="noactive">PEDIDO ENTREGADO</li>
+            <li class="active">CONFIRMANDO PEDIDO</li>
+            <li class="noactive">ALISTANDO PEDIDO</li>
+            <li class="noactive">ENVIANDO ENTREGADO</li>
             <br>
           </ul>
         </div>
+
+        <div class="container" *ngIf="estadoPedido == 1">
+            <br> <br>
+            <ion-progress-bar value="0.5"></ion-progress-bar>
+            <ul class="progressbar">
+              <li class="noactive">CONFIRMANDO PEDIDO</li>
+              <li class="active">ALISTANDO PEDIDO</li>
+              <li class="noactive">ENVIANDO ENTREGADO</li>
+              <br>
+            </ul>
+          </div>
+
+          <div class="container" *ngIf="estadoPedido == 2">
+              <br> <br>
+              <ion-progress-bar value="0.75"></ion-progress-bar>
+    
+              <ul class="progressbar">
+                <li class="noactive">CONFIRMANDO PEDIDO</li>
+                <li class="noactive">ALISTANDO PEDIDO</li>
+                <li class="active">ENVIANDO ENTREGADO</li>
+                <br>
+              </ul>
+            </div>
       </section>
 
       <section>
@@ -66,29 +88,45 @@
 
       <ion-card>
         <ion-item>
-          <ion-avatar item-start>
-            <img src="assets/icon/checkverde.png">
-          </ion-avatar>
-          <ion-card-header>PEDIDO #{{idPedido}}</ion-card-header>
-          <ion-card-subtitle slot="end">Total ${{valorTotal}}</ion-card-subtitle>
+          <ion-row>
+            <ion-col size="2">
+                <img src="assets/icon/checkverde.png">
+            </ion-col>
+            <ion-col size='7'>
+              PEDIDO #{{idPedido}}
+            </ion-col>
+            <ion-col size="3">
+              Total ${{valorTotal}}
+            </ion-col>
+          </ion-row>
         </ion-item>
 
         <ion-card-content>
           <ion-row>
             <ion-col>
-              <ion-label>{{metodoEnvio}}</ion-label><br>
+              <ion-label>{{metodoEnvio}} {{hora}}</ion-label><br>
+              <ion-label class="tituloPedido">Dirección:</ion-label>
+              <ion-label> {{direccionEnvio}}</ion-label><br>
+              <ion-label class="tituloPedido">Forma de Pago: </ion-label>
+              <ion-label>{{metodoPago}}</ion-label><br>
+              <ion-label class="tituloPedido">Cubiertos: </ion-label>
+              <ion-label>{{cubiertos}}</ion-label><br><br>
             </ion-col>
             <ion-col>
-              <button class="boton" (click)="cancelAlert()" ion-button icon-start clear small>
-                <ion-label>CANCELAR</ion-label>
+              <button class="boton" (click)="cancelAlert()" ion-button icon-start clear small id="cancelButton" hidden="false">
+                <ion-label >CANCELAR</ion-label>
               </button>
             </ion-col>
           </ion-row>
-
-          <ion-label>{{amount}} {{productName}}</ion-label><br>
-          <ion-label>{{amount}} {{productName}}</ion-label><br>
-          <ion-label>{{amount}} {{productName}}</ion-label>
-
+          <ion-label class="tituloPedido">PEDIDO: </ion-label> <br>
+          <ion-row>
+            <ion-col size="1">
+              {{amount}}
+            </ion-col>
+            <ion-col size="11">
+              {{productName}}
+            </ion-col>
+          </ion-row>
         </ion-card-content>
       </ion-card>
     </section>
@@ -101,15 +139,16 @@
           <ion-avatar item-start>
             <img src="assets/icon/check.png">
           </ion-avatar>
-          <ion-card-header>PEDIDO {{idPedido}}</ion-card-header>
-          <ion-card-subtitle>{{fechaPedido}}</ion-card-subtitle>
+          <ion-card-header>PEDIDO {{idPedidoPast}}</ion-card-header>
+          <ion-card-subtitle>{{fechaPedidoPast}}</ion-card-subtitle>
 
         </ion-item>
 
         <ion-card-content>
           <ion-row>
             <ion-col>
-              <ion-label>{{metodoEnvio}}</ion-label><br>
+              <ion-label>Metodo de pago {{metodoEnvioPast}}</ion-label><br>
+              <ion-label>Forma de pago: {{metodoPagoPast}}</ion-label><br>
             </ion-col>
             <ion-col>
               <button class="boton" ion-button icon-start clear small (click)="goCarrito()">
@@ -119,10 +158,8 @@
           </ion-row>
 
 
-          <ion-label>{{amount}} {{productName}}</ion-label><br>
-          <ion-label>{{amount}} {{productName}}</ion-label><br>
-          <ion-label>{{amount}} {{productName}}</ion-label>
-          
+          <ion-label>{{amountPast}} {{productNamePast}}</ion-label><br>
+
         </ion-card-content>
       </ion-card>
 

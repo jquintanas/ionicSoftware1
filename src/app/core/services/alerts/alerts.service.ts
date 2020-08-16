@@ -7,7 +7,10 @@ import { LoadingController } from '@ionic/angular';
 })
 export class AlertsService {
 
-  constructor(public loadingController: LoadingController, private toastCtrl: ToastController, private alterCrtl: AlertController) {
+  constructor(
+    public loadingController: LoadingController,
+    private toastCtrl: ToastController,
+    private alterCrtl: AlertController) {
 
   }
 
@@ -48,5 +51,61 @@ export class AlertsService {
   async mostrarToastError() {
     const toast = await this.toastCtrl.create({message: "Algo salio mal, por favor inténtenlo de nuevo.", duration: 2000});
     await toast.present();
+  }
+
+  async cancelAlert() {
+    const alert = await this.alterCrtl.create({
+      cssClass: 'alertCancel',
+      header: 'Cancelar Pedido',
+      inputs: [
+        {
+          type: 'radio',
+          name: 'motivo',
+          label: 'Pedido equivocado',
+          value: 'pedidoEquivocad'
+        },
+        {
+          type: 'radio',
+          name: 'motivo',
+          label: 'Repartidor demorado',
+          value: 'repDemorado'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Volver',
+          role: 'regresar',
+          handler: (blah) => { }
+        }, {
+          text: 'Enviar',
+          role: 'cancelar',
+          handler: () => {
+            this.motiveAlert();
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  async motiveAlert() {
+    const alert = await this.alterCrtl.create({
+      header: 'Motivo',
+      inputs: [
+        {
+          name: 'name1',
+          type: 'text',
+          placeholder: 'Cuentanos que paso con tu pedido'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Enviar',
+          role: 'cancelar',
+          handler: () => {
+          }
+        }]
+    });
+    await alert.present();
   }
 }
