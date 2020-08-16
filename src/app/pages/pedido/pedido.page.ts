@@ -53,7 +53,7 @@ export class PedidoPage implements OnInit {
     public mapaService: MapaDatosService,
     public alertService: AlertsService,
     public authService: AuthService,
-    private cartService: CarritoService,  
+    private cartService: CarritoService,
     private userInfo: UserInfoService,
     private loadingController: LoadingController
   ) { }
@@ -242,6 +242,7 @@ export class PedidoPage implements OnInit {
         ubicacion: this.latlng
       };
       this.datosPedido.direccionEntrega = JSON.stringify(direc);
+      console.log(this.datosPedido.direccionEntrega);
     }
     if (this.local) {
       this.datosPedido.horaDeRetiro = this.horaRetiro;
