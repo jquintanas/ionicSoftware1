@@ -119,12 +119,12 @@
             </ion-col>
           </ion-row>
           <ion-label class="tituloPedido">PEDIDO: </ion-label> <br>
-          <ion-row>
+          <ion-row *ngFor="let producto of listaProductos">
             <ion-col size="1">
-              {{amount}}
+              {{ producto.cantidad }}
             </ion-col>
             <ion-col size="11">
-              {{productName}}
+              {{ producto.producto }}
             </ion-col>
           </ion-row>
         </ion-card-content>
