@@ -69,7 +69,7 @@ export class DetallesProductosPage implements OnInit {
     private authService: AuthService) { }
 
   ngOnInit() {
-    //const token: any = await this.authService.getToken();
+    // const token: any = await this.authService.getToken();
     const token: any = this.authService.getToken2();
     console.log("token obtenido", token);
     this.detalleProducto = this.carrito.getProductoDetalle();

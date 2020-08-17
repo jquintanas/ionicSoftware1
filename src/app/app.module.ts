@@ -20,6 +20,7 @@ import { Facebook } from '@ionic-native/facebook/ngx';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { TokenInterceptorService } from "src/app/core/services/interceptor/token-interceptor.service";
 import { UserInfoService } from 'src/app/core/services/userInfo/user-info.service';
+import { DetallesProductosPageModule } from "src/app/pages/detalles-productos/detalles-productos.module";
 // import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
@@ -35,6 +36,7 @@ import { UserInfoService } from 'src/app/core/services/userInfo/user-info.servic
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    DetallesProductosPageModule
     // NgxSpinnerModule
   ],
   providers: [
@@ -56,6 +58,6 @@ import { UserInfoService } from 'src/app/core/services/userInfo/user-info.servic
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
