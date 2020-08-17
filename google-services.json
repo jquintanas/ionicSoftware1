@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1021916524711",
+    "firebase_url": "https://omi-y-pali-80d1d.firebaseio.com",
+    "project_id": "omi-y-pali-80d1d",
+    "storage_bucket": "omi-y-pali-80d1d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1021916524711:android:92c6546a8712f8cc9eeb82",
+        "android_client_info": {
+          "package_name": "com.OmiPali.omiypali"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1021916524711-57me291h1dnbpbea3jnqg1dugv72ihkj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCitxr737mSxcYBpXSSfXVQsGiGCFdaLY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1021916524711-57me291h1dnbpbea3jnqg1dugv72ihkj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1021916524711-iq4feh356am91lh9jqjs7gm8oaf1aeo3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.Omipali.omiypali"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
