@@ -53,6 +53,7 @@ export class PedidoPage implements OnInit {
     public alertService: AlertsService,
     public authService: AuthService,
     private cartService: CarritoService,
+    private userInfo: UserInfoService,
     private loadingController: LoadingController,
     private navController: NavController
   ) { }
@@ -241,6 +242,7 @@ export class PedidoPage implements OnInit {
         ubicacion: this.latlng
       };
       this.datosPedido.direccionEntrega = JSON.stringify(direc);
+      console.log(this.datosPedido.direccionEntrega);
     } else {
       this.datosPedido.direccionEntrega = "S";
     }

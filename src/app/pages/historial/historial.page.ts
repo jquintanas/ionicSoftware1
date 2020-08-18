@@ -7,7 +7,6 @@ import { AlertsService } from 'src/app/core/services/alerts/alerts.service';
 import { CarritoService } from 'src/app/core/services/cart/carrito.service';
 import { ProductosService } from 'src/app/core/services/cart/productos.service';
 import { RepartidorService } from 'src/app/core/services/repartidor/repartidor.service';
-import { whitesmoke } from 'color-name';
 
 @Component({
   selector: 'app-historial',
@@ -53,6 +52,7 @@ export class HistorialPage implements OnInit {
     this.startTimer(20);
     this.setOrderInfo();
     this.nombreProducto();
+    this.getEstadoByIDPedido(this.carritoService.datosPedido.idPedido);
     this.valorTotal = this.carritoService.datosPedido.total;
     this.amount = this.carritoService.datosPedido.cantidades;
     this.idPedido = this.carritoService.datosPedido.idPedido;
@@ -116,12 +116,24 @@ export class HistorialPage implements OnInit {
 
   nombreProducto() {
     this.productID = this.carritoService.datosPedido.productos;
+    const cant = this.carritoService.datosPedido.cantidades;
+    let productoFinal = {};
+    this.listaProductos = [];
+    console.log(this.productID);
+    console.log(cant);
     for (let i = 0; i < this.productID.length; i++) {
       const idProd = this.productID[i];
       this.productoService.obtenerProductosPorID(idProd).subscribe(
         dt => {
           this.productName = dt[0].nombre;
-          console.log(this.productName);
+          productoFinal = {
+            // tslint:disable-next-line: object-literal-key-quotes
+            'cantidad': cant[i],
+            // tslint:disable-next-line: object-literal-key-quotes
+            'producto': this.productName
+          };
+          this.listaProductos.push(productoFinal);
+          console.log(this.listaProductos);
         },
         async err => {
           console.log(err);
@@ -172,31 +184,39 @@ export class HistorialPage implements OnInit {
       this.estadoPedido = 0;
       this.startTimer(17);
       this.showCancelButton();
-      // valor= 0.25 - CONFIRMANDO PEDIDP
     } else if (estado == 1) {
       this.estadoPedido = 1;
       this.startTimer(15);
       this.showCancelButton();
-      // valor= 0.5 - ALISTANDO PEDIDO
     } else if (estado == 2) {
       this.estadoPedido = 2;
       this.startTimer(10);
-      // valor= 0.75 - ENVIANDO PEDIDO
     }
   }
 
   showCancelButton() {
     if (this.cancelButtonHidden == true) {
       this.cancelButtonHidden = false;
-      document.getElementById("tutorial").hidden = false;
+      document.getElementById("cancelButton").hidden = false;
 
     } else if (this.cancelButtonHidden === false) {
 
       this.cancelButtonHidden = true;
-      document.getElementById("tutorial").hidden = true;
+      document.getElementById("cancelButton").hidden = true;
 
     }
   }
 
-
+  getEstadoByIDPedido(idPedido: string) {
+    this.repartidorService.obtenerEstadoPorIdPedido(idPedido)
+      .subscribe(dt => {
+        console.log(dt);
+        this.estadoPedido = dt[0].estadoDelPedido;
+        console.log(this.estadoPedido);
+      },
+        async err => {
+          console.log(err);
+          await this.alertService.mostrarToastError();
+        });
+  }
 }
