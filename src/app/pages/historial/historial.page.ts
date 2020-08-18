@@ -19,22 +19,27 @@ export class HistorialPage implements OnInit {
   time: BehaviorSubject<string> = new BehaviorSubject('00');
   timer: number;
   segment: string = "active";
-  private deliveryName: string = "Pedro Riascos";
-  private deliveryNumber: string = "+593 123 456 789";
-  private idPedido: string;
-  private valorTotal: number;
-  private metodoEnvio: string = "";
-  private amount: number[];
-  private productID: string[];
-  private fechaPedido: string = "";
-  private metodoPago = "";
-  private direccionEnvio: string;
-  private cubiertos: string;
-  private hora: Date;
-  private productName: any;
-  private cancelButtonHidden: boolean = true;
-  private estadoPedido: number =  1;
-
+  deliveryName: string = "Pedro Riascos";
+  deliveryNumber: string = "+593 123 456 789";
+  idPedido: string;
+  valorTotal: number;
+  metodoEnvio: string = "";
+  amount: number[];
+  productID: string[];
+  fechaPedido: string = "";
+  metodoPago = "";
+  direccionEnvio: string;
+  cubiertos: string;
+  hora: Date;
+  productName: any;
+  cancelButtonHidden: boolean = true;
+  estadoPedido: number = 1;
+  idPedidoPast: any;
+  fechaPedidoPast: any;
+  metodoEnvioPast: any;
+  metodoPagoPast: any;
+  amountPast: any;
+  productNamePast: any;
   constructor(
     private historialService: HistorialService,
     private alertService: AlertsService,

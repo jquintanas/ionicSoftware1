@@ -24,9 +24,9 @@ export class CardProductosComponent implements OnInit, OnDestroy {
   @Input("categoria") categoria: number;
 
   // variables internas
-  private banderaLoading: boolean = true;
+  banderaLoading: boolean = true;
   private detalle: DetalleProducto;
-  private cantidad: number = 0;
+  cantidad: number = 0;
   abstract: string = "";
   private observadorCarrito: any;
   private observadorFavoritos: any;

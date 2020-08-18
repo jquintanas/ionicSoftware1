@@ -10,7 +10,7 @@ import { AlertController } from '@ionic/angular';
 })
 export class CardCarritoComponent implements OnInit {
   // private banderas
-  private banderaLoading: boolean = true;
+  banderaLoading: boolean = true;
   @Input("precio") precioString: string;
   @Input("Titulo") titulo: string;
   @Input("imagen") img: string;

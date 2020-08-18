@@ -11,11 +11,11 @@ import { AlertsService } from 'src/app/core/services/alerts/alerts.service';
   styleUrls: ['./novedad.page.scss'],
 })
 export class NovedadPage implements OnInit {
-  private idNovedad: string = "";
+  idNovedad: string = "";
   private reportUser: string = "";
-  private description: string = "";
-  private noveltyList: number [];
-  private reportUserName: string;
+  description: string = "";
+  private noveltyList: number[];
+  reportUserName: string;
 
   constructor(
     private httpClient: HttpClient,
@@ -33,32 +33,32 @@ export class NovedadPage implements OnInit {
       'Authorization': 'Bearer ' + token
     };
     await this.httpClient.get(environment.rutas.reportaNovelty + this.userInfoService.cedula)
-    .subscribe(data => {
-      if (data != null) {
-        console.log(data);
-        for (let i = 0 ; i < 5 ; i++) {
-        this.setIdNovelty(data[i]);
-        this.httpClient.get(environment.rutas.urlNovelty + this.noveltyList, { headers }).subscribe(novedad => {
-          if (novedad != null) {
-            this.publishNovelty(novedad);
-            this.getNameDeliveryByID() ;
-            console.log(novedad);
-          } else {
-            console.log("No hay novedad");
+      .subscribe(data => {
+        if (data != null) {
+          console.log(data);
+          for (let i = 0; i < 5; i++) {
+            this.setIdNovelty(data[i]);
+            this.httpClient.get(environment.rutas.urlNovelty + this.noveltyList, { headers }).subscribe(novedad => {
+              if (novedad != null) {
+                this.publishNovelty(novedad);
+                this.getNameDeliveryByID();
+                console.log(novedad);
+              } else {
+                console.log("No hay novedad");
+              }
+            }, (err => {
+              console.log(err);
+              console.log("idNovedad incorrecto");
+            }));
           }
-        }, (err => {
-          console.log(err);
-          console.log ("idNovedad incorrecto");
-        }));
-      }
-      }
-    });
+        }
+      });
   }
 
   publishNovelty(data) {
-      this.idNovedad = data.idnovedad;
-      this.description = data.descripcion;
-      this.reportUser = data.idUsuarioreportado;
+    this.idNovedad = data.idnovedad;
+    this.description = data.descripcion;
+    this.reportUser = data.idUsuarioreportado;
   }
 
   setIdNovelty(data) {
