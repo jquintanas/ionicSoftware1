@@ -7,7 +7,7 @@ import { AlertsService } from 'src/app/core/services/alerts/alerts.service';
 import { UserInfoService } from 'src/app/core/services/userInfo/user-info.service';
 import { UpdateInterface } from "src/app/core/interface/usuarioUpdate";
 import { HttpClient } from '@angular/common/http';
-// import { NgxSpinnerService } from "ngx-spinner";
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Usuario } from 'src/app/core/interface/modelNOSQL/usuario';
 
 @Component({
@@ -16,19 +16,15 @@ import { Usuario } from 'src/app/core/interface/modelNOSQL/usuario';
   styleUrls: ["./editar-perfil.page.scss"],
 })
 export class EditarPerfilPage implements OnInit {
+  base64: any;
   selectedFile: File = null;
   userDataForm: FormGroup;
   id: string;
-  userName: string = "";
-  phoneNumber: string = "";
-  emailUser: string = "";
-  addressUser: string = "";
-  reference: string = "";
   private datosUsuario: UpdateInterface;
   Urls: any = [];
   allfiles: any = [];
   previewUrl: any = null;
-
+  private datosRespaldo: any;
   constructor(
     private formBuilder: FormBuilder,
     public modalController: ModalController,
@@ -37,15 +33,15 @@ export class EditarPerfilPage implements OnInit {
     private alertService: AlertsService,
     private userinfo: UserInfoService,
     private http: HttpClient,
+    private camera: Camera
     // private spinner: NgxSpinnerService,
   ) {
-    this.buildForm();
   }
 
   public user: string;
 
   ngOnInit() {
-    this.setInfo();
+    this.buildForm();
   }
 
 
@@ -74,12 +70,14 @@ export class EditarPerfilPage implements OnInit {
 
   buildForm() {
     this.userDataForm = this.formBuilder.group({
-      namesField: ["", [Validators.required, Validators.maxLength(50)]],
-      directionField: ["", [Validators.required, Validators.minLength(10)]],
-      emailField: ["", [Validators.required, Validators.pattern(environment.emailPatter)]],
-      phoneField: ["", [Validators.required, Validators.maxLength(10), Validators.minLength(10),
+      namesField: [this.userinfo.usuario, [Validators.required, Validators.maxLength(50)]],
+      directionField: [this.userinfo.direccion, [Validators.required, Validators.minLength(10)]],
+      emailField: [this.userinfo.email, [Validators.required, Validators.pattern(environment.emailPatter)]],
+      phoneField: [this.userinfo.telefono, [Validators.required, Validators.maxLength(10), Validators.minLength(10),
       Validators.pattern(environment.phonePatter)]],
+      referencia: [this.userinfo.referencia, [Validators.required]]
     });
+    this.datosRespaldo = this.userDataForm.value;
   }
 
 
@@ -113,29 +111,20 @@ export class EditarPerfilPage implements OnInit {
     return "";
   }
 
-  setInfo() {
-      this.userName = this.userinfo.usuario;
-      this.phoneNumber = this.userinfo.telefono;
-      this.emailUser = this.userinfo.email;
-      this.addressUser = this.userinfo.direccion;
-      this.reference = this.userinfo.direccion;
-  }
-
   async guardarCambios() {
-    this.userinfo.usuario = this.userName;
-    this.userinfo.telefono = this.phoneNumber;
-    this.userinfo.direccion = this.addressUser;
+    this.userinfo.usuario = this.userDataForm.get("namesField").value;
+    this.userinfo.telefono = this.userDataForm.get("phoneField").value;
+    this.userinfo.direccion = this.userDataForm.get("directionField").value;
     const pass = "12345678";
     const datosUsuario: UpdateInterface = {
       nombre: this.userinfo.usuario,
       apellido: "",
-      telefono:  this.userinfo.telefono,
-      email: this.emailUser,
+      telefono: this.userinfo.telefono,
+      email: this.userDataForm.get("emailField").value,
       contrasenia: pass,
-      direccion: this.userinfo.direccion,
-      rol: 3
+      direccion: this.userDataForm.get("directionField").value,
+      rol: environment.idRol
     };
-
     console.log(datosUsuario);
     await this.userinfo.setUserInfo(datosUsuario);
     this.alertService.alert("ACTUALIZACION", "Datos actualizados correctamente");
@@ -168,9 +157,32 @@ export class EditarPerfilPage implements OnInit {
 
   uploadPhoto() {
     const usuario: Usuario = {
-      imagen : this.previewUrl,
+      imagen: this.previewUrl,
     };
 
     this.userinfo.updatePhotoUser(usuario);
+  }
+
+  validarCambiosDatos() {
+    return JSON.stringify(this.datosRespaldo) !== JSON.stringify(this.userDataForm.value);
+  }
+
+  cargarFotoGaleria() {
+    const options: CameraOptions = {
+      quality: 60,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      targetWidth: 500,
+      saveToPhotoAlbum: false,
+      correctOrientation: true
+    };
+
+    this.camera.getPicture(options).then((imageData) => {
+      this.base64 = 'data:image/jpeg;base64,' + imageData;
+    }, (err) => {
+      // Handle error
+    });
   }
 }

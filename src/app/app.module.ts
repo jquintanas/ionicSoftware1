@@ -22,7 +22,7 @@ import { TokenInterceptorService } from "src/app/core/services/interceptor/token
 import { UserInfoService } from 'src/app/core/services/userInfo/user-info.service';
 import { DetallesProductosPageModule } from "src/app/pages/detalles-productos/detalles-productos.module";
 // import { NgxSpinnerModule } from "ngx-spinner";
-
+import { Camera } from '@ionic-native/camera/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -40,6 +40,7 @@ import { DetallesProductosPageModule } from "src/app/pages/detalles-productos/de
     // NgxSpinnerModule
   ],
   providers: [
+    Camera,
     GooglePlus,
     FirebaseAuthentication,
     FavoritosService,

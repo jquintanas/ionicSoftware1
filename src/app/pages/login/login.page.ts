@@ -72,6 +72,8 @@ export class LoginPage implements OnInit {
         if (data) {
           await this.authService.loginToApi(this.emailUser, this.password).toPromise().then(
             (dt: any) => {
+              console.log(dt);
+
               this.authService.dataUser = dt.data;
               this.authService.token = {
                 refreshToken: dt.refreshToken,

@@ -17,6 +17,7 @@ export class UserInfoService {
   public email: string = "";
   public direccion: string = "";
   public usuario: string = "";
+  public referencia: string = "";
   constructor(
     private seguridad: SeguridadService,
     private http: HttpClient,

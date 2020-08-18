@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
     "@capacitor/core": "2.1.0",
+    "@ionic-native/camera": "^5.28.0",
     "@ionic-native/core": "^5.0.7",
     "@ionic-native/facebook": "^5.27.0",
     "@ionic-native/firebase-authentication": "^5.27.0",
@@ -68,6 +69,7 @@
     "@types/node": "^8.9.5",
     "codelyzer": "^5.0.0",
     "cordova-android": "^9.0.0",
+    "cordova-plugin-camera": "^4.1.0",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-ionic-keyboard": "^2.2.0",
     "cordova-plugin-ionic-webview": "^4.2.1",
@@ -122,6 +124,10 @@
         "REVERSED_CLIENT_ID": "com.OmiPali.omiypali",
         "WEB_APPLICATION_CLIENT_ID": "1021916524711-57me291h1dnbpbea3jnqg1dugv72ihkj.apps.googleusercontent.com",
         "PLAY_SERVICES_VERSION": "15.0.1"
+      },
+      "cordova-plugin-camera": {
+        "CAMERA_USAGE_DESCRIPTION": "the app need the camera",
+        "PHOTOLIBRARY_USAGE_DESCRIPTION": "the app need the photolibrary"
       }
     },
     "platforms": [

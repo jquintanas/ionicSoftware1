@@ -39,6 +39,7 @@ export class HistorialPage implements OnInit {
   metodoPagoPast: any;
   amountPast: any;
   productNamePast: any;
+  listaProductos: any;
   constructor(
     private historialService: HistorialService,
     private alertService: AlertsService,
@@ -218,5 +219,9 @@ export class HistorialPage implements OnInit {
           console.log(err);
           await this.alertService.mostrarToastError();
         });
+  }
+
+  irAlHome() {
+    this.router.navigateByUrl("/");
   }
 }
