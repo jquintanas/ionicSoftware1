@@ -57,17 +57,18 @@ export class PerfilUsuarioPage implements OnInit {
   zoomImage() {
     console.log("ZoomImage");
   }
-  //TODO corregir carga de datos
+
   private async cargarDatos() {
-    let favMap: Map<string, Map<string, Favoritos>>;
-    // await this.favoritos.obtenerFavoritos().then((data: any) => {
-    //   favMap = data;
-    // });
-    let lista;
-    // if (favMap != null) {
-    //   lista = this.favoritos.convertirMapaALista(favMap);
-    // }
-    this.dataBebidas = lista;
+    await this.favoritos.obtenerFavoritosLista().then(
+      dt => {
+        this.dataBebidas = dt;
+      }
+    ).catch(
+      err => {
+        console.log(err);
+        this.dataBebidas = [];
+      }
+    );
   }
 
   async actualizarPantalla(event: any) {
