@@ -95,27 +95,43 @@ export class DetallesProductosPage implements OnInit {
         idProducto: this.detalleProducto.id,
         url: this.detalleProducto.ImagenP
       };
-      if (!await this.favoritos.agregarFavorito(this.detalleProducto.categoria + "", tmp)) {
-        const toast = await this.toastController.create({
-          message: "No se pudo agregar a favoritos",
-          duration: 2000,
-          position: "top"
-        });
-        toast.present();
-        this.banderaCorazon = false;
-      }
+      await this.favoritos.agregarFavorito(tmp).then(
+        async dt => {
+          if (dt) {
+            const toast = await this.toastController.create({
+              message: "No se pudo agregar a favoritos",
+              duration: 2000,
+              position: "top"
+            });
+            toast.present();
+            this.banderaCorazon = false;
+          }
+        }
+      ).catch(
+        err => {
+          console.log(err);
+        }
+      );
     } else {
-      if (await this.favoritos.borrarDeFavoritos(this.detalleProducto.categoria + "", this.detalleProducto.id)) {
-        this.banderaCorazon = false;
-      } else {
-        this.banderaCorazon = true;
-        const toast = await this.toastController.create({
-          message: "No se pudo eliminar de favoritos",
-          duration: 2000,
-          position: "top"
-        });
-        toast.present();
-      }
+      await this.favoritos.borrarDeFavoritos(this.detalleProducto.id).then(
+        async dt => {
+          if (dt) {
+            this.banderaCorazon = false;
+          } else {
+            this.banderaCorazon = true;
+            const toast = await this.toastController.create({
+              message: "No se pudo eliminar de favoritos",
+              duration: 2000,
+              position: "top"
+            });
+            toast.present();
+          }
+        }
+      ).catch(
+        err => {
+          console.log(err);
+        }
+      );
     }
     this.detalleProducto.Favorito = this.banderaCorazon;
     this.carrito.setProductoDetalle(this.detalleProducto);

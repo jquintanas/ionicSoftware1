@@ -21,9 +21,9 @@ export class FavoriteProductoComponent implements OnInit {
     this.banderaCorazon = true;
     // this.favorito.publica
   }
-
+  //TODO verificar implementacion
   async desmarcarFavorito() {
-    await this.favoritoService.borrarDeFavoritos("" + this.categoria, this.id).then(
+    await this.favoritoService.borrarDeFavoritos(this.id).then(
       (data: boolean) => {
         if (data) {
           this.propagar.emit(false);

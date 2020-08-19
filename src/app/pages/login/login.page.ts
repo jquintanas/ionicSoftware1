@@ -85,7 +85,7 @@ export class LoginPage implements OnInit {
               this.userInfo.usuario = dt.data.nombre;
               this.userInfo.apellido = dt.data.apellido;
               this.userInfo.telefono = dt.data.telefono;
-              this.userInfo.direccion = dt.data.direccion;
+              this.userInfo.direccion = JSON.parse(dt.data.direccion);
               loading.dismiss();
               this.navController.navigateRoot("home");
             }

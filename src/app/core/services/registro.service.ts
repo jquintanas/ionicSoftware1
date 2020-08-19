@@ -20,6 +20,7 @@ export class RegistroService {
     const hash = this.seguridad.hashJSON(datos);
     datos.hash = hash;
     const url = environment.rutas.urlGetUser;
+    console.log(datos);
     return this.http.post(url, datos);
   }
 

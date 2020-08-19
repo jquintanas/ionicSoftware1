@@ -4,7 +4,6 @@ import * as firebase from 'firebase/app';
 import { AlertsService } from '../alerts/alerts.service';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 import { Router } from "@angular/router";
-import { Storage } from '@ionic/storage';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Token } from 'src/app/core/interface/token';
@@ -29,7 +28,7 @@ export class AuthService {
     private fb: Facebook,
     private httpClient: HttpClient,
     private router: Router,
-    private storage: Storage,
+    // private storage: Storage,
     public loadingController: LoadingController,
     private userInfo: UserInfoService
   ) { }
@@ -109,19 +108,19 @@ export class AuthService {
   }
 
   getToken() {
-    return this.storage.get(this.JWT_TOKEN);
+    // return this.storage.get(this.JWT_TOKEN);
   }
 
   async getToken2(): Promise<any> {
-    return await this.storage.get(this.JWT_TOKEN).then(data => {
-      return data;
-    });
+    // return await this.storage.get(this.JWT_TOKEN).then(data => {
+    //   return data;
+    // });
   }
 
 
   private removeTokens() {
-    this.storage.remove(this.JWT_TOKEN);
-    this.storage.remove(this.REFRESH_TOKEN);
+    // this.storage.remove(this.JWT_TOKEN);
+    // this.storage.remove(this.REFRESH_TOKEN);
   }
 
   private doLogoutUser() {

@@ -8,7 +8,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { IonicStorageModule } from '@ionic/storage';
 import { FavoritosService } from './core/services/cart/favoritos.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { firebaseConfig } from '../environments/environment';
@@ -23,6 +22,7 @@ import { UserInfoService } from 'src/app/core/services/userInfo/user-info.servic
 import { DetallesProductosPageModule } from "src/app/pages/detalles-productos/detalles-productos.module";
 // import { NgxSpinnerModule } from "ngx-spinner";
 import { Camera } from '@ionic-native/camera/ngx';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -32,7 +32,6 @@ import { Camera } from '@ionic-native/camera/ngx';
     BrowserAnimationsModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    IonicStorageModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule,
@@ -40,6 +39,7 @@ import { Camera } from '@ionic-native/camera/ngx';
     // NgxSpinnerModule
   ],
   providers: [
+    NativeStorage,
     Camera,
     GooglePlus,
     FirebaseAuthentication,
