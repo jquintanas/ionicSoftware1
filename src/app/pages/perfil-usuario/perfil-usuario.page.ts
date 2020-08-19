@@ -6,7 +6,6 @@ import { LoadingController, AlertController } from "@ionic/angular";
 import { IonContent } from "@ionic/angular";
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { AlertsService } from 'src/app/core/services/alerts/alerts.service';
-import { Storage } from '@ionic/storage';
 import { UserInfoService } from 'src/app/core/services/userInfo/user-info.service';
 
 @Component({
@@ -58,16 +57,16 @@ export class PerfilUsuarioPage implements OnInit {
   zoomImage() {
     console.log("ZoomImage");
   }
-
+  //TODO corregir carga de datos
   private async cargarDatos() {
     let favMap: Map<string, Map<string, Favoritos>>;
-    await this.favoritos.obtenerFavoritos().then((data: any) => {
-      favMap = data;
-    });
+    // await this.favoritos.obtenerFavoritos().then((data: any) => {
+    //   favMap = data;
+    // });
     let lista;
-    if (favMap != null) {
-      lista = this.favoritos.convertirMapaALista(favMap);
-    }
+    // if (favMap != null) {
+    //   lista = this.favoritos.convertirMapaALista(favMap);
+    // }
     this.dataBebidas = lista;
   }
 
@@ -88,11 +87,11 @@ export class PerfilUsuarioPage implements OnInit {
 
   mostrarCuentasBancarias() {
     this.alertService.alert("Cuentas Bancarias",
-    '<p class="title"><strong>Banco Pichincha</strong></p>' +
-        '<p class="p">Cuenta de Ahorros #45789657479  FARID ALVARADO CI:1207684521 Omiypali@gmail.com <br></p>' +
-        '<p class="title"><strong>Banco Guayaquil</strong></p>' +
-        '<p class="p">Cuenta de Ahorros #45789657479  FARID ALVARADO CI:1207684521 Omiypali@gmail.com <br></p>' +
-        '<p class="comentario">Envíanos una foto del comprobante del depósito/transferencia para confirmar tu ' +
-        'pedido al 0955744347<br> </p>');
+      '<p class="title"><strong>Banco Pichincha</strong></p>' +
+      '<p class="p">Cuenta de Ahorros #45789657479  FARID ALVARADO CI:1207684521 Omiypali@gmail.com <br></p>' +
+      '<p class="title"><strong>Banco Guayaquil</strong></p>' +
+      '<p class="p">Cuenta de Ahorros #45789657479  FARID ALVARADO CI:1207684521 Omiypali@gmail.com <br></p>' +
+      '<p class="comentario">Envíanos una foto del comprobante del depósito/transferencia para confirmar tu ' +
+      'pedido al 0955744347<br> </p>');
   }
 }

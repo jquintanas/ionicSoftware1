@@ -9,7 +9,7 @@ import { UsuarioInterface } from "src/app/core/interface/usuarioRegistro";
 import { environment } from "src/environments/environment";
 import { RegistroService } from "src/app/core/services/registro.service";
 import { SeguridadService } from "src/app/core/services/seguridad.service";
-
+import { Seguridad } from "src/app/core/utils/seguridad";
 @Component({
   selector: "app-registro",
   templateUrl: "./registro.page.html",
@@ -229,6 +229,9 @@ export class RegistroPage implements OnInit {
           ).catch(
             err => {
               console.log(err);
+              if (err.status == 500 && err.error.log == "Usuario ya existe.") {
+                this.alertsService.presentToast(err.error.log);
+              }
               this.alertsService.presentToast("Algo salio mal, vuelve a intentarlo.");
             }
           );

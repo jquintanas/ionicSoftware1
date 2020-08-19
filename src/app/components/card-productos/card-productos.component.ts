@@ -6,6 +6,7 @@ import { CarritoService } from "src/app/core/services/cart/carrito.service";
 import { ProductoCarrito } from "src/app/core/interface/productoCarrito";
 import { Favoritos } from "src/app/core/interface/favoritosStorage";
 import { FavoritosService } from 'src/app/core/services/cart/favoritos.service';
+
 @Component({
   selector: 'app-card-productos',
   templateUrl: './card-productos.component.html',
@@ -88,16 +89,20 @@ export class CardProductosComponent implements OnInit, OnDestroy {
         idProducto: this.id,
         url: this.urlImagen
       };
-      if (await this.favoritos.agregarFavorito(this.categoria + "", favorito)) {
-        this.banderaCorazon = !this.banderaCorazon;
-      } else {
-        const toast = await this.toastController.create({
-          message: "No se pudo agregar a favoritos",
-          duration: 2000,
-          position: "bottom"
-        });
-        toast.present();
-      }
+      await this.favoritos.agregarFavorito(favorito).then(
+        async dt => {
+          if (dt) {
+            this.banderaCorazon = !this.banderaCorazon;
+          } else {
+            const toast = await this.toastController.create({
+              message: "No se pudo agregar a favoritos",
+              duration: 2000,
+              position: "bottom"
+            });
+            toast.present();
+          }
+        }
+      );
     } else {
       await this.eliminarDeFavoritos();
     }
@@ -176,24 +181,41 @@ export class CardProductosComponent implements OnInit, OnDestroy {
   }
 
   private async eliminarDeFavoritos() {
-    if (await this.favoritos.comprobarFavorito(this.categoria + "", this.id)) {
-      if (await this.favoritos.borrarDeFavoritos(this.categoria + "", this.id)) {
-        this.banderaCorazon = false;
-      } else {
-        const toast = await this.toastController.create({
-          message: "No se pudo eliminar de favoritos",
-          duration: 2000,
-          position: "bottom"
-        });
-        toast.present();
-        this.banderaCorazon = true;
+    await this.favoritos.comprobarFavorito(this.id).then(
+      async dt => {
+        if (dt) {
+          await this.favoritos.borrarDeFavoritos(this.id).then(
+            async dta => {
+              if (dta) {
+                this.banderaCorazon = false;
+              } else {
+                const toast = await this.toastController.create({
+                  message: "No se pudo eliminar de favoritos",
+                  duration: 2000,
+                  position: "bottom"
+                });
+                toast.present();
+                this.banderaCorazon = true;
+              }
+            }
+          );
+        }
       }
-    }
+    );
+
   }
 
   private async verificarFavorito() {
-    this.banderaCorazon = await this.favoritos.comprobarFavorito(this.categoria + "", this.id);
-    this.detalle.Favorito = this.banderaCorazon;
+    await this.favoritos.comprobarFavorito(this.id).then(
+      dt => {
+        this.banderaCorazon = dt;
+        this.detalle.Favorito = this.banderaCorazon;
+      }
+    ).catch(
+      err => {
+        console.log(err);
+      }
+    );
   }
 
 
