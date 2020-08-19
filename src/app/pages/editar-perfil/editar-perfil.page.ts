@@ -9,6 +9,7 @@ import { UpdateInterface } from "src/app/core/interface/usuarioUpdate";
 import { HttpClient } from '@angular/common/http';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Usuario } from 'src/app/core/interface/modelNOSQL/usuario';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
 
 @Component({
   selector: "app-editar-perfil",
@@ -24,6 +25,9 @@ export class EditarPerfilPage implements OnInit {
   Urls: any = [];
   allfiles: any = [];
   previewUrl: any = null;
+  direccion: string;
+  referencia: string;
+  coordenadas: string;
   private datosRespaldo: any;
   constructor(
     private formBuilder: FormBuilder,
@@ -33,14 +37,15 @@ export class EditarPerfilPage implements OnInit {
     private alertService: AlertsService,
     private userinfo: UserInfoService,
     private http: HttpClient,
-    private camera: Camera
-    // private spinner: NgxSpinnerService,
+    private camera: Camera,
+    private authService: AuthService
   ) {
   }
 
   public user: string;
 
   ngOnInit() {
+    this.getAdress(this.userinfo.direccion);
     this.buildForm();
   }
 
@@ -68,14 +73,22 @@ export class EditarPerfilPage implements OnInit {
     return " ";
   }
 
+  getAdress(address: any) {
+    const obj = JSON.parse(address);
+    this.direccion = obj.direccion;
+    this.referencia = obj.referencia;
+    this.coordenadas = obj.coordenadas;
+    console.log(this.userinfo.direccion);
+  }
+
   buildForm() {
     this.userDataForm = this.formBuilder.group({
       namesField: [this.userinfo.usuario, [Validators.required, Validators.maxLength(50)]],
-      directionField: [this.userinfo.direccion, [Validators.required, Validators.minLength(10)]],
+      directionField: [this.direccion, [Validators.required, Validators.minLength(10)]],
       emailField: [this.userinfo.email, [Validators.required, Validators.pattern(environment.emailPatter)]],
       phoneField: [this.userinfo.telefono, [Validators.required, Validators.maxLength(10), Validators.minLength(10),
       Validators.pattern(environment.phonePatter)]],
-      referencia: [this.userinfo.referencia, [Validators.required]]
+      referencia: [this.referencia, [Validators.required]]
     });
     this.datosRespaldo = this.userDataForm.value;
   }
@@ -112,22 +125,34 @@ export class EditarPerfilPage implements OnInit {
   }
 
   async guardarCambios() {
+    const token = await this.authService.token.token;
+    console.log(token);
+    const headers = {
+      'Content-Type': 'application/json',
+      // tslint:disable-next-line: object-literal-key-quotes
+      'Authorization': 'Bearer ' + token
+    };
+    console.log(headers);
     this.userinfo.usuario = this.userDataForm.get("namesField").value;
     this.userinfo.telefono = this.userDataForm.get("phoneField").value;
     this.userinfo.direccion = this.userDataForm.get("directionField").value;
-    const pass = "12345678";
-    const datosUsuario: UpdateInterface = {
-      nombre: this.userinfo.usuario,
-      apellido: "",
+    this.datosUsuario = {
+      cedula: this.userinfo.cedula,
+      nombre: this.userinfo.nombre,
+      apellido: this.userinfo.apellido,
       telefono: this.userinfo.telefono,
-      email: this.userDataForm.get("emailField").value,
-      contrasenia: pass,
-      direccion: this.userDataForm.get("directionField").value,
-      rol: environment.idRol
+      email: this.userinfo.email,
+      direccion: this.userinfo.direccion,
+      contrasenia: "12345678",
+      rol: 3
     };
-    console.log(datosUsuario);
-    await this.userinfo.setUserInfo(datosUsuario);
-    this.alertService.alert("ACTUALIZACION", "Datos actualizados correctamente");
+    console.log(this.datosUsuario);
+    this.userinfo.setUserInfo(this.datosUsuario, headers).toPromise().then(data => {
+      console.log("ngresado correctamente");
+    }).catch ((err) => {
+      console.log(err);
+    })
+    ;
   }
 
   onFileSelected(event) {

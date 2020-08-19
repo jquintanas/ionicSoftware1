@@ -4,7 +4,7 @@ import { environment } from 'src/environments/environment';
 import { UpdateInterface } from 'src/app/core/interface/usuarioUpdate';
 import { HttpClient } from '@angular/common/http';
 import { Usuario } from 'src/app/core/interface/modelNOSQL/usuario';
-import {AngularFirestore } from "@angular/fire/firestore";
+import { AngularFirestore } from "@angular/fire/firestore";
 
 @Injectable({
   providedIn: 'root'
@@ -25,15 +25,14 @@ export class UserInfoService {
   ) { }
 
 
-  setUserInfo(datos: UpdateInterface) {
-  const hash = this.seguridad.hashJSON(datos);
-  datos.hash = hash;
-  datos.cedula = this.cedula;
-  datos.updatedAt = new Date();
-  console.log(datos);
-  const url = environment.rutas.updateUser + datos.cedula;
-  console.log(url);
-  return this.http.put(url, datos);
+  setUserInfo(datos: UpdateInterface, headers: any) {
+    const hash = this.seguridad.hashJSON(datos);
+    datos.hash = hash;
+    datos.cedula = this.cedula;
+    datos.updatedAt = new Date();
+    console.log(datos);
+    const url = environment.rutas.updateUser + datos.cedula;
+    return this.http.put(url, datos, { headers });
   }
 
   pushProductos(usuario: Usuario) {
@@ -48,15 +47,15 @@ export class UserInfoService {
   updatePhotoUser(usuario: Usuario) {
     console.log(usuario);
     this.firebase.collection(environment.nombresTablasFirebase.usuario)
-    .doc(usuario.cedula)
-    .update(usuario)
-    // tslint:disable-next-line: only-arrow-functions
-    .then(function() {
-      console.log("Imagen subida con exito");
-    })
-    // tslint:disable-next-line: only-arrow-functions
-    .catch(function() {
-      console.log("Error al subir imagen");
-    });
+      .doc(usuario.cedula)
+      .update(usuario)
+      // tslint:disable-next-line: only-arrow-functions
+      .then(function() {
+        console.log("Imagen subida con exito");
+      })
+      // tslint:disable-next-line: only-arrow-functions
+      .catch(function() {
+        console.log("Error al subir imagen");
+      });
   }
 }

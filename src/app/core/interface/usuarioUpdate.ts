@@ -4,9 +4,8 @@ export interface UpdateInterface {
     apellido: string;
     telefono: string;
     email: string;
-    contrasenia: string;
     direccion?: string;
-    createdAt?: Date;
+    contrasenia: string;
     rol: number;
     updatedAt?: Date;
     hash?: string;
