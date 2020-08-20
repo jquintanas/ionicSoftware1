@@ -26,11 +26,10 @@ export class NovedadPage implements OnInit {
   ) { }
 
   async ngOnInit() {
-    const token = await this.authService.getToken();
     const headers = {
       'Content-Type': 'application/json',
       // tslint:disable-next-line: object-literal-key-quotes
-      'Authorization': 'Bearer ' + token
+      'Authorization': 'Bearer '
     };
     await this.httpClient.get(environment.rutas.reportaNovelty + this.userInfoService.cedula)
       .subscribe(data => {

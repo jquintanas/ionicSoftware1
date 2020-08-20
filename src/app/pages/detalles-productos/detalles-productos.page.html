@@ -25,49 +25,52 @@
   <ion-slides pager="false" [options]="slideOpts">
     <ion-slide *ngFor="let data of listaImagenes;let i = index">
       <div class="slide">
-        <img [src]="data" onerror="this.src='/assets/img/404.jpg';" [ngClass]="{'ion-hide': banderasLoading[i]}" (load)="desactivarLoading(i)"/>
+        <img [src]="data" onerror="this.src='/assets/img/404.jpg';" [ngClass]="{'ion-hide': banderasLoading[i]}"
+          (load)="desactivarLoading(i)" />
         <img src="/assets/svg/spinner.svg" alt="spinner" *ngIf="banderasLoading[i]">
       </div>
     </ion-slide>
   </ion-slides>
   <div class="actionSheetInferior" [@popOverState]="stateName" *ngIf="!ocultarSheetInferior">
-    <ion-grid class="ion-no-padding">
-      <ion-row>
-        <ion-col size="12" class="ion-no-padding">
-          <ion-buttons *ngIf="show" (click)="bajarSheetFooter()">
-            <ion-button class="btnFlecha">
-              <ion-icon name="chevron-down-outline" color="omipali"></ion-icon>
-            </ion-button>
-          </ion-buttons>
-          <ion-buttons *ngIf="!show" (click)="bajarSheetFooter()">
-            <ion-button class="btnFlecha">
-              <ion-icon name="chevron-up-outline" color="omipali"></ion-icon>
-            </ion-button>
-          </ion-buttons>
-        </ion-col>
-        <ion-col size="12" *ngIf="contenidoFooter">
-          <ion-card>
-            <ion-item style="border-bottom: solid 2px var(--ion-color-omipali);">
-              <ion-label class="ion-text-center colorPrimario ion-text-uppercase">{{nombreProducto}}</ion-label>
-              <ion-button fill="outline" slot="end" color="omipali">
-                <strong class="colorPrimario">${{precioProducto | number: ".2"}}</strong>
+    <ion-content class="sinFondo">
+      <ion-grid class="ion-no-padding">
+        <ion-row>
+          <ion-col size="12" class="ion-no-padding">
+            <ion-buttons *ngIf="show" (click)="bajarSheetFooter()">
+              <ion-button class="btnFlecha">
+                <ion-icon name="chevron-down-outline" color="omipali"></ion-icon>
               </ion-button>
-            </ion-item>
-            <ion-card-content class="ion-text-justify ion-text-wrap textoDescripcion">
-              {{descripcionProducto}}
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col size="12" class="ion-padding" *ngIf="contenidoFooter">
-          <ion-button expand="block" fill="clear" class="btnAddCard" (click)="bajarSheetTop()">
-            Agregar al carrito
-            <ion-icon slot="start" name="cart" color="omipali"></ion-icon>
-          </ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-    <h5 class="promociones">PROMOCIONES</h5>
-    <app-slider-recomendados></app-slider-recomendados>
+            </ion-buttons>
+            <ion-buttons *ngIf="!show" (click)="bajarSheetFooter()">
+              <ion-button class="btnFlecha">
+                <ion-icon name="chevron-up-outline" color="omipali"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+          </ion-col>
+          <ion-col size="12" *ngIf="contenidoFooter">
+            <ion-card>
+              <ion-item style="border-bottom: solid 2px var(--ion-color-omipali);">
+                <ion-label class="ion-text-center colorPrimario ion-text-uppercase">{{nombreProducto}}</ion-label>
+                <ion-button fill="outline" slot="end" color="omipali">
+                  <strong class="colorPrimario">${{precioProducto | number: ".2"}}</strong>
+                </ion-button>
+              </ion-item>
+              <ion-card-content class="ion-text-justify ion-text-wrap textoDescripcion">
+                {{descripcionProducto}}
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+          <ion-col size="12" class="ion-padding" *ngIf="contenidoFooter">
+            <ion-button expand="block" fill="clear" class="btnAddCard" (click)="bajarSheetTop()">
+              Agregar al carrito
+              <ion-icon slot="start" name="cart" color="omipali"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <h5 class="promociones">PROMOCIONES</h5>
+      <app-slider-recomendados class="sinFondo"></app-slider-recomendados>
+    </ion-content>
   </div>
 
   <div class="actionSheetSuperior" [@venta]="stateNameVentas">
