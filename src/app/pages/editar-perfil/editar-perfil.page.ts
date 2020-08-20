@@ -126,8 +126,11 @@ export class EditarPerfilPage implements OnInit {
   async guardarCambios() {
     this.userinfo.usuario = this.userDataForm.get("namesField").value;
     this.userinfo.telefono = this.userDataForm.get("phoneField").value;
-    this.userinfo.direccion = this.setAddress(this.userDataForm.get("directionField").value,
-    this.userDataForm.get("referencia").value);
+    const direcciones = {
+      direccion: this.userDataForm.get("directionField").value,
+      referencia: this.userDataForm.get("referencia").value,
+      coordenadas: this.coordenadas,
+    };
     const nombre = (this.userinfo.usuario).split(' ');
     this.datosUsuario = {
       cedula: this.userinfo.cedula,
@@ -135,7 +138,8 @@ export class EditarPerfilPage implements OnInit {
       apellido: nombre[1],
       telefono: this.userinfo.telefono,
       email: this.userinfo.email,
-      direccion: "{\"direccion\":\"ssssssssssssssss\",\"referencia\":\"ssssssssssssssss\",\"coordenadas\":\"-79.9336,-2.0649\"}",
+      // direccion: "{\"direccion\":\"ssssssssssssssss\",\"referencia\":\"ssssssssssssssss\",\"coordenadas\":\"-79.9336,-2.0649\"}",
+      direccion: JSON.stringify(direcciones),
       contrasenia: "12345678",
       rol: 3
     };
@@ -144,19 +148,6 @@ export class EditarPerfilPage implements OnInit {
     }).catch ((err) => {
       console.log(err);
     });
-  }
-
-  setAddress(address: string, reference: string) {
-    const direccion = {
-      // tslint:disable-next-line: object-literal-key-quotes
-      "direccion" : address,
-      // tslint:disable-next-line: object-literal-key-quotes
-      "referencia": reference,
-      // tslint:disable-next-line: object-literal-key-quotes
-      "coordenadas": this.coordenadas
-    };
-    return direccion;
-    console.log(direccion);
   }
 
   validarCambiosDatos() {
