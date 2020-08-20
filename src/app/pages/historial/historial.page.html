@@ -28,7 +28,7 @@
       <br><br>
 
       <section>
-        <div class="center" *ngIf="visible == yes">
+        <div class="center" *ngIf="visible == 'yes'">
           <ion-label>TIEMPO RESTANTE: {{time | async}}</ion-label> <BR>
         </div>
 
@@ -68,7 +68,7 @@
       </section>
 
       <section >
-        <div *ngIf="visible == yes">
+        <div *ngIf="visible == 'yes'">
         <ion-card class="delivery">
           <ion-item>
             <ion-avatar item-start>
@@ -93,7 +93,7 @@
       </div>
       </section>
 
-      <div *ngIf="visible == yes" >
+      <div *ngIf="visible == 'yes'" >
       <ion-card >
         <ion-item>
           <ion-row>
@@ -101,7 +101,7 @@
                 <img src="assets/icon/checkverde.png">
             </ion-col>
             <ion-col size='7'>
-              PEDIDO #{{pedido.idpedido}}
+              PEDIDO #{{idpedido}}
             </ion-col>
             <ion-col size="3">
               Total ${{valorTotal}}
@@ -140,7 +140,7 @@
     </div>
 
 
-    <div *ngIf="visible == no">
+    <div *ngIf="visible == 'no'">
         <H1>NO TIENES PEDIDOS ACTIVOS</H1>
     </div>
 
@@ -174,7 +174,7 @@
               <ion-label>{{pedido.amountPast}}</ion-label><br>
             </ion-col>
             <ion-col>
-              <button class="boton" ion-button icon-start clear small (click)="goCarrito()">
+              <button class="boton" ion-button icon-start clear small (click)="repertirCompra()">
                 <ion-label>REPETIR</ion-label>
               </button>
             </ion-col>

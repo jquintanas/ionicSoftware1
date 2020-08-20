@@ -14,6 +14,7 @@ export class NovedadesService {
   description: string;
   noveltyList: number[];
   reportUserName: string;
+  visible: string;
   constructor(
     private httpClient: HttpClient,
     private userInfoService: UserInfoService,
@@ -21,8 +22,8 @@ export class NovedadesService {
     private alertService: AlertsService,
   ) { }
 
-   getNovedadesReportadas() {
-     this.httpClient.get(environment.rutas.reportaNovelty + this.userInfoService.cedula)
+   async getNovedadesReportadas() {
+     await this.httpClient.get(environment.rutas.reportaNovelty + this.userInfoService.cedula)
       .toPromise().then((data) => {
         console.log(data);
         if (data != null) {

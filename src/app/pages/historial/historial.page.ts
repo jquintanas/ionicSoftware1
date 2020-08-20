@@ -7,7 +7,6 @@ import { CarritoService } from 'src/app/core/services/cart/carrito.service';
 import { ProductosService } from 'src/app/core/services/cart/productos.service';
 import { RepartidorService } from 'src/app/core/services/repartidor/repartidor.service';
 import { PedidoService } from 'src/app/core/services/pedido/pedido.service';
-import { AuthService } from 'src/app/core/services/auth/auth.service';
 
 @Component({
   selector: 'app-historial',
@@ -34,16 +33,12 @@ export class HistorialPage implements OnInit {
   productName: any;
   cancelButtonHidden: boolean = true;
   estadoPedido: number;
-  idPedidoPast: number;
   fechaPedidoPast: any;
-  metodoEnvioPast: string;
-  metodoPagoPast: string;
-  amountPast: number;
   productNamePast: string[];
   listaProductos: any;
   listaProductosPass: any;
   valorTotalPast: number;
-  visible = "no";
+  visible: string;
   listaPedidos: any;
   constructor(
     private alertService: AlertsService,
@@ -52,7 +47,6 @@ export class HistorialPage implements OnInit {
     private productoService: ProductosService,
     private repartidorService: RepartidorService,
     private pedidoService: PedidoService,
-    private authService: AuthService,
   ) { }
 
   ngOnInit() {
@@ -63,7 +57,7 @@ export class HistorialPage implements OnInit {
     this.alertService.cancelAlert();
   }
 
-  goCarrito() {
+  repertirCompra() {
     this.router.navigateByUrl('carrito-compras');
   }
 
@@ -106,8 +100,10 @@ export class HistorialPage implements OnInit {
   } else if (event.detail.value == "active") {
   if (this.carritoService.datosPedido != null) {
     this.visible = "yes";
+    this.estadoPedido = 0;
     this.startTimer(20);
     this.setOrderInfo();
+    console.log(this.metodoEnvio);
     this.nombreProducto();
     this.getEstadoByIDPedido(this.carritoService.datosPedido.idPedido);
     this.valorTotal = this.carritoService.datosPedido.total;
@@ -115,8 +111,8 @@ export class HistorialPage implements OnInit {
     this.idPedido = this.carritoService.datosPedido.idPedido;
     this.hora = this.carritoService.datosPedido.horaDeRetiro;
   } else {
+    this.visible = "no";
     // SI NO HAY PEDIDO
-    this.estadoPedido = 4;
   }
 
 }

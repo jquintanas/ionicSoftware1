@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content>
-    <ion-card>
+    <ion-card *ngIf="visible == 'true'">
         <ion-item>
         <ion-avatar item-start>
             <ion-icon name="bookmark-outline" class="novedadIcon"></ion-icon>
@@ -24,5 +24,17 @@
           <ion-label class="boldletter">DESCRIPCIÓN: </ion-label><br>
           {{description}}<br>
         </ion-card-content>
+      </ion-card>
+
+      <ion-card *ngIf="visible == 'false'">
+          <ion-item>
+              <ion-avatar>
+                  <ion-icon name="happy-outline" class="novedadIcon"></ion-icon>
+              </ion-avatar>
+            </ion-item>
+
+            <ion-card-content>
+              <ion-label> No tienes novedades registradas</ion-label>
+            </ion-card-content>
       </ion-card>
 </ion-content>
