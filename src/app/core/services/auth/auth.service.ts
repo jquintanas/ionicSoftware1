@@ -28,7 +28,6 @@ export class AuthService {
     private fb: Facebook,
     private httpClient: HttpClient,
     private router: Router,
-    // private storage: Storage,
     public loadingController: LoadingController,
     private userInfo: UserInfoService
   ) { }

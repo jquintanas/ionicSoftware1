@@ -36,6 +36,7 @@ ion-icon {
   text-align : center;
   font-weight: bold;
   font-size  : large;
+  color: var(--ion-color-omipali);
 }
 
 
@@ -177,4 +178,8 @@ ion-slides {
 .promociones {
   margin-left: 16px;
   color      : white;
+}
+
+.sinFondo {
+  --background: transparent !important;
 }
