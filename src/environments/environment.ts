@@ -21,7 +21,7 @@ export const environment = {
     urlGetUser: 'https://omipalisf2.herokuapp.com/api/usersS/create',
     urlToken :  "https://omipalisf2.herokuapp.com/api/login/token",
     urlLogout : "https://omipalisf2.herokuapp.com/api/login/reject",
-    urlHistorialUsuario: "/user",
+    urlHistorialUsuario: "https://omipalisf2.herokuapp.com/api/orders/user",
     updateUser: 'https://omipalisf2.herokuapp.com/api/usersS/update/',
     reportaNovelty: 'https://omipalisf2.herokuapp.com/api/noveltys/reporta/'
   },
