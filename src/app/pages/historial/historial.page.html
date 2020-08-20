@@ -28,7 +28,7 @@
       <br><br>
 
       <section>
-        <div class="center">
+        <div class="center" *ngIf="visible == yes">
           <ion-label>TIEMPO RESTANTE: {{time | async}}</ion-label> <BR>
         </div>
 
@@ -67,7 +67,8 @@
             </div>
       </section>
 
-      <section>
+      <section >
+        <div *ngIf="visible == yes">
         <ion-card class="delivery">
           <ion-item>
             <ion-avatar item-start>
@@ -89,8 +90,10 @@
             </ion-row>
           </ion-card-content>
         </ion-card>
+      </div>
       </section>
 
+      <div *ngIf="visible == yes">
       <ion-card>
         <ion-item>
           <ion-row>
@@ -112,7 +115,7 @@
               <ion-label>{{metodoEnvio}} {{hora}}</ion-label><br>
               <ion-label class="tituloPedido">Dirección:</ion-label>
               <ion-label> {{direccionEnvio}}</ion-label><br>
-              <ion-label class="tituloPedido">Forma de Pago: </ion-label>
+              <ion-label class="tituloPedido">Forma de Pago:</ion-label>
               <ion-label>{{metodoPago}}</ion-label><br>
               <ion-label class="tituloPedido">Cubiertos: </ion-label>
               <ion-label>{{cubiertos}}</ion-label><br><br>
@@ -134,6 +137,7 @@
           </ion-row>
         </ion-card-content>
       </ion-card>
+    </div>
     </section>
   </div>
 
@@ -141,19 +145,27 @@
     <section>
       <ion-card>
         <ion-item>
-          <ion-avatar item-start>
-            <img src="assets/icon/check.png">
-          </ion-avatar>
-          <ion-card-header>PEDIDO {{idPedidoPast}}</ion-card-header>
-          <ion-card-subtitle>{{fechaPedidoPast}}</ion-card-subtitle>
+          <ion-row>
+            <ion-col size="2">
+              <img src="assets/icon/check.png">
+            </ion-col>
+            <ion-col size='7'>
+              PEDIDO #{{idPedidoPast}}
+            </ion-col>
+            <ion-col size="3">
+              Total ${{valorTotalPast}}
+            </ion-col>
+          </ion-row>
 
         </ion-item>
 
         <ion-card-content>
           <ion-row>
             <ion-col>
-              <ion-label>Metodo de pago {{metodoEnvioPast}}</ion-label><br>
-              <ion-label>Forma de pago: {{metodoPagoPast}}</ion-label><br>
+              <ion-label class="tituloPedido">Despacho: </ion-label>
+              <ion-label>{{metodoEnvioPast}}</ion-label><br>
+              <ion-label class="tituloPedido">Cant Productos: </ion-label>
+              <ion-label>{{amountPast}}</ion-label><br>
             </ion-col>
             <ion-col>
               <button class="boton" ion-button icon-start clear small (click)="goCarrito()">
@@ -162,8 +174,12 @@
             </ion-col>
           </ion-row>
 
-
-          <ion-label>{{amountPast}} {{productNamePast}}</ion-label><br>
+          <ion-label class="tituloPedido">PEDIDO: </ion-label>
+          <ion-row *ngFor="let producto of listaProductosPass">
+            <ion-col size="12">
+                {{ producto.producto }}
+            </ion-col>
+          </ion-row>
 
         </ion-card-content>
       </ion-card>

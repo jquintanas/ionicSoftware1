@@ -45,7 +45,7 @@ export class EditarPerfilPage implements OnInit {
   public user: string;
 
   ngOnInit() {
-    this.getAdress(this.userinfo.direccion);
+    this.getAddress(this.userinfo.direccion);
     this.buildForm();
   }
 
@@ -73,7 +73,7 @@ export class EditarPerfilPage implements OnInit {
     return " ";
   }
 
-  getAdress(address: any) {
+  getAddress(address: any) {
     const obj = JSON.parse(address);
     this.direccion = obj.direccion;
     this.referencia = obj.referencia;
@@ -135,7 +135,9 @@ export class EditarPerfilPage implements OnInit {
     console.log(headers);
     this.userinfo.usuario = this.userDataForm.get("namesField").value;
     this.userinfo.telefono = this.userDataForm.get("phoneField").value;
-    this.userinfo.direccion = this.userDataForm.get("directionField").value;
+    this.userinfo.direccion = this.setAddress(this.userDataForm.get("directionField").value,
+    this.userDataForm.get("referencia").value);
+    console.log("FRAN " + this.userinfo.direccion);
     this.datosUsuario = {
       cedula: this.userinfo.cedula,
       nombre: this.userinfo.nombre,
@@ -151,8 +153,16 @@ export class EditarPerfilPage implements OnInit {
       console.log("ngresado correctamente");
     }).catch ((err) => {
       console.log(err);
-    })
-    ;
+    });
+  }
+
+  setAddress(address: string, reference: string) {
+    const direccion = {
+      direccion: address,
+      referencia: reference,
+      coordenadas: this.coordenadas
+    };
+    return direccion;
   }
 
   onFileSelected(event) {

@@ -107,27 +107,10 @@ export class AuthService {
     this.router.navigateByUrl("login");
   }
 
-  getToken() {
-    // return this.storage.get(this.JWT_TOKEN);
-  }
-
-  async getToken2(): Promise<any> {
-    // return await this.storage.get(this.JWT_TOKEN).then(data => {
-    //   return data;
-    // });
-  }
-
-
-  private removeTokens() {
-    // this.storage.remove(this.JWT_TOKEN);
-    // this.storage.remove(this.REFRESH_TOKEN);
-  }
-
   private doLogoutUser() {
     this.token = null;
     this.isAuth = false;
     this.dataUser = null;
     this.idUserFirebase = "";
-    this.removeTokens();
   }
 }

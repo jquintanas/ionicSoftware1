@@ -15,7 +15,7 @@ export class UserInfoService {
   public apellido: string = "";
   public telefono: string = "";
   public email: string = "";
-  public direccion: string = "";
+  public direccion: any;
   public usuario: string = "";
   public referencia: string = "";
   constructor(

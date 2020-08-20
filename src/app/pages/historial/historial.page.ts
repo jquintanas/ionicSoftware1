@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { IonSegment } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
-import { HistorialService } from 'src/app/core/services/user/historial.service';
 import { AlertsService } from 'src/app/core/services/alerts/alerts.service';
 import { CarritoService } from 'src/app/core/services/cart/carrito.service';
 import { ProductosService } from 'src/app/core/services/cart/productos.service';
 import { RepartidorService } from 'src/app/core/services/repartidor/repartidor.service';
+import { PedidoService } from 'src/app/core/services/pedido/pedido.service';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
 
 @Component({
   selector: 'app-historial',
@@ -32,32 +33,35 @@ export class HistorialPage implements OnInit {
   hora: Date;
   productName: any;
   cancelButtonHidden: boolean = true;
-  estadoPedido: number = 1;
-  idPedidoPast: any;
+  estadoPedido: number;
+  idPedidoPast: number;
   fechaPedidoPast: any;
-  metodoEnvioPast: any;
-  metodoPagoPast: any;
-  amountPast: any;
-  productNamePast: any;
+  metodoEnvioPast: string;
+  metodoPagoPast: string;
+  amountPast: number;
+  productNamePast: string[];
   listaProductos: any;
+  listaProductosPass: any;
+  valorTotalPast: number;
+  visible = "no";
   constructor(
-    private historialService: HistorialService,
     private alertService: AlertsService,
     private router: Router,
     private carritoService: CarritoService,
     private productoService: ProductosService,
     private repartidorService: RepartidorService,
+    private pedidoService: PedidoService,
+    private authService: AuthService,
   ) { }
 
   ngOnInit() {
-    this.startTimer(20);
-    this.setOrderInfo();
-    this.nombreProducto();
-    this.getEstadoByIDPedido(this.carritoService.datosPedido.idPedido);
-    this.valorTotal = this.carritoService.datosPedido.total;
-    this.amount = this.carritoService.datosPedido.cantidades;
-    this.idPedido = this.carritoService.datosPedido.idPedido;
-    this.hora = this.carritoService.datosPedido.horaDeRetiro;
+    const token = this.authService.token.token;
+    const headers = {
+      'Content-Type': 'application/json',
+      // tslint:disable-next-line: object-literal-key-quotes
+      'Authorization': 'Bearer ' + token
+    };
+    this.pedidoService.getOrderHistory(headers);
   }
 
   cancelAlert() {
@@ -103,15 +107,27 @@ export class HistorialPage implements OnInit {
   cambioSegment(event: any) {
     console.log(event.detail.value);
     if (event.detail.value == "past") {
-      this.historialService.obtenerHistorial().toPromise().then(
-        data => {
-          console.log(data);
-        }
-      ).catch(
-        err => {
-          console.log(err);
-        }
-      );
+      this.idPedidoPast = this.pedidoService.idpedido;
+      this.metodoEnvioPast = this.pedidoService.entregaDomicilio;
+      this.amountPast = this.pedidoService.cantidad;
+      this.listaProductosPass = this.pedidoService.listaProductos;
+      this.valorTotalPast = this.pedidoService.subtotal;
+    } else if (event.detail.value == "active") {
+      if (this.carritoService.datosPedido != null) {
+        this.visible = "yes";
+        this.startTimer(20);
+        this.setOrderInfo();
+        this.nombreProducto();
+        this.getEstadoByIDPedido(this.carritoService.datosPedido.idPedido);
+        this.valorTotal = this.carritoService.datosPedido.total;
+        this.amount = this.carritoService.datosPedido.cantidades;
+        this.idPedido = this.carritoService.datosPedido.idPedido;
+        this.hora = this.carritoService.datosPedido.horaDeRetiro;
+      } else {
+        // SI NO HAY PEDIDO
+        this.estadoPedido = 4;
+      }
+
     }
   }
 
