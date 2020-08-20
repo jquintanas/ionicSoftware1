@@ -93,15 +93,15 @@
       </div>
       </section>
 
-      <div *ngIf="visible == yes">
-      <ion-card>
+      <div *ngIf="visible == yes" >
+      <ion-card >
         <ion-item>
           <ion-row>
             <ion-col size="2">
                 <img src="assets/icon/checkverde.png">
             </ion-col>
             <ion-col size='7'>
-              PEDIDO #{{idPedido}}
+              PEDIDO #{{pedido.idpedido}}
             </ion-col>
             <ion-col size="3">
               Total ${{valorTotal}}
@@ -138,22 +138,28 @@
         </ion-card-content>
       </ion-card>
     </div>
+
+
+    <div *ngIf="visible == no">
+        <H1>NO TIENES PEDIDOS ACTIVOS</H1>
+    </div>
+
     </section>
   </div>
 
   <div *ngIf="segment == 'past'">
     <section>
-      <ion-card>
+      <ion-card *ngFor="let pedido of listaPedidos">
         <ion-item>
           <ion-row>
             <ion-col size="2">
               <img src="assets/icon/check.png">
             </ion-col>
             <ion-col size='7'>
-              PEDIDO #{{idPedidoPast}}
+              PEDIDO #{{ pedido.idPedidoPast }}
             </ion-col>
             <ion-col size="3">
-              Total ${{valorTotalPast}}
+              Total ${{ pedido.valorTotalPast }}
             </ion-col>
           </ion-row>
 
@@ -163,9 +169,9 @@
           <ion-row>
             <ion-col>
               <ion-label class="tituloPedido">Despacho: </ion-label>
-              <ion-label>{{metodoEnvioPast}}</ion-label><br>
+              <ion-label>{{ pedido.metodoEnvioPast }}</ion-label><br>
               <ion-label class="tituloPedido">Cant Productos: </ion-label>
-              <ion-label>{{amountPast}}</ion-label><br>
+              <ion-label>{{pedido.amountPast}}</ion-label><br>
             </ion-col>
             <ion-col>
               <button class="boton" ion-button icon-start clear small (click)="goCarrito()">

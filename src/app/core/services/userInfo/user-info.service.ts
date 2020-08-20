@@ -25,14 +25,13 @@ export class UserInfoService {
   ) { }
 
 
-  setUserInfo(datos: UpdateInterface, headers: any) {
+  setUserInfo(datos: UpdateInterface) {
     const hash = this.seguridad.hashJSON(datos);
     datos.hash = hash;
     datos.cedula = this.cedula;
-    datos.updatedAt = new Date();
     console.log(datos);
     const url = environment.rutas.updateUser + datos.cedula;
-    return this.http.put(url, datos, { headers });
+    return this.http.put(url, datos);
   }
 
   pushProductos(usuario: Usuario) {

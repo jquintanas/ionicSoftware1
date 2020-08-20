@@ -78,7 +78,6 @@ export class EditarPerfilPage implements OnInit {
     this.direccion = obj.direccion;
     this.referencia = obj.referencia;
     this.coordenadas = obj.coordenadas;
-    console.log(this.userinfo.direccion);
   }
 
   buildForm() {
@@ -125,32 +124,23 @@ export class EditarPerfilPage implements OnInit {
   }
 
   async guardarCambios() {
-    const token = await this.authService.token.token;
-    console.log(token);
-    const headers = {
-      'Content-Type': 'application/json',
-      // tslint:disable-next-line: object-literal-key-quotes
-      'Authorization': 'Bearer ' + token
-    };
-    console.log(headers);
     this.userinfo.usuario = this.userDataForm.get("namesField").value;
     this.userinfo.telefono = this.userDataForm.get("phoneField").value;
     this.userinfo.direccion = this.setAddress(this.userDataForm.get("directionField").value,
     this.userDataForm.get("referencia").value);
-    console.log("FRAN " + this.userinfo.direccion);
+    const nombre = (this.userinfo.usuario).split(' ');
     this.datosUsuario = {
       cedula: this.userinfo.cedula,
-      nombre: this.userinfo.nombre,
-      apellido: this.userinfo.apellido,
+      nombre: nombre[0],
+      apellido: nombre[1],
       telefono: this.userinfo.telefono,
       email: this.userinfo.email,
-      direccion: this.userinfo.direccion,
+      direccion: "{\"direccion\":\"ssssssssssssssss\",\"referencia\":\"ssssssssssssssss\",\"coordenadas\":\"-79.9336,-2.0649\"}",
       contrasenia: "12345678",
       rol: 3
     };
-    console.log(this.datosUsuario);
-    this.userinfo.setUserInfo(this.datosUsuario, headers).toPromise().then(data => {
-      console.log("ngresado correctamente");
+    this.userinfo.setUserInfo(this.datosUsuario).toPromise().then(data => {
+      console.log("ingresado correctamente");
     }).catch ((err) => {
       console.log(err);
     });
@@ -158,44 +148,15 @@ export class EditarPerfilPage implements OnInit {
 
   setAddress(address: string, reference: string) {
     const direccion = {
-      direccion: address,
-      referencia: reference,
-      coordenadas: this.coordenadas
+      // tslint:disable-next-line: object-literal-key-quotes
+      "direccion" : address,
+      // tslint:disable-next-line: object-literal-key-quotes
+      "referencia": reference,
+      // tslint:disable-next-line: object-literal-key-quotes
+      "coordenadas": this.coordenadas
     };
     return direccion;
-  }
-
-  onFileSelected(event) {
-    // this.spinner.show();
-    this.selectedFile = event.target.files[0];
-    this.uploadFile(this.selectedFile);
-    // this.spinner.hide();
-  }
-
-  uploadFile(file: any) {
-    for (let i = 0; i < file.length; i++) {
-      const mimeType = file[i].type;
-      if (mimeType.match(/image\/*/) == null) {
-        return;
-      }
-
-      this.allfiles.push(file[i]);
-      console.log(file[i]);
-      const reader = new FileReader();
-      reader.onload = (fileData) => {
-        this.previewUrl = reader.result;
-        this.Urls.push(this.previewUrl);
-      };
-      reader.readAsDataURL(file[i]);
-    }
-  }
-
-  uploadPhoto() {
-    const usuario: Usuario = {
-      imagen: this.previewUrl,
-    };
-
-    this.userinfo.updatePhotoUser(usuario);
+    console.log(direccion);
   }
 
   validarCambiosDatos() {

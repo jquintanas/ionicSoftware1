@@ -1,8 +1,10 @@
-export interface DetalleHistorial {
-    idpedido: string;
-    producto: string;
+export interface PedidoHistorial {
+    idpedido: number;
+    idcompra: number;
+    idproducto: string;
     cantidad: number;
-    valor: number;
-    metodoEnvio: boolean;
-    fecha: string;
+    subtotal: number;
+    cubiertos: boolean;
+    estado: string;
+    compra: any [];
 }
