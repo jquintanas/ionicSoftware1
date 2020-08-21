@@ -3,7 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { ProductosService } from 'src/app/core/services/cart/productos.service';
 import { AlertsService } from 'src/app/core/services/alerts/alerts.service';
-// import { PedidoHistorial } from 'src/app/core/interface/historial-pedido';
+import { AngularFirestore } from "@angular/fire/firestore";
+import { map } from 'rxjs/operators';
+import { Pedidos } from 'src/app/core/interface/modelNOSQL/pedido';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +29,7 @@ export class PedidoService {
     private httpClient: HttpClient,
     private productoService: ProductosService,
     private alertService: AlertsService,
+    private db: AngularFirestore
   ) { }
 
   getOrderHistory() {
@@ -107,5 +110,15 @@ export class PedidoService {
     }
     this.nombreProducto();
     console.log(this.historial);
+  }
+
+  activeOrder(cedula: string) {
+    return this.db.collection(environment.nombresTablasFirebase.pedidos, ref => ref.where("idUsuario", "==", cedula))
+    .snapshotChanges().pipe(map(pedido => {
+      return pedido.map(p => {
+        console.log( p.payload.doc.data());
+        return p.payload.doc.data() as Pedidos;
+      });
+    }));
   }
 }
