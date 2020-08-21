@@ -43,7 +43,6 @@ export class PedidoService {
   }
 
   setHistory(data) {
-    // for (let i = 0; i < data.length; i++) {
     this.idpedido = data.idpedido;
     this.idcompra = data.idcompra;
     this.idproducto = (data.idproducto).split(',');
@@ -53,7 +52,6 @@ export class PedidoService {
     this.estado = data.estado;
     this.compra = data.compra;
     this.setEnvio(this.compra);
-    // }
   }
 
   setEnvio(datos) {
@@ -75,8 +73,7 @@ export class PedidoService {
         dt => {
           const productName = dt[0].nombre;
           productoFinal = {
-            // tslint:disable-next-line: object-literal-key-quotes
-            'producto': productName
+            producto: productName
           };
           this.listaProductos.push(productoFinal);
         },
@@ -94,16 +91,11 @@ export class PedidoService {
     for (let i = 0; i < Object.keys(this.listaPedidos).length; i++) {
       this.setHistory(this.listaPedidos[i]);
       infoPedido = {
-        // tslint:disable-next-line: object-literal-key-quotes
-        'idPedidoPast': this.idpedido,
-        // tslint:disable-next-line: object-literal-key-quotes
-        'valorTotalPast': this.subtotal,
-        // tslint:disable-next-line: object-literal-key-quotes
-        'metodoEnvioPast': this.entregaDomicilio,
-        // tslint:disable-next-line: object-literal-key-quotes
-        'amountPast': this.cantidad,
-        // tslint:disable-next-line: object-literal-key-quotes
-        'listaProductosPass': this.idproducto
+        idPedidoPast: this.idpedido,
+        valorTotalPast: this.subtotal,
+        metodoEnvioPast: this.entregaDomicilio,
+        amountPast: this.cantidad,
+        listaProductosPass: this.idproducto
       };
       this.historial.push(infoPedido);
       console.log(this.historial);
@@ -120,5 +112,9 @@ export class PedidoService {
         return p.payload.doc.data() as Pedidos;
       });
     }));
+  }
+
+  verDetalle() {
+    
   }
 }

@@ -9,7 +9,7 @@ import { RepartidorService } from 'src/app/core/services/repartidor/repartidor.s
 import { PedidoService } from 'src/app/core/services/pedido/pedido.service';
 import { UserInfoService } from 'src/app/core/services/userInfo/user-info.service';
 import { Pedidos } from 'src/app/core/interface/modelNOSQL/pedido';
-
+import { NovedadesService } from 'src/app/core/services/novedades/novedades.service';
 @Component({
   selector: 'app-historial',
   templateUrl: './historial.page.html',
@@ -52,6 +52,7 @@ export class HistorialPage implements OnInit {
     private repartidorService: RepartidorService,
     private pedidoService: PedidoService,
     private userInfo: UserInfoService,
+    private novedadService: NovedadesService,
   ) { }
 
   ngOnInit() {
@@ -60,6 +61,14 @@ export class HistorialPage implements OnInit {
 
   cancelAlert() {
     this.alertService.cancelAlert();
+    const novedad = {
+      idusuarioReporta: this.userInfo.cedula,
+      idusuarioReportado: "0968645215",
+      descripcion: "pedEquivocado"
+    };
+    console.log(novedad);
+    this.novedadService.createNovelty(novedad);
+    this.router.navigateByUrl("/");
   }
 
   repertirCompra() {
@@ -120,21 +129,16 @@ export class HistorialPage implements OnInit {
     const cant = this.pedidoAct.cantidades;
     let productoFinal = {};
     this.listaProductos = [];
-    console.log(this.productID);
-    console.log(cant);
     for (let i = 0; i < this.productID.length; i++) {
       const idProd = this.productID[i];
       this.productoService.obtenerProductosPorID(idProd).subscribe(
         dt => {
           this.productName = dt[0].nombre;
           productoFinal = {
-            // tslint:disable-next-line: object-literal-key-quotes
-            'cantidad': cant[i],
-            // tslint:disable-next-line: object-literal-key-quotes
-            'producto': this.productName
+            cantidad: cant[i],
+            producto: this.productName
           };
           this.listaProductos.push(productoFinal);
-          console.log(this.listaProductos);
         },
         async err => {
           console.log(err);
@@ -182,7 +186,6 @@ export class HistorialPage implements OnInit {
   }
 
   getOrderState(estado: number) {
-    // ESTADOS: 0:Confirmado - 1: Preparando - 2: Enviando
     if (estado == 0) {
       this.startTimer(17);
       this.mostrarBoton = 'yes';
@@ -198,9 +201,7 @@ export class HistorialPage implements OnInit {
   getEstadoByIDPedido(idPedido: string) {
     this.repartidorService.obtenerEstadoPorIdPedido(idPedido)
       .subscribe(dt => {
-        console.log(dt);
         this.estadoPedido = dt[0].estadoDelPedido;
-        console.log(this.estadoPedido);
       },
         async err => {
           console.log(err);
@@ -211,4 +212,5 @@ export class HistorialPage implements OnInit {
   irAlHome() {
     this.router.navigateByUrl("/");
   }
+
 }

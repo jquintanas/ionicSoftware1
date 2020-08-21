@@ -6,6 +6,8 @@ import { LoadingController } from '@ionic/angular';
   providedIn: 'root'
 })
 export class AlertsService {
+cancelMotive: string;
+descripcion: any;
 
   constructor(
     public loadingController: LoadingController,
@@ -62,13 +64,13 @@ export class AlertsService {
           type: 'radio',
           name: 'motivo',
           label: 'Pedido equivocado',
-          value: 'pedidoEquivocad'
+          value: 'pedEquivocado'
         },
         {
           type: 'radio',
           name: 'motivo',
-          label: 'Repartidor demorado',
-          value: 'repDemorado'
+          label: 'Pedido demorado',
+          value: 'pedDemorado'
         }
       ],
       buttons: [
@@ -79,7 +81,9 @@ export class AlertsService {
         }, {
           text: 'Enviar',
           role: 'cancelar',
-          handler: () => {
+          handler: (data) => {
+            this.cancelMotive = data;
+            console.log(this.cancelMotive);
             this.motiveAlert();
           }
         }
@@ -93,7 +97,7 @@ export class AlertsService {
       header: 'Motivo',
       inputs: [
         {
-          name: 'name1',
+          name: 'descripcion',
           type: 'text',
           placeholder: 'Cuentanos que paso con tu pedido'
         }
@@ -102,7 +106,9 @@ export class AlertsService {
         {
           text: 'Enviar',
           role: 'cancelar',
-          handler: () => {
+          handler: (data) => {
+            this.descripcion = data;
+            console.log(this.descripcion);
           }
         }]
     });
