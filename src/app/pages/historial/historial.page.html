@@ -111,7 +111,7 @@
 
         <ion-card-content>
           <ion-row>
-            <ion-col>
+            <ion-col size="9"> 
               <ion-label>{{metodoEnvio}} {{hora}}</ion-label><br>
               <ion-label class="tituloPedido">Dirección:</ion-label>
               <ion-label> {{direccionEnvio}}</ion-label><br>
@@ -120,8 +120,8 @@
               <ion-label class="tituloPedido">Cubiertos: </ion-label>
               <ion-label>{{cubiertos}}</ion-label><br><br>
             </ion-col>
-            <ion-col>
-              <button class="boton" (click)="cancelAlert()" ion-button icon-start clear small id="cancelButton" hidden="false">
+            <ion-col size="3" >
+              <button class="boton" (click)="cancelAlert()" *ngIf="mostrarBoton == 'yes'" ion-button icon-start clear small id="cancelButton">
                 <ion-label >CANCELAR</ion-label>
               </button>
             </ion-col>

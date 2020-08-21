@@ -43,6 +43,7 @@ export class HistorialPage implements OnInit {
   visible: string;
   listaPedidos: any;
   pedidoAct: Pedidos;
+  mostrarBoton: string;
   constructor(
     private alertService: AlertsService,
     private router: Router,
@@ -104,9 +105,11 @@ export class HistorialPage implements OnInit {
             this.startTimer(20);
             this.setOrderInfo();
             this.nombreProducto();
+            this.getOrderState(this.pedidoAct.estadoDelPedido);
             this.getEstadoByIDPedido(this.pedidoAct.idPedido);
           } else {
             this.visible = "no";
+            this.estadoPedido = 4;
           }
         });
     }
@@ -181,29 +184,14 @@ export class HistorialPage implements OnInit {
   getOrderState(estado: number) {
     // ESTADOS: 0:Confirmado - 1: Preparando - 2: Enviando
     if (estado == 0) {
-      this.estadoPedido = 0;
       this.startTimer(17);
-      this.showCancelButton();
+      this.mostrarBoton = 'yes';
     } else if (estado == 1) {
-      this.estadoPedido = 1;
       this.startTimer(15);
-      this.showCancelButton();
+      this.mostrarBoton = 'no';
     } else if (estado == 2) {
-      this.estadoPedido = 2;
       this.startTimer(10);
-    }
-  }
-
-  showCancelButton() {
-    if (this.cancelButtonHidden == true) {
-      this.cancelButtonHidden = false;
-      document.getElementById("cancelButton").hidden = false;
-
-    } else if (this.cancelButtonHidden === false) {
-
-      this.cancelButtonHidden = true;
-      document.getElementById("cancelButton").hidden = true;
-
+      this.mostrarBoton = 'no';
     }
   }
 
