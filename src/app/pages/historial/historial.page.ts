@@ -8,6 +8,7 @@ import { ProductosService } from 'src/app/core/services/cart/productos.service';
 import { RepartidorService } from 'src/app/core/services/repartidor/repartidor.service';
 import { PedidoService } from 'src/app/core/services/pedido/pedido.service';
 import { UserInfoService } from 'src/app/core/services/userInfo/user-info.service';
+import { Pedidos } from 'src/app/core/interface/modelNOSQL/pedido';
 
 @Component({
   selector: 'app-historial',
@@ -41,6 +42,7 @@ export class HistorialPage implements OnInit {
   valorTotalPast: number;
   visible: string;
   listaPedidos: any;
+  pedidoAct: Pedidos;
   constructor(
     private alertService: AlertsService,
     private router: Router,
@@ -74,14 +76,6 @@ export class HistorialPage implements OnInit {
     this.startTimer(20);
   }
 
-  controlProgressBar(estado: string) {
-    if (estado == "alistando") {
-      this.startTimer(15);
-    } else if (estado == "enviando") {
-      this.startTimer(10);
-    }
-  }
-
   updateTimeValue() {
     let minutes: any = this.timer / 60;
     let seconds: any = this.timer % 60;
@@ -102,19 +96,15 @@ export class HistorialPage implements OnInit {
     } else if (event.detail.value == "active") {
       this.pedidoService.activeOrder(this.userInfo.cedula)
         .subscribe((dt) => {
-          console.log(dt);
+          this.pedidoAct = dt[0];
+          console.log(this.pedidoAct);
           if (dt.length > 0) {
             this.visible = "yes";
             this.estadoPedido = 0;
             this.startTimer(20);
-            // this.setOrderInfo();
-            // console.log(this.metodoEnvio);
-            // this.nombreProducto();
-            // this.getEstadoByIDPedido(this.carritoService.datosPedido.idPedido);
-            this.valorTotal = dt[0].total;
-            this.idPedido = dt[0].idPedido;
-            this.amount = dt[0].cantidades;
-            // this.hora = dt[0].hora;
+            this.setOrderInfo();
+            this.nombreProducto();
+            this.getEstadoByIDPedido(this.pedidoAct.idPedido);
           } else {
             this.visible = "no";
           }
@@ -123,8 +113,8 @@ export class HistorialPage implements OnInit {
   }
 
   nombreProducto() {
-    this.productID = this.carritoService.datosPedido.productos;
-    const cant = this.carritoService.datosPedido.cantidades;
+    this.productID = this.pedidoAct.productos;
+    const cant = this.pedidoAct.cantidades;
     let productoFinal = {};
     this.listaProductos = [];
     console.log(this.productID);
@@ -165,25 +155,27 @@ export class HistorialPage implements OnInit {
   }
 
   setOrderInfo() {
-    if (this.carritoService.datosPedido.isDomicilio == true) {
+    if (this.pedidoAct.isDomicilio == true) {
       this.metodoEnvio = "Envio a domiclio";
-      this.direccionEnvio = this.carritoService.datosPedido.direccionEntrega;
+      this.direccionEnvio = this.pedidoAct.direccionEntrega;
     } else {
       this.metodoEnvio = "Retiro Local";
       this.direccionEnvio = "Jaime Roldós Avenue 220, Babahoyo";
     }
 
-    if (this.carritoService.datosPedido.isEfectivo == true) {
+    if (this.pedidoAct.isEfectivo == true) {
       this.metodoPago = "Efectivo";
     } else {
       this.metodoPago = "Deposito/ Transferencia";
     }
 
-    if (this.carritoService.datosPedido.cubiertos == true) {
+    if (this.pedidoAct.cubiertos == true) {
       this.cubiertos = "Si";
     } else {
       this.cubiertos = "No";
     }
+    this.valorTotal = this.pedidoAct.total;
+    this.idPedido = this.pedidoAct.idPedido;
   }
 
   getOrderState(estado: number) {
