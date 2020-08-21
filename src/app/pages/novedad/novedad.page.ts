@@ -12,7 +12,7 @@ import { UserInfoService } from 'src/app/core/services/userInfo/user-info.servic
 export class NovedadPage implements OnInit {
   visible: string;
   existe: boolean;
-  listaNovedades: any [];
+  listaNovedades: [];
   constructor(
     private novedadService: NovedadesService,
     private httpClient: HttpClient,
@@ -24,7 +24,8 @@ export class NovedadPage implements OnInit {
       .toPromise().then((data) => {
         if (Object.keys(data).length > 0) {
           this.visible = "true";
-          // this.novedadService.getNovedadesReportadas();
+          this.novedadService.getNovedadesReportadas();
+          this.listaNovedades = this.novedadService.listNovelty;
         } else {
           this.visible = "false";
         }

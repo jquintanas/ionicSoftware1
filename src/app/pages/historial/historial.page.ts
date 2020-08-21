@@ -47,7 +47,6 @@ export class HistorialPage implements OnInit {
   constructor(
     private alertService: AlertsService,
     private router: Router,
-    private carritoService: CarritoService,
     private productoService: ProductosService,
     private repartidorService: RepartidorService,
     private pedidoService: PedidoService,
@@ -139,6 +138,7 @@ export class HistorialPage implements OnInit {
             producto: this.productName
           };
           this.listaProductos.push(productoFinal);
+          console.log(this.listaProductos);
         },
         async err => {
           console.log(err);

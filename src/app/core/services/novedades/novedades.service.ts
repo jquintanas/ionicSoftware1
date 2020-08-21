@@ -13,9 +13,10 @@ export class NovedadesService {
   idNovedad: string;
   reportUser: string;
   description: string;
-  noveltyList: number[];
+  noveltyList: number;
   reportUserName: string;
   visible: string;
+  listNovelty: any;
   constructor(
     private httpClient: HttpClient,
     private seguridad: SeguridadService,
@@ -37,6 +38,7 @@ export class NovedadesService {
   }
 
   async getNovedadesReportadas() {
+    this.listNovelty = [];
     await this.httpClient.get(environment.rutas.reportaNovelty + this.userInfoService.cedula)
       .toPromise().then((data) => {
         if (data != null) {
@@ -45,14 +47,14 @@ export class NovedadesService {
             this.setIdNovelty(data[i]);
             this.httpClient.get(environment.rutas.urlNovelty + this.noveltyList).toPromise().then(novedad => {
               if (novedad != null) {
-                this.publishNovelty(novedad);
-                this.getNameDeliveryByID();
-                console.log(novedad);
+                this.listNovelty.push(novedad);
+                console.log(this.listNovelty);
               } else {
                 console.log("Error: idNovedad");
               }
             });
           }
+          console.log(this.listNovelty);
         }
       }).catch((err) => {
         console.log("no hay Novedad");
@@ -62,18 +64,22 @@ export class NovedadesService {
 
   setIdNovelty(data) {
     this.noveltyList = data.idnovedad;
+    this.reportUser = data.idUsuarioreportado;
   }
 
   publishNovelty(data) {
-    this.idNovedad = data.idnovedad;
-    this.description = data.descripcion;
-    this.reportUser = data.idUsuarioreportado;
+    const novedad = {
+    idNovedad : data.idnovedad,
+    description : data.descripcion,
+    };
+    this.listNovelty.push(novedad);
   }
 
   getNameDeliveryByID() {
     this.repartidorService.obtenerRepartidorPorID(this.reportUser).subscribe(
       dt => {
         this.reportUserName = dt[0].nombre + " " + dt[0].apellido;
+        return this.reportUserName;
       },
       async err => {
         console.log(err);
