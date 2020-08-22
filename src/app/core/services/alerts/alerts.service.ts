@@ -64,13 +64,13 @@ descripcion: any;
           type: 'radio',
           name: 'motivo',
           label: 'Pedido equivocado',
-          value: 'pedEquivocado'
+          value: 'pedido equivocado'
         },
         {
           type: 'radio',
           name: 'motivo',
           label: 'Pedido demorado',
-          value: 'pedDemorado'
+          value: 'Pedido demorado'
         }
       ],
       buttons: [

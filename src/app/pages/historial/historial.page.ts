@@ -60,10 +60,12 @@ export class HistorialPage implements OnInit {
 
   cancelAlert() {
     this.alertService.cancelAlert();
+    const desc = this.alertService.cancelMotive;
+    console.log(desc);
     const novedad = {
       idusuarioReporta: this.userInfo.cedula,
       idusuarioReportado: "0968645215",
-      descripcion: "pedEquivocado"
+      descripcion: "Pedido Equivocado"
     };
     console.log(novedad);
     this.novedadService.createNovelty(novedad);
@@ -211,6 +213,11 @@ export class HistorialPage implements OnInit {
 
   irAlHome() {
     this.router.navigateByUrl("/");
+  }
+
+  verDetalle() {
+    const producto = "Mojada Tres leches";
+    this.alertService.alert("DETALLE PEDIDO", producto);
   }
 
 }
