@@ -14,16 +14,18 @@ export class PedidoService {
   idpedido: number;
   idcompra: number;
   idproducto: string[];
-  cantidad: number;
+  cantidad: number [];
   subtotal: number;
   cubiertos: boolean;
   estado: string;
   compra: any;
   entregaDomicilio: string;
   horaEntrega: string;
-  listaProductos: any;
+  listaProductos: any [];
   listaPedidos: object;
-  historial: any;
+  historialInfo: any;
+  historialPedido: any;
+  listaCant: number[];
 
   constructor(
     private httpClient: HttpClient,
@@ -32,21 +34,57 @@ export class PedidoService {
     private db: AngularFirestore
   ) { }
 
+  activeOrder(cedula: string) {
+    return this.db.collection(environment.nombresTablasFirebase.pedidos, ref => ref.where("idUsuario", "==", cedula))
+    .snapshotChanges().pipe(map(pedido => {
+      return pedido.map(p => {
+        console.log( p.payload.doc.data());
+        return p.payload.doc.data() as Pedidos;
+      });
+    }));
+  }
+
   getOrderHistory() {
     this.httpClient.get(environment.rutas.urlHistorialUsuario).toPromise().then(data => {
       this.listaPedidos = data;
-      console.log(this.listaPedidos);
+      console.log(this.listaPedidos); // BIEN
       this.setOrderHistory();
     }).catch((err) => {
       console.log(err);
     });
   }
 
+  setOrderHistory() {
+    let infoDatos = {};
+    let infoPedido = {};
+    this.historialInfo = [];
+    this.historialPedido = [];
+    console.log(this.historialPedido);
+    console.log(this.historialInfo);
+    for (let i = 0; i < Object.keys(this.listaPedidos).length; i++) {
+      this.setHistory(this.listaPedidos[i]);
+      // this.nombreProducto();
+      infoDatos = {
+        idPedidoPast: this.idpedido,
+        valorTotalPast: this.subtotal,
+        metodoEnvioPast: this.entregaDomicilio,
+      };
+      infoPedido = {
+        amountPast: this.cantidad,
+        listaProductosPass: this.idproducto
+      };
+      this.historialPedido.push(infoPedido);
+      this.historialInfo.push(infoDatos);
+    }
+    console.log("historial" + this.historialInfo);
+    console.log("historial2" + this.historialPedido);
+  }
+
   setHistory(data) {
     this.idpedido = data.idpedido;
     this.idcompra = data.idcompra;
     this.idproducto = (data.idproducto).split(',');
-    this.cantidad = data.cantidad;
+    this.cantidad = (data.cantidad).split(',');
     this.subtotal = data.subtotal;
     this.cubiertos = data.cubiertos;
     this.estado = data.estado;
@@ -63,58 +101,25 @@ export class PedidoService {
     }
   }
 
+/*
   nombreProducto() {
-    let productoFinal = {};
+    this.listaProductos = [];
+    console.log("inicio");
     for (let i = 0; i < this.idproducto.length; i++) {
+      console.log('for');
       const idProd = this.idproducto[i];
-      console.log(idProd);
-      this.listaProductos = [];
       this.productoService.obtenerProductosPorID(idProd).subscribe(
         dt => {
+          console.log("dentro de get info");
           const productName = dt[0].nombre;
-          productoFinal = {
-            producto: productName
-          };
-          this.listaProductos.push(productoFinal);
+          this.listaProductos.push(productName);
+          console.log(this.listaProductos);
         },
         async err => {
           console.log(err);
+          console.log(this.listaProductos);
           await this.alertService.mostrarToastError();
-        }
-      );
+        });
     }
-  }
-
-  setOrderHistory() {
-    let infoPedido = {};
-    this.historial = [];
-    for (let i = 0; i < Object.keys(this.listaPedidos).length; i++) {
-      this.setHistory(this.listaPedidos[i]);
-      infoPedido = {
-        idPedidoPast: this.idpedido,
-        valorTotalPast: this.subtotal,
-        metodoEnvioPast: this.entregaDomicilio,
-        amountPast: this.cantidad,
-        listaProductosPass: this.idproducto
-      };
-      this.historial.push(infoPedido);
-      console.log(this.historial);
-    }
-    this.nombreProducto();
-    console.log(this.historial);
-  }
-
-  activeOrder(cedula: string) {
-    return this.db.collection(environment.nombresTablasFirebase.pedidos, ref => ref.where("idUsuario", "==", cedula))
-    .snapshotChanges().pipe(map(pedido => {
-      return pedido.map(p => {
-        console.log( p.payload.doc.data());
-        return p.payload.doc.data() as Pedidos;
-      });
-    }));
-  }
-
-  verDetalle() {
-    
-  }
+  }*/
 }

@@ -56,11 +56,29 @@ export class HistorialPage implements OnInit {
 
   ngOnInit() {
     this.pedidoService.getOrderHistory();
+    this.segment = 'active';
+    this.pedidoService.activeOrder(this.userInfo.cedula)
+        .subscribe((dt) => {
+          this.pedidoAct = dt[0];
+          console.log(this.pedidoAct);
+          if (dt.length > 0) {
+            this.visible = "yes";
+            this.estadoPedido = 0;
+            this.startTimer(20);
+            this.setOrderInfo();
+            this.nombreProducto();
+            this.getOrderState(this.pedidoAct.estadoDelPedido);
+            this.getEstadoByIDPedido(this.pedidoAct.idPedido);
+          } else {
+            this.visible = "no";
+            this.estadoPedido = 4;
+          }
+        });
   }
 
-  cancelAlert() {
+ cancelAlert() {
     this.alertService.cancelAlert();
-    const desc = this.alertService.cancelMotive;
+    const desc =  this.alertService.cancelMotive;
     console.log(desc);
     const novedad = {
       idusuarioReporta: this.userInfo.cedula,
@@ -68,7 +86,7 @@ export class HistorialPage implements OnInit {
       descripcion: "Pedido Equivocado"
     };
     console.log(novedad);
-    this.novedadService.createNovelty(novedad);
+    // this.novedadService.createNovelty(novedad);
     this.router.navigateByUrl("/");
   }
 
@@ -103,25 +121,7 @@ export class HistorialPage implements OnInit {
   cambioSegment(event: any) {
     console.log(event.detail.value);
     if (event.detail.value == "past") {
-      this.listaPedidos = this.pedidoService.historial;
-    } else if (event.detail.value == "active") {
-      this.pedidoService.activeOrder(this.userInfo.cedula)
-        .subscribe((dt) => {
-          this.pedidoAct = dt[0];
-          console.log(this.pedidoAct);
-          if (dt.length > 0) {
-            this.visible = "yes";
-            this.estadoPedido = 0;
-            this.startTimer(20);
-            this.setOrderInfo();
-            this.nombreProducto();
-            this.getOrderState(this.pedidoAct.estadoDelPedido);
-            this.getEstadoByIDPedido(this.pedidoAct.idPedido);
-          } else {
-            this.visible = "no";
-            this.estadoPedido = 4;
-          }
-        });
+      this.listaPedidos = this.pedidoService.historialInfo;
     }
   }
 
@@ -216,7 +216,11 @@ export class HistorialPage implements OnInit {
   }
 
   verDetalle() {
-    const producto = "Mojada Tres leches";
+    const listaProduct = ["Mojada", "Galleta", 'ggg'];
+    let producto = listaProduct[0] + "<br>" ;
+    for (let i = 1; i < listaProduct.length; i++) {
+      producto = producto + "<br>" + listaProduct[i] ;
+    }
     this.alertService.alert("DETALLE PEDIDO", producto);
   }
 

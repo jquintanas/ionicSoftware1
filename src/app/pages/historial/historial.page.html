@@ -171,8 +171,8 @@
             <ion-col size="9">
               <ion-label class="tituloPedido">Despacho: </ion-label>
               <ion-label>{{ pedido.metodoEnvioPast }}</ion-label><br>
-              <ion-label class="tituloPedido">Cant Productos: </ion-label>
-              <ion-label>{{pedido.amountPast}}</ion-label><br>
+              <!--ion-label class="tituloPedido">Cant Productos: </ion-label>
+              <ion-label>{{pedido.amountPast}}</ion-label><br>-->
             </ion-col>
             <ion-col size="3">
               <button class="boton" ion-button icon-start clear small (click)="repertirCompra()">
@@ -187,8 +187,8 @@
                 </button>
           </ion-row>
 
-          <!--
-          <ion-label class="tituloPedido">PEDIDO: </ion-label>
+          
+          <!--on-label class="tituloPedido">PEDIDO: </ion-label>
           <ion-row *ngFor="let producto of listaProductosPass">
             <ion-col size="12">
                 {{ producto.producto }}
