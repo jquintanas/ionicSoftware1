@@ -230,6 +230,8 @@ export class HistorialPage implements OnInit {
   verDetalle(idpedido: number) {
     for ( let i = 0; i < Object.keys(this.pedidoService.historialPedido).length; i++) {
       const listatmp = this.pedidoService.historialPedido;
+      console.log(idpedido);
+      console.log(listatmp[i].idPedidoPast);
       if (idpedido == listatmp[i].idPedidoPast) {
         for ( let j = 1 ; j < Object.keys(listatmp[i].listaProductosPass).length; j++) {
           let producto = listatmp[i].amountPast[0] + " " +
@@ -242,7 +244,6 @@ export class HistorialPage implements OnInit {
         return 0;
       } else {
         console.log("no existe el idPedido");
-        return 0;
       }
     }
   }
