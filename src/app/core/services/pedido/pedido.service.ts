@@ -14,18 +14,19 @@ export class PedidoService {
   idpedido: number;
   idcompra: number;
   idproducto: string[];
-  cantidad: number [];
+  cantidad: number[];
   subtotal: number;
   cubiertos: boolean;
   estado: string;
   compra: any;
   entregaDomicilio: string;
   horaEntrega: string;
-  listaProductos: any [];
+  listaProductos: any[];
   listaPedidos: object;
   historialInfo: any;
   historialPedido: any;
   listaCant: number[];
+  listatmp: any;
 
   constructor(
     private httpClient: HttpClient,
@@ -36,18 +37,18 @@ export class PedidoService {
 
   activeOrder(cedula: string) {
     return this.db.collection(environment.nombresTablasFirebase.pedidos, ref => ref.where("idUsuario", "==", cedula))
-    .snapshotChanges().pipe(map(pedido => {
-      return pedido.map(p => {
-        console.log( p.payload.doc.data());
-        return p.payload.doc.data() as Pedidos;
-      });
-    }));
+      .snapshotChanges().pipe(map(pedido => {
+        return pedido.map(p => {
+          console.log(p.payload.doc.data());
+          return p.payload.doc.data() as Pedidos;
+        });
+      }));
   }
 
   getOrderHistory() {
     this.httpClient.get(environment.rutas.urlHistorialUsuario).toPromise().then(data => {
       this.listaPedidos = data;
-      console.log(this.listaPedidos); // BIEN
+      console.log(this.listaPedidos);
       this.setOrderHistory();
     }).catch((err) => {
       console.log(err);
@@ -63,13 +64,13 @@ export class PedidoService {
     console.log(this.historialInfo);
     for (let i = 0; i < Object.keys(this.listaPedidos).length; i++) {
       this.setHistory(this.listaPedidos[i]);
-      // this.nombreProducto();
       infoDatos = {
         idPedidoPast: this.idpedido,
         valorTotalPast: this.subtotal,
         metodoEnvioPast: this.entregaDomicilio,
       };
       infoPedido = {
+        idPedidoPast: this.idpedido,
         amountPast: this.cantidad,
         listaProductosPass: this.idproducto
       };
@@ -101,25 +102,37 @@ export class PedidoService {
     }
   }
 
-/*
-  nombreProducto() {
-    this.listaProductos = [];
-    console.log("inicio");
-    for (let i = 0; i < this.idproducto.length; i++) {
-      console.log('for');
-      const idProd = this.idproducto[i];
-      this.productoService.obtenerProductosPorID(idProd).subscribe(
-        dt => {
-          console.log("dentro de get info");
-          const productName = dt[0].nombre;
-          this.listaProductos.push(productName);
-          console.log(this.listaProductos);
-        },
-        async err => {
-          console.log(err);
-          console.log(this.listaProductos);
-          await this.alertService.mostrarToastError();
-        });
-    }
-  }*/
+  /*
+    nombreProducto() {
+      console.log("inicio");
+      for (let i = 0; i < this.idproducto.length; i++) {
+        console.log('for');
+        const idProd = this.idproducto[i];
+        this.productoService.obtenerProductosPorID(idProd).subscribe(
+          dt => {
+            console.log("dentro de get info");
+            const productName = dt[0].nombre;
+            this.listaProductos.push(productName);
+            console.log(this.listaProductos);
+          },
+          async err => {
+            console.log(err);
+            console.log(this.listaProductos);
+            await this.alertService.mostrarToastError();
+          });
+      }
+    }*/
+
+  searchOrder(idPedido: number) {
+    this.httpClient.get(environment.rutas.urlHistorialUsuario).toPromise().then(data => {
+      this.listaPedidos = data;
+      for (let i = 0; i < Object.keys(this.listaPedidos).length; i++) {
+        if (idPedido == this.idpedido) {
+          console.log("existe pedido");
+        } else {
+          console.log("no existe pedido");
+        }
+      }
+    });
+  }
 }

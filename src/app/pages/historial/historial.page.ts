@@ -38,8 +38,6 @@ export class HistorialPage implements OnInit {
   fechaPedidoPast: any;
   productNamePast: string[];
   listaProductos: any;
-  listaProductosPass: any;
-  valorTotalPast: number;
   visible: string;
   listaPedidos: any;
   pedidoAct: Pedidos;
@@ -76,9 +74,9 @@ export class HistorialPage implements OnInit {
         });
   }
 
- cancelAlert() {
+ async cancelAlert() {
     this.alertService.cancelAlert();
-    const desc =  this.alertService.cancelMotive;
+    const desc =   await this.alertService.cancelMotive;
     console.log(desc);
     const novedad = {
       idusuarioReporta: this.userInfo.cedula,
@@ -87,11 +85,25 @@ export class HistorialPage implements OnInit {
     };
     console.log(novedad);
     // this.novedadService.createNovelty(novedad);
-    this.router.navigateByUrl("/");
+    // this.router.navigateByUrl("/");
   }
 
-  repertirCompra() {
-    this.router.navigateByUrl('carrito-compras');
+  repertirCompra(idpedido: number) {
+    console.log(idpedido);
+    for ( let i = 0; i < Object.keys(this.pedidoService.historialPedido).length; i++) {
+      const listatmp = this.pedidoService.historialPedido;
+      if (idpedido == listatmp[i].idPedidoPast) {
+        const idProd = listatmp[i].listaProductosPass[0];
+        console.log(idProd);
+        console.log(listatmp[i]);
+        return 0;
+      } else {
+        console.log("no existe el idPedido");
+        return 0;
+      }
+    }
+    // Setear los datos a carrito de compras
+    // this.router.navigateByUrl('carrito-compras');
   }
 
   startTimer(duration: number) {
@@ -215,13 +227,24 @@ export class HistorialPage implements OnInit {
     this.router.navigateByUrl("/");
   }
 
-  verDetalle() {
-    const listaProduct = ["Mojada", "Galleta", 'ggg'];
-    let producto = listaProduct[0] + "<br>" ;
-    for (let i = 1; i < listaProduct.length; i++) {
-      producto = producto + "<br>" + listaProduct[i] ;
+  verDetalle(idpedido: number) {
+    for ( let i = 0; i < Object.keys(this.pedidoService.historialPedido).length; i++) {
+      const listatmp = this.pedidoService.historialPedido;
+      if (idpedido == listatmp[i].idPedidoPast) {
+        for ( let j = 1 ; j < Object.keys(listatmp[i].listaProductosPass).length; j++) {
+          let producto = listatmp[i].amountPast[0] + " " +
+          listatmp[i].listaProductosPass[0] + "<br>" ;
+          console.log(producto);
+          producto = producto + "<br>" + listatmp[i].amountPast[0] + " " + listatmp[i].listaProductosPass[j];
+          console.log(producto);
+          this.alertService.alert("DETALLE PEDIDO", producto);
+        }
+        return 0;
+      } else {
+        console.log("no existe el idPedido");
+        return 0;
+      }
     }
-    this.alertService.alert("DETALLE PEDIDO", producto);
   }
 
 }

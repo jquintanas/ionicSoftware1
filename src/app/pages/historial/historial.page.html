@@ -171,17 +171,15 @@
             <ion-col size="9">
               <ion-label class="tituloPedido">Despacho: </ion-label>
               <ion-label>{{ pedido.metodoEnvioPast }}</ion-label><br>
-              <!--ion-label class="tituloPedido">Cant Productos: </ion-label>
-              <ion-label>{{pedido.amountPast}}</ion-label><br>-->
             </ion-col>
             <ion-col size="3">
-              <button class="boton" ion-button icon-start clear small (click)="repertirCompra()">
+              <button class="boton" ion-button icon-start clear small (click)="repertirCompra(pedido.idPedidoPast)">
                 <ion-label>REPETIR</ion-label>
               </button>
             </ion-col>
           </ion-row>
           <ion-row>
-              <button class="botonDetalle" ion-button icon-start small (click)="verDetalle()">
+              <button class="botonDetalle" ion-button icon-start small (click)="verDetalle(pedido.idPedidoPast)">
                   <ion-icon name="add-circle-outline"></ion-icon>
                   <ion-label> VER DETALLE</ion-label>
                 </button>
