@@ -75,7 +75,7 @@ export class HistorialPage implements OnInit {
 
   async cancelAlert() {
     // this.alertService.cancelAlert();
-    const desc = await this.alertService.cancelAlert;
+    const desc = await this.alertService.cancelAlert();
     console.log(desc);
     const novedad = {
       idusuarioReporta: this.userInfo.cedula,

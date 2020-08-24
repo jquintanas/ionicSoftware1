@@ -92,7 +92,7 @@ descripcion: any;
         }
       ]
     });
-    alert.present();
+    await alert.present();
     return motivo;
   }
 
