@@ -6,6 +6,8 @@ import { LoadingController } from '@ionic/angular';
   providedIn: 'root'
 })
 export class AlertsService {
+cancelMotive: string;
+descripcion: any;
 
   constructor(
     public loadingController: LoadingController,
@@ -54,6 +56,8 @@ export class AlertsService {
   }
 
   async cancelAlert() {
+    let motiveCancel;
+    const motivo = new Promise <Boolean>(resolve => motiveCancel = resolve);
     const alert = await this.alterCrtl.create({
       cssClass: 'alertCancel',
       header: 'Cancelar Pedido',
@@ -62,30 +66,34 @@ export class AlertsService {
           type: 'radio',
           name: 'motivo',
           label: 'Pedido equivocado',
-          value: 'pedidoEquivocad'
+          value: 'pedido equivocado'
         },
         {
           type: 'radio',
           name: 'motivo',
-          label: 'Repartidor demorado',
-          value: 'repDemorado'
+          label: 'Pedido demorado',
+          value: 'Pedido demorado'
         }
       ],
       buttons: [
         {
           text: 'Volver',
           role: 'regresar',
-          handler: (blah) => { }
+          handler: () => motiveCancel(false)
         }, {
           text: 'Enviar',
           role: 'cancelar',
-          handler: () => {
+          handler: (data) => motiveCancel(true)
+         /* {
+            this.cancelMotive = data;
+            console.log(this.cancelMotive);
             this.motiveAlert();
-          }
+          }*/
         }
       ]
     });
-    await alert.present();
+    alert.present();
+    return motivo;
   }
 
   async motiveAlert() {
@@ -93,7 +101,7 @@ export class AlertsService {
       header: 'Motivo',
       inputs: [
         {
-          name: 'name1',
+          name: 'descripcion',
           type: 'text',
           placeholder: 'Cuentanos que paso con tu pedido'
         }
@@ -102,7 +110,9 @@ export class AlertsService {
         {
           text: 'Enviar',
           role: 'cancelar',
-          handler: () => {
+          handler: (data) => {
+            this.descripcion = data;
+            console.log(this.descripcion);
           }
         }]
     });

@@ -152,7 +152,7 @@ export class LoginPage implements OnInit {
         return "Ingrese un correo electrónico válido";
       }
       if (controlName == "passwordField" && control.errors.minlength != null) {
-        return "Clave invalida";
+        return "Clave muy corta";
       }
     }
     return "";

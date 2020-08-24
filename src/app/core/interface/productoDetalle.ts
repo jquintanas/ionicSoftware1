@@ -6,6 +6,6 @@ export interface DetalleProducto {
     Descripcion: string;
     Precio: number;
     Favorito: boolean;
-    cantidad?: number,
+    cantidad?: number;
     categoria: number;
 }

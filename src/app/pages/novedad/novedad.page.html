@@ -10,19 +10,33 @@
 </ion-header>
 
 <ion-content>
-    <ion-card>
+  <section *ngIf="visible == 'true'">
+    <ion-card *ngFor="let novedad of listaNovedades">
         <ion-item>
         <ion-avatar item-start>
             <ion-icon name="bookmark-outline" class="novedadIcon"></ion-icon>
         </ion-avatar>
-        <ion-card-header class="novedadHeader">NOVEDAD #{{idNovedad}}<br></ion-card-header>
+        <ion-card-header class="novedadHeader">NOVEDAD #{{novedad.idnovedad}}<br></ion-card-header>
       </ion-item>
        
         <ion-card-content>
           <ion-label class="boldletter">USUARIO REPORTADO:</ion-label><br>
-          {{reportUserName}}<br>
+          {{novedad.idUsuarioreportado}}<br>
           <ion-label class="boldletter">DESCRIPCIÓN: </ion-label><br>
-          {{description}}<br>
+          {{novedad.descripcion}}<br>
         </ion-card-content>
+      </ion-card>
+    </section>
+
+      <ion-card *ngIf="visible == 'false'">
+          <ion-item>
+              <ion-avatar>
+                  <ion-icon name="happy-outline" class="novedadIcon"></ion-icon>
+              </ion-avatar>
+            </ion-item>
+
+            <ion-card-content>
+              <ion-label> No tienes novedades registradas</ion-label>
+            </ion-card-content>
       </ion-card>
 </ion-content>

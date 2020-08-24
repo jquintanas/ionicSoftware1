@@ -28,7 +28,7 @@
       <br><br>
 
       <section>
-        <div class="center" *ngIf="visible == yes">
+        <div class="center" *ngIf="visible == 'yes'">
           <ion-label>TIEMPO RESTANTE: {{time | async}}</ion-label> <BR>
         </div>
 
@@ -68,7 +68,7 @@
       </section>
 
       <section >
-        <div *ngIf="visible == yes">
+        <div *ngIf="visible == 'yes'">
         <ion-card class="delivery">
           <ion-item>
             <ion-avatar item-start>
@@ -93,7 +93,7 @@
       </div>
       </section>
 
-      <div *ngIf="visible == yes" >
+      <div *ngIf="visible == 'yes'" >
       <ion-card >
         <ion-item>
           <ion-row>
@@ -101,7 +101,7 @@
                 <img src="assets/icon/checkverde.png">
             </ion-col>
             <ion-col size='7'>
-              PEDIDO #{{pedido.idpedido}}
+              PEDIDO #{{idPedido}}
             </ion-col>
             <ion-col size="3">
               Total ${{valorTotal}}
@@ -111,7 +111,7 @@
 
         <ion-card-content>
           <ion-row>
-            <ion-col>
+            <ion-col size="9"> 
               <ion-label>{{metodoEnvio}} {{hora}}</ion-label><br>
               <ion-label class="tituloPedido">Dirección:</ion-label>
               <ion-label> {{direccionEnvio}}</ion-label><br>
@@ -120,8 +120,8 @@
               <ion-label class="tituloPedido">Cubiertos: </ion-label>
               <ion-label>{{cubiertos}}</ion-label><br><br>
             </ion-col>
-            <ion-col>
-              <button class="boton" (click)="cancelAlert()" ion-button icon-start clear small id="cancelButton" hidden="false">
+            <ion-col size="3" >
+              <button class="boton" (click)="cancelAlert()" *ngIf="mostrarBoton == 'yes'" ion-button icon-start clear small id="cancelButton">
                 <ion-label >CANCELAR</ion-label>
               </button>
             </ion-col>
@@ -140,8 +140,9 @@
     </div>
 
 
-    <div *ngIf="visible == no">
-        <H1>NO TIENES PEDIDOS ACTIVOS</H1>
+    <div *ngIf="visible == 'no'">
+        <ion-icon name="sad-outline" class="sadFace"></ion-icon>
+        <h2 class="noOrder">No tienes un pedido activo</h2>
     </div>
 
     </section>
@@ -167,25 +168,30 @@
 
         <ion-card-content>
           <ion-row>
-            <ion-col>
+            <ion-col size="9">
               <ion-label class="tituloPedido">Despacho: </ion-label>
               <ion-label>{{ pedido.metodoEnvioPast }}</ion-label><br>
-              <ion-label class="tituloPedido">Cant Productos: </ion-label>
-              <ion-label>{{pedido.amountPast}}</ion-label><br>
             </ion-col>
-            <ion-col>
-              <button class="boton" ion-button icon-start clear small (click)="goCarrito()">
+            <ion-col size="3">
+              <button class="boton" ion-button icon-start clear small (click)="repertirCompra(pedido.idPedidoPast)">
                 <ion-label>REPETIR</ion-label>
               </button>
             </ion-col>
           </ion-row>
+          <ion-row>
+              <button class="botonDetalle" ion-button icon-start small (click)="verDetalle(pedido.idPedidoPast)">
+                  <ion-icon name="add-circle-outline"></ion-icon>
+                  <ion-label> VER DETALLE</ion-label>
+                </button>
+          </ion-row>
 
-          <ion-label class="tituloPedido">PEDIDO: </ion-label>
+          
+          <!--on-label class="tituloPedido">PEDIDO: </ion-label>
           <ion-row *ngFor="let producto of listaProductosPass">
             <ion-col size="12">
                 {{ producto.producto }}
             </ion-col>
-          </ion-row>
+          </ion-row>-->
 
         </ion-card-content>
       </ion-card>
