@@ -56,6 +56,8 @@ descripcion: any;
   }
 
   async cancelAlert() {
+    let motiveCancel;
+    const motivo = new Promise <Boolean>(resolve => motiveCancel = resolve);
     const alert = await this.alterCrtl.create({
       cssClass: 'alertCancel',
       header: 'Cancelar Pedido',
@@ -77,19 +79,21 @@ descripcion: any;
         {
           text: 'Volver',
           role: 'regresar',
-          handler: (blah) => { }
+          handler: () => motiveCancel(false)
         }, {
           text: 'Enviar',
           role: 'cancelar',
-          handler: (data) => {
+          handler: (data) => motiveCancel(true)
+         /* {
             this.cancelMotive = data;
             console.log(this.cancelMotive);
             this.motiveAlert();
-          }
+          }*/
         }
       ]
     });
-    await alert.present();
+    alert.present();
+    return motivo;
   }
 
   async motiveAlert() {

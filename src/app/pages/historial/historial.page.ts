@@ -35,7 +35,6 @@ export class HistorialPage implements OnInit {
   productName: any;
   cancelButtonHidden: boolean = true;
   estadoPedido: number;
-  fechaPedidoPast: any;
   productNamePast: string[];
   listaProductos: any;
   visible: string;
@@ -75,8 +74,8 @@ export class HistorialPage implements OnInit {
   }
 
   async cancelAlert() {
-    this.alertService.cancelAlert();
-    const desc = await this.alertService.cancelMotive;
+    // this.alertService.cancelAlert();
+    const desc = await this.alertService.cancelAlert;
     console.log(desc);
     const novedad = {
       idusuarioReporta: this.userInfo.cedula,
@@ -93,12 +92,7 @@ export class HistorialPage implements OnInit {
     for (let i = 0; i < Object.keys(this.pedidoService.historialPedido).length; i++) {
       const listatmp = this.pedidoService.historialPedido;
       if (idpedido == listatmp[i].idPedidoPast) {
-        const idProd = listatmp[i].listaProductosPass[0];
-        console.log(idProd);
-        console.log(listatmp[i]);
-        return 0;
-      } else {
-        console.log("no existe el idPedido");
+        this.pedidoService.searchOrder(idpedido);
         return 0;
       }
     }
@@ -231,9 +225,6 @@ export class HistorialPage implements OnInit {
     for (let i = 0; i < Object.keys(this.pedidoService.historialPedido).length; i++) {
       const listatmp = this.pedidoService.historialPedido;
       if (idpedido == listatmp[i].idPedidoPast) {
-        console.log(listatmp);
-        console.log(listatmp[i]);
-        console.log(listatmp[i].listaProductosPass);
         for (let j = 1; j < Object.keys(listatmp[i].listaProductosPass).length; j++) {
           let producto = listatmp[i].amountPast[0] + " " +
             listatmp[i].listaProductosPass[0] + "<br>";

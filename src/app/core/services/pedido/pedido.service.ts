@@ -6,6 +6,8 @@ import { AlertsService } from 'src/app/core/services/alerts/alerts.service';
 import { AngularFirestore } from "@angular/fire/firestore";
 import { map } from 'rxjs/operators';
 import { Pedidos } from 'src/app/core/interface/modelNOSQL/pedido';
+import { ProductoCarrito } from 'src/app/core/interface/productoCarrito';
+import { DetalleProducto } from 'src/app/core/interface/productoDetalle';
 
 @Injectable({
   providedIn: 'root'
@@ -130,8 +132,11 @@ export class PedidoService {
     this.httpClient.get(environment.rutas.urlHistorialUsuario).toPromise().then(data => {
       this.listaPedidos = data;
       for (let i = 0; i < Object.keys(this.listaPedidos).length; i++) {
-        if (idPedido == this.idpedido) {
+        if (idPedido == this.listaPedidos[i].idpedido) {
+          //SETEAR CARRITO
+          console.log(this.listaPedidos[i]);
           console.log("existe pedido");
+          return 0;
         } else {
           console.log("no existe pedido");
         }
