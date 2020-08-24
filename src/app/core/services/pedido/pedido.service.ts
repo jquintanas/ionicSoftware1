@@ -8,6 +8,8 @@ import { map } from 'rxjs/operators';
 import { Pedidos } from 'src/app/core/interface/modelNOSQL/pedido';
 import { ProductoCarrito } from 'src/app/core/interface/productoCarrito';
 import { DetalleProducto } from 'src/app/core/interface/productoDetalle';
+import { Productos } from "src/app/core/interface/modelNOSQL/productos";
+import { CarritoService } from 'src/app/core/services/cart/carrito.service';
 
 @Injectable({
   providedIn: 'root'
@@ -31,12 +33,16 @@ export class PedidoService {
   listatmp: any;
   prodCarrito: ProductoCarrito;
   detProducto: DetalleProducto;
+  categoria: number;
+  producto: Productos;
+  cant: number;
 
   constructor(
     private httpClient: HttpClient,
     private productoService: ProductosService,
     private alertService: AlertsService,
-    private db: AngularFirestore
+    private db: AngularFirestore,
+    private carrito: CarritoService,
   ) { }
 
   activeOrder(cedula: string) {
@@ -135,16 +141,44 @@ export class PedidoService {
       this.listaPedidos = data;
       for (let i = 0; i < Object.keys(this.listaPedidos).length; i++) {
         if (idPedido == this.listaPedidos[i].idpedido) {
-          const cant = (this.listaPedidos[i].cantidad).split(',');
-          const idprod = (this.listaPedidos[i].idproducto).split(',');
-          console.log(cant);
+          this.cant = (this.listaPedidos[i].cantidad).split(',');
+          const idprod: string = (this.listaPedidos[i].idproducto).split(',');
+          console.log(this.cant);
           console.log(idprod);
-          //SETEAR CARRITO
-          console.log(this.listaPedidos[i]);
-          console.log("existe pedido");
+          for (let j = 0; j < Object.keys(idprod).length; j++) {
+            console.log(idprod[j]);
+            this.productoService.obtenerProductosPorID(idprod[j]).subscribe(
+              dt => {
+                console.log(dt);
+                const categoriaID = dt[0].idCategoria;
+                this.productoService.obtenerCategorioPorID(categoriaID).subscribe(dt2 => {
+                  this.categoria = dt2[0].codigo;
+                  console.log(this.categoria);
+                  const dataP = {
+                    id: idprod[j],
+                    Descripcion: dt[0].descripcion,
+                    ImagenP: dt[0].foto,
+                    Precio: dt[0].precio,
+                    Titulo: dt[0].nombre,
+                    Favorito: false,
+                    categoria: this.categoria,
+                    carrusel: dt[0].slide,
+                    cantidad: dt[0].stock,
+                  };
+                  console.log(dataP);
+                  const prodFinal = {
+                    cantidad: this.cant[j],
+                    id: idprod[j],
+                    producto: dataP,
+                  };
+                  this.carrito.agregarAlCarrito(this.categoria, prodFinal);
+                });
+              }, async err => {
+                console.log(err);
+                await this.alertService.mostrarToastError();
+              });
+          }
           return 0;
-        } else {
-          console.log("no existe pedido");
         }
       }
     });

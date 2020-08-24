@@ -53,4 +53,13 @@ export class ProductosService {
     }));
   }
 
+  public obtenerCategorioPorID(idCategoria: string) {
+    // tslint:disable-next-line: max-line-length
+    return this.db.collection(environment.nombresTablasFirebase.categorias, ref => ref.where("idCategoria", "==", idCategoria)).snapshotChanges().pipe(map(categoria => {
+      return categoria.map(p => {
+        return p.payload.doc.data() as Categorias;
+      });
+    }));
+  }
+
 }

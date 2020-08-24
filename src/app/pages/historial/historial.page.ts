@@ -91,11 +91,10 @@ export class HistorialPage implements OnInit {
       const listatmp = this.pedidoService.historialPedido;
       if (idpedido == listatmp[i].idPedidoPast) {
         this.pedidoService.searchOrder(idpedido);
+        this.router.navigateByUrl('carrito-compras');
         return 0;
       }
     }
-    // Setear los datos a carrito de compras
-    // this.router.navigateByUrl('carrito-compras');
   }
 
   startTimer(duration: number) {
