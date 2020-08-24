@@ -29,6 +29,8 @@ export class PedidoService {
   historialPedido: any;
   listaCant: number[];
   listatmp: any;
+  prodCarrito: ProductoCarrito;
+  detProducto: DetalleProducto;
 
   constructor(
     private httpClient: HttpClient,
@@ -133,6 +135,10 @@ export class PedidoService {
       this.listaPedidos = data;
       for (let i = 0; i < Object.keys(this.listaPedidos).length; i++) {
         if (idPedido == this.listaPedidos[i].idpedido) {
+          const cant = (this.listaPedidos[i].cantidad).split(',');
+          const idprod = (this.listaPedidos[i].idproducto).split(',');
+          console.log(cant);
+          console.log(idprod);
           //SETEAR CARRITO
           console.log(this.listaPedidos[i]);
           console.log("existe pedido");

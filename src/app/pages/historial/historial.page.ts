@@ -74,17 +74,15 @@ export class HistorialPage implements OnInit {
   }
 
   async cancelAlert() {
-    // this.alertService.cancelAlert();
     const desc = await this.alertService.cancelAlert();
-    console.log(desc);
     const novedad = {
       idusuarioReporta: this.userInfo.cedula,
       idusuarioReportado: "0968645215",
-      descripcion: "Pedido Equivocado"
+      descripcion: desc
     };
     console.log(novedad);
-    // this.novedadService.createNovelty(novedad);
-    // this.router.navigateByUrl("/");
+    this.novedadService.createNovelty(novedad);
+    this.router.navigateByUrl("/");
   }
 
   repertirCompra(idpedido: number) {
