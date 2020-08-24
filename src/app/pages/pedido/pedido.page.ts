@@ -39,6 +39,7 @@ export class PedidoPage implements OnInit {
   productos: Map<any, any>;
   total: number = 0;
   costoEnvio: number = 0;
+  direccionR: string = "";
   private datosPedido: IPedido;
   private listaProductos: string[];
   private listaCantidades: number[];
@@ -59,6 +60,7 @@ export class PedidoPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.direccionR = JSON.parse(this.authService.dataUser.direccion).direccion;
     this.horaRetiro = new Date(this.horaRetiro);
     this.listaProductos = [];
     this.listaCantidades = [];

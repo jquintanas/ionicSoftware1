@@ -4,7 +4,7 @@
       <img src="assets/logos/logo.png" alt="logo" class="logo">
     </ion-buttons>
     <ion-title *ngIf="!banderaDeBusqueda" class="ion-text-center">
-      Omi Pali
+      Omi & Pali
     </ion-title>
     <ion-searchbar placeholder="Tres leches" [animated]="true" *ngIf="banderaDeBusqueda" class="searchBar"
       (ionChange)="buscarProducto()" (ionClear)="limpiarBusqueda()" [(ngModel)]="productoBusqueda"></ion-searchbar>
