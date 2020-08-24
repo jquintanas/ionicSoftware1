@@ -64,6 +64,8 @@ export class PedidoService {
     console.log(this.historialInfo);
     for (let i = 0; i < Object.keys(this.listaPedidos).length; i++) {
       this.setHistory(this.listaPedidos[i]);
+      this.nombreProducto(this.idproducto);
+      console.log(this.listatmp);
       infoDatos = {
         idPedidoPast: this.idpedido,
         valorTotalPast: this.subtotal,
@@ -72,8 +74,9 @@ export class PedidoService {
       infoPedido = {
         idPedidoPast: this.idpedido,
         amountPast: this.cantidad,
-        listaProductosPass: this.idproducto
+        listaProductosPass: this.listatmp[i]
       };
+      console.log(this.listatmp[i]);
       this.historialPedido.push(infoPedido);
       this.historialInfo.push(infoDatos);
     }
@@ -102,26 +105,26 @@ export class PedidoService {
     }
   }
 
-  /*
-    nombreProducto() {
-      console.log("inicio");
-      for (let i = 0; i < this.idproducto.length; i++) {
-        console.log('for');
-        const idProd = this.idproducto[i];
-        this.productoService.obtenerProductosPorID(idProd).subscribe(
-          dt => {
-            console.log("dentro de get info");
-            const productName = dt[0].nombre;
-            this.listaProductos.push(productName);
-            console.log(this.listaProductos);
-          },
-          async err => {
-            console.log(err);
-            console.log(this.listaProductos);
-            await this.alertService.mostrarToastError();
-          });
-      }
-    }*/
+
+  nombreProducto(lista: string[]) {
+    const listatmp2 = [];
+    this.listatmp = [];
+    for (let i = 0; i < lista.length; i++) {
+      const idProd = lista[i];
+      this.productoService.obtenerProductosPorID(idProd).subscribe(
+        dt => {
+          const productName = dt[0].nombre;
+          listatmp2.push(productName);
+          console.log(listatmp2);
+        },
+        async err => {
+          console.log(err);
+          await this.alertService.mostrarToastError();
+        });
+      this.listatmp.push(listatmp2);
+      console.log(this.listatmp);
+    }
+  }
 
   searchOrder(idPedido: number) {
     this.httpClient.get(environment.rutas.urlHistorialUsuario).toPromise().then(data => {

@@ -56,27 +56,27 @@ export class HistorialPage implements OnInit {
     this.pedidoService.getOrderHistory();
     this.segment = 'active';
     this.pedidoService.activeOrder(this.userInfo.cedula)
-        .subscribe((dt) => {
-          this.pedidoAct = dt[0];
-          console.log(this.pedidoAct);
-          if (dt.length > 0) {
-            this.visible = "yes";
-            this.estadoPedido = 0;
-            this.startTimer(20);
-            this.setOrderInfo();
-            this.nombreProducto();
-            this.getOrderState(this.pedidoAct.estadoDelPedido);
-            this.getEstadoByIDPedido(this.pedidoAct.idPedido);
-          } else {
-            this.visible = "no";
-            this.estadoPedido = 4;
-          }
-        });
+      .subscribe((dt) => {
+        this.pedidoAct = dt[0];
+        console.log(this.pedidoAct);
+        if (dt.length > 0) {
+          this.visible = "yes";
+          this.estadoPedido = 0;
+          this.startTimer(20);
+          this.setOrderInfo();
+          this.nombreProducto();
+          this.getOrderState(this.pedidoAct.estadoDelPedido);
+          this.getEstadoByIDPedido(this.pedidoAct.idPedido);
+        } else {
+          this.visible = "no";
+          this.estadoPedido = 4;
+        }
+      });
   }
 
- async cancelAlert() {
+  async cancelAlert() {
     this.alertService.cancelAlert();
-    const desc =   await this.alertService.cancelMotive;
+    const desc = await this.alertService.cancelMotive;
     console.log(desc);
     const novedad = {
       idusuarioReporta: this.userInfo.cedula,
@@ -90,7 +90,7 @@ export class HistorialPage implements OnInit {
 
   repertirCompra(idpedido: number) {
     console.log(idpedido);
-    for ( let i = 0; i < Object.keys(this.pedidoService.historialPedido).length; i++) {
+    for (let i = 0; i < Object.keys(this.pedidoService.historialPedido).length; i++) {
       const listatmp = this.pedidoService.historialPedido;
       if (idpedido == listatmp[i].idPedidoPast) {
         const idProd = listatmp[i].listaProductosPass[0];
@@ -228,22 +228,19 @@ export class HistorialPage implements OnInit {
   }
 
   verDetalle(idpedido: number) {
-    for ( let i = 0; i < Object.keys(this.pedidoService.historialPedido).length; i++) {
+    for (let i = 0; i < Object.keys(this.pedidoService.historialPedido).length; i++) {
       const listatmp = this.pedidoService.historialPedido;
-      console.log(idpedido);
-      console.log(listatmp[i].idPedidoPast);
       if (idpedido == listatmp[i].idPedidoPast) {
-        for ( let j = 1 ; j < Object.keys(listatmp[i].listaProductosPass).length; j++) {
+        console.log(listatmp);
+        console.log(listatmp[i]);
+        console.log(listatmp[i].listaProductosPass);
+        for (let j = 1; j < Object.keys(listatmp[i].listaProductosPass).length; j++) {
           let producto = listatmp[i].amountPast[0] + " " +
-          listatmp[i].listaProductosPass[0] + "<br>" ;
-          console.log(producto);
+            listatmp[i].listaProductosPass[0] + "<br>";
           producto = producto + "<br>" + listatmp[i].amountPast[0] + " " + listatmp[i].listaProductosPass[j];
-          console.log(producto);
           this.alertService.alert("DETALLE PEDIDO", producto);
         }
         return 0;
-      } else {
-        console.log("no existe el idPedido");
       }
     }
   }
