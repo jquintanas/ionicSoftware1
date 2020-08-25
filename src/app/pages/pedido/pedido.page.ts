@@ -290,6 +290,7 @@ export class PedidoPage implements OnInit {
   }
 
   private async alertEfectivo() {
+    this.cartService.borrarCarrito();
     const alert = await this.alertController.create({
       header: "Compra realizada",
       message:

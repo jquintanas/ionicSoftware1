@@ -102,7 +102,7 @@
       <ion-row *ngIf="nuevaDireccionEnvio" class="mensajtiempo">
         <ion-col>
           <ion-textarea rows="2" class="textareadir ion-no-padding" minlength="10" required
-            [(ngModel)]="newAddressString" #ctrl="ngModel">
+            [(ngModel)]="newAddressString" #ctrl="ngModel" placeholder="Dirección de entrega">
           </ion-textarea>
           <span *ngIf="validation(ctrl,'newAddressString') != ''">
             <ion-icon slot="start" name="information-circle" color="danger"></ion-icon>
@@ -128,7 +128,7 @@
       <ion-row *ngIf="nuevaDireccionEnvio" class="mensajtiempo">
         <ion-col>
           <ion-textarea rows="2" required class="textareadir ion-no-padding" minlength="10"
-            [(ngModel)]="referencesString" #ctrl2="ngModel">
+            [(ngModel)]="referencesString" #ctrl2="ngModel" placeholder="Referencia">
           </ion-textarea>
           <span *ngIf="validation(ctrl2,'referencesString') != ''">
             <ion-icon slot="start" name="information-circle" color="danger"></ion-icon>
