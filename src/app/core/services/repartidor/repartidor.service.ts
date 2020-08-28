@@ -8,6 +8,14 @@ import { Pedidos } from 'src/app/core/interface/modelNOSQL/pedido';
 @Injectable({
   providedIn: 'root'
 })
+/**
+ * @classdesc Container class of Repartidor Service.
+ * @desc Creation Date: 08/20/2020
+ * @class
+ * @public
+ * @version 1.0.0
+ * @author Francesca Man Ging <fman@espol.edu.ec>
+ */
 export class RepartidorService {
 
   constructor(

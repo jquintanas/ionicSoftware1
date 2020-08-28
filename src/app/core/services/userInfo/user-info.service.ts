@@ -9,6 +9,14 @@ import { AngularFirestore } from "@angular/fire/firestore";
 @Injectable({
   providedIn: 'root'
 })
+/**
+ * @classdesc Container class of UserIndo Service.
+ * @desc Creation Date: 08/20/2020
+ * @class
+ * @public
+ * @version 1.0.0
+ * @author Francesca Man Ging <fman@espol.edu.ec>
+ */
 export class UserInfoService {
   public cedula: string;
   public nombre: string = "";
@@ -24,6 +32,12 @@ export class UserInfoService {
     private firebase: AngularFirestore
   ) { }
 
+ /**
+   *
+   * @desc Set user info
+   * @param {UpdateInterface} datos
+   * @memberof UserInfoService
+   */
 
   setUserInfo(datos: UpdateInterface) {
     const hash = this.seguridad.hashJSON(datos);
