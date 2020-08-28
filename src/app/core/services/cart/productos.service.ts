@@ -9,6 +9,16 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
+/**
+ * @classdesc Container class of Producto Service.
+ * @desc Creation Date: 08/20/2020
+ * @class
+ * @public
+ * @version 1.0.0
+ * @author Francesca Man Ging <fman@espol.edu.ec>
+ */
+
 export class ProductosService {
   public mapaCategorias: Map<string, Categorias>;
   private subjectCategorias = new BehaviorSubject(false);

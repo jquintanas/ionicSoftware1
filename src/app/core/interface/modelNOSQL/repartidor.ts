@@ -1,9 +1,8 @@
 export interface Repartidor {
-    apellido: string;
+    idRepartidor: string;
     cedula: string;
-    contrasenia: string;
-    idRepartidor?: string;
     nombre: string;
-    pedidos: string[];
+    apellido: string;
     telefono: string;
+    pedidos: [];
 }

@@ -9,6 +9,16 @@ import { UserInfoService } from 'src/app/core/services/userInfo/user-info.servic
   templateUrl: './novedad.page.html',
   styleUrls: ['./novedad.page.scss'],
 })
+
+/**
+ * @classdesc Container class of Novelty.
+ * @desc Creation Date: 08/20/2020
+ * @class
+ * @public
+ * @version 1.0.0
+ * @author Francesca Man Ging <fman@espol.edu.ec>
+ */
+
 export class NovedadPage implements OnInit {
   visible: string;
   existe: boolean;

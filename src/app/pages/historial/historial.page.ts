@@ -16,6 +16,15 @@ import { NovedadesService } from 'src/app/core/services/novedades/novedades.serv
   styleUrls: ['./historial.page.scss'],
 })
 
+/**
+ * @classdesc Container class of HistorialComponent.
+ * @desc Creation Date: 08/20/2020
+ * @class
+ * @public
+ * @version 1.0.0
+ * @author Francesca Man Ging <fman@espol.edu.ec>
+ */
+
 export class HistorialPage implements OnInit {
   time: BehaviorSubject<string> = new BehaviorSubject('00');
   timer: number;
@@ -54,6 +63,7 @@ export class HistorialPage implements OnInit {
   ngOnInit() {
     this.pedidoService.getOrderHistory();
     this.segment = 'active';
+    this.setDeliveryMan();
     this.pedidoService.activeOrder(this.userInfo.cedula)
       .subscribe((dt) => {
         this.pedidoAct = dt[0];
@@ -73,6 +83,12 @@ export class HistorialPage implements OnInit {
       });
   }
 
+/**
+   *
+   * @desc cancelAlert and creat novelty
+   * @memberof HistorialPage
+   */
+
   async cancelAlert() {
     const desc = await this.alertService.cancelAlert();
     const novedad = {
@@ -85,7 +101,13 @@ export class HistorialPage implements OnInit {
     this.router.navigateByUrl("/");
   }
 
-  repertirCompra(idpedido: number) {
+ /**
+   *
+   * @desc repeat order
+   * @param {number} idpedido
+   * @memberof HistorialPage
+   */
+  public repertirCompra(idpedido: number) {
     console.log(idpedido);
     for (let i = 0; i < Object.keys(this.pedidoService.historialPedido).length; i++) {
       const listatmp = this.pedidoService.historialPedido;
@@ -153,10 +175,35 @@ export class HistorialPage implements OnInit {
     }
   }
 
+  /**
+   *
+   * @desc set DeliveryMan Info to active order
+   * @returns
+   * @memberof HistorialPage
+   */
+
   setDeliveryMan() {
-    this.repartidorService.obtenerRepartidorPorIdPedido(this.idPedido).subscribe(
+    this.repartidorService.obtenerRepartidores().subscribe(
       dt => {
-        this.deliveryName = dt[0].nombre + " " + dt[0].apellido;
+        const idpedprueba = "eSmMIQYPQQVDL8MYhyL1";
+        const listaRepartidores = dt;
+        console.log(listaRepartidores);
+        for (let i = 0; i < listaRepartidores.length; i++) {
+          console.log(listaRepartidores[i]);
+          console.log(listaRepartidores[i].pedidos);
+          const listaPedRep = listaRepartidores[i].pedidos;
+          for (let j = 0; j < listaPedRep.length; j++) {
+            const tmp = listaRepartidores[j].pedidos;
+            console.log(tmp[j]);
+            // tslint:disable-next-line: no-string-literal
+            // if ( this.idPedido === listaRepartidores[i].pedidos[j]['idPedido']) {
+            //   this.deliveryName = listaRepartidores[i].nombre;
+            // }
+            // console.log(listaPedRep[j]);
+          }
+        }
+
+        // this.deliveryName = dt[0].nombre + " " + dt[0].apellido;
         this.deliveryNumber = dt[0].telefono;
       },
       async err => {
@@ -169,7 +216,9 @@ export class HistorialPage implements OnInit {
   setOrderInfo() {
     if (this.pedidoAct.isDomicilio == true) {
       this.metodoEnvio = "Envio a domiclio";
-      this.direccionEnvio = this.pedidoAct.direccionEntrega;
+      const Address = this.pedidoAct.direccionEntrega;
+      const obj = JSON.parse(Address);
+      this.direccionEnvio = obj.direccion;
     } else {
       this.metodoEnvio = "Retiro Local";
       this.direccionEnvio = "Jaime Roldós Avenue 220, Babahoyo";
@@ -217,6 +266,13 @@ export class HistorialPage implements OnInit {
   irAlHome() {
     this.router.navigateByUrl("/");
   }
+
+  /**
+   *
+   * @desc See order detail
+   * @param {number} idpedido
+   * @memberof HistorialPage
+   */
 
   verDetalle(idpedido: number) {
     for (let i = 0; i < Object.keys(this.pedidoService.historialPedido).length; i++) {

@@ -13,6 +13,16 @@ import { UserInfoService } from 'src/app/core/services/userInfo/user-info.servic
   templateUrl: "./perfil-usuario.page.html",
   styleUrls: ["./perfil-usuario.page.scss"],
 })
+
+/**
+ * @classdesc Container class of User Profile.
+ * @desc Creation Date: 08/20/2020
+ * @class
+ * @public
+ * @version 1.0.0
+ * @author Francesca Man Ging <fman@espol.edu.ec>
+ */
+
 export class PerfilUsuarioPage implements OnInit {
   @Input("Favorito") banderaCorazon: boolean;
 
@@ -89,10 +99,8 @@ export class PerfilUsuarioPage implements OnInit {
   mostrarCuentasBancarias() {
     this.alertService.alert("Cuentas Bancarias",
       '<p class="title"><strong>Banco Pichincha</strong></p>' +
-      '<p class="p">Cuenta de Ahorros #45789657479  FARID ALVARADO CI:1207684521 Omiypali@gmail.com <br></p>' +
-      '<p class="title"><strong>Banco Guayaquil</strong></p>' +
-      '<p class="p">Cuenta de Ahorros #45789657479  FARID ALVARADO CI:1207684521 Omiypali@gmail.com <br></p>' +
+      '<p class="p">Cuenta Corriente #3461150804 SANDRA ZAMORA CI:1201750377 Omiypali@gmail.com <br></p>' +
       '<p class="comentario">Envíanos una foto del comprobante del depósito/transferencia para confirmar tu ' +
-      'pedido al 0955744347<br> </p>');
+      'pedido al 0955744347 o al 0994807723<br> </p>');
   }
 }

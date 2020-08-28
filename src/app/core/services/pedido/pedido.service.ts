@@ -14,6 +14,15 @@ import { CarritoService } from 'src/app/core/services/cart/carrito.service';
 @Injectable({
   providedIn: 'root'
 })
+/**
+ * @classdesc Container class of Order Service.
+ * @desc Creation Date: 08/20/2020
+ * @class
+ * @public
+ * @version 1.0.0
+ * @author Francesca Man Ging <fman@espol.edu.ec>
+ */
+
 export class PedidoService {
   idpedido: number;
   idcompra: number;
@@ -45,6 +54,13 @@ export class PedidoService {
     private carrito: CarritoService,
   ) { }
 
+  /**
+   *
+   * @desc Search if there is an active order for the user
+   * @param {string} cedula
+   * @memberof PedidoService
+   */
+
   activeOrder(cedula: string) {
     return this.db.collection(environment.nombresTablasFirebase.pedidos, ref => ref.where("idUsuario", "==", cedula))
       .snapshotChanges().pipe(map(pedido => {
@@ -64,6 +80,13 @@ export class PedidoService {
       console.log(err);
     });
   }
+
+  /**
+   *
+   * @desc Set order History
+   * @memberof PedidoService
+   */
+
 
   setOrderHistory() {
     let infoDatos = {};
@@ -115,6 +138,13 @@ export class PedidoService {
     }
   }
 
+  /**
+   *
+   * @desc Get the name of the products by its ID
+   * @param {string[]} lista
+   * @memberof PedidoService
+   */
+
 
   nombreProducto(lista: string[]) {
     const listatmp2 = [];
@@ -135,6 +165,13 @@ export class PedidoService {
       console.log(this.listatmp);
     }
   }
+
+  /**
+   *
+   * @desc Search an order by idPedido
+   * @param {number} idPedido
+   * @memberof PedidoService
+   */
 
   searchOrder(idPedido: number) {
     this.httpClient.get(environment.rutas.urlHistorialUsuario).toPromise().then(data => {

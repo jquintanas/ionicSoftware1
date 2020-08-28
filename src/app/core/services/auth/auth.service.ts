@@ -14,6 +14,16 @@ import { UserInfoService } from 'src/app/core/services/userInfo/user-info.servic
 @Injectable({
   providedIn: 'root'
 })
+
+/**
+ * @classdesc Container class of Auth Service.
+ * @desc Creation Date: 08/20/2020
+ * @class
+ * @public
+ * @version 1.0.0
+ * @author Francesca Man Ging <fman@espol.edu.ec>
+ */
+
 export class AuthService {
 
   private readonly JWT_TOKEN = 'JWT_TOKEN';
@@ -32,6 +42,13 @@ export class AuthService {
     private userInfo: UserInfoService
   ) { }
 
+  /**
+   *
+   * @desc Login authorization to firebase
+   * @param {string} email
+   * @param {string} password
+   */
+
   public loginToFirebase(email: string, password: string) {
     return new Promise((resolve, reject) => {
       this.AFauth.signInWithEmailAndPassword(email, password).then(
@@ -47,6 +64,12 @@ export class AuthService {
       });
     });
   }
+  /**
+    *
+    * @desc Login authorization to API
+    * @param {string} email
+    * @param {string} password
+    */
 
   public loginToApi(email: string, clave: string) {
     const body = {
@@ -56,7 +79,7 @@ export class AuthService {
   }
 
   refreshToken() {
-    console.log( {
+    console.log({
       id: this.dataUser.cedula,
       refreshToken: this.token.refreshToken
     });
@@ -106,27 +129,16 @@ export class AuthService {
     this.router.navigateByUrl("login");
   }
 
-  getToken() {
-    // return this.storage.get(this.JWT_TOKEN);
-  }
-
-  async getToken2(): Promise<any> {
-    // return await this.storage.get(this.JWT_TOKEN).then(data => {
-    //   return data;
-    // });
-  }
-
-
-  private removeTokens() {
-    // this.storage.remove(this.JWT_TOKEN);
-    // this.storage.remove(this.REFRESH_TOKEN);
-  }
+/**
+   *
+   * @desc add a product to the container map of the products in the cart
+   * @memberof CarritoService
+   */
 
   private doLogoutUser() {
     this.token = null;
     this.isAuth = false;
     this.dataUser = null;
     this.idUserFirebase = "";
-    this.removeTokens();
   }
 }

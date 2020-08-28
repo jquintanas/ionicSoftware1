@@ -42,4 +42,13 @@ export class RepartidorService {
     }));
   }
 
+  public obtenerRepartidores() {
+    return this.db.collection(environment.nombresTablasFirebase.repartidor).snapshotChanges().pipe(map(repartidores => {
+      return repartidores.map(r => {
+        return r.payload.doc.data() as Repartidor;
+      });
+    }));
+  }
+
+
 }

@@ -85,7 +85,7 @@
           <ion-card-content>
             <ion-row>
               <ion-col>
-                <ion-label>{{deliveryNumber}}</ion-label><br>
+                <ion-label>Teléfono: {{deliveryNumber}}</ion-label><br>
               </ion-col>
             </ion-row>
           </ion-card-content>
@@ -139,7 +139,6 @@
       </ion-card>
     </div>
 
-
     <div *ngIf="visible == 'no'">
         <ion-icon name="sad-outline" class="sadFace"></ion-icon>
         <h2 class="noOrder">No tienes un pedido activo</h2>
@@ -163,7 +162,6 @@
               Total ${{ pedido.valorTotalPast }}
             </ion-col>
           </ion-row>
-
         </ion-item>
 
         <ion-card-content>
@@ -184,18 +182,8 @@
                   <ion-label> VER DETALLE</ion-label>
                 </button>
           </ion-row>
-
-          
-          <!--on-label class="tituloPedido">PEDIDO: </ion-label>
-          <ion-row *ngFor="let producto of listaProductosPass">
-            <ion-col size="12">
-                {{ producto.producto }}
-            </ion-col>
-          </ion-row>-->
-
         </ion-card-content>
       </ion-card>
-
     </section>
   </div>
 </ion-content>

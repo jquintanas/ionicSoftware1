@@ -5,6 +5,16 @@ import { LoadingController } from '@ionic/angular';
 @Injectable({
   providedIn: 'root'
 })
+
+/**
+ * @classdesc Container class of Alert Service.
+ * @desc Creation Date: 08/20/2020
+ * @class
+ * @public
+ * @version 1.0.0
+ * @author Francesca Man Ging <fman@espol.edu.ec>
+ */
+
 export class AlertsService {
 cancelMotive: string;
 descripcion: any;
@@ -55,6 +65,13 @@ descripcion: any;
     await toast.present();
   }
 
+  /**
+   *
+   * @description Alert when an order is Cancel
+   * @returns boolean
+   */
+
+
   async cancelAlert() {
     let motiveCancel;
     const motivo = new Promise <String>(resolve => motiveCancel = resolve);
@@ -89,28 +106,5 @@ descripcion: any;
     });
     await alert.present();
     return motivo;
-  }
-
-  async motiveAlert() {
-    const alert = await this.alterCrtl.create({
-      header: 'Motivo',
-      inputs: [
-        {
-          name: 'descripcion',
-          type: 'text',
-          placeholder: 'Cuentanos que paso con tu pedido'
-        }
-      ],
-      buttons: [
-        {
-          text: 'Enviar',
-          role: 'cancelar',
-          handler: (data) => {
-            this.descripcion = data;
-            console.log(this.descripcion);
-          }
-        }]
-    });
-    await alert.present();
   }
 }

@@ -16,6 +16,16 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
   templateUrl: "./editar-perfil.page.html",
   styleUrls: ["./editar-perfil.page.scss"],
 })
+
+/**
+ * @classdesc Container class of Edit Profile.
+ * @desc Creation Date: 08/20/2020
+ * @class
+ * @public
+ * @version 1.0.0
+ * @author Francesca Man Ging <fman@espol.edu.ec>
+ */
+
 export class EditarPerfilPage implements OnInit {
   base64: any;
   selectedFile: File = null;
@@ -122,6 +132,11 @@ export class EditarPerfilPage implements OnInit {
     }
     return "";
   }
+  /**
+   *
+   * @desc Save changes made by the user
+   * @memberof EditarPerfilPage
+   */
 
   async guardarCambios() {
     this.userinfo.usuario = this.userDataForm.get("namesField").value;
@@ -138,12 +153,12 @@ export class EditarPerfilPage implements OnInit {
       apellido: nombre[1],
       telefono: this.userinfo.telefono,
       email: this.userinfo.email,
-      // direccion: "{\"direccion\":\"ssssssssssssssss\",\"referencia\":\"ssssssssssssssss\",\"coordenadas\":\"-79.9336,-2.0649\"}",
       direccion: JSON.stringify(direcciones),
       contrasenia: "12345678",
       rol: 3
     };
     this.userinfo.setUserInfo(this.datosUsuario).toPromise().then(data => {
+      this.alertService.alert('ACTUALIZACIÓN DE DATOS', 'Los datos fueron actualizados correctamente');
       console.log("ingresado correctamente");
     }).catch ((err) => {
       console.log(err);
