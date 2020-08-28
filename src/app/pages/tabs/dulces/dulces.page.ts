@@ -5,6 +5,14 @@ import { Productos } from "src/app/core/interface/modelNOSQL/productos";
 import { LoadingController } from '@ionic/angular';
 import { ProductosService } from 'src/app/core/services/cart/productos.service';
 import { AlertsService } from 'src/app/core/services/alerts/alerts.service';
+/**
+ *
+ * @desc Candy tab controller class that represents the category of the same name and is used as a child screen of the home
+ * @export
+ * @class DulcesPage
+ * @implements {OnInit}
+ * @implements {OnDestroy}
+ */
 @Component({
   selector: 'app-dulces',
   templateUrl: './dulces.page.html',

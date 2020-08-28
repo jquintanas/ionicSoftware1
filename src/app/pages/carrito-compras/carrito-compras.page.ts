@@ -3,6 +3,13 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { CarritoService } from 'src/app/core/services/cart/carrito.service';
 
+/**
+ *
+ * @desc shopping cart screen controller class
+ * @export
+ * @class CarritoComprasPage
+ * @implements {OnInit}
+ */
 @Component({
   selector: 'app-carrito-compras',
   templateUrl: './carrito-compras.page.html',

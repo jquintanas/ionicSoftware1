@@ -4,6 +4,12 @@ import * as CryptoJS from "crypto-js";
 const AES = CryptoJS.AES;
 import { environment } from "src/environments/environment";
 
+/**
+ *
+ * @desc security services for data encryption and hashing at the time of making a request to the api and preserving data integrity
+ * @export
+ * @class SeguridadService
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -11,6 +17,13 @@ export class SeguridadService {
 
   constructor() { }
 
+  /**
+   *
+   * @desc generates a 256 hash based on the json it receives as an input parameter
+   * @param {*} json
+   * @returns
+   * @memberof SeguridadService
+   */
   public hashJSON(json: any) {
     let data: string = "";
     // tslint:disable-next-line: prefer-const

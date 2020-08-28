@@ -2,11 +2,20 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { environment } from "src/environments/environment";
 import { ProductosService } from 'src/app/core/services/cart/productos.service';
 import { Productos } from 'src/app/core/interface/modelNOSQL/productos';
+/**
+ *
+ * @desc Recommended products banner, load promotional products in the form of a slider
+ * @export
+ * @class SliderRecomendadosComponent
+ * @implements {OnInit}
+ * @implements {OnDestroy}
+ */
 @Component({
   selector: 'app-slider-recomendados',
   templateUrl: './slider-recomendados.component.html',
   styleUrls: ['./slider-recomendados.component.scss'],
 })
+
 export class SliderRecomendadosComponent implements OnInit, OnDestroy {
   private subProductos: any;
   private subCategorias: any;

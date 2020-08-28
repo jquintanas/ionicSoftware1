@@ -7,11 +7,21 @@ import { ProductoCarrito } from "src/app/core/interface/productoCarrito";
 import { Favoritos } from "src/app/core/interface/favoritosStorage";
 import { FavoritosService } from 'src/app/core/services/cart/favoritos.service';
 
+/**
+ *
+ * @desc Card component to display product data in the home page
+ * @export
+ * @class CardProductosComponent
+ * @implements {OnInit}
+ * @implements {OnDestroy}
+ */
 @Component({
   selector: 'app-card-productos',
   templateUrl: './card-productos.component.html',
   styleUrls: ['./card-productos.component.scss'],
 })
+
+
 export class CardProductosComponent implements OnInit, OnDestroy {
 
   // variables de entrada
@@ -82,6 +92,12 @@ export class CardProductosComponent implements OnInit, OnDestroy {
     await this.verificarFavorito();
   }
 
+
+  /**
+   *
+   * @desc bookmark a product
+   * @memberof CardProductosComponent
+   */
   async marcarFavorito() {
     if (!this.banderaCorazon) {
       const favorito: Favoritos = {
@@ -109,6 +125,12 @@ export class CardProductosComponent implements OnInit, OnDestroy {
     this.detalle.Favorito = this.banderaCorazon;
   }
 
+
+  /**
+   *
+   * @desc add a product to the shopping cart
+   * @memberof CardProductosComponent
+   */
   async agregarAlCarrito() {
     // let cantida = await this.presentAlertPrompt();
     const cantida = 1;
@@ -136,6 +158,12 @@ export class CardProductosComponent implements OnInit, OnDestroy {
     this.abstract = this.descripcion;
   }
 
+
+  /**
+   *
+   * @desc open a modal with the detail of the product to see everything about it and make it easy for the customer to see if it is what they need
+   * @memberof CardProductosComponent
+   */
   async abrirDetalles() {
     this.carrito.setProductoDetalle(this.detalle);
     const modal = await this.modalController.create({
@@ -180,6 +208,12 @@ export class CardProductosComponent implements OnInit, OnDestroy {
     return 0;
   }
 
+  /**
+   *
+   * @desc remove the product from the favorites list
+   * @private
+   * @memberof CardProductosComponent
+   */
   private async eliminarDeFavoritos() {
     await this.favoritos.comprobarFavorito(this.id).then(
       async dt => {

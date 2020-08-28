@@ -1,3 +1,9 @@
+/**
+ *
+ * @desc user data interface
+ * @export
+ * @interface UsuarioInterface
+ */
 export interface UsuarioInterface {
     cedula?: string;
     nombre: string;

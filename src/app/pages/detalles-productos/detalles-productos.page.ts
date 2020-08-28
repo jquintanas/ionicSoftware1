@@ -9,6 +9,13 @@ import { Favoritos } from "src/app/core/interface/favoritosStorage";
 import { ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 
+/**
+ *
+ * @desc product details screen driver class
+ * @export
+ * @class DetallesProductosPage
+ * @implements {OnInit}
+ */
 @Component({
   selector: 'app-detalles-productos',
   templateUrl: './detalles-productos.page.html',
@@ -38,6 +45,7 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
     ])
   ]
 })
+
 export class DetallesProductosPage implements OnInit {
   slideOpts = {
     initialSlide: 0,
@@ -82,6 +90,11 @@ export class DetallesProductosPage implements OnInit {
     this.llenarBanderasLoading();
   }
 
+  /**
+   *
+   * @desc implements favorites service to add selected product as such
+   * @memberof DetallesProductosPage
+   */
   async marcarFavorito() {
     this.banderaCorazon = !this.banderaCorazon;
     this.detalleProducto.Favorito = this.banderaCorazon;

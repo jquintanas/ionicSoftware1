@@ -5,6 +5,14 @@ import { ProductosService } from 'src/app/core/services/cart/productos.service';
 import { AlertsService } from 'src/app/core/services/alerts/alerts.service';
 import { Productos } from "src/app/core/interface/modelNOSQL/productos";
 import { LoadingController } from '@ionic/angular';
+/**
+ *
+ * @desc Controlling class of drinks tab that represents the category of the same name and that is used as a child screen of the home
+ * @export
+ * @class BebidasPage
+ * @implements {OnInit}
+ * @implements {OnDestroy}
+ */
 @Component({
   selector: 'app-bebidas',
   templateUrl: './bebidas.page.html',

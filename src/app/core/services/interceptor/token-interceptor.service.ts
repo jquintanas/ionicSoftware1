@@ -5,9 +5,17 @@ import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 
 
+/**
+ *
+ * @desc Add authorization header and their respective tokens to all http requests and if you need to update the token, generate the refresh of it
+ * @export
+ * @class TokenInterceptorService
+ * @implements {HttpInterceptor}
+ */
 @Injectable({
   providedIn: 'root'
 })
+
 export class TokenInterceptorService implements HttpInterceptor {
   private isRefreshing = false;
   private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
@@ -29,6 +37,15 @@ export class TokenInterceptorService implements HttpInterceptor {
     return next.handle(req);
   }
 
+  /**
+   *
+   * @desc add the token to the request
+   * @private
+   * @param {HttpRequest<any>} request
+   * @param {string} token
+   * @returns
+   * @memberof TokenInterceptorService
+   */
   private addToken(request: HttpRequest<any>, token: string) {
     return request.clone({
       setHeaders: {
@@ -37,6 +54,15 @@ export class TokenInterceptorService implements HttpInterceptor {
     });
   }
 
+  /**
+   *
+   * @desc refresh the token when it expires
+   * @private
+   * @param {HttpRequest<any>} request
+   * @param {HttpHandler} next
+   * @returns
+   * @memberof TokenInterceptorService
+   */
   private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
     if (!this.isRefreshing) {
       this.isRefreshing = true;

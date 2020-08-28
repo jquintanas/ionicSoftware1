@@ -4,6 +4,14 @@ import { BusquedaService } from "src/app/core/services/comunicacion/busqueda.ser
 import { CarritoService } from 'src/app/core/services/cart/carrito.service';
 import { ProductosService } from 'src/app/core/services/cart/productos.service';
 import { ToastController, LoadingController } from '@ionic/angular';
+/**
+ *
+ * @desc home screen controller class of the system, in charge of showing welcome to the user and the different categories that are in the system
+ * @export
+ * @class HomePage
+ * @implements {OnInit}
+ * @implements {OnDestroy}
+ */
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',

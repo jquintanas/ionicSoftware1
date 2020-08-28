@@ -5,6 +5,12 @@ import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ng
 import { environment } from 'src/environments/environment';
 import { SeguridadService } from './seguridad.service';
 import { AngularFireAuth } from "@angular/fire/auth";
+/**
+ *
+ * @desc service in charge of managing the registration of new users
+ * @export
+ * @class RegistroService
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -16,6 +22,13 @@ export class RegistroService {
     private fbAuthN: FirebaseAuthentication,
     private AFAuth: AngularFireAuth) { }
 
+  /**
+   *
+   * @desc add user data to api
+   * @param {UsuarioInterface} datos
+   * @returns
+   * @memberof RegistroService
+   */
   public guardarPerfil(datos: UsuarioInterface) {
     const hash = this.seguridad.hashJSON(datos);
     datos.hash = hash;
@@ -32,6 +45,13 @@ export class RegistroService {
     return this.fbAuthN.signInWithVerificationId(verificationID, smsCode);
   }
 
+  /**
+   *
+   * @desc register user in firebase
+   * @param {*} datos
+   * @returns
+   * @memberof RegistroService
+   */
   public registrar(datos: any) {
     return new Promise((resolve, reject) => {
       this.AFAuth.createUserWithEmailAndPassword(datos.email, datos.pass).then(

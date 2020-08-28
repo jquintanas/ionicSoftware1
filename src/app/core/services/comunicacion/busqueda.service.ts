@@ -1,9 +1,16 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
+/**
+ *
+ * @desc controls the search for products and notifies the subscribed categories
+ * @export
+ * @class BusquedaService
+ */
 @Injectable({
   providedIn: 'root'
 })
+
 export class BusquedaService {
   private indiceTab: number = 0;
   private productosBuscarArray: string[] = ["", "", "", "", ""];

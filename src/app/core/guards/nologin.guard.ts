@@ -8,6 +8,13 @@ import { Router } from "@angular/router";
 import { AuthService } from '../services/auth/auth.service';
 import { NavController } from '@ionic/angular';
 
+/**
+ *
+ * @desc guard to prevent the user from accessing login routes already logged into the system and if he tries to be redirected to home
+ * @export
+ * @class NologinGuard
+ * @implements {CanActivate}
+ */
 @Injectable({
   providedIn: 'root'
 })

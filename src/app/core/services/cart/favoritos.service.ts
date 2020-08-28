@@ -3,15 +3,28 @@ import { environment } from "src/environments/environment";
 import { Favoritos } from "src/app/core/interface/favoritosStorage";
 import { BehaviorSubject, Observable } from 'rxjs';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
+/**
+ *
+ * @desc product control service marked as favorites
+ * @export
+ * @class FavoritosService
+ */
 @Injectable({
   providedIn: 'root'
 })
+
 export class FavoritosService {
 
   private favoritosSubject = new BehaviorSubject(false);
 
   constructor(private nativeStorage: NativeStorage) { }
 
+  /**
+   * @desc creates an observer that helps to identify if a product has been marked as a favorite so that it is updated on all the screens that are being displayed
+   *
+   * @returns {Observable<boolean>}
+   * @memberof FavoritosService
+   */
   observadorFavoritos(): Observable<boolean> {
     return this.favoritosSubject.asObservable();
   }
@@ -20,54 +33,15 @@ export class FavoritosService {
     this.favoritosSubject.next(bandera);
   }
 
-  // async agregarFavorito(categoria: string, favorito: Favoritos) {
-  //   let mapaFavoritos: Map<string, Map<string, Favoritos>>;
-  //   await this.obtenerFavoritos().then((data: Map<string, Map<string, Favoritos>>) => {
-  //     mapaFavoritos = data;
-  //   });
-  //   if (mapaFavoritos == null) {
-  //     let favoritos: Map<string, Map<string, Favoritos>> = new Map();
-  //     let tmp: Map<string, Favoritos> = new Map();
-  //     tmp.set(favorito.idProducto, favorito);
-  //     favoritos.set(categoria, tmp);
-  //     await this.nativeStorage.setItem(environment.codigoFavoritos, favoritos).then(
-  //       () => {
-  //         console.log("stored");
-  //       },
-  //       err => {
-  //         console.log(err);
-  //         return false;
-  //       }
-  //     );
-  //     return true;
-  //   }
-  //   const tmp = this.convertirMapaALista(mapaFavoritos);
-  //   if (this.soportaMasElementos(tmp)) {
-  //     let data = mapaFavoritos.get(categoria);
-  //     if (data == null) {
-  //       const map: Map<string, Favoritos> = new Map();
-  //       mapaFavoritos.set(categoria, map);
-  //       data = mapaFavoritos.get(categoria);
-  //     }
-  //     if (data.get(favorito.idProducto) == null) {
-  //       data.set(favorito.idProducto, favorito);
-  //       mapaFavoritos.set(categoria, data);
-  //       await this.nativeStorage.setItem(environment.codigoFavoritos, mapaFavoritos).then(
-  //         () => {
-  //           console.log("stored");
-  //           return true;
-  //         },
-  //         err => {
-  //           console.log(err);
-  //           console.log("error en agregar");
-  //           return false;
-  //         }
-  //       );
-  //     }
-  //   }
-  //   return false;
-  // }
-
+  /**
+   *
+   * @desc check if a product is bookmarked
+   * @private
+   * @param {string} idFavorito
+   * @param {Favoritos[]} listaFavoritos
+   * @returns
+   * @memberof FavoritosService
+   */
   private isFavorito(idFavorito: string, listaFavoritos: Favoritos[]) {
     if (!listaFavoritos) {
       return false;
@@ -94,6 +68,13 @@ export class FavoritosService {
     );
   }
 
+  /**
+   *
+   * @desc add a product to favorites and store it in the device storage
+   * @param {Favoritos} favorito
+   * @returns
+   * @memberof FavoritosService
+   */
   async agregarFavorito(favorito: Favoritos) {
     let listaFavoritos: Favoritos[];
     await this.obtenerFavoritosLista().then(
@@ -152,6 +133,13 @@ export class FavoritosService {
     );
   }
 
+  /**
+   *
+   * @desc removes the selected product from the favorites list and removes it from the phone's storage
+   * @param {string} idFavorito
+   * @returns
+   * @memberof FavoritosService
+   */
   async borrarDeFavoritos(idFavorito: string) {
     let bandera: boolean = false;
     let listaFavoritos: Favoritos[];
@@ -188,80 +176,4 @@ export class FavoritosService {
     return bandera;
   }
 
-  // async comprobarFavorito(categoria: string, idProducto: string) {
-  //   let favoritos: Map<string, Map<string, Favoritos>>;
-  //   await this.obtenerFavoritos().then((data: any) => {
-  //     favoritos = data;
-  //   });
-  //   if (favoritos == null) {
-  //     return false;
-  //   }
-
-  //   if (favoritos.get(categoria) == null) {
-  //     return false;
-  //   }
-
-  //   return favoritos.get(categoria).get(idProducto) != null;
-
-  // }
-
-  // async obtenerFavoritos(): Promise<Map<string, Map<string, Favoritos>>> {
-  //   return await this.nativeStorage.getItem(environment.codigoFavoritos).then(
-  //     data => {
-  //       console.log(data);
-  //       return data;
-  //     },
-  //     err => {
-  //       console.log(err);
-  //       console.log("error en favoritos");
-  //       return null;
-  //     }
-  //   );
-  //   // (data: Map<string, Map<string, Favoritos>>) => {
-
-  //   // }
-  // }
-
-  // convertirMapaALista(favoritos: Map<string, Map<string, Favoritos>>) {
-  //   // tslint:disable-next-line: prefer-const
-  //   let tmp: Favoritos[] = [];
-  //   if (favoritos) {
-  //     // tslint:disable-next-line: prefer-const
-  //     for (let data of favoritos.values()) {
-  //       // tslint:disable-next-line: prefer-const
-  //       for (let favorito of data.values()) {
-  //         tmp.push(favorito);
-  //       }
-  //     }
-  //   }
-  //   return tmp;
-  // }
-
-  private soportaMasElementos(arrayFavoritos: any[]) {
-    return arrayFavoritos.length < 10;
-  }
-
-  // async borrarDeFavoritos(categoria: string, idProducto: string) {
-  //   try {
-  //     let favoritos: Map<string, Map<string, Favoritos>>;
-  //     await this.obtenerFavoritos().then((data: any) => {
-  //       favoritos = data;
-  //     });
-  //     const tmp: Map<string, Favoritos> = favoritos.get(categoria);
-  //     tmp.delete(idProducto);
-  //     favoritos.set(categoria, tmp);
-  //     await this.nativeStorage.setItem(environment.codigoFavoritos, favoritos).then(
-  //       () => {
-  //         console.log("stored");
-  //       },
-  //       err => {
-  //         console.log(err);
-  //         console.log("error en borrar");
-  //       }
-  //     );
-  //     return true;
-  //   } catch (error) {
-  //     return false;
-  //   }
-  // }
 }

@@ -4,8 +4,22 @@ const AES = require("crypto-js/aes");
 const CryptoJS = require("crypto-js");
 import { environment } from "src/environments/environment";
 
+/**
+ *
+ * 2desc security functions used by security service
+ * @export
+ * @class Seguridad
+ */
 export class Seguridad {
 
+    /**
+     *
+     * @desc generate 256 hash based on provided json
+     * @static
+     * @param {*} json
+     * @returns
+     * @memberof Seguridad
+     */
     static hashJSON(json: any) {
         let data: string = "";
         // tslint:disable-next-line: prefer-const

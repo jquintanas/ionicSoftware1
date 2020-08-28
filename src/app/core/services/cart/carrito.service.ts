@@ -5,9 +5,16 @@ import { ProductoCarrito } from "src/app/core/interface/productoCarrito";
 import { IPedido } from "src/app/core/interface/modelNOSQL/pedido.interface";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { environment } from 'src/environments/environment';
+/**
+ *
+ * @desc shopping cart data management service
+ * @export
+ * @class CarritoService
+ */
 @Injectable({
   providedIn: 'root'
 })
+
 export class CarritoService {
   datosPedido: IPedido;
   private productoDetalle: DetalleProducto;
@@ -29,6 +36,13 @@ export class CarritoService {
     return this.productoDetalle;
   }
 
+  /**
+   *
+   * @desc add a product to the container map of the products in the cart
+   * @param {number} categoria
+   * @param {ProductoCarrito} producto
+   * @memberof CarritoService
+   */
   agregarAlCarrito(categoria: number, producto: ProductoCarrito) {
     if (this.mapaProductos.get(categoria) == null) {
       const mapTmp: Map<string, ProductoCarrito> = new Map();
@@ -50,6 +64,12 @@ export class CarritoService {
     this.mapaSubject.next(this.mapaProductos);
   }
 
+  /**
+   *
+   * @desc generates an observable to see when the quantity of products in the cart changes and be able to update the product counter of the navbar
+   * @returns {Observable<number>}
+   * @memberof CarritoService
+   */
   observarCantidad(): Observable<number> {
     return this.cantidadSubject.asObservable();
   }
@@ -75,6 +95,11 @@ export class CarritoService {
     }
   }
 
+  /**
+   *
+   * @desc delete the products stored in the cart
+   * @memberof CarritoService
+   */
   borrarCarrito() {
     this.mapaProductos = new Map();
     this.cantidad = 0;
@@ -86,6 +111,13 @@ export class CarritoService {
     return this.mapaProductos;
   }
 
+  /**
+   *
+   * @desc add a product to the shopping cart
+   * @param {IPedido} data
+   * @returns
+   * @memberof CarritoService
+   */
   agregarPedido(data: IPedido) {
     const id = this.db.createId();
     data.idPedido = id;

@@ -3,11 +3,19 @@ import { ProductoCarrito } from "src/app/core/interface/productoCarrito";
 import { CarritoService } from 'src/app/core/services/cart/carrito.service';
 import { AlertController } from '@ionic/angular';
 
+/**
+ *
+ * @desc Card component to display product data in the shopping cart
+ * @export
+ * @class CardCarritoComponent
+ * @implements {OnInit}
+ */
 @Component({
   selector: 'app-card-carrito',
   templateUrl: './card-carrito.component.html',
   styleUrls: ['./card-carrito.component.scss'],
 })
+
 export class CardCarritoComponent implements OnInit {
   // private banderas
   banderaLoading: boolean = true;
@@ -36,6 +44,15 @@ export class CardCarritoComponent implements OnInit {
     this.banderaLoading = !this.banderaLoading;
   }
 
+  /**
+   *
+   * @desc  increases the product based on the value provided
+   * @param {number} cantidad amount to increase
+   * @param {*} clave1 category key
+   * @param {*} clave2 Product code
+   * @returns
+   * @memberof CardCarritoComponent
+   */
   async decrementarProducto(cantidad: number, clave1: any, clave2: any) {
     const tmp: ProductoCarrito = this.productos.get(clave1).get(clave2);
     if (tmp.cantidad > 1) {
@@ -44,6 +61,14 @@ export class CardCarritoComponent implements OnInit {
     }
   }
 
+  /**
+   *
+   * @desc increases the product based on the value provided
+   * @param {number} incremento amount to decrease
+   * @param {*} clave category key
+   * @param {*} clave2 Product code
+   * @memberof CardCarritoComponent
+   */
   incrementarProducto(incremento: number, clave: any, clave2: any) {
     const tmp: ProductoCarrito = this.productos.get(clave).get(clave2);
     const te: ProductoCarrito = {
@@ -54,6 +79,14 @@ export class CardCarritoComponent implements OnInit {
     this.carrito.agregarAlCarrito(tmp.producto.categoria, te);
   }
 
+  /**
+   *
+   *
+   * @param {any} clave category key
+   * @param {any} clave2 Product code
+   * @memberof CardCarritoComponent
+   * @desc Remove a product from the product map based on its keys
+   */
   async eliminarProducto(clave: any, clave2: any) {
     const alert = await this.alertController.create({
       header: 'Seguro que desea continuar!',

@@ -5,6 +5,14 @@ import { Productos } from "src/app/core/interface/modelNOSQL/productos";
 import { LoadingController } from '@ionic/angular';
 import { ProductosService } from 'src/app/core/services/cart/productos.service';
 import { AlertsService } from 'src/app/core/services/alerts/alerts.service';
+/**
+ *
+ * @desc Dessert tab controller class that represents the category of the same name and that is used as a child screen of the home
+ * @export
+ * @class PostresPage
+ * @implements {OnInit}
+ * @implements {OnDestroy}
+ */
 @Component({
   selector: 'app-postres',
   templateUrl: './postres.page.html',
