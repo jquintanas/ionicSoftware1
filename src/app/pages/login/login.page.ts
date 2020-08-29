@@ -82,10 +82,12 @@ export class LoginPage implements OnInit {
               this.authService.isAuth = true;
               this.userInfo.email = dt.data.email;
               this.userInfo.cedula = dt.data.cedula;
-              this.userInfo.usuario = dt.data.nombre;
+              this.userInfo.nombre = dt.data.nombre;
               this.userInfo.apellido = dt.data.apellido;
+              this.userInfo.usuario = dt.data.nombre + " " + dt.data.apellido;
               this.userInfo.telefono = dt.data.telefono;
               this.userInfo.direccion = dt.data.direccion;
+              this.userInfo.contrasenia = this.password;
               loading.dismiss();
               this.navController.navigateRoot("home");
             }

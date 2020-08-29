@@ -26,6 +26,7 @@ export class UserInfoService {
   public direccion: any;
   public usuario: string = "";
   public referencia: string = "";
+  public contrasenia: string;
   constructor(
     private seguridad: SeguridadService,
     private http: HttpClient,
@@ -73,6 +74,16 @@ export class UserInfoService {
   }
 
   userExist(email: string) {
-    //
+    this.http.get(environment.rutas.getUser).toPromise().then( (dt) => {
+      console.log(dt);
+      for (let i = 0; i < Object.keys(dt).length; i++) {
+        if (dt[i].email == email) {
+          console.log("el usuario existe");
+          return 0;
+        } else {
+          console.log ("el usuario no existe");
+        }
+      }
+    });
   }
 }

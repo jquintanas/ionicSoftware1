@@ -154,7 +154,7 @@ export class EditarPerfilPage implements OnInit {
       telefono: this.userinfo.telefono,
       email: this.userinfo.email,
       direccion: JSON.stringify(direcciones),
-      contrasenia: "12345678",
+      contrasenia: this.userinfo.contrasenia,
       rol: 3
     };
     this.userinfo.setUserInfo(this.datosUsuario).toPromise().then(data => {

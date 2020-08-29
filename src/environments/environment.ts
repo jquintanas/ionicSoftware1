@@ -23,7 +23,8 @@ export const environment = {
     urlLogout : "https://omipalisf2.herokuapp.com/api/login/reject",
     urlHistorialUsuario: "https://omipalisf2.herokuapp.com/api/orders/user",
     updateUser: 'https://omipalisf2.herokuapp.com/api/usersS/update/',
-    reportaNovelty: 'https://omipalisf2.herokuapp.com/api/noveltys/reporta/'
+    reportaNovelty: 'https://omipalisf2.herokuapp.com/api/noveltys/reporta/',
+    getUser: 'https://omipalisf2.herokuapp.com/api/usersS'
   },
   nombresCategorias: {
     dulces: "dulces",

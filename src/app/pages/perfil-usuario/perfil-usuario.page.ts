@@ -53,7 +53,7 @@ export class PerfilUsuarioPage implements OnInit {
 
   async ngOnInit() {
     await this.cargarDatos();
-    this.userName = this.userInfo.usuario + " " + this.userInfo.apellido;
+    this.userName = this.userInfo.usuario;
   }
 
   ionViewWillEnter() {

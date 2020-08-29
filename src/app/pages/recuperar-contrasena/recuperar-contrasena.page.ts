@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ModalController } from "@ionic/angular";
 import { AlertsService } from "src/app/core/services/alerts/alerts.service";
 import { environment } from "./../../../environments/environment";
+import { UserInfoService } from 'src/app/core/services/userInfo/user-info.service';
 
 @Component({
   selector: "app-recuperar-contrasena",
@@ -14,7 +15,8 @@ export class RecuperarContrasenaPage implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private modalController: ModalController,
-    public alertsService: AlertsService
+    public alertsService: AlertsService,
+    private userInfo: UserInfoService
   ) {
     this.buildForm();
   }
@@ -36,7 +38,7 @@ export class RecuperarContrasenaPage implements OnInit {
   save() {
     if (this.recoveryForm.valid) {
       const value = this.recoveryForm.value;
-      // if ()
+      this.userInfo.userExist(value.emailField);
       console.log(value);
       console.log(this.recoveryForm);
       this.alertsService.presentLoading("Enviando Mensaje");
