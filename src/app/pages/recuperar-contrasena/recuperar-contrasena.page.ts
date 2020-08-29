@@ -3,7 +3,8 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ModalController } from "@ionic/angular";
 import { AlertsService } from "src/app/core/services/alerts/alerts.service";
 import { environment } from "./../../../environments/environment";
-import { UserInfoService } from 'src/app/core/services/userInfo/user-info.service';
+import { HttpClient } from '@angular/common/http';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
 
 @Component({
   selector: "app-recuperar-contrasena",
@@ -16,7 +17,8 @@ export class RecuperarContrasenaPage implements OnInit {
     private formBuilder: FormBuilder,
     private modalController: ModalController,
     public alertsService: AlertsService,
-    private userInfo: UserInfoService
+    private authService: AuthService,
+    private http: HttpClient
   ) {
     this.buildForm();
   }
@@ -38,8 +40,16 @@ export class RecuperarContrasenaPage implements OnInit {
   save() {
     if (this.recoveryForm.valid) {
       const value = this.recoveryForm.value;
-      this.userInfo.userExist(value.emailField);
-      console.log(value);
+      this.http.get(environment.rutas.getUser).toPromise().then( (dt) => {
+        console.log(dt);
+        for (let i = 0; i < Object.keys(dt).length; i++) {
+          if (dt[i].email == value) {
+            this.authService.resetPasswordEmail(value);
+            console.log("el usuario existe");
+            return 0;
+          }
+        }
+      });
       console.log(this.recoveryForm);
       this.alertsService.presentLoading("Enviando Mensaje");
     } else {

@@ -141,4 +141,14 @@ export class AuthService {
     this.dataUser = null;
     this.idUserFirebase = "";
   }
+
+  resetPasswordEmail(emailAddress: string) {
+    // tslint:disable-next-line: only-arrow-functions
+    this.AFauth.sendPasswordResetEmail(emailAddress).then(function() {
+      console.log("Email sent.");
+    // tslint:disable-next-line: only-arrow-functions
+    }).catch(function(error) {
+      console.log("An error happened.");
+    });
+    }
 }

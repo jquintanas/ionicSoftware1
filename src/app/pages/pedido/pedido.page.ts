@@ -271,12 +271,10 @@ export class PedidoPage implements OnInit {
     const alert = await this.alertController.create({
       header: "Cuentas Bancarias",
       message:
-        '<p class="title"><strong>Banco Pichincha</strong></p>' +
-        '<p class="p">Cuenta de Ahorros #45789657479  FARID ALVARADO CI:1207684521 Omiypali@gmail.com <br></p>' +
-        '<p class="title"><strong>Banco Guayaquil</strong></p>' +
-        '<p class="p">Cuenta de Ahorros #45789657479  FARID ALVARADO CI:1207684521 Omiypali@gmail.com <br></p>' +
-        '<p class="comentario">Envíanos una foto del comprobante del depósito/transferencia para confirmar tu ' +
-        'pedido al 0955744347<br> </p>',
+      '<p class="title"><strong>Banco Pichincha</strong></p>' +
+      '<p class="p">Cuenta Corriente #3461150804 SANDRA ZAMORA CI:1201750377 Omiypali@gmail.com <br></p>' +
+      '<p class="comentario">Envíanos una foto del comprobante del depósito/transferencia para confirmar tu ' +
+      'pedido al 0955744347 o al 0994807723<br> </p>',
       buttons: [
         {
           text: "Aceptar",

@@ -74,16 +74,6 @@ export class UserInfoService {
   }
 
   userExist(email: string) {
-    this.http.get(environment.rutas.getUser).toPromise().then( (dt) => {
-      console.log(dt);
-      for (let i = 0; i < Object.keys(dt).length; i++) {
-        if (dt[i].email == email) {
-          console.log("el usuario existe");
-          return 0;
-        } else {
-          console.log ("el usuario no existe");
-        }
-      }
-    });
+    this.http.get(environment.rutas.getUser);
   }
 }
