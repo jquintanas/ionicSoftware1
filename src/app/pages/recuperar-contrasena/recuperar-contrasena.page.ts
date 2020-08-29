@@ -36,6 +36,7 @@ export class RecuperarContrasenaPage implements OnInit {
   save() {
     if (this.recoveryForm.valid) {
       const value = this.recoveryForm.value;
+      // if ()
       console.log(value);
       console.log(this.recoveryForm);
       this.alertsService.presentLoading("Enviando Mensaje");
