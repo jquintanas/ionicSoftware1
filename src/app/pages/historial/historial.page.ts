@@ -29,8 +29,8 @@ export class HistorialPage implements OnInit {
   time: BehaviorSubject<string> = new BehaviorSubject('00');
   timer: number;
   segment: string = "active";
-  deliveryName: string = "Pedro Riascos";
-  deliveryNumber: string = "+593 123 456 789";
+  deliveryName: string = "Delivery delivery";
+  deliveryNumber: string = "";
   idPedido: string;
   valorTotal: number;
   metodoEnvio: string = "";
@@ -50,6 +50,7 @@ export class HistorialPage implements OnInit {
   listaPedidos: any;
   pedidoAct: Pedidos;
   mostrarBoton: string;
+  tmp: any[];
   constructor(
     private alertService: AlertsService,
     private router: Router,
@@ -83,11 +84,11 @@ export class HistorialPage implements OnInit {
       });
   }
 
-/**
-   *
-   * @desc cancelAlert and creat novelty
-   * @memberof HistorialPage
-   */
+  /**
+     *
+     * @desc cancelAlert and creat novelty
+     * @memberof HistorialPage
+     */
 
   async cancelAlert() {
     const desc = await this.alertService.cancelAlert();
@@ -101,12 +102,12 @@ export class HistorialPage implements OnInit {
     this.router.navigateByUrl("/");
   }
 
- /**
-   *
-   * @desc repeat order
-   * @param {number} idpedido
-   * @memberof HistorialPage
-   */
+  /**
+    *
+    * @desc repeat order
+    * @param {number} idpedido
+    * @memberof HistorialPage
+    */
   public repertirCompra(idpedido: number) {
     console.log(idpedido);
     for (let i = 0; i < Object.keys(this.pedidoService.historialPedido).length; i++) {
@@ -193,18 +194,14 @@ export class HistorialPage implements OnInit {
           console.log(listaRepartidores[i].pedidos);
           const listaPedRep = listaRepartidores[i].pedidos;
           for (let j = 0; j < listaPedRep.length; j++) {
-            const tmp = listaRepartidores[j].pedidos;
-            console.log(tmp[j]);
-            // tslint:disable-next-line: no-string-literal
-            // if ( this.idPedido === listaRepartidores[i].pedidos[j]['idPedido']) {
-            //   this.deliveryName = listaRepartidores[i].nombre;
-            // }
-            // console.log(listaPedRep[j]);
+            this.tmp = listaRepartidores[j].pedidos;
+            // const tmp2 = this.tmp[j].idPedido;
+            if (this.idPedido === this.tmp[j].idPedido) {
+              this.deliveryName = listaRepartidores[i].nombre + " " + listaRepartidores[i].apellido;
+              this.deliveryNumber = listaRepartidores[i].telefono;
+            }
           }
         }
-
-        // this.deliveryName = dt[0].nombre + " " + dt[0].apellido;
-        this.deliveryNumber = dt[0].telefono;
       },
       async err => {
         console.log(err);
