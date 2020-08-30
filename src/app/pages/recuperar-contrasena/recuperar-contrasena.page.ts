@@ -46,10 +46,6 @@ export class RecuperarContrasenaPage implements OnInit {
           console.log(value.emailField);
           if (dt[i].email == value.emailField) {
             this.authService.resetPasswordEmail(value.emailField);
-            console.log("el usuario existe");
-            return 0;
-          } else {
-            console.log("no existe");
           }
         }
       });
