@@ -148,6 +148,7 @@ export class AuthService {
       console.log("Email sent.");
     // tslint:disable-next-line: only-arrow-functions
     }).catch(function(error) {
+      console.log(error);
       console.log("An error happened.");
     });
     }

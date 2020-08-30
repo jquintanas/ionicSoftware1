@@ -43,10 +43,13 @@ export class RecuperarContrasenaPage implements OnInit {
       this.http.get(environment.rutas.getUser).toPromise().then( (dt) => {
         console.log(dt);
         for (let i = 0; i < Object.keys(dt).length; i++) {
-          if (dt[i].email == value) {
-            this.authService.resetPasswordEmail(value);
+          console.log(value.emailField);
+          if (dt[i].email == value.emailField) {
+            this.authService.resetPasswordEmail(value.emailField);
             console.log("el usuario existe");
             return 0;
+          } else {
+            console.log("no existe");
           }
         }
       });

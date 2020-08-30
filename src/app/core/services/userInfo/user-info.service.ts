@@ -72,8 +72,4 @@ export class UserInfoService {
         console.log("Error al subir imagen");
       });
   }
-
-  userExist(email: string) {
-    this.http.get(environment.rutas.getUser);
-  }
 }
