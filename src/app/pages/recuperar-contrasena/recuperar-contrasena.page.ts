@@ -41,7 +41,6 @@ export class RecuperarContrasenaPage implements OnInit {
     if (this.recoveryForm.valid) {
       const value = this.recoveryForm.value;
       this.http.get(environment.rutas.getUser).toPromise().then( (dt) => {
-        console.log(dt);
         for (let i = 0; i < Object.keys(dt).length; i++) {
           console.log(value.emailField);
           if (dt[i].email == value.emailField) {
